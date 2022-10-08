@@ -1,0 +1,17 @@
+{
+    "name": "bernardopacheco94/ecommerce",
+    "authors": [
+        {
+            "name": "Controle de Comandas"            
+        }
+    ],
+    "require": {
+    	"slim/slim":"2.0",
+    	"rain/raintpl":"3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaChapa\\": "vendor\\lachapa\\php-classes\\src"
+        }
+    }
+}
