@@ -29,7 +29,6 @@ class Page
             "debug"         => true
         );
 
-        
         Tpl::configure($config);
 
 
