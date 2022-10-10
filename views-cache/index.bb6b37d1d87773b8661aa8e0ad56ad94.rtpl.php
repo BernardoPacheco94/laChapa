@@ -165,11 +165,21 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-dark" id="btn-adc-comanda" data-bs-toggle="modal"
-                        data-bs-target="#modal_lanca_comanda">
-                        Nova Comanda
-                    </button>
-
+                    <div class="row">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-dark" id="btn-adc-comanda" data-bs-toggle="modal"
+                                data-bs-target="#modal_lanca_comanda">
+                                Nova Comanda
+                            </button>
+                        </div>
+                        <div class="col-6 text-end">                            
+                            <a href="/removerMesa/<?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                                <button type="button" class="btn btn-secondary">
+                                        Remover Mesa
+                                </button>
+                            </a>                           
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -386,18 +396,22 @@
             </div>
             <div class="modal-body">
                 <div class="card w-100" style="width: 18rem;">
+                    <?php $counter1=-1;  if( isset($mesaOculta) && ( is_array($mesaOculta) || $mesaOculta instanceof Traversable ) && sizeof($mesaOculta) ) foreach( $mesaOculta as $key1 => $value1 ){ $counter1++; ?>
                     <div class="card-body">
                         <div class="row"> 
                             <div class="col-8">
-                                <h3>Mesa Nº x</h3>
+                                <h3>Mesa Nº <?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h3>
                             </div>
                             <div class="col-4">
-                                <button class="btn btn-dark">
-                                    Alocar Mesa
-                                </button>
+                                <a href="/exibeMesa/<?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                                    <button class="btn btn-dark">
+                                        Alocar Mesa
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </div>
+                    <?php } ?>
                     <div class="card-footer">
                         <div class="text-center">
                             <a href="/addMesa">

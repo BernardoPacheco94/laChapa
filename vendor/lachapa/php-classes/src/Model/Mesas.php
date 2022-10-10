@@ -23,6 +23,24 @@ class Mesas extends Model
         ]);
     }
 
+    public static function mesasExibidas()
+    {
+        $sql = new Sql;
+
+        return $sql->select('SELECT * FROM mesas WHERE exibe = :exibe ORDER BY idmesa',[
+            ':exibe' => 1
+        ]);
+    }
+
+    public static function mesasOcultas()
+    {
+        $sql = new Sql;
+
+        return $sql->select('SELECT * FROM mesas WHERE exibe = :exibe ORDER BY idmesa',[
+            ':exibe' => 0
+        ]);
+    }
+
     public static function exibeOcupadas()
     {
         $sql = new Sql;
@@ -45,7 +63,23 @@ class Mesas extends Model
             'livre'=> 1,
             'exibe'=> 1
         ]);
+    }
 
-        // $this->setData($result[0]);
+    public function removerMesa($idmesa)
+    {
+        $sql = new Sql;
+
+        $sql->query('UPDATE mesas SET exibe = 0 WHERE idmesa = :idmesa',[
+            ':idmesa' => $idmesa
+        ]);
+    }
+
+    public function exibirMesa($idmesa)
+    {
+        $sql = new Sql;
+        
+        $sql->query('UPDATE mesas SET exibe = 1 WHERE idmesa = :idmesa',[
+            ':idmesa' => $idmesa
+        ]);
     }
 }

@@ -11,16 +11,16 @@ $app = new \Slim\Slim();
 
 //Rota para a pagina principal - deck mesas
 $app->get('/', function(){
-    $mesas = Mesas::exibeTodas();
     
     $page = new Page();
 
     $page->setTpl('index',[
-        'mesa' => $mesas
+        'mesa' => Mesas::mesasExibidas(),
+        'mesaOculta' => Mesas::mesasOcultas()
     ]);
 });
 
-//Rota adicionar mesa
+//Rota adicionar nova mesa
 $app->get('/addMesa', function(){
     $mesa = new Mesas;
 
@@ -29,6 +29,28 @@ $app->get('/addMesa', function(){
     header('Location: /');
     exit;
 });
+
+//Rota reexibir mesa
+$app->get('/exibeMesa/:idmesa', function($idmesa){
+    $mesa = new Mesas;
+
+    $mesa->exibirMesa($idmesa);
+
+    header('Location: /');
+    exit;    
+});
+
+//Rota remover mesa
+$app->get('/removerMesa/:idmesa', function($idmesa){
+    $mesa = new Mesas;
+
+    $mesa->removerMesa($idmesa);
+
+    header('Location: /');
+    exit;
+});
+
+
 
 $app->get('/cardapio', function(){
     $page = new Page();
