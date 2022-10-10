@@ -1,0 +1,137 @@
+ :root {
+     --cor0: #0D0D0D;
+     --cor1: #F2F2F2;
+     --cor2: #F2B66D;
+     --cor3: #c28b25;
+     --cor4: #F2AE2E;
+ }
+
+ body {
+     background-color: var(--cor1);
+ }
+
+ header {
+     background-color: black;
+ }
+
+ .container-fluid {
+     height: 100px;
+     text-align: left;
+ }
+
+ .btn-group {
+     margin-bottom: 0px;
+ }
+
+ .btn-menu {
+     margin: 5px 5px 0px 5px;
+     border-radius: 10px 10px 0px 0px;
+     height: 50px;
+     cursor: pointer;
+     border: none;
+     background-color: #303030;
+     color: var(--cor1);
+ }
+
+
+
+
+ .card-deck {
+     margin: 1px;
+ }
+
+ .card {
+     min-width: 250px;
+     max-width: 450px;
+     border: 1px solid black;
+     margin: 3px;
+ }
+
+ div>h5 {
+     text-align: center;
+ }
+
+ #btn-adc-comanda {
+     margin: 5px 5px 0px 5px;
+     border-radius: 10px;
+     height: 50px;
+     cursor: pointer;
+     border: none;
+     background-color: #303030;
+     color: var(--cor1);
+ }
+
+
+
+ #label-select {
+     display: block;
+     margin-left: 10px;
+ }
+
+ #select-tipo-comanda {
+     display: inline;
+     width: 15%;
+     margin-left: 10px;
+ }
+
+ #select-tipo {
+     display: inline;
+     width: auto;
+     margin-left: 10px;
+ }
+
+ #select-produto {
+     display: inline;
+     width: 78%;
+ }
+
+ #btn-adc-produto,
+ #btn-adc-tipo {
+     margin: 5px;
+     border-radius: 10px;
+     height: 50px;
+     cursor: pointer;
+     border: none;
+     background-color: #303030;
+     color: var(--cor1);
+ }
+
+ .btn-adc-produto-card {
+     margin: 5px;
+     border-radius: 10px;
+     height: 50px;
+     width: 60px;
+     cursor: pointer;
+     border: none;
+     background-color: #303030;
+     color: var(--cor1);
+ }
+
+ #lista-ingredientes {
+     max-height: 150px;
+     overflow: scroll;
+ }
+
+ th,
+ td,
+ tr {
+     border: 1px solid rgba(0, 0, 0, 0.452);
+ }
+
+ #table-responsive {
+     padding: 3px;
+ }
+
+ #btn-check-ingredientes {
+     margin: 3px;
+ }
+
+ #div_data,
+ #title_caixa {
+     text-align: center;
+ }
+
+ #div_data_caixa,
+ #div_somente_pendentes {
+     display: inline;
+ }

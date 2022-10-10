@@ -1,0 +1,21 @@
+{
+    "name": "lachapa/php-classes",
+    "minimum-stability": "dev",
+    "type": "library",
+    "description": "Classes PHP",
+    "authors": [
+        {
+            "name": "La Chapa",
+            "email": "bpacheco94@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "rain/raintpl":"3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src"
+        }
+    }
+}
