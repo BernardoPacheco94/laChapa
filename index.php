@@ -30,4 +30,6 @@ $app->get('/caixa', function(){
     $page->setTpl('caixa');
 });
 
+//teste
+
 $app->run();
