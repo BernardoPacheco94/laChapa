@@ -4,19 +4,31 @@ require_once "vendor/autoload.php";
 
 use LaChapa\DB\Sql;
 use LaChapa\Page;
+use LaChapa\Model\Mesas;
 
 $app = new \Slim\Slim();
 
-$app->get('/', function(){
-    $sql = new Sql;
-    
-    
 
+//Rota para a pagina principal - deck mesas
+$app->get('/', function(){
+    $mesas = Mesas::exibeTodas();
+    
     $page = new Page();
 
-    $page->setTpl('index');
+    $page->setTpl('index',[
+        'mesa' => $mesas
+    ]);
 });
 
+//Rota adicionar mesa
+$app->get('/addMesa', function(){
+    $mesa = new Mesas;
+
+    $mesa->novaMesa();
+
+    header('Location: /');
+    exit;
+});
 
 $app->get('/cardapio', function(){
     $page = new Page();
@@ -29,7 +41,5 @@ $app->get('/caixa', function(){
 
     $page->setTpl('caixa');
 });
-
-//teste
 
 $app->run();
