@@ -4,7 +4,7 @@ require_once "vendor/autoload.php";
 
 use LaChapa\DB\Sql;
 use LaChapa\Page;
-use LaChapa\Model\Mesas;
+use LaChapa\Model\Mesa;
 
 $app = new \Slim\Slim();
 
@@ -15,14 +15,14 @@ $app->get('/', function(){
     $page = new Page();
 
     $page->setTpl('index',[
-        'mesa' => Mesas::mesasExibidas(),
-        'mesaOculta' => Mesas::mesasOcultas()
+        'mesa' => Mesa::mesasExibidas(),
+        'mesaOculta' => Mesa::mesasOcultas()
     ]);
 });
 
 //Rota adicionar nova mesa
 $app->get('/addMesa', function(){
-    $mesa = new Mesas;
+    $mesa = new Mesa;
 
     $mesa->novaMesa();
 
@@ -32,7 +32,7 @@ $app->get('/addMesa', function(){
 
 //Rota reexibir mesa
 $app->get('/exibeMesa/:idmesa', function($idmesa){
-    $mesa = new Mesas;
+    $mesa = new Mesa;
 
     $mesa->exibirMesa($idmesa);
 
@@ -42,7 +42,7 @@ $app->get('/exibeMesa/:idmesa', function($idmesa){
 
 //Rota remover mesa
 $app->get('/removerMesa/:idmesa', function($idmesa){
-    $mesa = new Mesas;
+    $mesa = new Mesa;
 
     $mesa->removerMesa($idmesa);
 

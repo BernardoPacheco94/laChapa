@@ -5,7 +5,7 @@ namespace LaChapa\Model;
 use LaChapa\Model;
 use LaChapa\DB\Sql;
 
-class Mesas extends Model
+class Mesa extends Model
 {
     public static function exibeTodas()
     {

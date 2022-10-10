@@ -112,13 +112,79 @@
 
             <div class="row text-center">
                 <div class="col-xs12-col-sm-12 col-md-8 col-lg-4 col-xl-4 mx-auto">
-                    <a href="#" class="btn btn-dark mx-auto col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 m-2 p-2">Novo
-                        Produto</a>
-                    <a href="#" class="btn btn-dark mx-auto col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 m-2 p-2">Novo
-                        Tipo</a>
+                    <button class="btn btn-dark mx-auto col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 m-2 p-2" data-bs-toggle="modal" data-bs-target="#modalNovoTipo">Novo
+                        Tipo</button>
+                    <button class="btn btn-dark mx-auto col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 m-2 p-2" data-bs-toggle="modal" data-bs-target="#modalNovoProduto">Novo
+                        Produto</button>
                 </div>
             </div>
-
-
         </section>
+
+        <!-- Modal cadastro tipo -->
+        <div class="modal fade" id="modalNovoTipo" tabindex="-1" aria-labelledby="modalNovoTipoLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="modalNovoTipoLabel">Cadastre um novo Tipo</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="" method="post">
+                    <label for="NovoTipo">
+                        Nome:
+                    </label>
+                    <input type="text" class="form-control" name="novoTipo" id="novoTipo" placeholder="Nome do Tipo (ex: Xis, Dog, Porção...)">
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i></button>
+                  <button type="button" class="btn btn-dark">Salvar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Modal Novo Produto -->
+          <div class="modal fade" id="modalNovoProduto" tabindex="-1" aria-labelledby="modalNovoProdutoLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="modalNovoProdutoLabel">Cadastre um novo Produto</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form class="form" action="" method="post">
+                    <label for="selectTipo">Tipo:</label>
+                    <select class="form-control" name="selectTipo" id="selectTipo">
+                        <option class="form-control" value="xis">Xis</option>
+                        <option class="form-control" value="xis">Dog</option>
+                        <option class="form-control" value="xis">Porção</option>
+                    </select>
+                    <label for="nomeProduto">Nome:</label>
+                    <input type="text" class="form-control" name="nomeProduto" id="nomeProduto" placeholder="Nome do Tipo (ex: Xis, Dog, Porção...)">
+                    <label for="checkIngredientes"><h5>Ingredientes</h5></label>
+
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="ingr1">
+                        <label class="form-check-label" for="ingr1">Ingrediente 1</label>
+                    </div>
+
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Ingrediente 2</label>
+                    </div>
+
+                    <label for="vlProduto">Valor:</label>
+                    <input class="form-control" type="number" name="vlProduto" id="vlProduto">
+
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i></button>
+                  <button type="button" class="btn btn-dark">Salvar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
     </main>
