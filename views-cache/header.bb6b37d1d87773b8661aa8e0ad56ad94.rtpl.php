@@ -37,7 +37,7 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-md navbar-dark bg-black">
             <div class="container-fluid">
-                <a class="navbar-brand d-block d-xl-none d-lg-none d-md-none d-sm-block" href="#">laChapa</a>
+                <a class="navbar-brand d-block d-xl-none d-lg-none d-md-none d-sm-block" href="/">laChapa</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

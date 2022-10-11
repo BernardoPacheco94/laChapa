@@ -50,9 +50,16 @@
                             </td>
                         </tr>
                         <?php } ?>
-                        <?php require $this->checkTemplate("modal-editar-tipo");?> 
+                        <?php require $this->checkTemplate("modal-editar-tipo");?>
                     </tbody>
                 </table>
+                    <div class="container mx-auto col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4">
+                        <button class="w-100 btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalNovoTipo">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <?php require $this->checkTemplate("modal-novo-tipo");?>
+                    </div>
+               
             </div>
 
         </div>

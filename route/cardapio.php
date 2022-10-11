@@ -48,9 +48,6 @@ $app->get('/editarTipo/:idtipo', function($idtipo){
 
     $tipo->setData($_GET);
 
-    // var_dump($tipo);
-    // exit;
-
     $tipo->updateTipo($idtipo);
 
     header('Location: /tipos');
