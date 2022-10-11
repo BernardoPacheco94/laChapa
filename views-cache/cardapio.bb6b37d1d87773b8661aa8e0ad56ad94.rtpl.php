@@ -1,31 +1,6 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?><main>
     <section>
-        <div class="p-4">
-            <button class="btn btn-dark " type="button" data-bs-toggle="offcanvas" data-bs-target="#sideMenuCardapio"
-                aria-controls="sideMenuCardapio"><i class="fa-solid fa-gear"></i></button>
-        </div>
-
-        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="sideMenuCardapio"
-            aria-labelledby="sideMenuCardapioLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="sideMenuCardapioLabel">Configurações</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body text-center">
-                <button class="btn btn-dark mx-auto mb-4 w-75">Visualizar Tipos</button>
-
-                <button class="btn btn-dark mx-auto mb-4 w-75" data-bs-toggle="modal"
-                    data-bs-target="#modalNovoTipo">Novo
-                    Tipo</button>
-
-                <button class="btn btn-dark mx-auto mb-4 w-75" data-bs-toggle="modal"
-                    data-bs-target="#modalNovoProduto">Novo
-                    Produto</button>
-
-                <button class="btn btn-dark mx-auto mb-4 w-75" data-bs-toggle="modal"
-                    data-bs-target="#modalNovoIngrediente">Novo Ingrediente</button>
-            </div>
-        </div>
+        <?php require $this->checkTemplate("side-menu");?>
         <div class="row container mx-auto">
             <h3 class="mx-auto mt-3">Produtos</h3>
         </div>
@@ -34,7 +9,7 @@
         <!-- Seleção de produto -->
         <div class="row container mx-auto">
             <div class="form-group w-100">
-                <form action="tela_produtos.html" class="form">
+                <form action="" class="form">
                     <div class="col-12">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-inline-block">
                             <select name="select_tipo" id="select_tipo" class="form-control">
@@ -88,50 +63,6 @@
                                         class="fa-solid fa-2x fa-trash-can text-danger"></i></a>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Xis</td>
-                            <td>Xis Completo</td>
-                            <td>Pãp, Ketchup, maionese, mostarda, milho, ervilha, alface, tomate, haburguer, ovo
-                            </td>
-                            <td>R$ 15,00</td>
-                            <td class="text-center"><a href="#"><i class="fa-solid fa-edit text-info"></i></a></td>
-                            <td class="text-center"><a href=""><i class="fa-solid fa-trash-can text-danger"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Xis</td>
-                            <td>Xis Completo</td>
-                            <td>Pãp, Ketchup, maionese, mostarda, milho, ervilha, alface, tomate, haburguer, ovo
-                            </td>
-                            <td>R$ 15,00</td>
-                            <td class="text-center"><a href="#"><i class="fa-solid fa-edit text-info"></i></a></td>
-                            <td class="text-center"><a href=""><i class="fa-solid fa-trash-can text-danger"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Xis</td>
-                            <td>Xis Completo</td>
-                            <td>Pãp, Ketchup, maionese, mostarda, milho, ervilha, alface, tomate, haburguer, ovo
-                            </td>
-                            <td>R$ 15,00</td>
-                            <td class="text-center"><a href="#"><i class="fa-solid fa-edit text-info"></i></a></td>
-                            <td class="text-center"><a href=""><i class="fa-solid fa-trash-can text-danger"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>Xis</td>
-                            <td>Xis Completo</td>
-                            <td>Pãp, Ketchup, maionese, mostarda, milho, ervilha, alface, tomate, haburguer, ovo
-                            </td>
-                            <td>R$ 15,00</td>
-                            <td class="text-center"><a href="#"><i class="fa-solid fa-edit text-info"></i></a></td>
-                            <td class="text-center"><a href=""><i class="fa-solid fa-trash-can text-danger"></i></a>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -140,106 +71,10 @@
 
     </section>
 
-    <!-- Modal cadastro tipo -->
-    <div class="modal fade" id="modalNovoTipo" tabindex="-1" aria-labelledby="modalNovoTipoLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalnometipoLabel">Cadastre um novo Tipo</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="/addTipo">
-                    <div class="modal-body">
-                        <label for="nometipo">
-                            Nome:
-                        </label>
-                        <input type="text" class="form-control" name="nometipo" id="nometipo"
-                            placeholder="Nome do Tipo (ex: Xis, Dog, Porção...)">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
-                                class="fa-solid fa-xmark"></i></button>
-                        <button type="submit" class="btn btn-dark">Salvar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal cadastro Ingrediente -->
-    <div class="modal fade" id="modalNovoIngrediente" tabindex="-1" aria-labelledby="modalNovoIngredienteLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalNovoIngredienteLabel">Cadastre um novo Ingrediente</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post">
-                        <label for="NovoIngrediente">
-                            Nome:
-                        </label>
-                        <input type="text" class="form-control" name="novoIngrediente" id="novoIngrediente"
-                            placeholder="Nome do Ingrediente">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
-                            class="fa-solid fa-xmark"></i></button>
-                    <button type="button" class="btn btn-dark">Salvar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
-    <!-- Modal Novo Produto -->
-    <div class="modal fade" id="modalNovoProduto" tabindex="-1" aria-labelledby="modalNovoProdutoLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalNovoProdutoLabel">Cadastre um novo Produto</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="form" action="" method="post">
-                        <label for="selectTipo">Tipo:</label>
-                        <select class="form-control" name="selectTipo" id="selectTipo">
-                            <option class="form-control" value="xis">Xis</option>
-                            <option class="form-control" value="xis">Dog</option>
-                            <option class="form-control" value="xis">Porção</option>
-                        </select>
-                        <label for="nomeProduto">Nome:</label>
-                        <input type="text" class="form-control" name="nomeProduto" id="nomeProduto"
-                            placeholder="Nome do Tipo (ex: Xis, Dog, Porção...)">
-                        <label for="checkIngredientes">
-                            <h5>Ingredientes</h5>
-                        </label>
 
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="ingr1">
-                            <label class="form-check-label" for="ingr1">Ingrediente 1</label>
-                        </div>
 
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Ingrediente 2</label>
-                        </div>
 
-                        <label for="vlProduto">Valor:</label>
-                        <input class="form-control" type="number" name="vlProduto" id="vlProduto">
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
-                            class="fa-solid fa-xmark"></i></button>
-                    <button type="button" class="btn btn-dark">Salvar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </main>

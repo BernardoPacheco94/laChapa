@@ -10,6 +10,7 @@ $app->get('/cardapio', function(){
     $page->setTpl('cardapio');
 });
 
+//Criar um tipo de produto
 $app->get('/addTipo', function(){
         
     $tipo = new Tipo;
@@ -18,6 +19,25 @@ $app->get('/addTipo', function(){
 
     $tipo->salvaTipo();
 
-    header('Location: /cardapio');
+    header('Location: /tipos');
+    exit;
+});
+
+//Visualizar tipos
+$app->get('/tipos', function(){
+    $page = new Page();
+
+    $page->setTpl('tipos',[
+        'tipos'=>Tipo::listaTipos()
+    ]);
+});
+
+// deletar tipo
+$app->get('/tipos/deletar/:idtipo', function($idtipo){
+    $tipo = new Tipo;
+
+    $tipo->deletarTipo($idtipo);
+
+    header('Location: /tipos');
     exit;
 });

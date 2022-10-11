@@ -20,4 +20,25 @@ class Tipo extends Model
         ]);
 
     }
+
+    public static function listaTipos()
+    {
+        $sql = new Sql;
+
+        return $sql->select('SELECT * FROM tipos WHERE ativo = 1 ORDER BY nometipo'); 
+    }
+
+    public function deletarTipo($idtipo)
+    {
+        $sql = new Sql;
+
+        $sql->query('UPDATE `db_lachapa`.`tipos`
+        SET
+        `ativo` = 0
+        WHERE `idtipo` = :idtipo',[
+            ':idtipo'=>$idtipo
+        ]);
+
+    }
+
 }
