@@ -13,17 +13,17 @@
             </div>
             <div class="offcanvas-body text-center">
                 <button class="btn btn-dark mx-auto mb-4 w-75">Visualizar Tipos</button>
-                    
-                <button class="btn btn-dark mx-auto mb-4 w-75"
-                    data-bs-toggle="modal" data-bs-target="#modalNovoTipo">Novo
+
+                <button class="btn btn-dark mx-auto mb-4 w-75" data-bs-toggle="modal"
+                    data-bs-target="#modalNovoTipo">Novo
                     Tipo</button>
-                
-                <button class="btn btn-dark mx-auto mb-4 w-75"
-                    data-bs-toggle="modal" data-bs-target="#modalNovoProduto">Novo
+
+                <button class="btn btn-dark mx-auto mb-4 w-75" data-bs-toggle="modal"
+                    data-bs-target="#modalNovoProduto">Novo
                     Produto</button>
-                
-                    <button class="btn btn-dark mx-auto mb-4 w-75"
-                    data-bs-toggle="modal" data-bs-target="#modalNovoIngrediente">Novo Ingrediente</button>
+
+                <button class="btn btn-dark mx-auto mb-4 w-75" data-bs-toggle="modal"
+                    data-bs-target="#modalNovoIngrediente">Novo Ingrediente</button>
             </div>
         </div>
         <div class="row container mx-auto">
@@ -82,8 +82,10 @@
                             <td>Pãp, Ketchup, maionese, mostarda, milho, ervilha, alface, tomate, haburguer, ovo
                             </td>
                             <td>R$ 15,00</td>
-                            <td class="text-center"><a href="#"><i class="fa-solid fa-edit text-info"></i></a></td>
-                            <td class="text-center"><a href=""><i class="fa-solid fa-trash-can text-danger"></i></a>
+                            <td class="text-center"><a href="#"><i class="fa-solid fa-2x fa-edit text-info"></i></a>
+                            </td>
+                            <td class="text-center"><a href=""><i
+                                        class="fa-solid fa-2x fa-trash-can text-danger"></i></a>
                             </td>
                         </tr>
                         <tr>
@@ -143,29 +145,30 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalNovoTipoLabel">Cadastre um novo Tipo</h1>
+                    <h1 class="modal-title fs-5" id="modalnometipoLabel">Cadastre um novo Tipo</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form action="" method="post">
-                        <label for="NovoTipo">
+                <form action="/addTipo">
+                    <div class="modal-body">
+                        <label for="nometipo">
                             Nome:
                         </label>
-                        <input type="text" class="form-control" name="novoTipo" id="novoTipo"
+                        <input type="text" class="form-control" name="nometipo" id="nometipo"
                             placeholder="Nome do Tipo (ex: Xis, Dog, Porção...)">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
-                            class="fa-solid fa-xmark"></i></button>
-                    <button type="button" class="btn btn-dark">Salvar</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
+                                class="fa-solid fa-xmark"></i></button>
+                        <button type="submit" class="btn btn-dark">Salvar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
     <!-- Modal cadastro Ingrediente -->
-    <div class="modal fade" id="modalNovoIngrediente" tabindex="-1" aria-labelledby="modalNovoIngredienteLabel" aria-hidden="true">
+    <div class="modal fade" id="modalNovoIngrediente" tabindex="-1" aria-labelledby="modalNovoIngredienteLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
