@@ -1,0 +1,33 @@
+{loop="$ingredientes"}
+<div class="modal fade" id="modalEditarIngrediente{$value.idingrediente}" tabindex="-1" aria-labelledby="modalEditarIngrediente{$value.idingrediente}Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-white">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalEditarIngrediente{$value.idingrediente}Label">Alterar Ingrediente</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/editarIngrediente/{$value.idingrediente}">
+                <div class="modal-body">
+                    <label for="nomeingrediente">
+                        Nome: 
+                    </label>
+                    <input type="text" class="form-control" name="nomeingrediente" id="nomeingrediente"
+                        value="{$value.nomeingrediente}">
+                        
+                        <label for="valoradicional">
+                            Valor: 
+                        </label>
+                        <input type="number" step="0.01" class="form-control" name="valoradicional" id="valoradicional"
+                            value="{$value.valoradicional}">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
+                            class="fa-solid fa-xmark"></i></button>
+                    <button type="submit" class="btn btn-dark">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/loop}

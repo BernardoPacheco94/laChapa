@@ -9,10 +9,9 @@
             <form action="/editarTipo/<?php echo htmlspecialchars( $value1["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                 <div class="modal-body">
                     <label for="nometipo">
-                        Nome anterior: <?php echo htmlspecialchars( $value1["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        Nome:
                     </label>
-                    <input type="text" class="form-control" name="nometipo" id="nometipo"
-                        placeholder="Novo nome">
+                    <input type="text" class="form-control" name="nometipo" id="nometipo" value="<?php echo htmlspecialchars( $value1["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i

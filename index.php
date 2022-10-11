@@ -12,14 +12,13 @@ $app->config('debug', true);
 
 require_once "route".DIRECTORY_SEPARATOR."mesas.php";
 require_once "route".DIRECTORY_SEPARATOR."cardapio.php";
+require_once "route".DIRECTORY_SEPARATOR."tipo.php";
+require_once "route".DIRECTORY_SEPARATOR."caixa.php";
+require_once "route".DIRECTORY_SEPARATOR."ingredientes.php";
 
 
 
 
-$app->get('/caixa', function(){
-    $page = new Page();
 
-    $page->setTpl('caixa');
-});
 
 $app->run();

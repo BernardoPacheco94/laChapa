@@ -9,10 +9,9 @@
             <form action="/editarTipo/{$value.idtipo}">
                 <div class="modal-body">
                     <label for="nometipo">
-                        Nome anterior: {$value.nometipo}
+                        Nome:
                     </label>
-                    <input type="text" class="form-control" name="nometipo" id="nometipo"
-                        placeholder="Novo nome">
+                    <input type="text" class="form-control" name="nometipo" id="nometipo" value="{$value.nometipo}">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i

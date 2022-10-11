@@ -4,7 +4,7 @@
         <?php require $this->checkTemplate("side-menu");?>   
                   
         <div class="row container mx-auto">
-            <h3 class="mx-auto mt-3">Tipos Cadastrados</h3>
+            <h3 class="mx-auto mt-3">Ingredientes Cadastrados</h3>
         </div>
 
         <!-- Seleção de produto -->
@@ -25,38 +25,40 @@
             </div>
         </div>
 
-        <!-- Tabela de tipos -->
+        <!-- Tabela de ingredientes -->
         <div class="container">
             <div class="table table-responsive" id="table-responsive">
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th scope="col" class="text-center">Código</th>
-                            <th scope="col">Tipo</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Valor Adicional</th>
                             <th scope="col" class="text-center">Editar</th>
                             <th scope="col" class="text-center">Excluir</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $counter1=-1;  if( isset($tipos) && ( is_array($tipos) || $tipos instanceof Traversable ) && sizeof($tipos) ) foreach( $tipos as $key1 => $value1 ){ $counter1++; ?>
-                        <tr>
-                             <th scope="row" class="text-center"><?php echo htmlspecialchars( $value1["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></th>
-                            <td class="text-start"><?php echo htmlspecialchars( $value1["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                            <td class="text-center"><button class="btn" data-bs-toggle="modal" data-bs-target="#modalEditarTipo<?php echo htmlspecialchars( $value1["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><i class="fa-solid fa-2x fa-edit text-info"></i></button>
+                        <?php $counter1=-1;  if( isset($ingredientes) && ( is_array($ingredientes) || $ingredientes instanceof Traversable ) && sizeof($ingredientes) ) foreach( $ingredientes as $key1 => $value1 ){ $counter1++; ?>
+                        <tr>       
+                            <th scope="row" class="text-center"><?php echo htmlspecialchars( $value1["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?></th>
+                            <td class="text-start"><?php echo htmlspecialchars( $value1["nomeingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                            <td class="text-start">R$ <?php echo htmlspecialchars( $value1["valoradicional"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                            <td class="text-center"><button class="btn" data-bs-toggle="modal" data-bs-target="#modalEditarIngrediente<?php echo htmlspecialchars( $value1["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><i class="fa-solid fa-2x fa-edit text-info"></i></button>
                             </td>
-                            <td class="text-center"><a href="/tipos/deletar/<?php echo htmlspecialchars( $value1["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" onclick="return confirm('Deseja realmente deletar o tipo <?php echo htmlspecialchars( $value1["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>?')"><i
+                            <td class="text-center"><a href="/ingrediente/deletar/<?php echo htmlspecialchars( $value1["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" onclick="return confirm('Deseja realmente deletar o ingrediente <?php echo htmlspecialchars( $value1["nomeingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>?')"><i
                                         class="fa-solid fa-2x fa-trash-can text-danger"></i></a>
                             </td>
                         </tr>
                         <?php } ?>
-                        <?php require $this->checkTemplate("modal-editar-tipo");?>
+                        <?php require $this->checkTemplate("modal-editar-ingrediente");?>
                     </tbody>
                 </table>
                     <div class="container mx-auto col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4">
-                        <button class="w-100 btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalNovoTipo">
+                        <button class="w-100 btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalNovoIngrediente">
                             <i class="fa-solid fa-plus"></i>
-                        </button>
-                        <?php require $this->checkTemplate("modal-novo-tipo");?>
+                        </button>                        
+                    
                     </div>
                
             </div>
