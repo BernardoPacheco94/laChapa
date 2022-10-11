@@ -41,3 +41,18 @@ $app->get('/tipos/deletar/:idtipo', function($idtipo){
     header('Location: /tipos');
     exit;
 });
+
+//editar tipo
+$app->get('/editarTipo/:idtipo', function($idtipo){
+    $tipo = new Tipo();
+
+    $tipo->setData($_GET);
+
+    // var_dump($tipo);
+    // exit;
+
+    $tipo->updateTipo($idtipo);
+
+    header('Location: /tipos');
+    exit;
+});

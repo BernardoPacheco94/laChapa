@@ -41,4 +41,17 @@ class Tipo extends Model
 
     }
 
+    public function updateTipo($idtipo)
+    {
+        $sql = new Sql;
+
+        $sql->query('UPDATE `db_lachapa`.`tipos`
+        SET
+        `nometipo` = :nometipo
+        WHERE `idtipo` = :idtipo',[
+            'nometipo'=>$this->getnometipo(),
+            'idtipo'=>$idtipo
+        ]);
+    }
+
 }

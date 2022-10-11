@@ -70,11 +70,4 @@
         </div>
 
     </section>
-
-
-
-
-
-
-
 </main>
