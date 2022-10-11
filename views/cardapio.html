@@ -42,7 +42,7 @@
                         <tr>
                             <th scope="col">Código</th>
                             <th scope="col">Tipo</th>
-                            <th scope="col">Produtos</th>
+                            <th scope="col">Nome</th>
                             <th scope="col">Ingredientes</th>
                             <th scope="col">Valor</th>
                             <th scope="col" class="text-center">Editar</th>
