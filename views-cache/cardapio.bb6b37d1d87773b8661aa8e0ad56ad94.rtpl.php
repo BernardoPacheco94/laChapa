@@ -110,7 +110,7 @@
 
             </div>
 
-            <div class="row text-center">
+            <div class="text-center">
                 <div class="col-xs12-col-sm-12 col-md-8 col-lg-4 col-xl-4 mx-auto">
                     <button class="btn btn-dark mx-auto col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 m-2 p-2" data-bs-toggle="modal" data-bs-target="#modalNovoTipo">Novo
                         Tipo</button>

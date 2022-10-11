@@ -56,13 +56,13 @@
                         <li class="nav-item">
                         </li>
                     </ul>
-                    <div class="">
+                    <!-- <div class="">
                         <ul class="navbar-nav mr-3">
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="index.php">Sair</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </nav>
