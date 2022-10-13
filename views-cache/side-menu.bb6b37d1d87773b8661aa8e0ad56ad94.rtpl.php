@@ -27,3 +27,4 @@
 </div>
 <?php require $this->checkTemplate("modal-novo-tipo");?>
 <?php require $this->checkTemplate("modal-novo-ingrediente");?>
+<?php require $this->checkTemplate("modal-novo-produto");?>

@@ -1,6 +1,7 @@
 <?php
 
 use LaChapa\Model\Ingrediente;
+use LaChapa\Model\Tipo;
 use LaChapa\Page;
 
 $app->config('debug',true);
@@ -11,7 +12,8 @@ $app->get('/ingredientes', function(){
     $page = new Page();
 
     $page->setTpl('ingredientes',[
-        'ingredientes'=>$listaIngredientes
+        'ingredientes'=>$listaIngredientes,
+        'tipos'=>Tipo::listaTipos()
     ]);
 });
 
