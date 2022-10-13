@@ -43,7 +43,7 @@
                         <tr>       
                             <th scope="row" class="text-center"><?php echo htmlspecialchars( $value1["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?></th>
                             <td class="text-start"><?php echo htmlspecialchars( $value1["nomeingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                            <td class="text-start">R$ <?php echo htmlspecialchars( $value1["valoradicional"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                            <td class="text-start">R$ <?php echo formatPrice($value1["valoradicional"]); ?></td>
                             <td class="text-center"><button class="btn" data-bs-toggle="modal" data-bs-target="#modalEditarIngrediente<?php echo htmlspecialchars( $value1["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><i class="fa-solid fa-2x fa-edit text-info"></i></button>
                             </td>
                             <td class="text-center"><a href="/ingrediente/deletar/<?php echo htmlspecialchars( $value1["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" onclick="return confirm('Deseja realmente deletar o ingrediente <?php echo htmlspecialchars( $value1["nomeingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>?')"><i

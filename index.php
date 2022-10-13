@@ -10,6 +10,7 @@ $app = new \Slim\Slim();
 
 $app->config('debug', true);
 
+require_once "functions.php";
 require_once "route".DIRECTORY_SEPARATOR."mesas.php";
 require_once "route".DIRECTORY_SEPARATOR."cardapio.php";
 require_once "route".DIRECTORY_SEPARATOR."tipo.php";

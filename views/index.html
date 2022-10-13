@@ -65,7 +65,7 @@
                                         <div class="col-6 text-center ">
                                             <button type="button" class="btn btn-dark" id="btn-adc-comanda"
                                                 data-bs-toggle="modal" data-bs-target="#modal_lanca_comanda">
-                                                Novo Produto
+                                                Adicioanar Produto
                                             </button>
                                         </div>
                                         <div class="col-6 text-center">
