@@ -58,4 +58,11 @@ class Ingrediente extends Model
         ]);
     }
 
+    public static function pesquisar($pesquisa)
+    {
+        $sql = new Sql;
+
+        return $sql->select('SELECT * FROM ingredientes WHERE (nomeingrediente LIKE :PESQUISA) AND ativo = 1',array(":PESQUISA"=>"%".$pesquisa."%"));
+    }
+
 }

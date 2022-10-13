@@ -18,10 +18,12 @@ $app->get('/addTipo', function(){
 
 //Visualizar tipos
 $app->get('/tipos', function(){
+    $listaTipos = (isset($_GET['pesquisar'])) ? Tipo::pesquisar($_GET['pesquisar']) : Tipo::listaTipos();    
+    
     $page = new Page();
 
     $page->setTpl('tipos',[
-        'tipos'=>Tipo::listaTipos()
+        'tipos'=> $listaTipos
     ]);
 });
 

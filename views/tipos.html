@@ -20,7 +20,6 @@
                             <button type="submit" class="w-100 btn btn-dark"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>

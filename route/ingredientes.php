@@ -6,10 +6,12 @@ use LaChapa\Page;
 $app->config('debug',true);
 
 $app->get('/ingredientes', function(){
+    $listaIngredientes = (isset($_GET['pesquisar'])) ? Ingrediente::pesquisar($_GET['pesquisar']) : Ingrediente::listaIngredientes();    
+    
     $page = new Page();
 
     $page->setTpl('ingredientes',[
-        'ingredientes'=>Ingrediente::listaIngredientes()
+        'ingredientes'=>$listaIngredientes
     ]);
 });
 
@@ -48,4 +50,4 @@ $app->get('/editarIngrediente/:idingrediente', function($idingrediente){
     exit;
 });
 
-//rota para deletar ingrediente
+

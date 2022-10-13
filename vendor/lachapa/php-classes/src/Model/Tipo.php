@@ -54,4 +54,11 @@ class Tipo extends Model
         ]);
     }
 
+    public static function pesquisar($pesquisa)
+    {
+        $sql = new Sql;
+
+        return $sql->select('SELECT * FROM tipos WHERE (nometipo LIKE :PESQUISA) AND ativo = 1',array(":PESQUISA"=>"%".$pesquisa."%"));
+    }
+
 }
