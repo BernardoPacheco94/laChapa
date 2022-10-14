@@ -11,7 +11,8 @@ $app->get('/cardapio', function(){
 
     $page->setTpl('cardapio',[
         'tipos'=>Tipo::listaTipos(),
-        'ingredientes'=>Ingrediente::listaIngredientes()
+        'ingredientes'=>Ingrediente::listaIngredientes(),
+        'produtos'=>Produto::listaProdutos()
     ]);
 });
 
@@ -41,3 +42,4 @@ $app->get('/salvaProduto', function(){
     header('Location: /cardapio');
     exit;
 });
+ 

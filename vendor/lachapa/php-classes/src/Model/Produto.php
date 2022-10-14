@@ -50,4 +50,38 @@ class Produto extends Model{
             ':idingrediente'=>$idingrediente
         ]);
     }
+
+    public static function listaProdutos()
+    {
+        $sql = new Sql;
+
+        return $sql->select('SELECT * 
+        FROM produtos a
+        INNER JOIN `produto-tipo` b USING (idproduto)
+        INNER JOIN `tipos` c USING (idtipo)
+        WHERE a.ativo = 1
+        ');
+    }
+
+    public static function listaIngredientesProduto( $produto)
+    {
+        $sql = new Sql;
+
+        $resultado = $sql->select('SELECT * FROM `produto-ingredientes` WHERE idproduto = :idproduto',[
+            ':idproduto'=>$produto
+        ]);
+
+        return $resultado;
+    }
+
+    public function get($idproduto)
+    {
+        $sql = new Sql;
+
+        $resultado = $sql->select('SELECT * FROM produtos WHERE idproduto = :idproduto',[
+            'idproduto'=>$idproduto
+        ]);
+
+        return $this->setData($resultado[0]);
+    }
 }

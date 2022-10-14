@@ -50,19 +50,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $counter1=-1;  if( isset($produtos) && ( is_array($produtos) || $produtos instanceof Traversable ) && sizeof($produtos) ) foreach( $produtos as $key1 => $value1 ){ $counter1++; ?>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Xis</td>
-                            <td>Xis Completo</td>
-                            <td>Pãp, Ketchup, maionese, mostarda, milho, ervilha, alface, tomate, haburguer, ovo
+                            <th scope="row"><?php echo htmlspecialchars( $value1["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?></th>
+                            <td><?php echo htmlspecialchars( $value1["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                            <td><?php echo htmlspecialchars( $value1["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                            <td>Pão, Ketchup, maionese, mostarda, milho, ervilha, alface, tomate, haburguer, ovo
                             </td>
-                            <td>R$ 15,00</td>
+                            <td>R$ <?php echo formatPrice($value1["valorproduto"]); ?></td>
                             <td class="text-center"><a href="#"><i class="fa-solid fa-2x fa-edit text-info"></i></a>
                             </td>
                             <td class="text-center"><a href=""><i
                                         class="fa-solid fa-2x fa-trash-can text-danger"></i></a>
                             </td>
                         </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
