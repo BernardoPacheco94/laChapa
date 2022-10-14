@@ -11,19 +11,17 @@ class Produto extends Model{
     {
         $sql = new Sql;
 
-        $sql->query('INSERT INTO `db_lachapa`.`produtos`
-        (`nomeproduto`,
-        `valorproduto`)
-        VALUES
-        (:nomeproduto,
-        :valorproduto)',[
+        $resultado = $sql->select('CALL `db_lachapa`.`sp_salva_produtos`(:idproduto, :nomeproduto, :valorproduto, :ativo);',[
+            'idproduto'=>$this->getidproduto(),
             'nomeproduto'=>$this->getnomeproduto(),
-            'valorproduto'=>$this->getvalorproduto()
+            'valorproduto'=>$this->getvalorproduto(),
+            'ativo'=>1
         ]);
-        
+
+        return $this->setData($resultado[0]);        
     }
 
-    public function addTipo($idtipo)
+    public function addTipo(Tipo $tipo)
     {
         $sql = new Sql;
 
@@ -34,7 +32,7 @@ class Produto extends Model{
         (:idproduto,
         :idtipo)',[
             ':idproduto'=>$this->getidproduto(),
-            ':idtipo'=>$idtipo
+            ':idtipo'=>$tipo->getidtipo()
         ]);
     }
 

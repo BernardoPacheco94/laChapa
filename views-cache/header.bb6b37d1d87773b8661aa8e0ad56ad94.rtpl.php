@@ -14,11 +14,11 @@
     <script src="https://kit.fontawesome.com/4c5a422e1b.js" crossorigin="anonymous"></script>
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="img/favicon/site.webmanifest">
-    <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="apple-touch-icon" sizes="76x76" href="/res/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/res/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/res/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/res/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/res/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
@@ -29,7 +29,7 @@
 
     <header>
         <div class="container-fluid bg-black d-none d-xs-none d-sm-none d-md-block d-lg-block d-xl-block">
-            <img src="img/logo.png" alt="logo-la-chapa" class="mx-auto d-block">
+            <img src="/res/img/logo.png" alt="logo-la-chapa" class="mx-auto d-block">
         </div>
     </header>
 

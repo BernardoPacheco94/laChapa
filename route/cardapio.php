@@ -22,19 +22,21 @@ $app->get('/salvaProduto', function(){
     $dataProduto = [];
     array_push($dataProduto, $_GET['nomeproduto'], $_GET['valorproduto']);
     $produto->setData($_GET);
-    // var_dump($produto);
-    // exit;
     $produto->salvaProduto();
 
-    $produto->addTipo((int)$_GET['idtipo']);
+    $tipo = new Tipo;
+    $tipo->get((int)$produto->getidtipo());
+    
 
-    // if(isset($_GET['ingredientes']))
-    // {
-    //     $listaIngredientes = $_GET['ingredientes'];
-    //     foreach ($listaIngredientes as $idingrediente) {
-    //         $produto->addTipo((int)$idingrediente);
-    //     }
-    // }
+    $produto->addTipo($tipo);
+
+    if(isset($_GET['ingredientes']))
+    {
+        $listaIngredientes = $_GET['ingredientes'];
+        foreach ($listaIngredientes as $idingrediente) {
+            $produto->addIngrediente((int)$idingrediente);
+        }
+    }
     
     header('Location: /cardapio');
     exit;

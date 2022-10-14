@@ -6,7 +6,7 @@
                 <h1 class="modal-title" id="modalNovoProdutoLabel">Novo Produto</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/salvaProduto">
+            <form action="/salvaProduto" autocomplete="off">
                 <div class="modal-body">
                     <!-- Dados do produto -->
 

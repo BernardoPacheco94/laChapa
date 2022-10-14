@@ -38,7 +38,6 @@ class Tipo extends Model
         WHERE `idtipo` = :idtipo',[
             ':idtipo'=>$idtipo
         ]);
-
     }
 
     public function updateTipo($idtipo)
@@ -59,6 +58,17 @@ class Tipo extends Model
         $sql = new Sql;
 
         return $sql->select('SELECT * FROM tipos WHERE (nometipo LIKE :PESQUISA) AND ativo = 1',array(":PESQUISA"=>"%".$pesquisa."%"));
+    }
+
+    public function get($idtipo)
+    {
+        $sql = new Sql;
+
+        $resultado = $sql->select('SELECT * FROM tipos WHERE idtipo = :idtipo',[
+            'idtipo'=>$idtipo
+        ]);
+
+        return $this->setData($resultado[0]);
     }
 
 }
