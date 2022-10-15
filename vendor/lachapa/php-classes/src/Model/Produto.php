@@ -4,6 +4,7 @@ namespace LaChapa\Model;
 
 use LaChapa\Model;
 use LaChapa\DB\Sql;
+use LDAP\Result;
 
 class Produto extends Model{
     
@@ -51,27 +52,47 @@ class Produto extends Model{
         ]);
     }
 
-    public static function listaProdutos()
+    public function listaProdutos()
     {
         $sql = new Sql;
 
-        return $sql->select('SELECT * 
+        $result = $sql->select('SELECT * 
         FROM produtos a
         INNER JOIN `produto-tipo` b USING (idproduto)
         INNER JOIN `tipos` c USING (idtipo)
         WHERE a.ativo = 1
         ');
+
+        for($i=0; $i<(count($result)); $i++ )
+        {
+            array_push($result[$i], [
+                'ingredientes'=>Produto::listaIngredientesProduto($result[$i]['idproduto'])
+            ]);
+        }
+
+        return $result;
+
     }
 
-    public static function listaIngredientesProduto( $produto)
+    public static function listaIngredientesProduto($idproduto)
     {
         $sql = new Sql;
 
-        $resultado = $sql->select('SELECT * FROM `produto-ingredientes` WHERE idproduto = :idproduto',[
-            ':idproduto'=>$produto
+        $resultado = $sql->select('SELECT * 
+        FROM produtos a
+        INNER JOIN `produto-ingredientes` b USING (idproduto)
+        INNER JOIN `ingredientes` c USING (idingrediente)
+        WHERE b.idproduto= :idproduto AND a.ativo =1',[
+            ':idproduto'=>$idproduto
         ]);
 
-        return $resultado;
+        $ingredientes =[];
+
+        for ($i=0; $i < count($resultado) ; $i++) { 
+            array_push($ingredientes, $resultado[$i]['nomeingrediente']);
+        }
+
+        return $ingredientes;
     }
 
     public function get($idproduto)

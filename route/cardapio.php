@@ -7,13 +7,18 @@ use LaChapa\Page;
 
 //pagina principal - visualizar produtos
 $app->get('/cardapio', function(){
-    $page = new Page();
+    $produto = new Produto;
+    
+    var_dump($produto->listaProdutos());
+    exit;
 
-    $page->setTpl('cardapio',[
-        'tipos'=>Tipo::listaTipos(),
-        'ingredientes'=>Ingrediente::listaIngredientes(),
-        'produtos'=>Produto::listaProdutos()
-    ]);
+    // $page = new Page();
+
+    // $page->setTpl('cardapio',[
+    //     'tipos'=>Tipo::listaTipos(),
+    //     'ingredientes'=>Ingrediente::listaIngredientes(),
+    //     'produtos'=>Produto::listaProdutos()
+    // ]);
 });
 
 //salvar produto
