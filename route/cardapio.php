@@ -9,16 +9,16 @@ use LaChapa\Page;
 $app->get('/cardapio', function(){
     $produto = new Produto;
     
-    var_dump($produto->listaProdutos());
-    exit;
+    // var_dump($produto->listaProdutos());
+    // exit;
 
-    // $page = new Page();
+    $page = new Page();
 
-    // $page->setTpl('cardapio',[
-    //     'tipos'=>Tipo::listaTipos(),
-    //     'ingredientes'=>Ingrediente::listaIngredientes(),
-    //     'produtos'=>Produto::listaProdutos()
-    // ]);
+    $page->setTpl('cardapio',[
+        'tipos'=>Tipo::listaTipos(),
+        'ingredientes'=>Ingrediente::listaIngredientes(),
+        'produtos'=>$produto->listaProdutos()
+    ]);
 });
 
 //salvar produto

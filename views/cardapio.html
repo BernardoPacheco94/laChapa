@@ -55,7 +55,7 @@
                             <th scope="row" class="text-center">{$value.idproduto}</th>
                             <td>{$value.nometipo}</td>
                             <td>{$value.nomeproduto}</td>
-                            <td>Pão, Ketchup, maionese, mostarda, milho, ervilha, alface, tomate, haburguer, ovo
+                            <td>{loop="$value.0.ingredientes"} {$value} {/loop}
                             </td>
                             <td>R$ {function="formatPrice($value.valorproduto)"}</td>
                             <td class="text-center"><a href="#"><i class="fa-solid fa-2x fa-edit text-info"></i></a>
