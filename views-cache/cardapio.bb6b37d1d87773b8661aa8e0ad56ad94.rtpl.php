@@ -55,16 +55,25 @@
                             <th scope="row" class="text-center"><?php echo htmlspecialchars( $value1["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?></th>
                             <td><?php echo htmlspecialchars( $value1["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                             <td><?php echo htmlspecialchars( $value1["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                            <td><?php $counter2=-1;  if( isset($value1["0"]["ingredientes"]) && ( is_array($value1["0"]["ingredientes"]) || $value1["0"]["ingredientes"] instanceof Traversable ) && sizeof($value1["0"]["ingredientes"]) ) foreach( $value1["0"]["ingredientes"] as $key2 => $value2 ){ $counter2++; ?> <?php echo htmlspecialchars( $value2, ENT_COMPAT, 'UTF-8', FALSE ); ?> <?php } ?>
+                            <td>
+                                <ul class="list-group list-group-horizontal">
+                                    <?php $counter2=-1;  if( isset($value1["0"]["ingredientes"]) && ( is_array($value1["0"]["ingredientes"]) || $value1["0"]["ingredientes"] instanceof Traversable ) && sizeof($value1["0"]["ingredientes"]) ) foreach( $value1["0"]["ingredientes"] as $key2 => $value2 ){ $counter2++; ?>
+                                    <li class="list-group-item"><?php echo htmlspecialchars( $value2, ENT_COMPAT, 'UTF-8', FALSE ); ?></li>
+                                    <?php } ?>
+                                </ul>
                             </td>
                             <td>R$ <?php echo formatPrice($value1["valorproduto"]); ?></td>
-                            <td class="text-center"><a href="#"><i class="fa-solid fa-2x fa-edit text-info"></i></a>
+                            <td class="text-center"><button class="btn" data-bs-toggle="modal"
+                                    data-bs-target="#modalEditarProduto<?php echo htmlspecialchars( $value1["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><i
+                                        class="fa-solid fa-2x fa-edit text-info"></i></button>
                             </td>
-                            <td class="text-center"><a href=""><i
+                            <td class="text-center"><a href="/produto/deletar/<?php echo htmlspecialchars( $value1["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
+                                    onclick="return confirm('Deseja realmente excluir o produto <?php echo htmlspecialchars( $value1["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>?')"><i
                                         class="fa-solid fa-2x fa-trash-can text-danger"></i></a>
                             </td>
                         </tr>
                         <?php } ?>
+                        <?php require $this->checkTemplate("modal-editar-produto");?>
                     </tbody>
                 </table>
             </div>

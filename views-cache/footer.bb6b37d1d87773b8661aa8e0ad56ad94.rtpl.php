@@ -9,7 +9,7 @@
         crossorigin="anonymous"></script>
 
     <!-- Script interno -->
-    <script src="script/script-modal.js"></script>
+    <script src="/res/script/script-modal.js"></script>
 
 </body>
 

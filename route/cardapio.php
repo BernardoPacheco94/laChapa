@@ -47,4 +47,14 @@ $app->get('/salvaProduto', function(){
     header('Location: /cardapio');
     exit;
 });
+
+//excluir produto
+$app->get('/produto/deletar/:idproduto', function($idproduto){
+    $produto = new Produto;
+    
+    $produto->deletarProduto($idproduto);
+
+    header('Location: /cardapio');
+    exit;
+});
  

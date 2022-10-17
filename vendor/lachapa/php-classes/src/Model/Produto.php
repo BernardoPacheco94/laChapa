@@ -56,6 +56,7 @@ class Produto extends Model{
     {
         $sql = new Sql;
 
+        
         $result = $sql->select('SELECT * 
         FROM produtos a
         INNER JOIN `produto-tipo` b USING (idproduto)
@@ -104,5 +105,17 @@ class Produto extends Model{
         ]);
 
         return $this->setData($resultado[0]);
+    }
+
+    public function deletarProduto($idproduto)
+    {
+        $sql = new Sql;
+
+        $sql->query('UPDATE `db_lachapa`.`produtos`
+        SET
+        `ativo` = 0
+        WHERE `idproduto` = :idproduto',[
+            ':idproduto'=>$idproduto
+        ]);        
     }
 }

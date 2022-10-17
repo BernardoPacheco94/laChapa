@@ -55,16 +55,25 @@
                             <th scope="row" class="text-center">{$value.idproduto}</th>
                             <td>{$value.nometipo}</td>
                             <td>{$value.nomeproduto}</td>
-                            <td>{loop="$value.0.ingredientes"} {$value} {/loop}
+                            <td>
+                                <ul class="list-group list-group-horizontal">
+                                    {loop="$value.0.ingredientes"}
+                                    <li class="list-group-item">{$value}</li>
+                                    {/loop}
+                                </ul>
                             </td>
                             <td>R$ {function="formatPrice($value.valorproduto)"}</td>
-                            <td class="text-center"><a href="#"><i class="fa-solid fa-2x fa-edit text-info"></i></a>
+                            <td class="text-center"><button class="btn" data-bs-toggle="modal"
+                                    data-bs-target="#modalEditarProduto{$value.idproduto}"><i
+                                        class="fa-solid fa-2x fa-edit text-info"></i></button>
                             </td>
-                            <td class="text-center"><a href=""><i
+                            <td class="text-center"><a href="/produto/deletar/{$value.idproduto}"
+                                    onclick="return confirm('Deseja realmente excluir o produto {$value.nomeproduto}?')"><i
                                         class="fa-solid fa-2x fa-trash-can text-danger"></i></a>
                             </td>
                         </tr>
                         {/loop}
+                        {include="modal-editar-produto"}
                     </tbody>
                 </table>
             </div>

@@ -1,8 +1,8 @@
 function adcProduto() {
-  let modal = document.querySelector('div#modal-body')
-  let item = document.createElement('div')
+    let modal = document.querySelector('div#modal-body')
+    let item = document.createElement('div')
 
-  item.innerHTML = `<div class="card text-center">
+    item.innerHTML = `<div class="card text-center">
     <h5 class="card-title">XIS COMPLETO
     <button class="btn btn-warning" type="submit">Excluir</button>
     </h5>
@@ -38,19 +38,21 @@ function adcProduto() {
 
 </div>`
 
-  modal.appendChild(item)
+    modal.appendChild(item)
 }
+
+
 
 function geraComanda() {
 
 }
 
 function adcMesa() {
-  let card_deck = document.querySelector('div#card-deck')
-  let card = document.createElement('div')
-  card.setAttribute('class', 'col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mt-2 p-2')
+    let card_deck = document.querySelector('div#card-deck')
+    let card = document.createElement('div')
+    card.setAttribute('class', 'col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mt-2 p-2')
 
-  card.innerHTML = `<div>
+    card.innerHTML = `<div>
   <div class="card h-100">
       <div class="card-header">
           <h5 class="card-title">MESA N#</h5>
@@ -199,6 +201,6 @@ function adcMesa() {
   </div>
 </div>`
 
-  card_deck.appendChild(card)
+    card_deck.appendChild(card)
 
 }
