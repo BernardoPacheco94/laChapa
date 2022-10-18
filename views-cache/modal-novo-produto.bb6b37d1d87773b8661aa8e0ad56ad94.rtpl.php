@@ -31,7 +31,7 @@
                             <?php $counter1=-1;  if( isset($ingredientes) && ( is_array($ingredientes) || $ingredientes instanceof Traversable ) && sizeof($ingredientes) ) foreach( $ingredientes as $key1 => $value1 ){ $counter1++; ?>
                             <div class="form-check form-switch">
                                 <input class="mb-2 form-check-input" type="checkbox" role="switch"
-                                    id="<?php echo htmlspecialchars( $value1["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" name="ingredientes[]" value="<?php echo htmlspecialchars( $value1["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                                    id="<?php echo htmlspecialchars( $value1["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" name="ingredientes[]" value="<?php echo htmlspecialchars( $value1["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" >
                                 <label class="mb-2 form-check-label"
                                     for="<?php echo htmlspecialchars( $value1["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nomeingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                                 </label>

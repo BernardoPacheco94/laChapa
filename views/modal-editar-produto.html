@@ -29,18 +29,23 @@
                             {/if}>{$value.nometipo}</option>
                         {/loop}
                     </select>
+                    {$selecionados=$value.0.ingredientes}                    
+                    
                     <label for="check_ingredientes">Ingredientes:</label>
                     <div class="card">
                         <div class="card-body">
                             <!-- <input type="search" class="form-control" placeholder="Pesquisar Ingrediente" name="pesquisar"> -->
-                            {loop="$ingredientes"}
+                            {loop="$ingredientes"} 
+                            {$opcaoIngrediente=$value.nomeingrediente} 
                             <div class="form-check form-switch">
                                 <input class="mb-2 form-check-input" type="checkbox" role="switch"
-                                    id="{$value.idingrediente}" name="ingredientes[]" value="{$value.idingrediente}">
+                                id="{$value.idingrediente}" name="ingredientes[]" value="{$value.idingrediente}" {loop="$selecionados"}
+                                {if="$value == $opcaoIngrediente"} checked {/if}
+                            {/loop}>
                                 <label class="mb-2 form-check-label"
-                                    for="{$value.idingrediente}">{$value.nomeingrediente}
-                                </label>
-                            </div>
+                                        for="{$value.idingrediente}">{$value.nomeingrediente}
+                                    </label>
+                                </div>
                             {/loop}
                         </div>
                     </div>
