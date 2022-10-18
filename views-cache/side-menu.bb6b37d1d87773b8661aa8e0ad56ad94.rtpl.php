@@ -21,6 +21,8 @@
         <button class="btn btn-dark mx-auto mb-4 w-75" data-bs-toggle="modal"
             data-bs-target="#modalNovoIngrediente">Novo Ingrediente</button>
 
+        <a href="/cardapio"><button class="btn btn-dark mx-auto mb-4 w-75">Visualizar Produtos</button></a>
+
         <button class="btn btn-dark mx-auto mb-4 w-75" data-bs-toggle="modal" data-bs-target="#modalNovoProduto">Novo
             Produto</button>
     </div>

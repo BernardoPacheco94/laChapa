@@ -58,7 +58,6 @@
                         <button class="w-100 btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalNovoIngrediente">
                             <i class="fa-solid fa-plus"></i>
                         </button>                        
-                    
                     </div>
                
             </div>

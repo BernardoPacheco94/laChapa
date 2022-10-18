@@ -51,12 +51,7 @@
                     </button>
                 </div>
             </form>
-            <div class="modal-footer">
-                <h6>vazio
-                </h6>
-            </div>
         </div>
-
     </div>
 </div>
 </div>
