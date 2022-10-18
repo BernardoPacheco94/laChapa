@@ -25,8 +25,6 @@ $app->get('/cardapio', function(){
 $app->get('/salvaProduto', function(){
     
     $produto = new Produto;
-    $dataProduto = [];
-    array_push($dataProduto, $_GET['nomeproduto'], $_GET['valorproduto']);
     $produto->setData($_GET);
     $produto->salvaProduto();
 
@@ -53,6 +51,32 @@ $app->get('/produto/deletar/:idproduto', function($idproduto){
     $produto = new Produto;
     
     $produto->deletarProduto($idproduto);
+
+    header('Location: /cardapio');
+    exit;
+});
+
+//editar produto
+$app->get('/editarProduto/:idproduto', function($idproduto){
+    $produto = new Produto;
+
+    $produto->setData($_GET);
+    $produto->salvaProduto();
+
+    $tipo = new Tipo;
+    $tipo->get((int)$produto->getidtipo());
+    
+    $produto->updateTipo($produto->getidproduto());
+
+    $produto->limpaIngredientes($produto->getidproduto());
+
+    if(isset($_GET['ingredientes']))
+    {
+        $listaIngredientes = $_GET['ingredientes'];
+        foreach ($listaIngredientes as $idingrediente) {
+            $produto->addIngrediente((int)$idingrediente);
+        }
+    }
 
     header('Location: /cardapio');
     exit;

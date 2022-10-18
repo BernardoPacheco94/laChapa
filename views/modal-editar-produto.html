@@ -9,6 +9,7 @@
             </div>
             <form action="/editarProduto/{$value.idproduto}">
                 <div class="modal-body">
+                    <input hidden type="number" name="idproduto" value="{$value.idproduto}" >
 
 
                     <label for="nomeproduto">
@@ -27,7 +28,7 @@
 
                     <label for="select_tipo_produto">Tipo:</label>
                     {$tipo=$value.idtipo}
-                    <select class="form-control" name="select_tipo_produto" id="select_tipo_produto">
+                    <select class="form-control" name="idtipo" id="idtipo">
                         {loop="$tipos"}
                         <option name="{$value.idtipo}" value="{$value.idtipo}" {if="$value.idtipo == $tipo"} selected
                             {/if}>{$value.nometipo}</option>

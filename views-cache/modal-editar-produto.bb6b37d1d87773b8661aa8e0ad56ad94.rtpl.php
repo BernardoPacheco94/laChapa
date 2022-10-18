@@ -9,6 +9,7 @@
             </div>
             <form action="/editarProduto/<?php echo htmlspecialchars( $value1["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                 <div class="modal-body">
+                    <input hidden type="number" name="idproduto" value="<?php echo htmlspecialchars( $value1["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" >
 
 
                     <label for="nomeproduto">
@@ -27,7 +28,7 @@
 
                     <label for="select_tipo_produto">Tipo:</label>
                     <?php $tipo=$value1["idtipo"]; ?>
-                    <select class="form-control" name="select_tipo_produto" id="select_tipo_produto">
+                    <select class="form-control" name="idtipo" id="idtipo">
                         <?php $counter2=-1;  if( isset($tipos) && ( is_array($tipos) || $tipos instanceof Traversable ) && sizeof($tipos) ) foreach( $tipos as $key2 => $value2 ){ $counter2++; ?>
                         <option name="<?php echo htmlspecialchars( $value2["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value2["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" <?php if( $value2["idtipo"] == $tipo ){ ?> selected
                             <?php } ?>><?php echo htmlspecialchars( $value2["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
@@ -45,11 +46,11 @@
                             <div class="form-check form-switch">
                                 <input class="mb-2 form-check-input" type="checkbox" role="switch"
                                 id="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" name="ingredientes[]" value="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" 
-                                <?php $counter3=-1;  if( isset($selecionados) && ( is_array($selecionados) || $selecionados instanceof Traversable ) && sizeof($selecionados) ) foreach( $selecionados as $key3 => $value3 ){ $counter3++; ?>
+                                <?php $counter3=-1;  if( isset($selecionados) && ( is_array($selecionados) || $selecionados instanceof Traversable ) && sizeof($selecionados) ) foreach( $selecionados as $key3 => $value3 ){ $counter3++; ?> 
                                     <?php if( $value3 == $opcaoIngrediente ){ ?>  
                                         checked 
                                     <?php } ?>
-                                <?php } ?>>
+                                <?php } ?>> <!--Faz o loop nos ingredientes selecionados e compara com todos os ingredientes, marcando os que coincidem-->
                                 <label class="mb-2 form-check-label"
                                         for="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value2["nomeingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                                     </label>

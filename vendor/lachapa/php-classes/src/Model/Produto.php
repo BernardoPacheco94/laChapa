@@ -118,4 +118,27 @@ class Produto extends Model{
             ':idproduto'=>$idproduto
         ]);        
     }
+
+    public function updateTipo($idproduto)
+    {
+        $sql = new Sql;
+
+        $sql->query('UPDATE `db_lachapa`.`produto-tipo`
+        SET
+        `idtipo` = :idtipo
+        WHERE `idproduto` = :idproduto',[
+            ':idtipo'=>$this->getidtipo(),
+            ':idproduto'=>$idproduto
+        ]);
+    }
+
+    public function limpaIngredientes($idproduto)
+    {
+        $sql = new Sql;
+
+        $sql->query('DELETE FROM `produto-ingredientes` WHERE idproduto = :idproduto',[
+            ':idproduto'=>$idproduto
+        ]);        
+    }
+
 }
