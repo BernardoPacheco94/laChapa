@@ -25,7 +25,7 @@
                     {$tipo=$value.idtipo}
                     <select class="form-control" name="select_tipo_produto" id="select_tipo_produto">
                         {loop="$tipos"}
-                        <option name="{$value.idtipo}" value="{$value.idtipo}" {if="$value.idtipo == $tipo" } selected
+                        <option name="{$value.idtipo}" value="{$value.idtipo}" {if="$value.idtipo == $tipo"} selected
                             {/if}>{$value.nometipo}</option>
                         {/loop}
                     </select>
@@ -34,12 +34,13 @@
                         <div class="card-body">
                             <!-- <input type="search" class="form-control" placeholder="Pesquisar Ingrediente" name="pesquisar"> -->
                             {loop="$ingredientes"}
-                                <div class="form-check form-switch">
-                                    <input class="mb-2 form-check-input" type="checkbox" role="switch"
-                                        id="{$value.idingrediente}" name="ingredientes[]" value="{$value.idingrediente}">
-                                    <label class="mb-2 form-check-label" for="{$value.idingrediente}">{$value.nomeingrediente}
-                                    </label>
-                                </div>
+                            <div class="form-check form-switch">
+                                <input class="mb-2 form-check-input" type="checkbox" role="switch"
+                                    id="{$value.idingrediente}" name="ingredientes[]" value="{$value.idingrediente}">
+                                <label class="mb-2 form-check-label"
+                                    for="{$value.idingrediente}">{$value.nomeingrediente}
+                                </label>
+                            </div>
                             {/loop}
                         </div>
                     </div>

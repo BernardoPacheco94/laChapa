@@ -32,19 +32,15 @@
                     <label for="check_ingredientes">Ingredientes:</label>
                     <div class="card">
                         <div class="card-body">
-                            <?php $nomesIngredientes=$value1["0"]["ingredientes"]; ?>
                             <!-- <input type="search" class="form-control" placeholder="Pesquisar Ingrediente" name="pesquisar"> -->
                             <?php $counter2=-1;  if( isset($ingredientes) && ( is_array($ingredientes) || $ingredientes instanceof Traversable ) && sizeof($ingredientes) ) foreach( $ingredientes as $key2 => $value2 ){ $counter2++; ?>
-                                        <?php $counter3=-1;  if( isset($nomeIngredientes) && ( is_array($nomeIngredientes) || $nomeIngredientes instanceof Traversable ) && sizeof($nomeIngredientes) ) foreach( $nomeIngredientes as $key3 => $value3 ){ $counter3++; ?>
-                                            <?php $ingr=$value3; ?>
-                                        <?php } ?>
-                                    <div class="form-check form-switch">
-                                        <input class="mb-2 form-check-input" type="checkbox" role="switch"
-                                            id="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" name="ingredientes[]" value="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                                        <label class="mb-2 form-check-label" for="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" <?php if( $value2["nomeingrediente"] == $ingr ){ ?>
-                                            checked <?php } ?>><?php echo htmlspecialchars( $value2["nomeingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
-                                        </label>
-                                    </div>
+                            <div class="form-check form-switch">
+                                <input class="mb-2 form-check-input" type="checkbox" role="switch"
+                                    id="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" name="ingredientes[]" value="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                                <label class="mb-2 form-check-label"
+                                    for="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value2["nomeingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                                </label>
+                            </div>
                             <?php } ?>
                         </div>
                     </div>
