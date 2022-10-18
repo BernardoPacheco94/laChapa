@@ -22,14 +22,13 @@
                         value="<?php echo htmlspecialchars( $value1["valorproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
 
                     <label for="select_tipo_produto">Tipo:</label>
-                    <div hidden id="iddiferente"><?php echo htmlspecialchars( $value1["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></div>
-                    <button onclick="teste()">Butão</button>
+                    <?php $tipo=$value1["idtipo"]; ?>                    
                     <select class="form-control" name="select_tipo_produto" id="select_tipo_produto">
                         <?php $counter2=-1;  if( isset($tipos) && ( is_array($tipos) || $tipos instanceof Traversable ) && sizeof($tipos) ) foreach( $tipos as $key2 => $value2 ){ $counter2++; ?>
-                        <option name="<?php echo htmlspecialchars( $value2["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value2["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value2["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                        <option name="<?php echo htmlspecialchars( $value2["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value2["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" <?php if( $value2["idtipo"] == $tipo ){ ?> selected <?php } ?>><?php echo htmlspecialchars( $value2["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                         <?php } ?>
                     </select>
-
+                    
                     <label for="check_ingredientes">Ingredientes:</label>
                     <div class="card">
                         <div class="card-body">
