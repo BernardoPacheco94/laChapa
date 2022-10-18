@@ -22,25 +22,29 @@
                         value="<?php echo htmlspecialchars( $value1["valorproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
 
                     <label for="select_tipo_produto">Tipo:</label>
-                    <?php $tipo=$value1["idtipo"]; ?>                    
+                    <?php $tipo=$value1["idtipo"]; ?>
                     <select class="form-control" name="select_tipo_produto" id="select_tipo_produto">
                         <?php $counter2=-1;  if( isset($tipos) && ( is_array($tipos) || $tipos instanceof Traversable ) && sizeof($tipos) ) foreach( $tipos as $key2 => $value2 ){ $counter2++; ?>
-                        <option name="<?php echo htmlspecialchars( $value2["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value2["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" <?php if( $value2["idtipo"] == $tipo ){ ?> selected <?php } ?>><?php echo htmlspecialchars( $value2["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                        <option name="<?php echo htmlspecialchars( $value2["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value2["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" <?php if( $value2["idtipo"] == $tipo ){ ?> selected
+                            <?php } ?>><?php echo htmlspecialchars( $value2["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                         <?php } ?>
                     </select>
-                    
                     <label for="check_ingredientes">Ingredientes:</label>
                     <div class="card">
                         <div class="card-body">
+                            <?php $nomesIngredientes=$value1["0"]["ingredientes"]; ?>
                             <!-- <input type="search" class="form-control" placeholder="Pesquisar Ingrediente" name="pesquisar"> -->
                             <?php $counter2=-1;  if( isset($ingredientes) && ( is_array($ingredientes) || $ingredientes instanceof Traversable ) && sizeof($ingredientes) ) foreach( $ingredientes as $key2 => $value2 ){ $counter2++; ?>
-                            <div class="form-check form-switch">
-                                <input class="mb-2 form-check-input" type="checkbox" role="switch"
-                                    id="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" name="ingredientes[]" value="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                                <label class="mb-2 form-check-label"
-                                    for="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value2["nomeingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
-                                </label>
-                            </div>
+                                        <?php $counter3=-1;  if( isset($nomeIngredientes) && ( is_array($nomeIngredientes) || $nomeIngredientes instanceof Traversable ) && sizeof($nomeIngredientes) ) foreach( $nomeIngredientes as $key3 => $value3 ){ $counter3++; ?>
+                                            <?php $ingr=$value3; ?>
+                                        <?php } ?>
+                                    <div class="form-check form-switch">
+                                        <input class="mb-2 form-check-input" type="checkbox" role="switch"
+                                            id="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" name="ingredientes[]" value="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                                        <label class="mb-2 form-check-label" for="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" <?php if( $value2["nomeingrediente"] == $ingr ){ ?>
+                                            checked <?php } ?>><?php echo htmlspecialchars( $value2["nomeingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                                        </label>
+                                    </div>
                             <?php } ?>
                         </div>
                     </div>
