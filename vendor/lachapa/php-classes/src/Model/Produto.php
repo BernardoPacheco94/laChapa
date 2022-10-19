@@ -141,4 +141,28 @@ class Produto extends Model{
         ]);        
     }
 
+    public static function pesquisar($pesquisa)
+    {
+        $sql = new Sql;
+
+        $result = $sql->select('SELECT * 
+        FROM produtos a
+        INNER JOIN `produto-tipo` b USING (idproduto)
+        INNER JOIN `tipos` c USING (idtipo)
+        WHERE (a.nomeproduto LIKE :PESQUISA) AND  a.ativo = 1 ',
+        [
+            ":PESQUISA"=>"%".$pesquisa."%"
+        ]);
+
+        for($i=0; $i<(count($result)); $i++ )
+        {
+            array_push($result[$i], [
+                'ingredientes'=>Produto::listaIngredientesProduto($result[$i]['idproduto'])
+            ]);
+        }
+
+        return $result;
+    }
+
 }
+

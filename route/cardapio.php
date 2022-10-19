@@ -9,15 +9,14 @@ use LaChapa\Page;
 $app->get('/cardapio', function(){
     $produto = new Produto;
     
-    // var_dump($produto->listaProdutos());
-    // exit;
+    $listaProdutos = (isset($_GET['pesquisar'])) ? Produto::pesquisar($_GET['pesquisar']) : $produto->listaProdutos();
 
     $page = new Page();
 
     $page->setTpl('cardapio',[
         'tipos'=>Tipo::listaTipos(),
         'ingredientes'=>Ingrediente::listaIngredientes(),
-        'produtos'=>$produto->listaProdutos()
+        'produtos'=>$listaProdutos
     ]);
 });
 
