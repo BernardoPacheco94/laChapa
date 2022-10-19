@@ -54,6 +54,7 @@
                             <a class="nav-link" href="/caixa">Caixa</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="/atendentes">Atendentes</a>
                         </li>
                     </ul>
                     <!-- <div class="">
