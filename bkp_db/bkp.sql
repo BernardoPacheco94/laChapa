@@ -29,7 +29,7 @@ CREATE TABLE `atendentes` (
   PRIMARY KEY (`idatendente`),
   UNIQUE KEY `idatendente_UNIQUE` (`idatendente`),
   UNIQUE KEY `nomeatendente_UNIQUE` (`nomeatendente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `atendentes` (
 
 LOCK TABLES `atendentes` WRITE;
 /*!40000 ALTER TABLE `atendentes` DISABLE KEYS */;
+INSERT INTO `atendentes` VALUES (1,'Bernardo',1),(2,'Luana',0),(3,'Gabriel',1);
 /*!40000 ALTER TABLE `atendentes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,6 +170,7 @@ CREATE TABLE `comandas` (
   `valortotal` float DEFAULT NULL,
   `status` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `data` timestamp NOT NULL DEFAULT current_timestamp(),
+  `nomecliente` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`idcomanda`),
   UNIQUE KEY `idcomanda_UNIQUE` (`idcomanda`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -413,33 +415,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-19 12:06:45
-
-                      -- PROCEDURE
--- CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_salva_produtos`(
-
--- `pidproduto` int(11),
--- `pnomeproduto` varchar(45),
--- `pvalorproduto` float,
--- `pativo` int(11)
-
--- )
--- BEGIN
-
--- 	IF pidproduto > 0 THEN
--- 		UPDATE produtos
--- 			SET 
--- 				nomeproduto = pnomeproduto,
--- 				valorproduto = pvalorproduto,
--- 				ativo = pativo
--- 			WHERE  idproduto = pidproduto;
--- 	ELSE
--- 		INSERT INTO `db_lachapa`.`produtos` (`nomeproduto`,`valorproduto`,`ativo`)
--- 		VALUES (pnomeproduto, pvalorproduto, 1);
-        
---         SET pidproduto = LAST_INSERT_ID();
--- 	END IF;
-    
---     SELECT * FROM produtos WHERE idproduto = pidproduto;    
-
--- END
+-- Dump completed on 2022-10-19 16:02:44
