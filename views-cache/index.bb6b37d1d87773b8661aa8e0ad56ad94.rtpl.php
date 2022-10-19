@@ -65,12 +65,12 @@
                                         <div class="col-6 text-center ">
                                             <button type="button" class="btn btn-dark" id="btn-adc-comanda"
                                                 data-bs-toggle="modal" data-bs-target="#modal_lanca_comanda">
-                                                Adicioanar Produto
+                                                Gerenciar Comanda
                                             </button>
                                         </div>
                                         <div class="col-6 text-center">
                                             <span class="">
-                                                <a href=""><i class="text-dark fa-solid fa-2x fa-print"></i> </a>
+                                                <a href="/comanda/print/idcomanda"><i class="text-dark fa-solid fa-2x fa-print"></i> </a>
                                             </span>
                                         </div>
                                     </div>

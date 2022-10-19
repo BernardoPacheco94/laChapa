@@ -82,4 +82,15 @@ class Mesa extends Model
             ':idmesa' => $idmesa
         ]);
     }
+
+    public function get($idmesa)
+    {
+        $sql = new Sql;
+
+        $resultado = $sql->select('SELECT * FROM mesas WHERE idmesa = :idmesa',[
+            'idmesa'=>$idmesa
+        ]);
+
+        return $this->setData($resultado[0]);
+    }
 }
