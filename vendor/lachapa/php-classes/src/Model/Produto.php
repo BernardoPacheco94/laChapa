@@ -164,5 +164,28 @@ class Produto extends Model{
         return $result;
     }
 
+    public static function filtraPorTipo($idtipo)
+    {
+        $sql = new Sql;
+
+        $result = $sql->select('SELECT * 
+        FROM produtos a
+        INNER JOIN `produto-tipo` b USING (idproduto)
+        INNER JOIN `tipos` c USING (idtipo)
+        WHERE (c.idtipo LIKE :idtipo) AND  a.ativo = 1 ',
+        [
+            ":idtipo"=>$idtipo
+        ]);
+
+        for($i=0; $i<(count($result)); $i++ )
+        {
+            array_push($result[$i], [
+                'ingredientes'=>Produto::listaIngredientesProduto($result[$i]['idproduto'])
+            ]);
+        }
+
+        return $result;        
+    }
+
 }
 

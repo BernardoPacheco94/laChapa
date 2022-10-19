@@ -12,8 +12,9 @@
                 <form action="" class="form">
                     <div class="col-12">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-inline-block">
-                            <select name="select_tipo" id="select_tipo" class="form-control">
-                                <option value="1" disabled selected>Tipo</option>
+                            <select name="pesquisaPorTipo" id="select_tipo" class="form-control">
+                                <option value="tipo" disabled selected>Tipo</option>
+                                <option value="todos">Todos</option>
                                 <?php $counter1=-1;  if( isset($tipos) && ( is_array($tipos) || $tipos instanceof Traversable ) && sizeof($tipos) ) foreach( $tipos as $key1 => $value1 ){ $counter1++; ?>
                                 <option value="<?php echo htmlspecialchars( $value1["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                                 <?php } ?>
@@ -23,7 +24,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 col-xl-8 d-inline-block">
                                     <input class="form-control mb-3" type="search" name="pesquisar" id="pesquisar"
-                                        placeholder="Pesquisar">
+                                        placeholder="Pesquisar por nome">
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 col-xxl-2">
                                     <button type="submit" class="w-100 btn btn-dark"><i

@@ -7,9 +7,23 @@ use LaChapa\Page;
 
 //pagina principal - visualizar produtos
 $app->get('/cardapio', function(){
-    $produto = new Produto;
+    // if(isset($_GET['pesquisaPorTipo'])){
+    //     var_dump((int)$_GET['pesquisaPorTipo']);
+    //     exit;
+    // }
     
-    $listaProdutos = (isset($_GET['pesquisar'])) ? Produto::pesquisar($_GET['pesquisar']) : $produto->listaProdutos();
+    
+    $produto = new Produto;
+
+    if(isset($_GET['pesquisaPorTipo']))
+    {
+        $listaProdutos = ($_GET['pesquisaPorTipo'] == 'todos') ? $listaProdutos = $produto->listaProdutos() : Produto::filtraPorTipo((int)$_GET['pesquisaPorTipo']);
+    } else if ((isset($_GET['pesquisar']))) {
+        $listaProdutos = Produto::pesquisar($_GET['pesquisar']) ;
+    } else {
+        $listaProdutos = $produto->listaProdutos();
+    }
+    
 
     $page = new Page();
 
