@@ -6,16 +6,14 @@ use LaChapa\Page;
 
 $app->config('debug',true);
 
-$app->get('/novaComanda', function(){
-    
-    var_dump($_GET);
-    exit;
-    
-});
-
 $app->post('/novaComanda', function(){
-    echo 'carregou';
-    var_dump($_POST);
+    $comanda = new Comanda;
+
+    $comanda->setData($_POST);
+    
+    $comanda->novaComanda();
+    var_dump($comanda);
     exit;
+
     
 });

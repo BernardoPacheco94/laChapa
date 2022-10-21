@@ -168,12 +168,12 @@ DROP TABLE IF EXISTS `comandas`;
 CREATE TABLE `comandas` (
   `idcomanda` int(11) NOT NULL AUTO_INCREMENT,
   `valortotal` float DEFAULT NULL,
-  `status` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `data` timestamp NOT NULL DEFAULT current_timestamp(),
+  `statuscomanda` varchar(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'A',
+  `datacomanda` timestamp NOT NULL DEFAULT current_timestamp(),
   `nomecliente` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`idcomanda`),
   UNIQUE KEY `idcomanda_UNIQUE` (`idcomanda`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,6 +182,7 @@ CREATE TABLE `comandas` (
 
 LOCK TABLES `comandas` WRITE;
 /*!40000 ALTER TABLE `comandas` DISABLE KEYS */;
+INSERT INTO `comandas` VALUES (1,15,'A','2022-10-21 15:25:09','cliente');
 /*!40000 ALTER TABLE `comandas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -415,4 +416,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-19 16:02:44
+-- Dump completed on 2022-10-21 12:26:27

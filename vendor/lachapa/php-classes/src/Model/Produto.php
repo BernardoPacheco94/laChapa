@@ -12,11 +12,11 @@ class Produto extends Model{
     {
         $sql = new Sql;
 
-        $resultado = $sql->select('CALL `db_lachapa`.`sp_salva_produtos`(:idproduto, :nomeproduto, :valorproduto, :ativo);',[
-            'idproduto'=>$this->getidproduto(),
-            'nomeproduto'=>$this->getnomeproduto(),
-            'valorproduto'=>$this->getvalorproduto(),
-            'ativo'=>1
+        $resultado = $sql->select('CALL `db_lachapa`.`sp_salva_produtos`(:idproduto, :nomeproduto, :valorproduto, :ativo)',[
+            ':idproduto'=>$this->getidproduto(),
+            ':nomeproduto'=>$this->getnomeproduto(),
+            ':valorproduto'=>$this->getvalorproduto(),
+            ':ativo'=>1
         ]);
 
         return $this->setData($resultado[0]);        

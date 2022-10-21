@@ -173,7 +173,10 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="4" class="text-center">Total</th>
-                                            <th>R$ 18,00</th>
+                                            <th>
+                                                <input type="number" step="0.01" name="valortotal" id="valortotal" class="form-control" hidden value="15">
+                                                <input class="form-control" disabled value="15">
+                                            </th>
                                         </tr>
 
                                     </tfoot>
