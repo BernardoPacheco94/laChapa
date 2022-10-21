@@ -64,7 +64,7 @@
                                     <div class="row">
                                         <div class="col-6 text-center ">
                                             <button type="button" class="btn btn-dark" id="btn-adc-comanda"
-                                                data-bs-toggle="modal" data-bs-target="#modal_lanca_comanda">
+                                                data-bs-toggle="modal" data-bs-target="#modal_comanda">
                                                 Gerenciar Comanda
                                             </button>
                                         </div>
@@ -168,7 +168,7 @@
                     <div class="row">
                         <div class="col-6">
                             <button type="button" class="btn btn-dark" id="btn-adc-comanda" data-bs-toggle="modal"
-                                data-bs-target="#modal_lanca_comanda">
+                                data-bs-target="#modal_comanda">
                                 Nova Comanda
                             </button>
                         </div>
@@ -188,6 +188,6 @@
 </section>
 
 
-<?php require $this->checkTemplate("modal-nova-comanda");?>
+<?php require $this->checkTemplate("modal-comanda");?>
 
 <?php require $this->checkTemplate("modal-gerenciar-mesas");?>
