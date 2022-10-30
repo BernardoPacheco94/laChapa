@@ -9,10 +9,10 @@
         <!-- Seleção de produto -->
         <div class="row container mx-auto">
             <div class="form-group text-center w-100">
-                <form action="" class="form">
+                <form id="form_cardapio_pesquisa_por_tipo" action="" class="form">
                     <div class="col-12">
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-inline-block">
-                            <select name="pesquisaPorTipo" id="select_tipo" class="form-control">
+                            <select name="idtipo" id="select_tipo" class="form-control">
                                 <option value="tipo" disabled selected>Tipo</option>
                                 <option value="todos">Todos</option>
                                 <?php $counter1=-1;  if( isset($tipos) && ( is_array($tipos) || $tipos instanceof Traversable ) && sizeof($tipos) ) foreach( $tipos as $key1 => $value1 ){ $counter1++; ?>
@@ -27,8 +27,8 @@
                                         placeholder="Pesquisar por nome">
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 col-xxl-2">
-                                    <button type="submit" class="w-100 btn btn-dark"><i
-                                            class="fa-solid fa-magnifying-glass"></i></button>
+                                    <button type="submit" form="form_cardapio_pesquisa_por_tipo" class="w-100 btn btn-dark">
+                                    <i class="fa-solid fa-magnifying-glass"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -52,30 +52,8 @@
                             <th scope="col" class="text-center">Excluir</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php $counter1=-1;  if( isset($produtos) && ( is_array($produtos) || $produtos instanceof Traversable ) && sizeof($produtos) ) foreach( $produtos as $key1 => $value1 ){ $counter1++; ?>
-                        <tr>
-                            <th scope="row" class="text-center"><?php echo htmlspecialchars( $value1["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?></th>
-                            <td><?php echo htmlspecialchars( $value1["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                            <td><?php echo htmlspecialchars( $value1["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                            <td>
-                                <ul class="list-group list-group-horizontal">
-                                    <?php $counter2=-1;  if( isset($value1["0"]["ingredientes"]) && ( is_array($value1["0"]["ingredientes"]) || $value1["0"]["ingredientes"] instanceof Traversable ) && sizeof($value1["0"]["ingredientes"]) ) foreach( $value1["0"]["ingredientes"] as $key2 => $value2 ){ $counter2++; ?>
-                                    <li class="list-group-item"><?php echo htmlspecialchars( $value2, ENT_COMPAT, 'UTF-8', FALSE ); ?></li>
-                                    <?php } ?>
-                                </ul>
-                            </td>
-                            <td>R$ <?php echo formatPrice($value1["valorproduto"]); ?></td>
-                            <td class="text-center"><button class="btn" data-bs-toggle="modal"
-                                    data-bs-target="#modalEditarProduto<?php echo htmlspecialchars( $value1["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><i
-                                        class="fa-solid fa-2x fa-edit text-info"></i></button>
-                            </td>
-                            <td class="text-center"><a href="/produto/deletar/<?php echo htmlspecialchars( $value1["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
-                                    onclick="return confirm('Deseja realmente excluir o produto <?php echo htmlspecialchars( $value1["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>?')"><i
-                                        class="fa-solid fa-2x fa-trash-can text-danger"></i></a>
-                            </td>
-                        </tr>
-                        <?php } ?>
+                    <tbody id="produtos_tbody">
+                        
                         <?php require $this->checkTemplate("modal-editar-produto");?>
                     </tbody>
                 </table>

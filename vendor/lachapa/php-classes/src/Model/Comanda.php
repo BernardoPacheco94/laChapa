@@ -20,5 +20,6 @@ class Comanda extends Model{
 
     return $this->setData($result[0]);
    }
+   
 }
 

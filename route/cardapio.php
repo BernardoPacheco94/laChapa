@@ -7,27 +7,38 @@ use LaChapa\Page;
 
 //pagina principal - visualizar produtos
 $app->get('/cardapio', function(){
-        
     $produto = new Produto;
 
-    if(isset($_GET['pesquisaPorTipo']))
+    
+    if(isset($_GET['idtipo']))
     {
-        $listaProdutos = ($_GET['pesquisaPorTipo'] == 'todos') ? $listaProdutos = $produto->listaProdutos() : Produto::filtraPorTipo((int)$_GET['pesquisaPorTipo']);
+        $listaProdutos = ($_GET['idtipo'] == 'todos') ? $listaProdutos = $produto->listaProdutos() : Produto::filtraPorTipo((int)$_GET['idtipo']);
     } else if ((isset($_GET['pesquisar']))) {
         $listaProdutos = Produto::pesquisar($_GET['pesquisar']) ;
     } else {
         $listaProdutos = $produto->listaProdutos();
     }
     
+    
 
     $page = new Page();
-
+    
     $page->setTpl('cardapio',[
         'tipos'=>Tipo::listaTipos(),
         'ingredientes'=>Ingrediente::listaIngredientes(),
-        'produtos'=>$listaProdutos
+        'produtos'=> $listaProdutos
     ]);
 });
+
+
+$app->get('/cardapio/ajax', function(){
+
+    $idtipo = ($_GET['idtipo'] == 'todos' || $_GET['idtipo'] == 'tipo') ? '%' : ((int)$_GET['idtipo']);
+
+    echo json_encode(Produto::filtraPorTipo($idtipo));
+
+});
+
 
 //salvar produto
 $app->get('/salvaProduto', function(){

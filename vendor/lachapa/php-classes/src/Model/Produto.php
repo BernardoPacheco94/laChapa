@@ -52,7 +52,7 @@ class Produto extends Model{
         ]);
     }
 
-    public function listaProdutos()
+    public static function listaProdutos()
     {
         $sql = new Sql;
 
@@ -87,7 +87,7 @@ class Produto extends Model{
             ':idproduto'=>$idproduto
         ]);
 
-        $ingredientes =[];
+        $ingredientes = [];
 
         for ($i=0; $i < count($resultado) ; $i++) { 
             array_push($ingredientes, $resultado[$i]['nomeingrediente']);

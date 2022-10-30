@@ -1,18 +1,29 @@
 <?php
+
+use LaChapa\Model\Atendente;
 use LaChapa\Page;
 use LaChapa\Model\Mesa;
-
+use LaChapa\Model\Produto;
+use LaChapa\Model\Tipo;
 
 //Rota para a pagina principal - deck mesas
 $app->get('/', function(){
     
     $page = new Page();
 
+    $produto = new Produto;
+
     $page->setTpl('index',[
         'mesa' => Mesa::mesasExibidas(),
-        'mesaOculta' => Mesa::mesasOcultas()
+        'mesaOculta' => Mesa::mesasOcultas(),
+        'atendentes' => Atendente::listaAtendentes(),
+        'tipos'=>Tipo::listaTipos(),
+        'produtos'=> Produto::listaProdutos()
     ]);
 });
+
+
+
 
 //Rota adicionar nova mesa
 $app->get('/addMesa', function(){

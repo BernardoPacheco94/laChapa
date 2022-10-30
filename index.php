@@ -20,8 +20,4 @@ require_once "route".DIRECTORY_SEPARATOR."atendentes.php";
 require_once "route".DIRECTORY_SEPARATOR."comandas.php";
 
 
-
-
-
-
 $app->run();

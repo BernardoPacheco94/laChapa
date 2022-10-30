@@ -12,8 +12,7 @@ $app->post('/novaComanda', function(){
     $comanda->setData($_POST);
     
     $comanda->novaComanda();
-    var_dump($comanda);
-    exit;
 
-    
+    header('Location: /index');
+    exit;    
 });

@@ -8,8 +8,11 @@
         integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
         crossorigin="anonymous"></script>
 
+    <!-- Script jQuery -->
+    <script src="/res/script/jQuery/jquery-3.6.1.min.js"></script>
+
     <!-- Script interno -->
-    <script src="/res/script/script-modal.js"></script>
+    <script src="/res/script/script.js"></script>
 
 </body>
 
