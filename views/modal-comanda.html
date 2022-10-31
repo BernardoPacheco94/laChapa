@@ -49,7 +49,7 @@
                     <div class="form">
                         <div class="row">
                             <div class="col-8">
-                                <select class="form-control" id="select_tipo_produto">
+                                <select class="form-control" id="select_tipo_produto_comanda">
                                     <option value="tipo" disabled selected>Tipo</option>
                                     <option value="todos">Todos</option>
                                     {loop="$tipos"}
@@ -61,7 +61,7 @@
                         <div class="row mt-3">
                             </button>
                             <div class="col-12">
-                                <select class="form-control" id="select_produto">
+                                <select class="form-control" id="select_produto_comanda">
                                     <option value="produto" disabled selected>Produto</option>
                                     {loop="$produtos"}
                                     <option value="{$value.idproduto}">{$value.nomeproduto} Completo</option>

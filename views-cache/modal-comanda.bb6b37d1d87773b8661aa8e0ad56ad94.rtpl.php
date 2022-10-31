@@ -49,7 +49,7 @@
                     <div class="form">
                         <div class="row">
                             <div class="col-8">
-                                <select class="form-control" id="select_tipo_produto">
+                                <select class="form-control" id="select_tipo_produto_comanda">
                                     <option value="tipo" disabled selected>Tipo</option>
                                     <option value="todos">Todos</option>
                                     <?php $counter1=-1;  if( isset($tipos) && ( is_array($tipos) || $tipos instanceof Traversable ) && sizeof($tipos) ) foreach( $tipos as $key1 => $value1 ){ $counter1++; ?>
@@ -61,7 +61,7 @@
                         <div class="row mt-3">
                             </button>
                             <div class="col-12">
-                                <select class="form-control" id="select_produto">
+                                <select class="form-control" id="select_produto_comanda">
                                     <option value="produto" disabled selected>Produto</option>
                                     <?php $counter1=-1;  if( isset($produtos) && ( is_array($produtos) || $produtos instanceof Traversable ) && sizeof($produtos) ) foreach( $produtos as $key1 => $value1 ){ $counter1++; ?>
                                     <option value="<?php echo htmlspecialchars( $value1["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?> Completo</option>

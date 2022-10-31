@@ -82,3 +82,32 @@ $('#form_cardapio_pesquisa_por_tipo').submit(function (e) {
 });
 
 
+$('#select_tipo_produto_comanda').change(function (e) { 
+    e.preventDefault();
+
+    id_tipo = $('#select_tipo_produto_comanda').val()
+
+    // console.log(id_tipo)
+    $.ajax({
+        type: "get",
+        url: "/cardapio/ajax/tipo",
+        data: {idtipo: id_tipo},
+        dataType: "json",
+        success: function (response) {
+            // console.log(response)
+
+            $('#select_produto_comanda').empty()
+
+            if(response.length == 0){
+                $('#select_produto_comanda').prepend('<option selected disabled value="invalido">Não há produtos desse tipo </option>')
+            }
+
+            for (let index = 0; index < response.length; index++) {
+                $('#select_produto_comanda').prepend('<option value='+ response[index].idproduto +'>'+ response[index].nomeproduto + '</option>')                
+            }
+
+
+        }
+    });
+    
+});
