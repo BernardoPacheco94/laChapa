@@ -6,38 +6,33 @@ use LaChapa\Model\Tipo;
 use LaChapa\Page;
 
 //pagina principal - visualizar produtos
-$app->get('/cardapio', function(){
-    $produto = new Produto;
-
-    
-    if(isset($_GET['idtipo']))
-    {
-        $listaProdutos = ($_GET['idtipo'] == 'todos') ? $listaProdutos = $produto->listaProdutos() : Produto::filtraPorTipo((int)$_GET['idtipo']);
-    } else if ((isset($_GET['pesquisar']))) {
-        $listaProdutos = Produto::pesquisar($_GET['pesquisar']) ;
-    } else {
-        $listaProdutos = $produto->listaProdutos();
-    }
-    
-    
+$app->get('/cardapio', function(){    
 
     $page = new Page();
     
     $page->setTpl('cardapio',[
         'tipos'=>Tipo::listaTipos(),
-        'ingredientes'=>Ingrediente::listaIngredientes(),
-        'produtos'=> $listaProdutos
+        'ingredientes'=>Ingrediente::listaIngredientes()
     ]);
 });
 
 
-$app->get('/cardapio/ajax', function(){
+$app->get('/cardapio/ajax/tipo', function(){
 
-    $idtipo = ($_GET['idtipo'] == 'todos' || $_GET['idtipo'] == 'tipo') ? '%' : ((int)$_GET['idtipo']);
+    $idtipo = ($_GET['idtipo'] == 'todos' || $_GET['idtipo'] == '') ? '%' : ((int)$_GET['idtipo']);
+
+    // $pesquisa = $_GET['pesquisa'];
 
     echo json_encode(Produto::filtraPorTipo($idtipo));
 
 });
+
+// $app->get('/cardapio/ajax/pesquisar', function(){
+//     $pesquisa = $_GET['pesquisa'];
+
+//     echo json_encode(Produto::pesquisar($pesquisa));
+
+// });
 
 
 //salvar produto
