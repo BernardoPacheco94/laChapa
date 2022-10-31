@@ -80,8 +80,8 @@
                                             <th>Valor adc</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
+                                    <tbody id="tabela_ingredientes_comanda">
+                                        <tr><td hidden>id</td>
                                             <td>Pão</td>
                                             <td>1x</td>
                                             <td class="text-center"><a href=""><i

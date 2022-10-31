@@ -93,7 +93,17 @@ $('#select_produto_comanda').change(function (e) {
         data: {idproduto: id_produto},
         dataType: "json",
         success: function (response) {
-            console.log(response)            
+            console.log(response)
+
+            $('#tabela_ingredientes_comanda').empty()
+
+            listaIngredientes = response[0].ingredientes
+            
+            $.each(listaIngredientes, function (key, value) { 
+                 $('#tabela_ingredientes_comanda').prepend('<tr><td>'+ value['nome'] +'</td><td> 1x </td><td class="text-center"><a href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td>'+ value['valoradicional'].toLocaleString("pt-BR", { style: "currency" , currency:"BRL"}) +'</td></tr>')
+            });
+            
         }
     });
 });
+
