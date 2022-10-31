@@ -54,3 +54,12 @@ $app->get('/removerMesa/:idmesa', function($idmesa){
     header('Location: /');
     exit;
 });
+
+
+$app->get('/comanda/ajax', function(){
+    $idproduto = $_GET['idproduto'];
+
+    $produto = new Produto;
+    echo ($produto->getAjax($idproduto));
+    
+});

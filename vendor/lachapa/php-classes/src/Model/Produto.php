@@ -87,10 +87,15 @@ class Produto extends Model{
             ':idproduto'=>$idproduto
         ]);
 
-        $ingredientes = [];
+        $ingredientes['ingredientes'] = [];
+        
 
         for ($i=0; $i < count($resultado) ; $i++) { 
-            array_push($ingredientes, $resultado[$i]['nomeingrediente']);
+            array_push($ingredientes['ingredientes'], 
+            [ 
+                'nome' => $resultado[$i]['nomeingrediente'], 
+                'valoradicional' => $resultado[$i]['valoradicional'] 
+            ]);
         }
 
         return $ingredientes;
@@ -105,6 +110,19 @@ class Produto extends Model{
         ]);
 
         return $this->setData($resultado[0]);
+    }
+
+    public static function getAjax($idproduto)
+    {
+        $sql = new Sql;
+
+        $resultado = $sql->select('SELECT * FROM produtos WHERE idproduto = :idproduto',[
+            'idproduto'=>$idproduto
+        ]);
+
+        array_push($resultado[0], Produto::listaIngredientesProduto($idproduto));
+
+        return json_encode($resultado[0]);
     }
 
     public function deletarProduto($idproduto)

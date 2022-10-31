@@ -63,9 +63,6 @@
                             <div class="col-12">
                                 <select class="form-control" id="select_produto_comanda">
                                     <option value="produto" disabled selected>Produto</option>
-                                    <?php $counter1=-1;  if( isset($produtos) && ( is_array($produtos) || $produtos instanceof Traversable ) && sizeof($produtos) ) foreach( $produtos as $key1 => $value1 ){ $counter1++; ?>
-                                    <option value="<?php echo htmlspecialchars( $value1["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?> Completo</option>
-                                    <?php } ?>
                                 </select>
                             </div>
                         </div>
