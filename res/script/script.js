@@ -86,7 +86,6 @@ $('#select_produto_comanda').change(function (e) {
 
     id_produto = $('#select_produto_comanda').val()
 
-    console.log(id_produto)
     $.ajax({
         type: "get",
         url: "/comanda/ajax",
@@ -99,9 +98,25 @@ $('#select_produto_comanda').change(function (e) {
 
             listaIngredientes = response[0].ingredientes
             
-            $.each(listaIngredientes, function (key, value) { 
-                 $('#tabela_ingredientes_comanda').prepend('<tr><td>'+ value['nome'] +'</td><td> 1x </td><td class="text-center"><a href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td>'+ value['valoradicional'].toLocaleString("pt-BR", { style: "currency" , currency:"BRL"}) +'</td></tr>')
+            $.each(listaIngredientes, function (key, value) {              
+                
+                $('#tabela_ingredientes_comanda').prepend('<tr><td>'+ value['nome'] +'</td><td id="qtd_ing_'+ value["idingrediente"] +'"> '+ value['quantidade'] +'x </td><td class="text-center"><a id="adc_ing_'+ value['idingrediente'] +'" href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a id="rmv_ing_'+ value['idingrediente'] +'" href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td id="vlr_adc_'+ value['idingrediente'] +'">'+ (value['valoradicional']).toLocaleString("pt-BR", { style: "currency" , currency:"BRL"}) +'</td></tr>')
+                
+                
+
+                $('#adc_ing_'+value["idingrediente"]).click(function (e) { 
+                    e.preventDefault();
+                    (value['quantidade'])++
+
+                    $('#qtd_ing_'+value["idingrediente"]).replaceWith('<td id="qtd_ing_'+ value["idingrediente"] +'"> '+ value['quantidade'] +'x </td>');
+
+                    vlr_adicional = (value["valoradicional"])*(value["quantidade"])
+
+                    $('#vlr_adc_'+ value["idingrediente"]).replaceWith('<td id="vlr_adc_'+ value["idingrediente"] +'">'+ (vlr_adicional).toLocaleString("pt-BR", { style: "currency" , currency:"BRL"}) +'</td>')
+                    
+                });
             });
+
             
         }
     });

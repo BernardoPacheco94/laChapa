@@ -92,9 +92,11 @@ class Produto extends Model{
 
         for ($i=0; $i < count($resultado) ; $i++) { 
             array_push($ingredientes['ingredientes'], 
-            [ 
+            [
+                'idingrediente' => $resultado[$i]['idingrediente'] ,
                 'nome' => $resultado[$i]['nomeingrediente'], 
-                'valoradicional' => $resultado[$i]['valoradicional'] 
+                'valoradicional' => $resultado[$i]['valoradicional'],
+                'quantidade' => 1 
             ]);
         }
 
