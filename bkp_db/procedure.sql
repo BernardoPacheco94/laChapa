@@ -39,7 +39,8 @@
 -- `pvalortotal` float,
 -- `pstatuscomanda` varchar(1),
 -- `pdatacomanda` timestamp,
--- `pnomecliente` varchar(45)
+-- `pnomecliente` varchar(45),
+-- `pidatendente` int(11)
 
 -- )
 -- BEGIN
@@ -51,11 +52,12 @@
 -- 				valortotal = pvalortotal,
 -- 				statuscomanda = pstatuscomanda,
 --                 datacomanda = pdatacomanda,
---                 nomecliente = pnomecliente                
+--                 nomecliente = pnomecliente,
+--                 idatendente = pidatendente
 -- 			WHERE  idcomanda = pidcomanda;
 -- 	ELSE
--- 		INSERT INTO `db_lachapa`.`comandas` (`valortotal`, `nomecliente`)
--- 		VALUES (pvalortotal, pnomecliente);
+-- 		INSERT INTO `db_lachapa`.`comandas` (`valortotal`, `nomecliente`, `idatendente`)
+-- 		VALUES (pvalortotal, pnomecliente, pidatendente);
         
 --         SET pidcomanda = LAST_INSERT_ID();
 -- 	END IF;

@@ -50,7 +50,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <select class="form-control" id="select_tipo_produto_comanda">
-                                    <option value="tipo" disabled selected>Tipo</option>
+                                    <option value="tipo" disabled selected>Tipo de Produto</option>
                                     <option value="todos">Todos</option>
                                     {loop="$tipos"}
                                     <option value="{$value.idtipo}">{$value.nometipo}</option>
@@ -62,7 +62,7 @@
                             </button>
                             <div class="col-12">
                                 <select class="form-control" id="select_produto_comanda">
-                                    <option value="produto" disabled selected>Produto</option>
+                                    <option value="produto" disabled selected>Selecione o tipo de produto</option>
                                 </select>
                             </div>
                         </div>
@@ -81,7 +81,8 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tabela_ingredientes_comanda">
-                                        <tr><td hidden>id</td>
+                                        <tr>
+                                            <td hidden>id</td>
                                             <td>Pão</td>
                                             <td>1x</td>
                                             <td class="text-center"><a href=""><i
@@ -176,6 +177,20 @@
                                             </td>
                                             <td>R$ 0,00</td>
                                         </tr>
+                                        <tr>
+                                            <th colspan="4" class="text-center">
+                                                <select class="form-control" name="" id="">
+                                                    <option value="">1</option>
+                                                    <option value="">1</option>
+                                                    <option value="">1</option>
+                                                </select> 
+                                            </th>
+                                            <th>
+                                                <button type="button" name="" id="" class="btn btn-dark">
+                                                    <i class="fa-solid fa-save"></i>
+                                                </button>
+                                            </th>
+                                        </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
@@ -183,7 +198,7 @@
                                             <th>
                                                 <input type="number" step="0.01" name="valortotal" id="valortotal"
                                                     class="form-control" hidden value="15">
-                                                <input class="form-control" disabled value="15">
+                                                <input id="valortotal_exibido" class="form-control" disabled value="15">
                                             </th>
                                         </tr>
 

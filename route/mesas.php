@@ -1,6 +1,7 @@
 <?php
 
 use LaChapa\Model\Atendente;
+use LaChapa\Model\Ingrediente;
 use LaChapa\Page;
 use LaChapa\Model\Mesa;
 use LaChapa\Model\Produto;
@@ -62,4 +63,8 @@ $app->get('/comanda/ajax', function(){
     $produto = new Produto;
     echo ($produto->getAjax($idproduto));
     
+});
+
+$app->get('/ingredientes/ajax', function(){
+    echo json_encode(Ingrediente::listaIngredientes());
 });
