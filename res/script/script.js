@@ -93,8 +93,6 @@ $('#select_tipo_produto_comanda').change(function (e) {
 $('#select_produto_comanda').change(function (e) {
     e.preventDefault()
 
-    vlr_total_produto_comanda = 0
-
     id_produto = $('#select_produto_comanda').val()
 
     $.ajax({
@@ -104,76 +102,68 @@ $('#select_produto_comanda').change(function (e) {
         dataType: "json",
         success: function (response) {
             console.log(response)
-            vlr_total_produto_comanda = response['valorproduto']
+
             $('#tabela_ingredientes_comanda').empty()
             //Altera o valor do produto selecionado de acordo com o somatorio dos ingredientes
-            $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' + vlr_total_produto_comanda.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '"></input>');
-            $('#valortotal').replaceWith('<input id="valortotal" class="form-control" hidden value="' + vlr_total_produto_comanda + '"></input>');
+            $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' + response['valorproduto'].toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '"></input>');
+            $('#valortotal').replaceWith('<input id="valortotal" class="form-control" hidden value="' + response['valorproduto'] + '"></input>');
 
             listaIngredientesProduto = response[0].ingredientes
+
+            valor_adicional_total = 0
 
             //Monta a lista de ingredientes do produto
             $.each(listaIngredientesProduto, function (key, value) {
 
-                $('#tabela_ingredientes_comanda').prepend('<tr><td>' + value['nome'] + '</td><td id="qtd_ing_' + value["idingrediente"] + '"> ' + value['quantidade'] + 'x </td><td class="text-center"><a id="adc_ing_' + value['idingrediente'] + '" href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a id="rmv_ing_' + value['idingrediente'] + '" href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td id="vlr_adc_' + value['idingrediente'] + '">' + (value['valoradicional']).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td></tr>')
+                $('#tabela_ingredientes_comanda').prepend('<tr><td>' + value['nome'] + '</td><td id="qtd_ing_' + value["idingrediente"] + '" value="'+value["quantidade"]+'"> ' + value['quantidade'] + 'x </td><td class="text-center"><a id="adc_ing_' + value['idingrediente'] + '" href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a id="rmv_ing_' + value['idingrediente'] + '" href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td id="vlr_adc_' + value['idingrediente'] + '">' + (value['valoradicional']).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td></tr>')
 
                 //Método de adicionar ingrediente
                 $('#adc_ing_' + value['idingrediente']).click(function (e) {
                     e.preventDefault();
-                        value['quantidade']++
-                        console.log('qtd: '+value['quantidade'])
-                        
-                        
-                        $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '"> ' + value['quantidade']  + 'x </td>');
-                        
-                        if (value['quantidade'] <= 0) {
-                            $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '"> 0x </td>');
-                            value['quantidade'] = 0
-                        } else {
-                            vlr_total = ((value['quantidade'] - 1) * value['valoradicional']) + response['valorproduto']
-                            // console.log('qtd clicado: '+(value['quantidade'] - 1))
-                            // console.log('valoradicional: '+value['valoradicional'])
-                            // console.log('valorproduto: '+response['valorproduto'])
-                            // console.log('vlt_total: '+vlr_total)
-                            
-                            $('#valortotal').replaceWith('<input type="number" step="0.01" name="valortotal" id="valortotal" class="form-control" hidden value="' + vlr_total + '">');
-                            
-                            $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' + vlr_total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '"></input>');
-                            
-                            vlr_total = response['valorproduto']
-                            
-                        }
-                    });
-                
-                    //Método de remover ingrediente
-                    $('#rmv_ing_' + value['idingrediente']).click(function (e) {
-                        e.preventDefault();
-                        value['quantidade']--
-                
-                
-                        if (value['quantidade'] <= 0) {
-                            $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '"> 0x </td>');
-                            value['quantidade'] = 0
-                        } else {
-                
-                            $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '"> ' + value['quantidade'] + 'x </td>');
-                
-                            vlr_total = ((value['quantidade'] - 1) * value['valoradicional']) + response['valorproduto']
-                
-                            
-                            
-                            $('#valortotal').replaceWith('<input type="number" step="0.01" name="valortotal" id="valortotal" class="form-control" hidden value="' + vlr_total + '">');
-                            
-                            $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' +vlr_total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '"></input>');
-                            
-                            vlr_total =  response['valorproduto'] 
-                        }
-                    });
-                
+                    
+                    value['quantidade']++
+
+                    $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '"> ' + value['quantidade'] + 'x </td>');
+
+                    if (value['quantidade'] <= 0) {
+                        value['quantidade'] = 0
+                        $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '"> '+value['quantidade']+'x </td>');
+                    } else if(value['quantidade'] == 1){
+                        // não adiciona nada ao valor total
+                    } else {
+                        valor_adicional_total = valor_adicional_total + value['valoradicional']
+
+                        $('#valortotal').replaceWith('<input type="number" step="0.01" name="valortotal" id="valortotal" class="form-control" hidden value="' + (valor_adicional_total+response['valorproduto']) + '">');
+
+                        $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' + (valor_adicional_total+response['valorproduto']).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '"></input>');
+                        console.log(valor_adicional_total)
+
+                    }
+                });
+
+                //Método de remover ingrediente
+                $('#rmv_ing_' + value['idingrediente']).click(function (e) {
+                    e.preventDefault();
+                    value['quantidade']--
+
+
+                    if (value['quantidade'] <= 0) {
+                        $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '"> 0x </td>');
+                        value['quantidade'] = 0
+                    } else {
+
+                        $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '"> ' + value['quantidade'] + 'x </td>');
+
+                        valor_adicional_total = valor_adicional_total - value['valoradicional']
+
+                        $('#valortotal').replaceWith('<input type="number" step="0.01" name="valortotal" id="valortotal" class="form-control" hidden value="' + (valor_adicional_total + response['valorproduto']) + '">');
+
+                        $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' + (valor_adicional_total + response['valorproduto']).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '"></input>');
+                    }
+                });
+
 
             });
-            // console.log('valor total produto comanda '+vlr_total_produto_comanda)
-
             //Cria botão para adição de novo ingredientes
             $('#tabela_ingredientes_comanda').append('<tr><th colspan="5" class="text-center"><input type="button" class="btn btn-dark "value="Adicionar outro ingrediente" id="adc_novo_ingrediente"></th></tr>')
 
@@ -199,7 +189,6 @@ $('#select_produto_comanda').change(function (e) {
 
                         //inclui as opções no select
                         for (let c = 0; c < responseIngredientes.length; c++) {
-
                             $('#select_adc_novo_ingrediente').prepend('<option value="' + responseIngredientes[c].idingrediente + '">' + responseIngredientes[c].nomeingrediente + '</option>')
                         }
 
@@ -216,16 +205,61 @@ $('#select_produto_comanda').change(function (e) {
 
                                 if (id_novo_ingrediente_comanda == responseIngredientes[i].idingrediente) {//compara se o id ingrediente do produto está na lista de ingredientes
 
-                                    vlr_total_produto_comanda = vlr_total_produto_comanda + responseIngredientes[i]['valoradicional']
+                                    qtd = 1
+                                    
 
-                                    $('#tabela_ingredientes_comanda').prepend('<tr><td>' + responseIngredientes[i]['nomeingrediente'] + '</td><td id="qtd_ing_' + responseIngredientes[i]["idingrediente"] + '"> 1x </td><td class="text-center"><a id="adc_ing_' + responseIngredientes[i]["idingrediente"] + '" href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a id="rmv_ing_' + responseIngredientes[i]['idingrediente'] + '" href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td id="vlr_adc_' + responseIngredientes[i]['idingrediente'] + '">' + vlr_total_produto_comanda.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td></tr>');
+                                    $('#tabela_ingredientes_comanda').prepend('<tr><td>' + responseIngredientes[i]['nomeingrediente'] + '</td><td id="qtd_ing_' + responseIngredientes[i]["idingrediente"] + '"> '+qtd+'x </td><td class="text-center"><a id="adc_ing_' + responseIngredientes[i]["idingrediente"] + '" href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a id="rmv_ing_' + responseIngredientes[i]['idingrediente'] + '" href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td id="vlr_adc_' + responseIngredientes[i]['idingrediente'] + '">' + responseIngredientes[i]['valoradicional'].toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td></tr>');
 
-                                    console.log(adicionarERemoverIngredientesComanda(responseIngredientes[i].idingrediente, 1, responseIngredientes[i]['valoradicional'], vlr_total_produto_comanda))
+                                    //Método de adicionar ingrediente
+                                    $('#adc_ing_' + responseIngredientes[i]['idingrediente']).click(function (e) {
+                                        e.preventDefault();
+                                        qtd++
+                                        console.log('qtd: ' + qtd)
 
 
-                                    // $('#valortotal').replaceWith('<input type="number" step="0.01" name="valortotal" id="valortotal" class="form-control" hidden value="' + vlr_total_produto_comanda + '">');
+                                        $('#qtd_ing_' + responseIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + responseIngredientes[i]['idingrediente'] + '"> ' + qtd + 'x </td>');
 
-                                    // $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' + vlr_total_produto_comanda.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '"></input>');
+                                        if (qtd <= 0) {
+                                            $('#qtd_ing_' + responseIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + responseIngredientes[i]['idingrediente'] + '"> 0x </td>');
+                                            qtd = 0
+                                        } else {
+                                            vlr_total = (qtd * responseIngredientes[i]['valoradicional']) + response['valorproduto']
+                                            
+
+                                            $('#valortotal').replaceWith('<input type="number" step="0.01" name="valortotal" id="valortotal" class="form-control" hidden value="' + vlr_total + '">');
+
+                                            $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' + vlr_total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '"></input>');
+                                        }
+                                    });
+
+                                    //Método de remover ingrediente
+                                    $('#rmv_ing_' + responseIngredientes[i]['idingrediente']).click(function (e) {
+                                        e.preventDefault();
+                                        qtd--
+
+
+                                        if (qtd < 0) {
+                                            alert('Não é possível ingrediente menor que ZERO!')
+                                        } else {
+
+                                            $('#qtd_ing_' + responseIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + responseIngredientes[i]['idingrediente'] + '"> ' + qtd + 'x </td>');
+
+                                            vlr_total = (qtd * responseIngredientes[i]['valoradicional']) + response['valorproduto']
+                                            console.log('qtd clicado: '+(qtd))
+                                            console.log('valoradicional: '+responseIngredientes[i]['valoradicional'])
+                                            console.log('valorproduto: '+response['valorproduto'])
+                                            console.log('vlt_total: '+vlr_total)
+                                            
+
+                                            $('#valortotal').replaceWith('<input type="number" step="0.01" name="valortotal" id="valortotal" class="form-control" hidden value="' + vlr_total + '">');
+
+                                            $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' + vlr_total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '"></input>');
+                                        }
+                                    });
+
+                                    $('#valortotal').replaceWith('<input type="number" step="0.01" name="valortotal" id="valortotal" class="form-control" hidden value="' +  + 'VERIFICAR">');
+
+                                    $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' + (10).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + 'VERIFICAR"></input>');
                                 }
 
 
@@ -246,52 +280,54 @@ $('#select_produto_comanda').change(function (e) {
     });
 });
 
-
-function adicionarERemoverIngredientesComanda(idIngrediente, qtd, valoradicional, valorproduto) {
-    $('#adc_ing_' + idIngrediente).click(function (e) {
-        e.preventDefault();
-        (qtd)++
-
-
-        $('#qtd_ing_' + idIngrediente).replaceWith('<td id="qtd_ing_' + idIngrediente + '"> ' + qtd + 'x </td>');
-
-        if (qtd <= 0) {
-            $('#qtd_ing_' + idIngrediente).replaceWith('<td id="qtd_ing_' + idIngrediente + '"> 0x </td>');
-            qtd = 1
-        } else {
-            vlr_total = ((qtd - 1) * valoradicional) + valorproduto
-
-            $('#valortotal').replaceWith('<input type="number" step="0.01" name="valortotal" id="valortotal" class="form-control" hidden value="' + vlr_total + '">');
-
-            $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' + vlr_total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '"></input>');
-
-        }
-    });
-
-    $('#rmv_ing_' + idIngrediente).click(function (e) {
-        e.preventDefault();
-        (qtd)--
+//desuso
+// function adicionarERemoverIngredientesComanda(idIngrediente, qtd, valoradicional, valorproduto) {
+//     $('#adc_ing_' + idIngrediente).click(function (e) {
+//         e.preventDefault();
+//         (qtd)++
 
 
-        if (qtd <= 0) {
-            $('#qtd_ing_' + idIngrediente).replaceWith('<td id="qtd_ing_' + idIngrediente + '"> 0x </td>');
-            qtd = 0
-        } else {
+//         $('#qtd_ing_' + idIngrediente).replaceWith('<td id="qtd_ing_' + idIngrediente + '"> ' + qtd + 'x </td>');
 
-            $('#qtd_ing_' + idIngrediente).replaceWith('<td id="qtd_ing_' + idIngrediente + '"> ' + qtd + 'x </td>');
+//         if (qtd <= 0) {
+//             $('#qtd_ing_' + idIngrediente).replaceWith('<td id="qtd_ing_' + idIngrediente + '"> 0x </td>');
+//             qtd = 1
+//         } else {
+//             vlr_total = ((qtd - 1) * valoradicional) + valorproduto
 
-            vlr_total = ((qtd - 1) * valoradicional) + valorproduto
+//             $('#valortotal').replaceWith('<input type="number" step="0.01" name="valortotal" id="valortotal" class="form-control" hidden value="' + vlr_total + '">');
+
+//             $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' + vlr_total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '"></input>');
+
+//         }
+//     });
+
+//     $('#rmv_ing_' + idIngrediente).click(function (e) {
+//         e.preventDefault();
+//         (qtd)--
+
+
+//         if (qtd <= 0) {
+//             $('#qtd_ing_' + idIngrediente).replaceWith('<td id="qtd_ing_' + idIngrediente + '"> 0x </td>');
+//             qtd = 0
+//         } else {
+
+//             $('#qtd_ing_' + idIngrediente).replaceWith('<td id="qtd_ing_' + idIngrediente + '"> ' + qtd + 'x </td>');
+
+//             vlr_total = ((qtd - 1) * valoradicional) + valorproduto
 
 
 
 
-            $('#valortotal').replaceWith('<input type="number" step="0.01" name="valortotal" id="valortotal" class="form-control" hidden value="' + vlr_total + '">');
+//             $('#valortotal').replaceWith('<input type="number" step="0.01" name="valortotal" id="valortotal" class="form-control" hidden value="' + vlr_total + '">');
 
-            $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' + vlr_total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '"></input>');
-        }
-    });
+//             $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' + vlr_total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '"></input>');
+//         }
+//     });
 
-    return valorproduto
-}
+//     return valorproduto
+// }
+
+
 
 
