@@ -11,14 +11,14 @@ $app->get('/cardapio', function(){
     
     $page = new Page();
 
-    // if(isset($_GET['idtipo']))
-    // {
-    //     $listaProdutos = ($_GET['idtipo'] == 'todos') ? $listaProdutos = $produto->listaProdutos() : Produto::filtraPorTipo((int)$_GET['idtipo']);
-    // } else if ((isset($_GET['pesquisar']))) {
-    //     $listaProdutos = Produto::pesquisar($_GET['pesquisar']) ;
-    // } else {
-    //     $listaProdutos = $produto->listaProdutos();
-    // }
+    if(isset($_GET['idtipo']))
+    {
+        $listaProdutos = ($_GET['idtipo'] == 'todos') ? $listaProdutos = $produto->listaProdutos() : Produto::filtraPorTipo((int)$_GET['idtipo']);
+    } else if ((isset($_GET['pesquisar']))) {
+        $listaProdutos = Produto::pesquisar($_GET['pesquisar']) ;
+    } else {
+        $listaProdutos = $produto->listaProdutos();
+    }
 
 
 
@@ -26,7 +26,7 @@ $app->get('/cardapio', function(){
     $page->setTpl('cardapio',[
         'tipos'=>Tipo::listaTipos(),
         'ingredientes'=>Ingrediente::listaIngredientes(),
-        'produtos'=> Produto::listaProdutos()
+        'produtos'=> $listaProdutos
     ]);
 });
     

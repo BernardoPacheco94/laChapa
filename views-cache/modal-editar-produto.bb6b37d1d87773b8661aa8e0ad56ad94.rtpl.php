@@ -40,14 +40,14 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- <input type="search" class="form-control" placeholder="Pesquisar Ingrediente" name="pesquisar"> -->
-                            <?php $selecionados=$value1["0"]["ingredientes"]; ?>   <!-- Captura os ingredientes do produto -->
+                            <?php $selecionados=$value1["0"]["ingredientes"]["ingredientes"]; ?>   <!-- Captura os ingredientes do produto -->
                             <?php $counter2=-1;  if( isset($ingredientes) && ( is_array($ingredientes) || $ingredientes instanceof Traversable ) && sizeof($ingredientes) ) foreach( $ingredientes as $key2 => $value2 ){ $counter2++; ?>  <!--Faz o loop em todos ingredientes-->
                             <?php $opcaoIngrediente=$value2["nomeingrediente"]; ?> <!--Salva cada ingrediente em uma variavel a cada laço--> 
                             <div class="form-check form-switch">
                                 <input class="mb-2 form-check-input" type="checkbox" role="switch"
                                 id="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" name="ingredientes[]" value="<?php echo htmlspecialchars( $value2["idingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" 
                                 <?php $counter3=-1;  if( isset($selecionados) && ( is_array($selecionados) || $selecionados instanceof Traversable ) && sizeof($selecionados) ) foreach( $selecionados as $key3 => $value3 ){ $counter3++; ?> 
-                                    <?php if( $value3 == $opcaoIngrediente ){ ?>  
+                                    <?php if( $value3["nome"] == $opcaoIngrediente ){ ?>  
                                         checked 
                                     <?php } ?>
                                 <?php } ?>> <!--Faz o loop nos ingredientes selecionados e compara com todos os ingredientes, marcando os que coincidem-->
