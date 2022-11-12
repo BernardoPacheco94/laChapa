@@ -30,6 +30,13 @@ class Ingrediente extends Model
         return $sql->select('SELECT * FROM ingredientes WHERE ativo = 1 ORDER BY nomeingrediente'); 
     }
 
+    public static function listaIngredientesAdicionaisDisponiveis($idproduto)//desuso
+    {
+        $sql = new Sql;
+
+        return $sql->select('SELECT * FROM ingredientes WHERE ativo = 1 ORDER BY nomeingrediente'); 
+    }
+
     public function deletarIngrediente($idingrediente)
     {
         $sql = new Sql;

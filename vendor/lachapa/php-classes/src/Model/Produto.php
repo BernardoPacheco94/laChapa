@@ -83,7 +83,7 @@ class Produto extends Model{
         FROM produtos a
         INNER JOIN `produto-ingredientes` b USING (idproduto)
         INNER JOIN `ingredientes` c USING (idingrediente)
-        WHERE b.idproduto= :idproduto AND a.ativo =1',[
+        WHERE b.idproduto = :idproduto AND a.ativo =1',[
             ':idproduto'=>$idproduto
         ]);
 
