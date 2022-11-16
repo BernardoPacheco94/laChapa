@@ -194,7 +194,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="4" class="text-center">Total</th>
+                                            <th colspan="4" class="text-center">Valor</th>
                                             <th>
                                                 <input type="number" step="0.01" name="valortotal" id="valortotal"
                                                     class="form-control" hidden value="15">
