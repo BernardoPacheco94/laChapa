@@ -1,63 +1,4 @@
 
-// Envia o formulário de pesquisa por tipo de produto ao carregar a pagina
-// $(document).ready(function () {
-//     $('#form_cardapio_pesquisa_por_tipo').submit()
-// });
-
-
-// // Envia o formulário de pesquisa por tipo de produto ao alterar o tipo de produto
-// $('#select_tipo').change(function () {
-//     $('#form_cardapio_pesquisa_por_tipo').submit()
-// });
-
-
-// //Carregamento das opções de produto via ajax || Cadastro de produtos
-// $('#form_cardapio_pesquisa_por_tipo').submit(function (e) {
-//     e.preventDefault();
-
-//     var id_tipo = $('#select_tipo').val()
-//     var pesquisa = $('#pesquisar').val()
-    
-
-//     $.ajax({
-//         type: "get",
-//         url: "/cardapio/ajax/tipo",
-//         data: { idtipo: id_tipo, pesquisa: pesquisa },
-//         dataType: "json",
-//         error: function (err) {
-//             console.log(err)
-//         },
-//         success: function (response) {
-//             $('#produtos_tbody').empty();
-
-
-//             console.log(response)
-
-//             //carrega a tabela de produtos de acordo com o ingrediente
-//             for (let i = 0; i < response.length; i++) {
-
-//                 $('#produtos_tbody').prepend('<tr><th scope="row" class="text-center">' + response[i].idproduto + '</th><td>' + response[i].nometipo + '</td><td>' + response[i].nomeproduto + '</td><td><ul id="ingredientes' + response[i].idproduto + '" class="list-group list-group-horizontal"> </ul></td><td> ' + (response[i].valorproduto).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td><td class="text-center"><button class="btn" data-bs-toggle="modal"data-bs-target="#modalEditarProduto' + response[i].idproduto + '"><i class="fa-solid fa-2x fa-edit text-info"></i></button></td><td class="text-center"><a id="deletar_produto' + response[i].idproduto + '" href="/produto/deletar/' + response[i].idproduto + '"><i class="fa-solid fa-2x fa-trash-can text-danger"></i></a></td></tr>');
-                
-//                 list = response[i][0].ingredientes.ingredientes //Lista de ingredientes do produto
-
-//                 //Carrega os ingredientes do produto selecionado
-//                 $.each(list, function (key, value) {
-//                     $('#ingredientes' + response[i].idproduto).append($('<li class="list-group-item">' + value['nome'] + '</li>'))
-//                 });
-
-//                 //Confirmação de exclusão
-//                 $('#deletar_produto' + response[i].idproduto).click(function (e) {
-
-//                     return confirm("Deseja realmente excluir o produto " + response[i].nomeproduto + " ?")
-
-//                 });
-//             }
-//         }
-//     });
-
-
-// });
-
 //Carregamento das opções da comanda via ajax
 $('#select_tipo_produto_comanda').change(function (e) {
     e.preventDefault();
@@ -188,7 +129,13 @@ $('#select_produto_comanda').change(function (e) {
 
                         //inclui as opções no select
                         for (let c = 0; c < responseIngredientes.length; c++) {
-                            $('#select_adc_novo_ingrediente').prepend('<option value="' + responseIngredientes[c].idingrediente + '">' + responseIngredientes[c].nomeingrediente + '</option>')
+                            
+                            $('#select_adc_novo_ingrediente').prepend('<option id="option'+responseIngredientes[c].idingrediente+'" value="' + responseIngredientes[c].idingrediente + '">' + responseIngredientes[c].nomeingrediente + '</option>')                               
+                            for (let index = 0; index < listaIngredientesProduto.length; index++) {//se o ingrediente já estiver no produto é removido
+                                if(responseIngredientes[c].idingrediente == listaIngredientesProduto[index].idingrediente){
+                                    $('#option'+responseIngredientes[c].idingrediente).remove()
+                                } 
+                            }                            
                         }
 
 
@@ -264,9 +211,6 @@ $('#select_produto_comanda').change(function (e) {
                                         $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' + (valor_adicional_total + response['valorproduto']).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '"></input>');
                                     });
 
-                                    // $('#valortotal').replaceWith('<input type="number" step="0.01" name="valortotal" id="valortotal" class="form-control" hidden value="' +  + 'VERIFICAR">');
-
-                                    // $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control" disabled value="' + (10).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + 'VERIFICAR"></input>');
                                 }
 
 

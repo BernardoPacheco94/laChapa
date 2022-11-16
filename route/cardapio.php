@@ -42,12 +42,6 @@ $app->get('/cardapio/ajax/tipo', function(){
 
 });
 
-// $app->get('/cardapio/ajax/pesquisar', function(){
-//     $pesquisa = $_GET['pesquisa'];
-
-//     echo json_encode(Produto::pesquisar($pesquisa));
-
-// });
 
 
 //salvar produto
