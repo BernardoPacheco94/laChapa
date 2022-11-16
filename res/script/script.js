@@ -18,11 +18,12 @@ $('#select_tipo_produto_comanda').change(function (e) {
                 $('#select_produto_comanda').prepend('<option selected disabled value="invalido">Não há produtos desse tipo </option>')
             }
 
+            
             //Carrega os produtos de acordo com o tipo selecionado
             for (let index = 0; index < response.length; index++) {
                 $('#select_produto_comanda').prepend('<option value=' + response[index].idproduto + '>' + response[index].nomeproduto + '</option>')
             }
-
+            $('#select_produto_comanda').prepend('<option selected disabled>Selecione o produto</option>')
         }
     });
 
@@ -62,6 +63,8 @@ $('#select_produto_comanda').change(function (e) {
             $.each(listaIngredientesProduto, function (key, value) {
 
                 $('#tabela_ingredientes_comanda').prepend('<tr><td>' + value['nome'] + '</td><td id="qtd_ing_' + value["idingrediente"] + '" value="' + value["quantidade"] + '"> ' + value['quantidade'] + 'x </td><td class="text-center"><a id="adc_ing_' + value['idingrediente'] + '" href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a id="rmv_ing_' + value['idingrediente'] + '" href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td id="vlr_adc_' + value['idingrediente'] + '">' + (value['valoradicional']).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td></tr>')
+
+            
 
                 //Método de adicionar ingrediente
                 $('#adc_ing_' + value['idingrediente']).click(function (e) {
@@ -260,6 +263,13 @@ $('#select_produto_comanda').change(function (e) {
     });
 });
 
+
+$('#salva_produto_comanda').click(function (e) { 
+    e.preventDefault();
+
+    alert('clicou')
+    
+});
 
 
 

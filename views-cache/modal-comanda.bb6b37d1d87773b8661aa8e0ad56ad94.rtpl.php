@@ -208,7 +208,7 @@
                         </div>
                     </div>
                     <div class="row m-3">
-                        <button class="btn btn-dark col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 mx-auto">
+                        <button id="salva_produto_comanda" class="btn btn-dark col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 mx-auto">
                             <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
