@@ -56,15 +56,3 @@ $app->get('/removerMesa/:idmesa', function($idmesa){
     exit;
 });
 
-
-$app->get('/comanda/ajax', function(){
-    $idproduto = $_GET['idproduto'];
-
-    $produto = new Produto;
-    echo ($produto->getAjax($idproduto));
-    
-});
-
-$app->get('/ingredientes/ajax', function(){
-    echo json_encode(Ingrediente::listaIngredientes());
-});

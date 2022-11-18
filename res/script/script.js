@@ -53,11 +53,11 @@ $('#select_produto_comanda').change(function (e) {
 
             valor_adicional_total = 0
 
-            porcao_extra = []
+            porcaoextra = []
 
-            ingrediente_adicional = []
+            ingredienteadicional = []
             
-            remover_ingrediente = []
+            removeringrediente = []
 
             //Monta a lista de ingredientes do produto
             $.each(listaIngredientesProduto, function (key, value) {
@@ -80,9 +80,10 @@ $('#select_produto_comanda').change(function (e) {
                     } else if (value['quantidade'] == 1) {
                         // não adiciona nada ao valor total
                     } else {
-                        porcao_extra.push({
-                                'ingrediente': value['nome'],
-                                'qtd': value['quantidade']
+                        porcaoextra.push({
+                                'ingredienteporcaoextra': value['nome'],
+                                'idporcaoextra': value['idingrediente'],
+                                'qtdporcaoextra': value['quantidade']
                             })
 
                         valor_adicional_total = valor_adicional_total + value['valoradicional']
@@ -99,9 +100,10 @@ $('#select_produto_comanda').change(function (e) {
                     value['quantidade']--
 
 
-                    remover_ingrediente.push({
-                        'ingrediente' : value['nome'],
-                        'qtd':value['quantidade']
+                    removeringrediente.push({
+                        'removeringrediente' : value['nome'],
+                        'idremoveringrediente' : value['idingrediente'],
+                        'qtdremoveringrediente':value['quantidade']
                     })
 
                     if (value['quantidade'] <= 0) {
@@ -172,9 +174,10 @@ $('#select_produto_comanda').change(function (e) {
                                     
                                     qtd = 1
                                     
-                                    ingrediente_adicional.push({
-                                        'ingrediente' : responseIngredientes[i]['nomeingrediente'],
-                                        'qtd': qtd
+                                    ingredienteadicional.push({
+                                        'ingredienteadicional' : responseIngredientes[i]['nomeingrediente'],
+                                        'idingredienteadicional' : responseIngredientes[i]['idingrediente'],
+                                        'qtdingredienteadicional': qtd
                                     })
 
                                     $('#tabela_ingredientes_comanda').append('<tr><td>' + responseIngredientes[i]['nomeingrediente'] + '</td><td id="qtd_ing_' + responseIngredientes[i]["idingrediente"] + '"> ' + qtd + 'x </td><td class="text-center"><a id="adc_ing_' + responseIngredientes[i]["idingrediente"] + '" href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a id="rmv_ing_' + responseIngredientes[i]['idingrediente'] + '" href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td id="vlr_adc_' + responseIngredientes[i]['idingrediente'] + '">' + responseIngredientes[i]['valoradicional'].toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td></tr>');
@@ -192,9 +195,10 @@ $('#select_produto_comanda').change(function (e) {
 
                                         $('#qtd_ing_' + responseIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + responseIngredientes[i]['idingrediente'] + '"> ' + qtd + 'x </td>');
 
-                                        ingrediente_adicional.push({
-                                            'ingrediente' : responseIngredientes[i]['nomeingrediente'],
-                                            'qtd': qtd
+                                        ingredienteadicional.push({
+                                            'ingredienteadicional' : responseIngredientes[i]['nomeingrediente'],
+                                            'idingredienteadicional' : responseIngredientes[i]['idingrediente'],
+                                            'qtdingredienteadicional': qtd
                                         })
 
                                         if (qtd <= 0) {
@@ -217,13 +221,11 @@ $('#select_produto_comanda').change(function (e) {
                                         e.preventDefault();
                                         qtd--
 
-                                        ingrediente_adicional.push({
-                                            'ingrediente' : responseIngredientes[i]['nomeingrediente'],
-                                            'qtd': qtd
+                                        ingredienteadicional.push({
+                                            'ingredienteadicional' : responseIngredientes[i]['nomeingrediente'],
+                                            'idingredienteadicional' : responseIngredientes[i]['idingrediente'],
+                                            'qtdingredienteadicional': qtd
                                         })
-
-                                        console.log('ingrediente_adicional | menos')
-                                        console.log(ingrediente_adicional)
 
 
                                         if (qtd < 0) {
@@ -266,8 +268,30 @@ $('#select_produto_comanda').change(function (e) {
 
 $('#salva_produto_comanda').click(function (e) { 
     e.preventDefault();
+    if(($('#tabela_ingredientes_comanda').find('tr').length)==0){
+        alert('Selecione um produto para incluir na comanda')
+    }
 
-    alert('clicou')
+    id_produto = $('#select_produto_comanda').val()
+
+    $.ajax({
+        type: "get",
+        url: "/salvaingredientesprodutocomanda/ajax",
+        data: {
+            idproduto: id_produto,
+            valoradicional: valor_adicional_total,
+            porcaoextra: porcaoextra,
+            ingredienteadicional: ingredienteadicional,
+            removeringrediente: removeringrediente                        
+        },
+        dataType: "json",
+        success: function (response) {
+            console.log(data)
+        },
+        error: function (err) {
+            console.log(err)
+          }
+    });
     
 });
 

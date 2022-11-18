@@ -2,6 +2,8 @@
 
 use LaChapa\Model\Atendente;
 use LaChapa\Model\Comanda;
+use LaChapa\Model\Produto;
+use LaChapa\Model\Ingrediente;
 use LaChapa\Page;
 
 $app->config('debug',true);
@@ -13,6 +15,24 @@ $app->post('/novaComanda', function(){
     
     $comanda->salvaComanda();
 
-    header('Location: /index');
+    header('Location: /index.php');
     exit;    
+});
+
+
+$app->get('/comanda/ajax', function(){
+    $idproduto = $_GET['idproduto'];
+
+    $produto = new Produto;
+    echo ($produto->getAjax($idproduto));
+    
+});
+
+$app->get('/ingredientes/ajax', function(){
+    echo json_encode(Ingrediente::listaIngredientes());
+});
+
+$app->get('/salvaingredientesprodutocomanda/ajax', function(){
+    var_dump($_GET);
+    exit;
 });

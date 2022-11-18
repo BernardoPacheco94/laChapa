@@ -24,7 +24,20 @@
                         </option>
                         {/loop}
                     </select>
-                    <!-- Exibe produtos já cadastrados -->
+                    <!-- Exibe produtos já lançados -->
+                    <div class="table">
+                        <table class="table" id="tabela_produtos_lançados_na_comanda" hidden>
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
 
                     <!-- Seleciona o produto desejado -->
                     <div class="row">
@@ -78,23 +91,29 @@
                         </div>
                     </div>
 
-                    <div class="row m-3">
-                        <button id="salva_produto_comanda"
-                            class="btn btn-dark col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 mx-auto">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" form="form_principal" class="w-100 btn btn-dark" data-bs-dismiss="modal">
-                            <i class="fa-solid fa-save"></i> Salvar
-                        </button>
+                </div>
+                <div class="row m-3">
+                    <button id="salva_produto_comanda"
+                        class="btn btn-dark col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 mx-auto">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button class="w-100 btn btn-dark" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-save"></i> Salvar
+                    </button>
+
+                    <button type="button" class="w-100 btn btn-warning" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+
+
+                    <button type="button" class="w-100 btn btn-success">
+                        Encerrar Comanda
+                    </button>
+
+                </div>
             </form>
-            <button type="button" class="w-100 btn btn-warning" data-bs-dismiss="modal">
-                Cancelar
-            </button>
-            <button type="button" class="w-100 btn btn-success">
-                Encerrar Comanda
-            </button>
         </div>
     </div>
 
