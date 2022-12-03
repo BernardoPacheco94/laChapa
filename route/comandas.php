@@ -32,7 +32,17 @@ $app->get('/ingredientes/ajax', function(){
     echo json_encode(Ingrediente::listaIngredientes());
 });
 
-$app->get('/salvaingredientesprodutocomanda/ajax', function(){
-    var_dump($_GET);
-    exit;
+// $app->get('/teste/ajax', function(){
+//     $var = new Comanda;
+
+//     echo json_encode($var->salvaTeste(3));
+//     exit;
+// });
+
+
+$app->post('/salvaprodutoeingredientescomanda/ajax', function(){
+    $var = new Comanda;
+
+    echo json_encode($var->salvaTeste(15));
 });
+

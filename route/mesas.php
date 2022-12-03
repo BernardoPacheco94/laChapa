@@ -8,11 +8,9 @@ use LaChapa\Model\Produto;
 use LaChapa\Model\Tipo;
 
 //Rota para a pagina principal - deck mesas
-$app->get('/', function(){
-    
+$app->get('/', function(){    
     $page = new Page();
-
-    $produto = new Produto;
+    
 
     $page->setTpl('index',[
         'mesa' => Mesa::mesasExibidas(),

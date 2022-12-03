@@ -268,30 +268,29 @@ $('#select_produto_comanda').change(function (e) {
 
 $('#salva_produto_comanda').click(function (e) { 
     e.preventDefault();
-    if(($('#tabela_ingredientes_comanda').find('tr').length)==0){
+    if(($('#select_produto_comanda').val()) !=null){//verifica se foi selecionado produto
+        id_produto = $('#select_produto_comanda').val()
+
+        console.log(id_produto)
+    
+        $.ajax({
+            type: "POST",
+            url: "/salvaingredientesprodutocomanda/ajax",
+            data: { id: id_produto },
+            dataType: "json",
+            success: function (response) {
+                console.log(response)
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        });
+
+    }
+     else{
         alert('Selecione um produto para incluir na comanda')
     }
 
-    id_produto = $('#select_produto_comanda').val()
-
-    $.ajax({
-        type: "get",
-        url: "/salvaingredientesprodutocomanda/ajax",
-        data: {
-            idproduto: id_produto,
-            valoradicional: valor_adicional_total,
-            porcaoextra: porcaoextra,
-            ingredienteadicional: ingredienteadicional,
-            removeringrediente: removeringrediente                        
-        },
-        dataType: "json",
-        success: function (response) {
-            console.log(data)
-        },
-        error: function (err) {
-            console.log(err)
-          }
-    });
     
 });
 

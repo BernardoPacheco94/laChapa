@@ -27,9 +27,18 @@ class Mesa extends Model
     {
         $sql = new Sql;
 
-        return $sql->select('SELECT * FROM mesas WHERE exibe = :exibe ORDER BY idmesa',[
+        $result = $sql->select('SELECT * FROM mesas WHERE exibe = :exibe ORDER BY idmesa',[
             ':exibe' => 1
         ]);
+        
+        
+        for ($i=0; $i < count($result); $i++) { 
+            array_push($result[$i], [
+                'comandas' => Mesa::exibirComandas($result[$i]['idmesa'])
+            ]);
+        }
+
+        return $result;
     }
 
     public static function mesasOcultas()
@@ -92,5 +101,17 @@ class Mesa extends Model
         ]);
 
         return $this->setData($resultado[0]);
+    }
+
+    public static function exibirComandas($idmesa)
+    {
+        $sql = new Sql;
+
+        return $sql->select('SELECT * FROM comandas
+        INNER JOIN `comanda-mesa` USING (idcomanda)
+        INNER JOIN mesas USING (idmesa)
+        WHERE idmesa = :idmesa AND statuscomanda = "A"',[
+            ':idmesa' =>$idmesa
+        ]);
     }
 }

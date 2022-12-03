@@ -20,16 +20,18 @@
                 </div>
                 <div class="card-body">
                     <!-- Comandas da mesa / accordion -->
-                    <div class="accordion m-2" id="accordionExample">
+                    <?php $id_mesa=$value1["idmesa"]; ?>
+                    <div class="accordion m-2" id="accordion_mesa_<?php echo htmlspecialchars( $id_mesa, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                        <?php $counter2=-1;  if( isset($value1["0"]["comandas"]) && ( is_array($value1["0"]["comandas"]) || $value1["0"]["comandas"] instanceof Traversable ) && sizeof($value1["0"]["comandas"]) ) foreach( $value1["0"]["comandas"] as $key2 => $value2 ){ $counter2++; ?>
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="comanda_i">
+                            <h2 class="accordion-header" id="comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    Comanda Nº 1
+                                    data-bs-target="#collapse_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" aria-expanded="false" aria-controls="collapse_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                                    Comanda Nº <?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                                 </button>
                             </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="comanda_i"
-                                data-bs-parent="#accordionExample">
+                            <div id="collapse_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="accordion-collapse collapse show" aria-labelledby="comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
+                                data-bs-parent="#accordion_mesa_<?php echo htmlspecialchars( $id_mesa, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                 <div class="accordion-body">
                                     <div class="table">
                                         <table class="table table-hover">
@@ -63,106 +65,21 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6 text-center ">
-                                            <button type="button" class="btn btn-dark" id="btn-adc-comanda"
-                                                data-bs-toggle="modal" data-bs-target="#modal_comanda">
-                                                Gerenciar Comanda
-                                            </button>
-                                        </div>
-                                        <div class="col-6 text-center">
-                                            <span class="">
-                                                <a href="/comanda/print/idcomanda"><i class="text-dark fa-solid fa-2x fa-print"></i> </a>
-                                            </span>
-                                        </div>
+                                            <button type="button" class="btn btn-dark" id="btn-gerenciar-comanda-<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
+                                            data-bs-toggle="modal" data-bs-target="#modal_gerenciar_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                                            Gerenciar Comanda
+                                        </button>
                                     </div>
+                                    <div class="col-6 text-center">
+                                        <span class="">
+                                            <a href="/comanda/print/idcomanda"><i class="text-dark fa-solid fa-2x fa-print"></i> </a>
+                                        </span>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Comanda Nº 2
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <div class="table">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Produto</th>
-                                                    <th>Valor</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Xis Completo</td>
-                                                    <td>R$ 18,00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Cachorro Simples</td>
-                                                    <td>R$ 15,00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Coca-cola</td>
-                                                    <td>R$ 6,00</td>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot class="bg-light">
-                                                <tr>
-                                                    <th>Total</th>
-                                                    <td>R$ 39,00</td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Comanda Nº 3
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <div class="table">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Produto</th>
-                                                    <th>Valor</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Xis Completo</td>
-                                                    <td>R$ 18,00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Cachorro Simples</td>
-                                                    <td>R$ 15,00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Coca-cola</td>
-                                                    <td>R$ 6,00</td>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot class="bg-light">
-                                                <tr>
-                                                    <th>Total</th>
-                                                    <td>R$ 39,00</td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
 
                     <div class="row">
