@@ -12,9 +12,17 @@
                 </div>
                 <div class="modal-body">
 
-
                     <input class="form-control mb-4" type="text" name="nomecliente" id="nomecliente"
                         placeholder="Nomde do cliente">
+
+                    <select class="form-control mb-4" name="idmesacomanda" id="select_mesa_comanda">
+                        <option value="mesa" disabled selected>Mesa</option>
+                        <option value="0">Nenhuma</option>
+                        <?php $counter1=-1;  if( isset($todasMesas) && ( is_array($todasMesas) || $todasMesas instanceof Traversable ) && sizeof($todasMesas) ) foreach( $todasMesas as $key1 => $value1 ){ $counter1++; ?>
+                        <option name="<?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        </option>
+                        <?php } ?>
+                    </select>
 
                     <select class="form-control mb-4" name="idatendente" id="select_atendente_produto">
                         <option value="atendente" disabled selected>Atendente</option>

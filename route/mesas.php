@@ -13,7 +13,8 @@ $app->get('/', function(){
     
 
     $page->setTpl('index',[
-        'mesa' => Mesa::mesasExibidas(),
+        'todasMesas' => Mesa::exibeTodas(),
+        'mesasExibidas' => Mesa::mesasExibidas(),
         'mesaOculta' => Mesa::mesasOcultas(),
         'atendentes' => Atendente::listaAtendentes(),
         'tipos'=>Tipo::listaTipos(),

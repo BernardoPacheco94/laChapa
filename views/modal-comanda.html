@@ -12,9 +12,17 @@
                 </div>
                 <div class="modal-body">
 
-
                     <input class="form-control mb-4" type="text" name="nomecliente" id="nomecliente"
                         placeholder="Nomde do cliente">
+
+                    <select class="form-control mb-4" name="idmesacomanda" id="select_mesa_comanda">
+                        <option value="mesa" disabled selected>Mesa</option>
+                        <option value="0">Nenhuma</option>
+                        {loop="$todasMesas"}
+                        <option name="{$value.idmesa}" value="{$value.idmesa}">{$value.idmesa}
+                        </option>
+                        {/loop}
+                    </select>
 
                     <select class="form-control mb-4" name="idatendente" id="select_atendente_produto">
                         <option value="atendente" disabled selected>Atendente</option>

@@ -18,7 +18,7 @@
 
     <!-- Linha do card -->
     <div class="row" id="card-deck">
-        <?php $counter1=-1;  if( isset($mesa) && ( is_array($mesa) || $mesa instanceof Traversable ) && sizeof($mesa) ) foreach( $mesa as $key1 => $value1 ){ $counter1++; ?>
+        <?php $counter1=-1;  if( isset($mesasExibidas) && ( is_array($mesasExibidas) || $mesasExibidas instanceof Traversable ) && sizeof($mesasExibidas) ) foreach( $mesasExibidas as $key1 => $value1 ){ $counter1++; ?>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mt-2 p-2 d-inline">
             <div class="card h-100">
                 <div class="card-header">
