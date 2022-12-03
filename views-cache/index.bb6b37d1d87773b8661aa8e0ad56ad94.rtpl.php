@@ -8,6 +8,12 @@
                 Gerenciar Mesas
             </button>
         </div>
+        <div id="div-btn-adc-mesa" class="col-3">
+            <button type="button" class="btn btn-dark" id="btn-adc-comanda" data-bs-toggle="modal"
+                data-bs-target="#modal_comanda">
+                Nova Comanda
+            </button>
+        </div>
     </div>
 
     <!-- Linha do card -->
@@ -26,11 +32,13 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" aria-expanded="false" aria-controls="collapse_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                                    data-bs-target="#collapse_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" aria-expanded="false"
+                                    aria-controls="collapse_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                     Comanda Nº <?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                                 </button>
                             </h2>
-                            <div id="collapse_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="accordion-collapse collapse show" aria-labelledby="comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
+                            <div id="collapse_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="accordion-collapse collapse"
+                                aria-labelledby="comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
                                 data-bs-parent="#accordion_mesa_<?php echo htmlspecialchars( $id_mesa, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                 <div class="accordion-body">
                                     <div class="table">
@@ -65,37 +73,31 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6 text-center ">
-                                            <button type="button" class="btn btn-dark" id="btn-gerenciar-comanda-<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
-                                            data-bs-toggle="modal" data-bs-target="#modal_gerenciar_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                                            Gerenciar Comanda
-                                        </button>
+                                            <button type="button" class="btn btn-dark"
+                                                id="btn-gerenciar-comanda-<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" data-bs-toggle="modal"
+                                                data-bs-target="#modal_gerenciar_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                                                Gerenciar Comanda
+                                            </button>
+                                        </div>
+                                        <div class="col-6 text-center">
+                                            <span class="">
+                                                <a href="/comanda/print/idcomanda"><i
+                                                        class="text-dark fa-solid fa-2x fa-print"></i> </a>
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div class="col-6 text-center">
-                                        <span class="">
-                                            <a href="/comanda/print/idcomanda"><i class="text-dark fa-solid fa-2x fa-print"></i> </a>
-                                        </span>
-                                    </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
                         <?php } ?>
                     </div>
 
-                    <div class="row">
-                        <div class="col-6">
-                            <button type="button" class="btn btn-dark" id="btn-adc-comanda" data-bs-toggle="modal"
-                                data-bs-target="#modal_comanda">
-                                Nova Comanda
-                            </button>
-                        </div>
-                        <div class="col-6 text-end">                            
-                            <a href="/removerMesa/<?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                                <button type="button" class="btn btn-secondary">
-                                        Ocultar Mesa
+                    <div class="container text-center col-xxs-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                           <a href="/removerMesa/<?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                                <button type="button" class="btn btn-secondary w-100">
+                                    Ocultar Mesa
                                 </button>
-                            </a>                           
-                        </div>
+                            </a>
                     </div>
                 </div>
             </div>

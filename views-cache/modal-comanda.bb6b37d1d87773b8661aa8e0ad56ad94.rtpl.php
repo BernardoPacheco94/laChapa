@@ -4,7 +4,7 @@
         <div class="modal-content">
             <form id="form_principal" action="/novaComanda" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Comanda Nº 1</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Nova Comanda</h5>
                     <button type="button" class="btn btn-dark mx-auto w-50">
                         <i class="fa-solid fa-2x fa-print"></i>
                     </button>
