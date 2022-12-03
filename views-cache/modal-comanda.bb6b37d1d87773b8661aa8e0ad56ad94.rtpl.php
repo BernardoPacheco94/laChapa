@@ -24,7 +24,7 @@
                         <?php } ?>
                     </select>
 
-                    <select class="form-control mb-4" name="idatendente" id="select_atendente_produto">
+                    <select class="form-control mb-4" name="idatendente" id="select_atendente_comanda">
                         <option value="atendente" disabled selected>Atendente</option>
                         <option value="0">Nenhum</option>
                         <?php $counter1=-1;  if( isset($atendentes) && ( is_array($atendentes) || $atendentes instanceof Traversable ) && sizeof($atendentes) ) foreach( $atendentes as $key1 => $value1 ){ $counter1++; ?>

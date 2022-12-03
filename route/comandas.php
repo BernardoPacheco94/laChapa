@@ -41,8 +41,16 @@ $app->get('/ingredientes/ajax', function(){
 
 
 $app->post('/salvaprodutoeingredientescomanda/ajax', function(){
-    $var = new Comanda;
-
-    echo json_encode($var->salvaTeste(15));
+    $comanda = new Comanda;
+    
+    $comanda->setData($_POST);
+    $result = $comanda->salvaComanda();
+    echo json_encode($comanda->salvaComanda());
 });
+
+// $app->get('/salvaprodutoeingredientescomanda/ajax', function(){
+//     $comanda = new Comanda;
+//     $comanda->setData($_GET);
+//     echo json_encode($_GET);
+// });
 

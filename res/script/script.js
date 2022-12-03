@@ -7,7 +7,7 @@ $('#select_tipo_produto_comanda').change(function (e) {
 
     $.ajax({
         type: "get",
-        url: "/cardapio/ajax/tipo",//mesma rota do ajax anterior
+        url: "/cardapio/ajax/tipo",
         data: { idtipo: id_tipo },
         dataType: "json",
         success: function (response) {
@@ -268,15 +268,27 @@ $('#select_produto_comanda').change(function (e) {
 
 $('#salva_produto_comanda').click(function (e) { 
     e.preventDefault();
-    if(($('#select_produto_comanda').val()) !=null){//verifica se foi selecionado produto
+    if(($('#select_produto_comanda').val()) !=null){
         id_produto = $('#select_produto_comanda').val()
+        valortotal = $('#valortotal').val()
+        nomecliente = $('#nomecliente').val()
+        idatendente = $('#select_atendente_comanda').val()
 
-        console.log(id_produto)
+        console.log(valortotal)
+        console.log(nomecliente)
+        console.log(idatendente)
     
         $.ajax({
             type: "POST",
-            url: "/salvaingredientesprodutocomanda/ajax",
-            data: { id: id_produto },
+            url: "/salvaprodutoeingredientescomanda/ajax",
+            data: { 
+                idcomanda: 0,
+                valortotal: valortotal,
+                statuscomanda: null,
+                datacomanda: null,
+                nomecliente: nomecliente,
+                idatendente: idatendente
+            },
             dataType: "json",
             success: function (response) {
                 console.log(response)

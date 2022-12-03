@@ -14,7 +14,7 @@ class Comanda extends Model
         $result = $sql->select('CALL `db_lachapa`.`sp_salva_comanda`(:idcomanda, :valortotal, :statuscomanda, :datacomanda, :nomecliente, :idatendente)', [
             ':idcomanda' => $this->getidcomanda(),
             ':valortotal' => $this->getvalortotal(),
-            ':statuscomanda' => $this->getstatuscomanda(),
+            ':statuscomanda' => 'A',
             ':datacomanda' => $this->getdatacomanda(),
             ':nomecliente' => $this->getnomecliente(),
             ':idatendente' => $this->getidatendente()
