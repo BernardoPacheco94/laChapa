@@ -1,0 +1,5 @@
+> Nome ou numero na comanda;
+
+> Exibição dos produtos no lançamento da comanda, com ou sem os adicioanis;
+
+> Porção adicional e ingrediente adicional, forma de lançamento da comanda;

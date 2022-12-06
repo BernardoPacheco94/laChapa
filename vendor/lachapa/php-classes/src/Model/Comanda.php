@@ -24,19 +24,17 @@ class Comanda extends Model
     }
 
 
-    public function salvaProdutosComanda()
+    public function salvaComandaProdutos()
     {
         $sql = new Sql;
 
-        $sql->query('INSERT INTO `db_lachapa`.`comanda-produtos`
-    (`idcomanda`,
-    `idproduto`)
-    VALUES
-    (:idcomanda,
-    :idproduto);', [
+        $result = $sql->select('CALL `db_lachapa`.`sp_salva_comanda_produtos`(:idcomandaproduto, :idcomanda, :idproduto)',[
+            ':idcomandaproduto' => $this->getidcomandaproduto(),
             ':idcomanda' => $this->getidcomanda(),
             ':idproduto' => $this->getidproduto()
         ]);
+
+        return $this->setData($result[0]);
     }
 
     public function salvaComandaMesa()
@@ -53,14 +51,4 @@ class Comanda extends Model
         return $this->setData($result[0]);
     }
 
-    // public function salvaTeste($id)
-    // {
-    //     $sql = new Sql;
-    //     $result = $sql->select('CALL `db_lachapa`.`new_procedure` (:idtable_teste, :id)',[
-    //         ':idtable_teste' => 0,
-    //         ':id' => $id
-    //     ]);
-
-    //     return $result[0];
-    // }
 }

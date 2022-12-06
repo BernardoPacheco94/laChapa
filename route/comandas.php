@@ -32,25 +32,17 @@ $app->get('/ingredientes/ajax', function(){
     echo json_encode(Ingrediente::listaIngredientes());
 });
 
-// $app->get('/teste/ajax', function(){
-//     $var = new Comanda;
-
-//     echo json_encode($var->salvaTeste(3));
-//     exit;
-// });
 
 
 $app->post('/salvaprodutoeingredientescomanda/ajax', function(){
     $comanda = new Comanda;
     
     $comanda->setData($_POST);
-    $result = $comanda->salvaComanda();
-    echo json_encode($comanda->salvaComanda());
+    // $comanda->salvaComanda();
+    // $comanda->salvaComandaMesa();
+    // $comanda->salvaComandaProdutos();
+    echo json_encode($_POST);
 });
 
-// $app->get('/salvaprodutoeingredientescomanda/ajax', function(){
-//     $comanda = new Comanda;
-//     $comanda->setData($_GET);
-//     echo json_encode($_GET);
-// });
+
 
