@@ -142,7 +142,6 @@ $('#select_produto_comanda').change(function (e) {
                     url: "/ingredientes/ajax",
                     dataType: "json",
                     success: function (responseIngredientes) {//retorna todos os ingredientes
-                        console.log(responseIngredientes)
 
                         //Cria um select com os ingredientes cadastrados
                         $('#body_tabela_ingredientes_comanda').append('<tr id="linha_select_ingredientes"><th colspan="4" class="text-center"><select class="form-control" name="" id="select_adc_novo_ingrediente"></select> </th><th><button type="button" name="" id="btn_adc_novo_ingrediente_comanda" class="btn btn-dark"><i class="fa-solid fa-save"></i></button></th></tr>')
@@ -269,13 +268,16 @@ $('#select_produto_comanda').change(function (e) {
     $('#tabela_ingredientes_comanda').attr('hidden', false)
 });
 
-
+produto = []
+//inserção do produto na tabela de produtos da comanda
 $('#salva_produto_comanda').click(function (e) {
     e.preventDefault();
 
+    $('#tabela_produtos_lançados_na_comanda').empty();
+
     $('#tabela_ingredientes_comanda').attr('hidden', true)
     if (($('#select_produto_comanda').val()) != null) {
-        produto = {
+        produto.push({
             idproduto: $('#select_produto_comanda').val(),
             nomeproduto: nomeproduto,
             vladicional: valor_adicional_total,
@@ -283,10 +285,13 @@ $('#salva_produto_comanda').click(function (e) {
             ingredienteadicional: ingredienteadicional,
             removeringrediente: removeringrediente,
             vlfinalproduto: parseFloat($('#valortotal').val())
+        })
+
+        for (let index = 0; index < produto.length; index++) {
+            
+            $('#tabela_produtos_lançados_na_comanda').append('<tr><td>' + produto[index].nomeproduto + '</td><td class="text-center">' + produto[index].vlfinalproduto.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td><td class="text-center"><button id="btn_remove_produto_comanda_' + produto[index].idproduto + '" class="btn fa-solid fa-trash-can text-danger"></button></td></tr>')
         }
 
-
-        $('#tabela_produtos_lançados_na_comanda').append('<tr><td>'+produto.nomeproduto+'</td><td class="text-center">'+ produto.vlfinalproduto.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) +'</td><td class="text-center"><button id="btn_remove_produto_comanda_'+produto.idproduto+'" class="btn fa-solid fa-trash-can text-danger"></button></td></tr>')
         $('#tabela_produtos_lançados_na_comanda').attr('hidden', false);
 
 
@@ -330,6 +335,8 @@ $('#salva_produto_comanda').click(function (e) {
     else {
         alert('Selecione um produto para incluir na comanda')
     }
+
+    console.log(produto)
 
 
 });
