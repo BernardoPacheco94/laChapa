@@ -42,7 +42,7 @@
                                     <th class="text-center">Excluir</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="body_tabela_produtos_lançados_na_comanda">
 
                             </tbody>
                         </table>

@@ -273,7 +273,7 @@ produto = []
 $('#salva_produto_comanda').click(function (e) {
     e.preventDefault();
 
-    $('#tabela_produtos_lançados_na_comanda').empty();
+    $('#body_tabela_produtos_lançados_na_comanda').empty();
 
     $('#tabela_ingredientes_comanda').attr('hidden', true)
     if (($('#select_produto_comanda').val()) != null) {
