@@ -34,7 +34,7 @@
                     </select>
                     <!-- Exibe produtos já lançados -->
                     <div class="table">
-                        <table class="table" id="tabela_produtos_lançados_na_comanda" hidden>
+                        <table class="table table-striped" id="tabela_produtos_lançados_na_comanda" hidden>
                             <thead>
                                 <tr>
                                     <th>Produto</th>

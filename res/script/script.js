@@ -289,7 +289,30 @@ $('#salva_produto_comanda').click(function (e) {
 
         for (let index = 0; index < produto.length; index++) {
             
-            $('#tabela_produtos_lançados_na_comanda').append('<tr><td>' + produto[index].nomeproduto + '</td><td class="text-center">' + produto[index].vlfinalproduto.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td><td class="text-center"><button id="btn_remove_produto_comanda_' + produto[index].idproduto + '" class="btn fa-solid fa-trash-can text-danger"></button></td></tr>')
+            $('#tabela_produtos_lançados_na_comanda').append('<tr><td class="text-center"  id="td_nome_produto_comanda_'+produto[index].idproduto+'">' + produto[index].nomeproduto + '</td><td class="text-center align-middle">' + produto[index].vlfinalproduto.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td><td class="text-center align-middle"><button id="btn_remove_produto_comanda_' + produto[index].idproduto + '" class="btn fa-solid fa-trash-can text-danger "></button></td></tr>')
+
+
+            if((produto[index].removeringrediente).length){
+                $('#td_nome_produto_comanda_'+produto[index].idproduto).append('<ul class="text-start fw-normal" id="lista_remover_ingredientes_produto_'+produto[index].idproduto+'">Sem: </ul>')
+                for (let i = 0; i < produto[index].removeringrediente.length; i++) {
+                    $('#lista_remover_ingredientes_produto_'+produto[index].idproduto).append('<li>'+produto[index].removeringrediente[i].removeringrediente+'</li>')               
+                }
+            }
+            
+            if(produto[index].porcaoextra.length){
+                $('#td_nome_produto_comanda_'+produto[index].idproduto).append('<ul class="text-start fw-normal" id="lista_porcaoextra_ingredientes_produto_'+produto[index].idproduto+'">Porção extra: </ul>')
+                for (let i = 0; i < produto[index].porcaoextra.length; i++) {
+                    $('#lista_porcaoextra_ingredientes_produto_'+produto[index].idproduto).append('<li>'+produto[index].porcaoextra[i].ingredienteporcaoextra+'</li>')              
+                }
+            }
+            
+            if(produto[index].ingredienteadicional.length){
+                $('#td_nome_produto_comanda_'+produto[index].idproduto).append('<ul class="text-start fw-normal" id="lista_ingredienteadicional_ingredientes_produto_'+produto[index].idproduto+'">Adicional: </ul>')
+                for (let i = 0; i < produto[index].ingredienteadicional.length; i++) {
+                    $('#lista_ingredienteadicional_ingredientes_produto_'+produto[index].idproduto).append('<li>'+produto[index].ingredienteadicional[i].ingredienteadicional+'</li>')              
+                }
+            }
+
         }
 
         $('#tabela_produtos_lançados_na_comanda').attr('hidden', false);
