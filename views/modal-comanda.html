@@ -71,8 +71,8 @@
 
                     <!-- Tabela de ingredientes -->
                     <div class="row mt-2">
-                        <div class="table-responsive">
-                            <table class="table table-light table-hover">
+                        <div class="table-responsive" >
+                            <table class="table table-light table-hover" id="tabela_ingredientes_comanda" hidden>
                                 <thead>
                                     <tr>
                                         <th>Ingrediente</th>
@@ -82,7 +82,7 @@
                                         <th>Valor adc</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tabela_ingredientes_comanda">
+                                <tbody id="body_tabela_ingredientes_comanda">
 
                                 </tbody>
                                 <tfoot>
