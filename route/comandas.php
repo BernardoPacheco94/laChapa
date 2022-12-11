@@ -38,9 +38,12 @@ $app->post('/salvaprodutoeingredientescomanda/ajax', function(){
     $comanda = new Comanda;
     
     $comanda->setData($_POST);
-    // $comanda->salvaComanda();
-    // $comanda->salvaComandaMesa();
-    // $comanda->salvaComandaProdutos();
+    $comanda->salvaComanda();
+    $comanda->salvaComandaMesa();
+    for ($i=0; $i < $_POST ; $i++) { 
+        # code...
+    }
+    $comanda->salvaComandaProdutos();
     echo json_encode($_POST);
 });
 
