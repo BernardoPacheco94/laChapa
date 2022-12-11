@@ -37,7 +37,7 @@
                         <table class="table table-striped" id="tabela_produtos_lançados_na_comanda" hidden>
                             <thead>
                                 <tr>
-                                    <th>Produto</th>
+                                    <th class="text-center">Produto</th>
                                     <th class="text-center">Valor</th>
                                     <th class="text-center">Excluir</th>
                                 </tr>
@@ -45,6 +45,12 @@
                             <tbody id="body_tabela_produtos_lançados_na_comanda">
 
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="text-center" colspan="2">Total:</th>
+                                    <th id="valor_total_comanda"></th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
 
@@ -108,7 +114,7 @@
                     </button>
                 </div>
                 <div class="modal-footer">
-                    <button class="w-100 btn btn-dark" data-bs-dismiss="modal">
+                    <button class="w-100 btn btn-dark" data-bs-dismiss="modal" id="salva_comanda">
                         <i class="fa-solid fa-save"></i> Salvar
                     </button>
 
