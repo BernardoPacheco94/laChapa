@@ -24,17 +24,17 @@ class Comanda extends Model
     }
 
 
-    public function salvaComandaProdutos()
+    public function salvaComandaProdutos($idproduto)
     {
         $sql = new Sql;
 
         $result = $sql->select('CALL `db_lachapa`.`sp_salva_comanda_produtos`(:idcomandaproduto, :idcomanda, :idproduto)',[
             ':idcomandaproduto' => $this->getidcomandaproduto(),
             ':idcomanda' => $this->getidcomanda(),
-            ':idproduto' => $this->getidproduto()
+            ':idproduto' => $idproduto
         ]);
 
-        return $this->setData($result[0]);
+        return $result[0];
     }
 
     public function salvaComandaMesa()

@@ -369,4 +369,6 @@ $('#salva_comanda').click(function (e) {
             console.log(err)
         }
     });
+
+    // window.open('/salvaprodutoeingredientescomanda/ajax', '_blank')
 });
