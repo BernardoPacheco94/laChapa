@@ -255,41 +255,42 @@ produtos = []
 valortotalcomanda = 0
 $('#salva_produto_comanda').click(function (e) {
     e.preventDefault();
-    console.log(listaIngredientesProduto)
 
-    $.each(listaIngredientesProduto, function (key, value) {
-        if (value['quantidade'] > 1) {
-            porcaoextra.push({
-                'ingredienteporcaoextra': value['nome'],
-                'idporcaoextra': value['idingrediente'],
-                'qtdporcaoextra': value['quantidade']
-            })
-        }
-
-        if (value['quantidade'] == 0) {
-            removeringrediente.push({
-                'removeringrediente': value['nome'],
-                'idremoveringrediente': value['idingrediente'],
-                'qtdremoveringrediente': value['quantidade']
-            })
-        }
-    });
-
-    $.each(adicionais, function (key, value) {
-        ingredienteadicional.push({
-            'ingredienteadicional': value['nomeingrediente'],
-            'idingredienteadicional': value['idingrediente'],
-            'qtdingredienteadicional': value['qtdingredienteadicional']
-        })
-    });
-
-
-    $('#body_tabela_produtos_lançados_na_comanda').empty();
-
-    $('#tabela_ingredientes_comanda').attr('hidden', true)
     if (($('#select_produto_comanda').val()) != null) {
+        $.each(listaIngredientesProduto, function (key, value) {
+            if (value['quantidade'] > 1) {
+                porcaoextra.push({
+                    'ingredienteporcaoextra': value['nome'],
+                    'idproduto': id_produto,
+                    'idingrediente': value['idingrediente'],
+                    'qtdporcaoextra': value['quantidade']
+                })
+            }
+
+            if (value['quantidade'] == 0) {
+                removeringrediente.push({
+                    'removeringrediente': value['nome'],
+                    'idproduto': id_produto,
+                    'idingrediente': value['idingrediente']
+                })
+            }
+        });
+
+        $.each(adicionais, function (key, value) {
+            ingredienteadicional.push({
+                'ingredienteadicional': value['nomeingrediente'],
+                'idproduto': id_produto,
+                'idingrediente': value['idingrediente'],
+                'qtdingredienteadicional': value['qtdingredienteadicional']
+            })
+        });
+
+
+        $('#body_tabela_produtos_lançados_na_comanda').empty();
+
+        $('#tabela_ingredientes_comanda').attr('hidden', true)
         produtos.push({
-            idproduto: $('#select_produto_comanda').val(),
+            idproduto: id_produto,
             nomeproduto: nomeproduto,
             vladicional: valor_adicional_total,
             porcaoextra: porcaoextra,
@@ -323,7 +324,9 @@ $('#salva_produto_comanda').click(function (e) {
 
             //lista de ingredientes a serem adicionados
             if (produtos[index].ingredienteadicional.length) {
+
                 $('#td_nome_produto_comanda_' + produtos[index].idproduto).append('<ul class="text-start fw-normal" id="lista_ingredienteadicional_ingredientes_produto_' + produtos[index].idproduto + '">Adicional: </ul>')
+
                 for (let i = 0; i < produtos[index].ingredienteadicional.length; i++) {
                     if (produtos[index].ingredienteadicional[i].qtdingredienteadicional >= 1) {
                         $('#lista_ingredienteadicional_ingredientes_produto_' + produtos[index].idproduto).append('<li>' + produtos[index].ingredienteadicional[i].ingredienteadicional + ' - ' + produtos[index].ingredienteadicional[i].qtdingredienteadicional + 'x </li>')
@@ -347,7 +350,7 @@ $('#salva_produto_comanda').click(function (e) {
 
 $('#salva_comanda').click(function (e) {
     e.preventDefault();
-    
+
     $.ajax({
         type: "POST",
         url: "/salvaprodutoeingredientescomanda/ajax",
@@ -364,6 +367,8 @@ $('#salva_comanda').click(function (e) {
         dataType: "json",
         success: function (response) {
             console.log(response)
+
+            // document.location.reload()
         },
         error: function (err) {
             console.log(err)

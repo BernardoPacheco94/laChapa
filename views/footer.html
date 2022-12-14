@@ -9,7 +9,8 @@
         crossorigin="anonymous"></script>
         
         <!-- Script jQuery -->
-        <script src="/res/script/jQuery/jquery-3.6.1.min.js"></script>
+        <!-- <script src="/res/script/jQuery/jquery-3.6.1.min.js"></script> -->
+        <script src="/res/script/jQuery/jquery-develop.js"></script>
         
         <!-- Script interno -->
         <script src="/res/script/script.js"></script>
