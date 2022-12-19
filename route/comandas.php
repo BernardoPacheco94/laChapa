@@ -28,26 +28,38 @@ $app->post('/salvaprodutoeingredientescomanda/ajax', function () {
     $comanda->setData($_POST);
     $comanda->salvaComanda();
     $comanda->salvaComandaMesa();
+    try {
     for ($i = 0; $i < count($_POST['produtos']); $i++) {
         
         $comanda->salvaComandaProdutos($_POST['produtos'][$i]['idproduto'], $_POST['produtos'][$i]['vlfinalproduto']);
 
-        if (array_key_exists('porcaoextra', $_POST['produtos'][$i])){
-            for ($c=0; $c < count($_POST['produtos'][$i]['porcaoextra']); $c++) { 
-                $comanda->salvaComandaProdutoPorcaoExtra($_POST['produtos'][$i]['porcaoextra'][$c]['idproduto'], $_POST['produtos'][$i]['porcaoextra'][$c]['qtdporcaoextra'], $_POST['produtos'][$i]['porcaoextra'][$c]['idingrediente']);
+        
+            if (array_key_exists('porcaoextra', $_POST['produtos'][$i])){
+                for ($c=0; $c < count($_POST['produtos'][$i]['porcaoextra']); $c++) { 
+                    $comanda->salvaComandaProdutoPorcaoExtra($_POST['produtos'][$i]['porcaoextra'][$c]['idproduto'], $_POST['produtos'][$i]['porcaoextra'][$c]['qtdporcaoextra'], $_POST['produtos'][$i]['porcaoextra'][$c]['idingrediente']);
+                }
             }
-        }
-        if (array_key_exists('ingredienteadicional', $_POST['produtos'][$i])){
-            for ($c=0; $c < count($_POST['produtos'][$i]['ingredienteadicional']); $c++) { 
-                $comanda->salvaComandaIngredienteAdicional($_POST['produtos'][$i]['ingredienteadicional'][$c]['idproduto'], $_POST['produtos'][$i]['ingredienteadicional'][$c]['qtdingredienteadicional'], $_POST['produtos'][$i]['porcaoextra'][$c]['idingrediente']);
+            if (array_key_exists('ingredienteadicional', $_POST['produtos'][$i])){
+                for ($c=0; $c < count($_POST['produtos'][$i]['ingredienteadicional']); $c++) { 
+                    $comanda->salvaComandaIngredienteAdicional($_POST['produtos'][$i]['ingredienteadicional'][$c]['idproduto'], $_POST['produtos'][$i]['ingredienteadicional'][$c]['qtdingredienteadicional'], $_POST['produtos'][$i]['ingredienteadicional'][$c]['idingrediente']);
+                }
             }
-        }
-        if (array_key_exists('removeringrediente', $_POST['produtos'][$i])){
-            for ($c=0; $c < count($_POST['produtos'][$i]['removeringrediente']); $c++) { 
-                $comanda->salvaComandaProdutoRemoverIngrediente($_POST['produtos'][$i]['removeringrediente'][$c]['idproduto'], $_POST['produtos'][$i]['porcaoextra'][$c]['idingrediente']);
+            if (array_key_exists('removeringrediente', $_POST['produtos'][$i])){
+                for ($c=0; $c < count($_POST['produtos'][$i]['removeringrediente']); $c++) { 
+                    $comanda->salvaComandaProdutoRemoverIngrediente($_POST['produtos'][$i]['removeringrediente'][$c]['idproduto'], $_POST['produtos'][$i]['removeringrediente'][$c]['idingrediente']);
+                }
             }
+            
         }
+
+        echo json_encode($_POST);
+    } catch (\Throwable $th) {
+        echo json_encode(array(
+            "Arquivo" => $th->getFile(),
+            "Mensagem" => $th->getMessage(),
+            "linha" => $th->getLine()
+        ),JSON_UNESCAPED_SLASHES);
     }
-    echo json_encode($_POST);
+    
 });
 
