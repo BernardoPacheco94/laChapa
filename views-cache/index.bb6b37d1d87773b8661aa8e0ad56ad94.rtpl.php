@@ -50,23 +50,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php $counter3=-1;  if( isset($value2["0"]["produtosComanda"]) && ( is_array($value2["0"]["produtosComanda"]) || $value2["0"]["produtosComanda"] instanceof Traversable ) && sizeof($value2["0"]["produtosComanda"]) ) foreach( $value2["0"]["produtosComanda"] as $key3 => $value3 ){ $counter3++; ?>
                                                 <tr>
-                                                    <td>Xis Completo</td>
-                                                    <td>R$ 18,00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Cachorro Simples</td>
-                                                    <td>R$ 15,00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Coca-cola</td>
-                                                    <td>R$ 6,00</td>
-                                                </tr>
+                                                    <td><?php echo htmlspecialchars( $value3["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                                                    <td>R$ <?php echo formatPrice($value3["vlfinalproduto"]); ?></td>
+                                                </tr>                                                    
+                                                <?php } ?>
                                             </tbody>
                                             <tfoot class="bg-light">
                                                 <tr>
                                                     <th>Total</th>
-                                                    <td>R$ 39,00</td>
+                                                    <td>R$ <?php echo formatPrice($value2["valortotal"]); ?></td>
                                                 </tr>
                                             </tfoot>
                                         </table>

@@ -29,23 +29,25 @@ $app->post('/salvaprodutoeingredientescomanda/ajax', function () {
     $comanda->salvaComanda();
     $comanda->salvaComandaMesa();
     for ($i = 0; $i < count($_POST['produtos']); $i++) {
-        $comanda->salvaComandaProdutos($_POST['produtos'][$i]['idproduto']);
+        
+        $comanda->salvaComandaProdutos($_POST['produtos'][$i]['idproduto'], $_POST['produtos'][$i]['vlfinalproduto']);
 
-        if (isset($_POST['produtos'][$i]['porcaoextra'])){
-            for ($c=0; $c < count($_POST['produtos'][$i]['porcaoextra'])  ; $c++) { 
+        if (array_key_exists('porcaoextra', $_POST['produtos'][$i])){
+            for ($c=0; $c < count($_POST['produtos'][$i]['porcaoextra']); $c++) { 
                 $comanda->salvaComandaProdutoPorcaoExtra($_POST['produtos'][$i]['porcaoextra'][$c]['idproduto'], $_POST['produtos'][$i]['porcaoextra'][$c]['qtdporcaoextra'], $_POST['produtos'][$i]['porcaoextra'][$c]['idingrediente']);
             }
         }
-        if (isset($_POST['produtos'][$i]['ingredienteadicional'])){
-            for ($c=0; $c < count($_POST['produtos'][$i]['ingredienteadicional'])  ; $c++) { 
+        if (array_key_exists('ingredienteadicional', $_POST['produtos'][$i])){
+            for ($c=0; $c < count($_POST['produtos'][$i]['ingredienteadicional']); $c++) { 
                 $comanda->salvaComandaIngredienteAdicional($_POST['produtos'][$i]['ingredienteadicional'][$c]['idproduto'], $_POST['produtos'][$i]['ingredienteadicional'][$c]['qtdingredienteadicional'], $_POST['produtos'][$i]['porcaoextra'][$c]['idingrediente']);
             }
         }
-        if (isset($_POST['produtos'][$i]['removeringrediente'])){
-            for ($c=0; $c < count($_POST['produtos'][$i]['removeringrediente'])  ; $c++) { 
+        if (array_key_exists('removeringrediente', $_POST['produtos'][$i])){
+            for ($c=0; $c < count($_POST['produtos'][$i]['removeringrediente']); $c++) { 
                 $comanda->salvaComandaProdutoRemoverIngrediente($_POST['produtos'][$i]['removeringrediente'][$c]['idproduto'], $_POST['produtos'][$i]['porcaoextra'][$c]['idingrediente']);
             }
         }
     }
     echo json_encode($_POST);
 });
+

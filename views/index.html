@@ -50,23 +50,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                {loop="$value.0.produtosComanda"}
                                                 <tr>
-                                                    <td>Xis Completo</td>
-                                                    <td>R$ 18,00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Cachorro Simples</td>
-                                                    <td>R$ 15,00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Coca-cola</td>
-                                                    <td>R$ 6,00</td>
-                                                </tr>
+                                                    <td>{$value.nomeproduto}</td>
+                                                    <td>R$ {function="formatPrice($value.vlfinalproduto)"}</td>
+                                                </tr>                                                    
+                                                {/loop}
                                             </tbody>
                                             <tfoot class="bg-light">
                                                 <tr>
                                                     <th>Total</th>
-                                                    <td>R$ 39,00</td>
+                                                    <td>R$ {function="formatPrice($value.valortotal)"}</td>
                                                 </tr>
                                             </tfoot>
                                         </table>

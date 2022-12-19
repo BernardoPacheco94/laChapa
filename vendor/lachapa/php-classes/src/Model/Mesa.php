@@ -32,7 +32,7 @@ class Mesa extends Model
         ]);
         
         
-        for ($i=0; $i < count($result); $i++) { 
+        for ($i=0; $i < count($result); $i++) { // Não será necessário usar esse for
             array_push($result[$i], [
                 'comandas' => Mesa::exibirComandas($result[$i]['idmesa'])
             ]);
@@ -107,11 +107,22 @@ class Mesa extends Model
     {
         $sql = new Sql;
 
-        return $sql->select('SELECT * FROM comandas
+        $result = $sql->select('SELECT * FROM comandas
         INNER JOIN `comanda-mesa` USING (idcomanda)
         INNER JOIN mesas USING (idmesa)
         WHERE idmesa = :idmesa AND statuscomanda = "A"',[
             ':idmesa' =>$idmesa
         ]);
+
+        for ($i=0; $i < count($result); $i++) {
+            array_push($result[$i],[
+                'produtosComanda' => Comanda::listaProdutosComanda($result[$i]['idcomanda'])
+                ]
+            );           
+        }
+
+        return $result;
     }
+
+    
 }

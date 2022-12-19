@@ -24,14 +24,15 @@ class Comanda extends Model
     }
 
 
-    public function salvaComandaProdutos($idproduto)
+    public function salvaComandaProdutos($idproduto, $vlfinalproduto)
     {
         $sql = new Sql;
 
-        $sql->select('CALL `db_lachapa`.`sp_salva_comanda_produtos`(:idcomandaproduto, :idcomanda, :idproduto)',[
+        $sql->select('CALL `db_lachapa`.`sp_salva_comanda_produtos`(:idcomandaproduto, :idcomanda, :idproduto, :vlfinalproduto)',[
             ':idcomandaproduto' => $this->getidcomandaproduto(),
             ':idcomanda' => $this->getidcomanda(),
-            ':idproduto' => $idproduto
+            ':idproduto' => $idproduto,
+            ':vlfinalproduto' => $vlfinalproduto
         ]);
 
         // return $result[0];
@@ -88,5 +89,17 @@ class Comanda extends Model
         ]);
 
         // return $result[0];
+    }
+
+    public static function listaProdutosComanda($idcomanda)
+    {
+        $sql = new Sql;
+
+        return $sql->select('SELECT * FROM comandas
+        INNER JOIN `comanda-produtos` USING (idcomanda)
+        INNER JOIN produtos USING (idproduto)
+        WHERE idcomanda = :idcomanda',[
+            ':idcomanda' => $idcomanda
+        ]);
     }
 }

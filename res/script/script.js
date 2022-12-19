@@ -42,7 +42,6 @@ $('#select_produto_comanda').change(function (e) {
         data: { idproduto: id_produto },
         dataType: "json",
         success: function (response) {
-            console.log(response)
 
             $('#body_tabela_ingredientes_comanda').empty()
             //Altera o valor do produto selecionado de acordo com o somatorio dos ingredientes
@@ -62,8 +61,6 @@ $('#select_produto_comanda').change(function (e) {
             ingredienteadicional = []
 
             removeringrediente = []
-
-            console.log(listaIngredientesProduto)
 
             //Monta a lista de ingredientes do produto
             $.each(listaIngredientesProduto, function (key, value) {
@@ -229,7 +226,6 @@ $('#select_produto_comanda').change(function (e) {
                                     });
 
                                     adicionais.push(responseIngredientes[i])
-                                    console.log(responseIngredientes[i])
                                 }
                             }
 

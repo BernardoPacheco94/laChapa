@@ -1,6 +1,7 @@
 <?php
 
 use LaChapa\Model\Atendente;
+use LaChapa\Model\Comanda;
 use LaChapa\Model\Ingrediente;
 use LaChapa\Page;
 use LaChapa\Model\Mesa;
@@ -8,9 +9,8 @@ use LaChapa\Model\Produto;
 use LaChapa\Model\Tipo;
 
 //Rota para a pagina principal - deck mesas
-$app->get('/', function(){    
+$app->get('/', function(){
     $page = new Page();
-    
 
     $page->setTpl('index',[
         'todasMesas' => Mesa::exibeTodas(),
