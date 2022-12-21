@@ -26,7 +26,7 @@ $app->post('/salvaprodutoeingredientescomanda/ajax', function () {
     $comanda = new Comanda;
 
     $comanda->setData($_POST);
-    $comanda->setidatendente($_POST['idatendente'] == "" ? null : $_POST['idatendente']);
+    $comanda->setidatendente($_POST['idatendente'] == "" || $_POST['idatendente'] == 0 ? null : $_POST['idatendente']);
     try {
         $comanda->salvaComanda();
         $comanda->salvaComandaMesa();
