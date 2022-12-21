@@ -347,29 +347,36 @@ $('#salva_produto_comanda').click(function (e) {
 $('#salva_comanda').click(function (e) {
     e.preventDefault();
 
-    $.ajax({
-        type: "POST",
-        url: "/salvaprodutoeingredientescomanda/ajax",
-        data: {
-            idcomanda: 0,
-            valortotal: valortotalcomanda,
-            statuscomanda: null,
-            datacomanda: null,
-            nomecliente: $('#nomecliente').val(),
-            idatendente: $('#select_atendente_comanda').val(),
-            idmesa: $('#select_mesa_comanda').val(),
-            produtos: produtos
-        },
-        dataType: "json",
-        success: function (response) {
-            console.log(response)
+    if (($('#body_tabela_produtos_lançados_na_comanda').val()) != null) {
 
-            // document.location.reload()
-        },
-        error: function (err) {
-            console.log(err)
-        }
-    });
+        $.ajax({
+            type: "POST",
+            url: "/salvaprodutoeingredientescomanda/ajax",
+            data: {
+                idcomanda: 0,
+                valortotal: valortotalcomanda,
+                statuscomanda: null,
+                datacomanda: null,
+                nomecliente: $('#nomecliente').val(),
+                idatendente: $('#select_atendente_comanda').val(),
+                idmesa: $('#select_mesa_comanda').val(),
+                produtos: produtos
+            },
+            dataType: "json",
+            success: function (response) {
+                console.log(response)
+    
+                // document.location.reload()
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        });
+    
+        // window.open('/salvaprodutoeingredientescomanda/ajax', '_blank')
 
-    // window.open('/salvaprodutoeingredientescomanda/ajax', '_blank')
+    } else{
+        alert('Selecione um produto para incluir na comanda')
+    }
+
 });
