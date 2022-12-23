@@ -10,7 +10,7 @@
         </div>
         <div id="div-btn-adc-mesa" class="col-3">
             <button type="button" class="btn btn-dark" id="btn-adc-comanda" data-bs-toggle="modal"
-                data-bs-target="#modal_comanda">
+                data-bs-target="#modal_nova_comanda">
                 Nova Comanda
             </button>
         </div>
@@ -70,7 +70,7 @@
                                             <button type="button" class="btn btn-dark"
                                                 id="btn-gerenciar-comanda-<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" data-bs-toggle="modal"
                                                 data-bs-target="#modal_gerenciar_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                                                Gerenciar Comanda
+                                                Gerenciar Comanda <?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                                             </button>
                                         </div>
                                         <div class="col-6 text-center">
@@ -101,6 +101,6 @@
 </section>
 
 
-<?php require $this->checkTemplate("modal-comanda");?>
+<?php require $this->checkTemplate("modal-nova-comanda");?>
 
 <?php require $this->checkTemplate("modal-gerenciar-mesas");?>

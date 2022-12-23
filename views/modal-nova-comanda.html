@@ -1,4 +1,4 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Modal - Lançamento da comanda -->
+<!-- Modal - Lançamento da comanda -->
 <div class="modal fade" id="modal_nova_comanda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -18,19 +18,19 @@
                     <select class="form-control mb-4" name="idmesacomanda" id="select_mesa_comanda">
                         <option value="mesa" disabled selected>Mesa</option>
                         <option value="0">Nenhuma</option>
-                        <?php $counter1=-1;  if( isset($todasMesas) && ( is_array($todasMesas) || $todasMesas instanceof Traversable ) && sizeof($todasMesas) ) foreach( $todasMesas as $key1 => $value1 ){ $counter1++; ?>
-                        <option name="<?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        {loop="$todasMesas"}
+                        <option name="{$value.idmesa}" value="{$value.idmesa}">{$value.idmesa}
                         </option>
-                        <?php } ?>
+                        {/loop}
                     </select>
 
                     <select class="form-control mb-4" name="idatendente" id="select_atendente_comanda">
                         <option value="atendente" disabled selected>Atendente</option>
                         <option value="0">Nenhum</option>
-                        <?php $counter1=-1;  if( isset($atendentes) && ( is_array($atendentes) || $atendentes instanceof Traversable ) && sizeof($atendentes) ) foreach( $atendentes as $key1 => $value1 ){ $counter1++; ?>
-                        <option name="<?php echo htmlspecialchars( $value1["idatendente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value1["idatendente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nomeatendente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        {loop="$atendentes"}
+                        <option name="{$value.idatendente}" value="{$value.idatendente}">{$value.nomeatendente}
                         </option>
-                        <?php } ?>
+                        {/loop}
                     </select>
                     <!-- Exibe produtos já lançados -->
                     <div class="table">
@@ -60,9 +60,9 @@
                             <select class="form-control" id="select_tipo_produto_comanda">
                                 <option value="tipo" id="option_tipo" disabled selected>Tipo de Produto</option>
                                 <option value="todos">Todos</option>
-                                <?php $counter1=-1;  if( isset($tipos) && ( is_array($tipos) || $tipos instanceof Traversable ) && sizeof($tipos) ) foreach( $tipos as $key1 => $value1 ){ $counter1++; ?>
-                                <option value="<?php echo htmlspecialchars( $value1["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
-                                <?php } ?>
+                                {loop="$tipos"}
+                                <option value="{$value.idtipo}">{$value.nometipo}</option>
+                                {/loop}
                             </select>
                         </div>
                     </div>

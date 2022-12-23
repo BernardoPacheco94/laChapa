@@ -102,4 +102,7 @@ class Comanda extends Model
             ':idcomanda' => $idcomanda
         ]);
     }
+
+
+    
 }
