@@ -89,12 +89,12 @@
                                     </tr>
                                 </thead>
                                 <tbody id="body_tabela_ingredientes_comanda">
-
+                                    
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th colspan="4" class="text-center">Valor</th>
-                                        <th>
+                                        <th colspan="3" class="text-center">Valor</th>
+                                        <th colspan="2" class="text-center">
                                             <input type="number" step="0.01" name="valortotal" id="valortotal"
                                                 class="form-control" hidden >
                                             <input id="valortotal_exibido" class="form-control" disabled >
