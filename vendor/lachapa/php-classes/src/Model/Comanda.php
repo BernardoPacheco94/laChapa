@@ -11,7 +11,7 @@ class Comanda extends Model
     {
         $sql = new Sql;
 
-        $result = $sql->select('CALL `db_lachapa`.`sp_salva_comanda`(:idcomanda, :valortotal, :statuscomanda, :datacomanda, :nomecliente, :idatendente)', [
+        $resultado = $sql->select('CALL `db_lachapa`.`sp_salva_comanda`(:idcomanda, :valortotal, :statuscomanda, :datacomanda, :nomecliente, :idatendente)', [
             ':idcomanda' => $this->getidcomanda(),
             ':valortotal' => $this->getvalortotal(),
             ':statuscomanda' => 'A',
@@ -20,7 +20,7 @@ class Comanda extends Model
             ':idatendente' => $this->getidatendente()
         ]);
 
-        return $this->setData($result[0]);
+        return $this->setData($resultado[0]);
     }
 
 
@@ -65,6 +65,7 @@ class Comanda extends Model
         // return $result[0];
     }
 
+
     public function salvaComandaIngredienteAdicional($idproduto, $qtd, $idingrediente){
         $sql = new Sql;
 
@@ -103,6 +104,23 @@ class Comanda extends Model
         ]);
     }
 
+    public static function listaComandas()
+    {
+        $sql = new Sql;
 
-    
+        $resultado = $sql->select('SELECT * FROM comandas
+        INNER JOIN `comanda-mesa` USING (idcomanda) 
+        WHERE statuscomanda = "A"
+        ');
+
+        for ($i=0; $i < count($resultado); $i++) { 
+            array_push($resultado[$i], [
+                'produtos' => Comanda::listaProdutosComanda($resultado[$i]['idcomanda'])
+            ]);
+        }
+
+        return $resultado;
+    }
+
+
 }

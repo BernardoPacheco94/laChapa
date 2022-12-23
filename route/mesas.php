@@ -18,7 +18,8 @@ $app->get('/', function(){
         'mesaOculta' => Mesa::mesasOcultas(),
         'atendentes' => Atendente::listaAtendentes(),
         'tipos'=>Tipo::listaTipos(),
-        'produtos'=> Produto::listaProdutos()
+        'produtos'=> Produto::listaProdutos(),
+        'comandas' => Comanda::listaComandas()
     ]);
 });
 

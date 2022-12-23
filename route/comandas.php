@@ -61,3 +61,8 @@ $app->post('/salvaprodutoeingredientescomanda/ajax', function () {
         ));
     }
 });
+
+$app->get('/listagemteste', function(){
+    var_dump(Comanda::listaComandas());
+    exit;
+});

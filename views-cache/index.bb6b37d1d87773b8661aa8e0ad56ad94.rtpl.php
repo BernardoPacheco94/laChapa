@@ -69,7 +69,7 @@
                                         <div class="col-6 text-center ">
                                             <button type="button" class="btn btn-dark"
                                                 id="btn-gerenciar-comanda-<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" data-bs-toggle="modal"
-                                                data-bs-target="#modal_gerenciar_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                                                data-bs-target="#modal_editar_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                                 Gerenciar Comanda <?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                                             </button>
                                         </div>
@@ -102,5 +102,7 @@
 
 
 <?php require $this->checkTemplate("modal-nova-comanda");?>
+
+<?php require $this->checkTemplate("modal-editar-comanda");?>
 
 <?php require $this->checkTemplate("modal-gerenciar-mesas");?>

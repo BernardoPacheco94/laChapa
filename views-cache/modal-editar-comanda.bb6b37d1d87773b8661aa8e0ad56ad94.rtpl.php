@@ -1,10 +1,11 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Modal - Lançamento da comanda -->
-<div class="modal fade" id="modal_nova_comanda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<?php if(!class_exists('Rain\Tpl')){exit;}?><?php $counter1=-1;  if( isset($comandas) && ( is_array($comandas) || $comandas instanceof Traversable ) && sizeof($comandas) ) foreach( $comandas as $key1 => $value1 ){ $counter1++; ?>
+<!-- Modal - Lançamento da comanda -->
+<div class="modal fade" id="modal_editar_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form id="form_principal" action="/novaComanda" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Nova Comanda</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Comanda <?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h5>
                     <button type="button" class="btn btn-dark mx-auto w-50">
                         <i class="fa-solid fa-2x fa-print"></i>
                     </button>
@@ -13,28 +14,34 @@
                 <div class="modal-body">
 
                     <input class="form-control mb-4" type="text" name="nomecliente" id="nomecliente"
-                        placeholder="Nome do cliente">
+                        value="<?php echo htmlspecialchars( $value1["nomecliente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
 
                     <select class="form-control mb-4" name="idmesacomanda" id="select_mesa_comanda">
-                        <option value="mesa" disabled selected>Mesa</option>
+                        <option value="mesa" disabled>Mesa</option>
                         <option value="0">Nenhuma</option>
-                        <?php $counter1=-1;  if( isset($todasMesas) && ( is_array($todasMesas) || $todasMesas instanceof Traversable ) && sizeof($todasMesas) ) foreach( $todasMesas as $key1 => $value1 ){ $counter1++; ?>
-                        <option name="<?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        <?php $mesa=$value1["idmesa"]; ?>
+                        <?php $counter2=-1;  if( isset($todasMesas) && ( is_array($todasMesas) || $todasMesas instanceof Traversable ) && sizeof($todasMesas) ) foreach( $todasMesas as $key2 => $value2 ){ $counter2++; ?>
+                        <option name="<?php echo htmlspecialchars( $value2["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value2["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
+                        <?php if( $value2["idmesa"] == $mesa ){ ?> selected <?php } ?>
+                        ><?php echo htmlspecialchars( $value2["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                         </option>
                         <?php } ?>
                     </select>
 
                     <select class="form-control mb-4" name="idatendente" id="select_atendente_comanda">
-                        <option value="atendente" disabled selected>Atendente</option>
+                        <option value="atendente" disabled>Atendente</option>
                         <option value="0">Nenhum</option>
-                        <?php $counter1=-1;  if( isset($atendentes) && ( is_array($atendentes) || $atendentes instanceof Traversable ) && sizeof($atendentes) ) foreach( $atendentes as $key1 => $value1 ){ $counter1++; ?>
-                        <option name="<?php echo htmlspecialchars( $value1["idatendente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value1["idatendente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nomeatendente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        <?php $atendente=$value1["idatendente"]; ?>
+                        <?php $counter2=-1;  if( isset($atendentes) && ( is_array($atendentes) || $atendentes instanceof Traversable ) && sizeof($atendentes) ) foreach( $atendentes as $key2 => $value2 ){ $counter2++; ?>
+                        <option name="<?php echo htmlspecialchars( $value2["idatendente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value2["idatendente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
+                        <?php if( $atendente == $value2["idatendente"] ){ ?> selected <?php } ?>
+                        ><?php echo htmlspecialchars( $value2["nomeatendente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                         </option>
                         <?php } ?>
                     </select>
                     <!-- Exibe produtos já lançados -->
                     <div class="table">
-                        <table class="table table-striped" id="tabela_produtos_lançados_na_comanda" hidden>
+                        <table class="table table-striped" id="tabela_produtos_lançados_na_comanda" >
                             <thead>
                                 <tr>
                                     <th class="text-center">Produto</th>
@@ -43,12 +50,28 @@
                                 </tr>
                             </thead>
                             <tbody id="body_tabela_produtos_lançados_na_comanda">
-
+                                <?php $counter2=-1;  if( isset($value1["0"]["produtos"]) && ( is_array($value1["0"]["produtos"]) || $value1["0"]["produtos"] instanceof Traversable ) && sizeof($value1["0"]["produtos"]) ) foreach( $value1["0"]["produtos"] as $key2 => $value2 ){ $counter2++; ?>
+                                    <tr id="linha_produto_<?php echo htmlspecialchars( $value2["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                                        <td class="text-center" id="td_nome_produto_comanda_<?php echo htmlspecialchars( $value2["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>}">
+                                            <?php echo htmlspecialchars( $value2["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            R$ <?php echo formatPrice($value2["vlfinalproduto"]); ?>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <button id="btn_remove_produto_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
+                                            class="btn fa-solid fa-trash-can text-danger ">
+                                            </button>
+                                        </td>
+                                    </tr>                                    
+                                <?php } ?>
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th class="text-center" colspan="2">Total:</th>
-                                    <th id="valor_total_comanda"></th>
+                                    <th id="valor_total_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="text-start">
+                                        R$ <?php echo formatPrice($value1["valortotal"]); ?>
+                                    </th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -60,8 +83,8 @@
                             <select class="form-control" id="select_tipo_produto_comanda">
                                 <option value="tipo" id="option_tipo" disabled selected>Tipo de Produto</option>
                                 <option value="todos">Todos</option>
-                                <?php $counter1=-1;  if( isset($tipos) && ( is_array($tipos) || $tipos instanceof Traversable ) && sizeof($tipos) ) foreach( $tipos as $key1 => $value1 ){ $counter1++; ?>
-                                <option value="<?php echo htmlspecialchars( $value1["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                <?php $counter2=-1;  if( isset($tipos) && ( is_array($tipos) || $tipos instanceof Traversable ) && sizeof($tipos) ) foreach( $tipos as $key2 => $value2 ){ $counter2++; ?>
+                                <option value="<?php echo htmlspecialchars( $value2["idtipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value2["nometipo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -77,7 +100,7 @@
 
                     <!-- Tabela de ingredientes -->
                     <div class="row mt-2">
-                        <div class="table-responsive" >
+                        <div class="table-responsive">
                             <table class="table table-light table-hover" id="tabela_ingredientes_comanda" hidden>
                                 <thead>
                                     <tr>
@@ -89,15 +112,15 @@
                                     </tr>
                                 </thead>
                                 <tbody id="body_tabela_ingredientes_comanda">
-                                    
+
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th colspan="3" class="text-center">Valor</th>
                                         <th colspan="2" class="text-center">
                                             <input type="number" step="0.01" name="valortotal" id="valortotal"
-                                                class="form-control" hidden >
-                                            <input id="valortotal_exibido" class="form-control" disabled >
+                                                class="form-control" hidden>
+                                            <input id="valortotal_exibido" class="form-control" disabled>
                                         </th>
                                     </tr>
 
@@ -135,3 +158,4 @@
 </div>
 </div>
 </div>
+<?php } ?>
