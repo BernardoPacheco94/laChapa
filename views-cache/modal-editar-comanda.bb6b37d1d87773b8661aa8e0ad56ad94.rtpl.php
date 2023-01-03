@@ -1,5 +1,5 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?><?php $counter1=-1;  if( isset($comandas) && ( is_array($comandas) || $comandas instanceof Traversable ) && sizeof($comandas) ) foreach( $comandas as $key1 => $value1 ){ $counter1++; ?>
-<!-- Modal - Lançamento da comanda -->
+<!-- Modal - Lancamento da comanda -->
 <div class="modal fade" id="modal_editar_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -16,7 +16,7 @@
                     <input class="form-control mb-4" type="text" name="nomecliente" id="nomecliente"
                         value="<?php echo htmlspecialchars( $value1["nomecliente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
 
-                    <select class="form-control mb-4" name="idmesacomanda" id="select_mesa_comanda">
+                    <select class="form-control mb-4" name="idmesacomanda" id="select_mesa_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                         <option value="mesa" disabled>Mesa</option>
                         <option value="0">Nenhuma</option>
                         <?php $mesa=$value1["idmesa"]; ?>
@@ -28,7 +28,7 @@
                         <?php } ?>
                     </select>
 
-                    <select class="form-control mb-4" name="idatendente" id="select_atendente_comanda">
+                    <select class="form-control mb-4" name="idatendente" id="select_atendente_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                         <option value="atendente" disabled>Atendente</option>
                         <option value="0">Nenhum</option>
                         <?php $atendente=$value1["idatendente"]; ?>
@@ -39,9 +39,9 @@
                         </option>
                         <?php } ?>
                     </select>
-                    <!-- Exibe produtos já lançados -->
+                    <!-- Exibe produtos já lancados -->
                     <div class="table">
-                        <table class="table table-striped" id="tabela_produtos_lançados_na_comanda" >
+                        <table class="table table-striped" id="tabela_produtos_lancados_na_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" >
                             <thead>
                                 <tr>
                                     <th class="text-center">Produto</th>
@@ -49,7 +49,7 @@
                                     <th class="text-center">Excluir</th>
                                 </tr>
                             </thead>
-                            <tbody id="body_tabela_produtos_lançados_na_comanda">
+                            <tbody id="body_tabela_produtos_lancados_na_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                 <?php $counter2=-1;  if( isset($value1["0"]["produtos"]) && ( is_array($value1["0"]["produtos"]) || $value1["0"]["produtos"] instanceof Traversable ) && sizeof($value1["0"]["produtos"]) ) foreach( $value1["0"]["produtos"] as $key2 => $value2 ){ $counter2++; ?>
                                     <tr id="linha_produto_<?php echo htmlspecialchars( $value2["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                         <td class="text-center" id="td_nome_produto_comanda_<?php echo htmlspecialchars( $value2["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>}">
@@ -80,7 +80,7 @@
                     <!-- Seleciona o produto desejado -->
                     <div class="row">
                         <div class="col-8">
-                            <select class="form-control" id="select_tipo_produto_comanda">
+                            <select class="form-control select_tipo_produto_comanda">
                                 <option value="tipo" id="option_tipo" disabled selected>Tipo de Produto</option>
                                 <option value="todos">Todos</option>
                                 <?php $counter2=-1;  if( isset($tipos) && ( is_array($tipos) || $tipos instanceof Traversable ) && sizeof($tipos) ) foreach( $tipos as $key2 => $value2 ){ $counter2++; ?>
@@ -92,7 +92,7 @@
                     <div class="row mt-3">
                         </button>
                         <div class="col-12">
-                            <select class="form-control" id="select_produto_comanda">
+                            <select class="form-control select_produto_comanda">
                                 <option value="produto" disabled selected>Selecione o tipo de produto</option>
                             </select>
                         </div>

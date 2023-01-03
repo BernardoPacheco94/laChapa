@@ -1,4 +1,4 @@
-<!-- Modal - Lançamento da comanda -->
+<!-- Modal - Lancamento da comanda -->
 <div class="modal fade" id="modal_nova_comanda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -12,10 +12,10 @@
                 </div>
                 <div class="modal-body">
 
-                    <input class="form-control mb-4" type="text" name="nomecliente" id="nomecliente"
+                    <input class="form-control mb-4 nome_cliente_nova_comanda" type="text" name="nomecliente"
                         placeholder="Nome do cliente">
 
-                    <select class="form-control mb-4" name="idmesacomanda" id="select_mesa_comanda">
+                    <select class="form-control mb-4 select_mesa_nova_comanda" name="idmesacomanda">
                         <option value="mesa" disabled selected>Mesa</option>
                         <option value="0">Nenhuma</option>
                         {loop="$todasMesas"}
@@ -24,7 +24,7 @@
                         {/loop}
                     </select>
 
-                    <select class="form-control mb-4" name="idatendente" id="select_atendente_comanda">
+                    <select class="form-control mb-4 select_atendente_nova_comanda" name="idatendente">
                         <option value="atendente" disabled selected>Atendente</option>
                         <option value="0">Nenhum</option>
                         {loop="$atendentes"}
@@ -32,9 +32,9 @@
                         </option>
                         {/loop}
                     </select>
-                    <!-- Exibe produtos já lançados -->
+                    <!-- Exibe produtos já lancados -->
                     <div class="table">
-                        <table class="table table-striped" id="tabela_produtos_lançados_na_comanda" hidden>
+                        <table class="table table-striped" id="tabela_produtos_lancados_na_comanda" hidden>
                             <thead>
                                 <tr>
                                     <th class="text-center">Produto</th>
@@ -42,7 +42,7 @@
                                     <th class="text-center">Excluir</th>
                                 </tr>
                             </thead>
-                            <tbody id="body_tabela_produtos_lançados_na_comanda">
+                            <tbody id="body_tabela_produtos_lancados_na_comanda">
 
                             </tbody>
                             <tfoot>
@@ -57,7 +57,7 @@
                     <!-- Seleciona o produto desejado -->
                     <div class="row">
                         <div class="col-8">
-                            <select class="form-control" id="select_tipo_produto_comanda">
+                            <select class="form-control select_tipo_produto_comanda">
                                 <option value="tipo" id="option_tipo" disabled selected>Tipo de Produto</option>
                                 <option value="todos">Todos</option>
                                 {loop="$tipos"}
@@ -69,7 +69,7 @@
                     <div class="row mt-3">
                         </button>
                         <div class="col-12">
-                            <select class="form-control" id="select_produto_comanda">
+                            <select class="select_produto_comanda form-control">
                                 <option value="produto" disabled selected>Selecione o tipo de produto</option>
                             </select>
                         </div>
