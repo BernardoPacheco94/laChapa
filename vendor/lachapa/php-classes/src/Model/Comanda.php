@@ -28,7 +28,7 @@ class Comanda extends Model
     {
         $sql = new Sql;
 
-        $sql->select('CALL `db_lachapa`.`sp_salva_comanda_produtos`(:idcomandaproduto, :idcomanda, :idproduto, :vlfinalproduto)',[
+        $sql->select('CALL `db_lachapa`.`sp_salva_comanda_produtos`(:idcomandaproduto, :idcomanda, :idproduto, :vlfinalproduto)', [
             ':idcomandaproduto' => $this->getidcomandaproduto(),
             ':idcomanda' => $this->getidcomanda(),
             ':idproduto' => $idproduto,
@@ -42,19 +42,20 @@ class Comanda extends Model
     {
         $sql = new Sql;
 
-        $sql->select('CALL `db_lachapa`.`sp_salva_comanda_mesa`(:idcomandamesa, :idcomanda, :idmesa)',[
-            ':idcomandamesa'=>0,
-            ':idcomanda'=>$this->getidcomanda(),
-            ':idmesa'=>$this->getidmesa()
+        $sql->select('CALL `db_lachapa`.`sp_salva_comanda_mesa`(:idcomandamesa, :idcomanda, :idmesa)', [
+            ':idcomandamesa' => 0,
+            ':idcomanda' => $this->getidcomanda(),
+            ':idmesa' => $this->getidmesa()
         ]);
 
         // return $result[0];
     }
 
-    public function salvaComandaProdutoPorcaoExtra($idproduto, $qtd, $idingrediente){
+    public function salvaComandaProdutoPorcaoExtra($idproduto, $qtd, $idingrediente)
+    {
         $sql = new Sql;
 
-        $sql->select('CALL `db_lachapa`.`sp_salva_porcao_extra`(:idporcaoextra, :idproduto, :idcomanda, :idingrediente, :qtdporcaoextra)',[
+        $sql->select('CALL `db_lachapa`.`sp_salva_porcao_extra`(:idporcaoextra, :idproduto, :idcomanda, :idingrediente, :qtdporcaoextra)', [
             ':idporcaoextra' => 0,
             ':idcomanda' => $this->getidcomanda(),
             ':idproduto' => $idproduto,
@@ -65,11 +66,24 @@ class Comanda extends Model
         // return $result[0];
     }
 
-
-    public function salvaComandaIngredienteAdicional($idproduto, $qtd, $idingrediente){
+    public static function listaPorcaoExtraProdutoComanda($idproduto, $idcomanda)
+    {
         $sql = new Sql;
 
-        $sql->select('CALL `db_lachapa`.`sp_salva_ingrediente_adicional`(:idingredienteadicional, :idproduto, :idcomanda, :idingrediente, :qtdingredienteadicional)',[
+        return $sql->select('SELECT * FROM `porcao-extra` 
+        INNER JOIN ingredientes USING (idingrediente) 
+        WHERE idproduto = :idproduto AND idcomanda = :idcomanda', [
+            ':idproduto' => $idproduto,
+            ':idcomanda' => $idcomanda
+        ]);
+    }
+
+
+    public function salvaComandaIngredienteAdicional($idproduto, $qtd, $idingrediente)
+    {
+        $sql = new Sql;
+
+        $sql->select('CALL `db_lachapa`.`sp_salva_ingrediente_adicional`(:idingredienteadicional, :idproduto, :idcomanda, :idingrediente, :qtdingredienteadicional)', [
             ':idingredienteadicional' => 0,
             ':idproduto' => $idproduto,
             ':idcomanda' => $this->getidcomanda(),
@@ -79,10 +93,24 @@ class Comanda extends Model
 
         // return $result[0];
     }
-    public function salvaComandaProdutoRemoverIngrediente($idproduto, $idingrediente){
+
+    public static function listaIngredienteAdicionalProdutoComanda($idproduto, $idcomanda)
+    {
         $sql = new Sql;
 
-        $sql->select('CALL `db_lachapa`.`sp_salva_removeringrediente`(:idremoveringrediente, :idproduto, :idcomanda, :idingrediente)',[
+        return $sql->select('SELECT * FROM `ingredienteadicional`
+        INNER JOIN ingredientes USING (idingrediente)
+         WHERE idproduto = :idproduto AND idcomanda = :idcomanda', [
+            ':idproduto' => $idproduto,
+            ':idcomanda' => $idcomanda
+        ]);
+    }
+
+    public function salvaComandaProdutoRemoverIngrediente($idproduto, $idingrediente)
+    {
+        $sql = new Sql;
+
+        $sql->select('CALL `db_lachapa`.`sp_salva_removeringrediente`(:idremoveringrediente, :idproduto, :idcomanda, :idingrediente)', [
             ':idremoveringrediente' => 0,
             ':idproduto' => $idproduto,
             ':idcomanda' => $this->getidcomanda(),
@@ -92,16 +120,57 @@ class Comanda extends Model
         // return $result[0];
     }
 
+    public static function listaRemoverIngredienteProdutoComanda($idproduto, $idcomanda)
+    {
+        $sql = new Sql;
+
+        return $sql->select('SELECT * FROM `removeringrediente`
+        INNER JOIN ingredientes USING (idingrediente)
+        WHERE idproduto = :idproduto AND idcomanda = :idcomanda', [
+            ':idproduto' => $idproduto,
+            ':idcomanda' => $idcomanda
+        ]);
+    }
+
     public static function listaProdutosComanda($idcomanda)
     {
         $sql = new Sql;
 
-        return $sql->select('SELECT * FROM comandas
+        $resultado = $sql->select('SELECT * FROM comandas
         INNER JOIN `comanda-produtos` USING (idcomanda)
         INNER JOIN produtos USING (idproduto)
-        WHERE idcomanda = :idcomanda',[
+        WHERE idcomanda = :idcomanda', [
             ':idcomanda' => $idcomanda
         ]);
+
+        for ($i = 0; $i < count($resultado); $i++) {
+            $consultaporcaoextra = Comanda::listaPorcaoExtraProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda']);
+
+            if (count($consultaporcaoextra) > 0) {
+                array_push($resultado[$i], [
+                    'porcaoextra' => Comanda::listaPorcaoExtraProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda'])
+                ]);
+            }
+            
+            $consultaingredienteadicional = Comanda::listaIngredienteAdicionalProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda']);
+
+            if (count($consultaingredienteadicional) > 0) {
+                array_push($resultado[$i], [
+                    'ingredienteadicional' => Comanda::listaIngredienteAdicionalProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda'])
+                ]);
+            }
+
+            $consultaremoveringrediente = Comanda::listaRemoverIngredienteProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda']);
+
+            if (count($consultaremoveringrediente) > 0) {
+                array_push($resultado[$i], [
+                    'removeringrediente' => Comanda::listaRemoverIngredienteProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda'])
+                ]);
+            }
+
+        }
+
+        return $resultado;
     }
 
     public static function listaComandas()
@@ -113,7 +182,7 @@ class Comanda extends Model
         WHERE statuscomanda = "A"
         ');
 
-        for ($i=0; $i < count($resultado); $i++) { 
+        for ($i = 0; $i < count($resultado); $i++) {
             array_push($resultado[$i], [
                 'produtos' => Comanda::listaProdutosComanda($resultado[$i]['idcomanda'])
             ]);
@@ -121,6 +190,4 @@ class Comanda extends Model
 
         return $resultado;
     }
-
-
 }
