@@ -383,7 +383,7 @@ $('#salva_comanda').click(function (e) {
             success: function (response) {
                 console.log(response)
     
-                document.location.reload()
+                // document.location.reload()
             },
             error: function (err) {
                 console.log(err)
