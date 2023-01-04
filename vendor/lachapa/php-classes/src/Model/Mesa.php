@@ -27,18 +27,16 @@ class Mesa extends Model
     {
         $sql = new Sql;
 
-        $result = $sql->select('SELECT * FROM mesas WHERE exibe = :exibe ORDER BY idmesa',[
+        $resultado = $sql->select('SELECT * FROM mesas WHERE exibe = :exibe ORDER BY idmesa',[
             ':exibe' => 1
         ]);
         
         
-        for ($i=0; $i < count($result); $i++) { // Não será necessário usar esse for
-            array_push($result[$i], [
-                'comandas' => Mesa::exibirComandas($result[$i]['idmesa'])
-            ]);
+        for ($i=0; $i < count($resultado); $i++) { // Não será necessário usar esse for
+            $resultado[$i]['comandas'] = Mesa::exibirComandas($resultado[$i]['idmesa']);
         }
 
-        return $result;
+        return $resultado;
     }
 
     public static function mesasOcultas()
@@ -114,11 +112,8 @@ class Mesa extends Model
             ':idmesa' =>$idmesa
         ]);
 
-        for ($i=0; $i < count($result); $i++) {
-            array_push($result[$i],[
-                'produtosComanda' => Comanda::listaProdutosComanda($result[$i]['idcomanda'])
-                ]
-            );           
+        for ($i=0; $i < count($result); $i++) {   
+            $result[$i]['produtoscomanda'] =  Comanda::listaProdutosComanda($result[$i]['idcomanda']);      
         }
 
         return $result;

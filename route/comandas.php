@@ -4,6 +4,7 @@ use LaChapa\Model\Atendente;
 use LaChapa\Model\Comanda;
 use LaChapa\Model\Produto;
 use LaChapa\Model\Ingrediente;
+use LaChapa\Model\Mesa;
 use LaChapa\Page;
 
 $app->config('debug', true);
@@ -63,6 +64,6 @@ $app->post('/salvaprodutoeingredientescomanda/ajax', function () {
 });
 
 $app->get('/listagemteste', function(){
-    var_dump(Comanda::listaComandas());
+    var_dump(Produto::listaProdutos());
     exit;
 });

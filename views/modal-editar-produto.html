@@ -40,14 +40,14 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- <input type="search" class="form-control" placeholder="Pesquisar Ingrediente" name="pesquisar"> -->
-                            {$selecionados=$value.0.ingredientes.ingredientes}   <!-- Captura os ingredientes do produto -->
+                            {$selecionados=$value.ingredientes}   <!-- Captura os ingredientes do produto -->
                             {loop="$ingredientes"}  <!--Faz o loop em todos ingredientes-->
                             {$opcaoIngrediente=$value.nomeingrediente} <!--Salva cada ingrediente em uma variavel a cada laço--> 
                             <div class="form-check form-switch">
                                 <input class="mb-2 form-check-input" type="checkbox" role="switch"
                                 id="{$value.idingrediente}" name="ingredientes[]" value="{$value.idingrediente}" 
                                 {loop="$selecionados"} 
-                                    {if="$value.nome == $opcaoIngrediente"}  
+                                    {if="$value.nomeingrediente == $opcaoIngrediente"}  
                                         checked 
                                     {/if}
                                 {/loop}> <!--Faz o loop nos ingredientes selecionados e compara com todos os ingredientes, marcando os que coincidem-->

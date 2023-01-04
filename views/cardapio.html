@@ -61,8 +61,8 @@
                             <td>{$value.nomeproduto}</td>
                             <td>
                                 <ul class="list-group list-group-horizontal">
-                                    {loop="$value.0.ingredientes.ingredientes"}
-                                    <li class="list-group-item">{$value.nome}</li>
+                                    {loop="$value.ingredientes"}
+                                    <li class="list-group-item">{$value.nomeingrediente}</li>
                                     {/loop}
                                 </ul>
                             </td>

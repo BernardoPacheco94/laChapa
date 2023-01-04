@@ -61,8 +61,8 @@
                             <td><?php echo htmlspecialchars( $value1["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                             <td>
                                 <ul class="list-group list-group-horizontal">
-                                    <?php $counter2=-1;  if( isset($value1["0"]["ingredientes"]["ingredientes"]) && ( is_array($value1["0"]["ingredientes"]["ingredientes"]) || $value1["0"]["ingredientes"]["ingredientes"] instanceof Traversable ) && sizeof($value1["0"]["ingredientes"]["ingredientes"]) ) foreach( $value1["0"]["ingredientes"]["ingredientes"] as $key2 => $value2 ){ $counter2++; ?>
-                                    <li class="list-group-item"><?php echo htmlspecialchars( $value2["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?></li>
+                                    <?php $counter2=-1;  if( isset($value1["ingredientes"]) && ( is_array($value1["ingredientes"]) || $value1["ingredientes"] instanceof Traversable ) && sizeof($value1["ingredientes"]) ) foreach( $value1["ingredientes"] as $key2 => $value2 ){ $counter2++; ?>
+                                    <li class="list-group-item"><?php echo htmlspecialchars( $value2["nomeingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?></li>
                                     <?php } ?>
                                 </ul>
                             </td>

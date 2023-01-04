@@ -28,7 +28,7 @@
                     <!-- Comandas da mesa / accordion -->
                     {$id_mesa=$value.idmesa}
                     <div class="accordion m-2" id="accordion_mesa_{$id_mesa}">
-                        {loop="$value.0.comandas"}
+                        {loop="$value.comandas"}
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="comanda_{$value.idcomanda}">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -50,7 +50,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {loop="$value.0.produtosComanda"}
+                                                {loop="$value.produtoscomanda"}
                                                 <tr>
                                                     <td>{$value.nomeproduto}</td>
                                                     <td>R$ {function="formatPrice($value.vlfinalproduto)"}</td>

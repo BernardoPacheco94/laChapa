@@ -28,7 +28,7 @@
                     <!-- Comandas da mesa / accordion -->
                     <?php $id_mesa=$value1["idmesa"]; ?>
                     <div class="accordion m-2" id="accordion_mesa_<?php echo htmlspecialchars( $id_mesa, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                        <?php $counter2=-1;  if( isset($value1["0"]["comandas"]) && ( is_array($value1["0"]["comandas"]) || $value1["0"]["comandas"] instanceof Traversable ) && sizeof($value1["0"]["comandas"]) ) foreach( $value1["0"]["comandas"] as $key2 => $value2 ){ $counter2++; ?>
+                        <?php $counter2=-1;  if( isset($value1["comandas"]) && ( is_array($value1["comandas"]) || $value1["comandas"] instanceof Traversable ) && sizeof($value1["comandas"]) ) foreach( $value1["comandas"] as $key2 => $value2 ){ $counter2++; ?>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -50,7 +50,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php $counter3=-1;  if( isset($value2["0"]["produtosComanda"]) && ( is_array($value2["0"]["produtosComanda"]) || $value2["0"]["produtosComanda"] instanceof Traversable ) && sizeof($value2["0"]["produtosComanda"]) ) foreach( $value2["0"]["produtosComanda"] as $key3 => $value3 ){ $counter3++; ?>
+                                                <?php $counter3=-1;  if( isset($value2["produtoscomanda"]) && ( is_array($value2["produtoscomanda"]) || $value2["produtoscomanda"] instanceof Traversable ) && sizeof($value2["produtoscomanda"]) ) foreach( $value2["produtoscomanda"] as $key3 => $value3 ){ $counter3++; ?>
                                                 <tr>
                                                     <td><?php echo htmlspecialchars( $value3["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                                                     <td>R$ <?php echo formatPrice($value3["vlfinalproduto"]); ?></td>

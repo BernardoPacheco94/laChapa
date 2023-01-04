@@ -42,6 +42,7 @@ $('.select_produto_comanda').change(function (e) {
         data: { idproduto: id_produto },
         dataType: "json",
         success: function (response) {
+            console.log(response)
 
             $('#body_tabela_ingredientes_comanda').empty()
             //Altera o valor do produto selecionado de acordo com o somatorio dos ingredientes
@@ -50,7 +51,7 @@ $('.select_produto_comanda').change(function (e) {
 
             nomeproduto = response['nomeproduto']
 
-            listaIngredientesProduto = response[0].ingredientes
+            listaIngredientesProduto = response.ingredientes
 
             valor_adicional_total = 0
 
@@ -65,7 +66,7 @@ $('.select_produto_comanda').change(function (e) {
             //Monta a lista de ingredientes do produto
             $.each(listaIngredientesProduto, function (key, value) {
 
-                $('#body_tabela_ingredientes_comanda').prepend('<tr><td>' + value['nome'] + '</td><td id="qtd_ing_' + value["idingrediente"] + '" value="' + value["quantidade"] + '"> ' + value['quantidade'] + 'x </td><td class="text-center"><a id="adc_ing_' + value['idingrediente'] + '" href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a id="rmv_ing_' + value['idingrediente'] + '" href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td id="vlr_adc_' + value['idingrediente'] + '">' + (value['valoradicional']).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td></tr>')
+                $('#body_tabela_ingredientes_comanda').prepend('<tr><td>' + value['nomeingrediente'] + '</td><td id="qtd_ing_' + value["idingrediente"] + '" value="' + value["quantidade"] + '"> ' + value['quantidade'] + 'x </td><td class="text-center"><a id="adc_ing_' + value['idingrediente'] + '" href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a id="rmv_ing_' + value['idingrediente'] + '" href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td id="vlr_adc_' + value['idingrediente'] + '">' + (value['valoradicional']).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td></tr>')
 
 
 
@@ -89,7 +90,7 @@ $('.select_produto_comanda').change(function (e) {
 
                         $('#valortotal_exibido').replaceWith('<input id="valortotal_exibido" class="form-control text-center" disabled value="' + (valor_adicional_total + response['valorproduto']).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '"></input>');
 
-                        ingredienteporcaoextra = value['nome']
+                        ingredienteporcaoextra = value['nomeingrediente']
                         idporcaoextra = value['idingrediente']
                         qtdporcaoextra = value['quantidade']
                     }
@@ -258,7 +259,7 @@ $('#salva_produto_comanda').click(function (e) {
         $.each(listaIngredientesProduto, function (key, value) {
             if (value['quantidade'] > 1) {
                 porcaoextra.push({
-                    'ingredienteporcaoextra': value['nome'],
+                    'ingredienteporcaoextra': value['nomeingrediente'],
                     'idproduto': id_produto,
                     'idingrediente': value['idingrediente'],
                     'qtdporcaoextra': value['quantidade']
@@ -267,7 +268,7 @@ $('#salva_produto_comanda').click(function (e) {
 
             if (value['quantidade'] == 0) {
                 removeringrediente.push({
-                    'removeringrediente': value['nome'],
+                    'removeringrediente': value['nomeingrediente'],
                     'idproduto': id_produto,
                     'idingrediente': value['idingrediente']
                 })

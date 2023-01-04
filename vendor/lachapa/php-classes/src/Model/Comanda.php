@@ -34,8 +34,6 @@ class Comanda extends Model
             ':idproduto' => $idproduto,
             ':vlfinalproduto' => $vlfinalproduto
         ]);
-
-        // return $result[0];
     }
 
     public function salvaComandaMesa()
@@ -47,8 +45,6 @@ class Comanda extends Model
             ':idcomanda' => $this->getidcomanda(),
             ':idmesa' => $this->getidmesa()
         ]);
-
-        // return $result[0];
     }
 
     public function salvaComandaProdutoPorcaoExtra($idproduto, $qtd, $idingrediente)
@@ -62,8 +58,6 @@ class Comanda extends Model
             ':idingrediente' => $idingrediente,
             ':qtdporcaoextra' => $qtd
         ]);
-
-        // return $result[0];
     }
 
     public static function listaPorcaoExtraProdutoComanda($idproduto, $idcomanda)
@@ -90,8 +84,6 @@ class Comanda extends Model
             ':idingrediente' => $idingrediente,
             ':qtdingredienteadicional' => $qtd
         ]);
-
-        // return $result[0];
     }
 
     public static function listaIngredienteAdicionalProdutoComanda($idproduto, $idcomanda)
@@ -116,8 +108,6 @@ class Comanda extends Model
             ':idcomanda' => $this->getidcomanda(),
             ':idingrediente' => $idingrediente
         ]);
-
-        // return $result[0];
     }
 
     public static function listaRemoverIngredienteProdutoComanda($idproduto, $idcomanda)
@@ -143,31 +133,26 @@ class Comanda extends Model
             ':idcomanda' => $idcomanda
         ]);
 
+        
+
         for ($i = 0; $i < count($resultado); $i++) {
             $consultaporcaoextra = Comanda::listaPorcaoExtraProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda']);
 
             if (count($consultaporcaoextra) > 0) {
-                array_push($resultado[$i], [
-                    'porcaoextra' => Comanda::listaPorcaoExtraProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda'])
-                ]);
+                $resultado[$i]['porcaoextra'] = $consultaporcaoextra;
             }
             
             $consultaingredienteadicional = Comanda::listaIngredienteAdicionalProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda']);
-
+            
             if (count($consultaingredienteadicional) > 0) {
-                array_push($resultado[$i], [
-                    'ingredienteadicional' => Comanda::listaIngredienteAdicionalProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda'])
-                ]);
+                $resultado[$i]['ingredienteadicional'] = $consultaingredienteadicional;
             }
 
             $consultaremoveringrediente = Comanda::listaRemoverIngredienteProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda']);
 
             if (count($consultaremoveringrediente) > 0) {
-                array_push($resultado[$i], [
-                    'removeringrediente' => Comanda::listaRemoverIngredienteProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda'])
-                ]);
+                $resultado[$i]['removeringrediente'] = $consultaremoveringrediente;
             }
-
         }
 
         return $resultado;
@@ -183,9 +168,10 @@ class Comanda extends Model
         ');
 
         for ($i = 0; $i < count($resultado); $i++) {
-            array_push($resultado[$i], [
-                'produtos' => Comanda::listaProdutosComanda($resultado[$i]['idcomanda'])
-            ]);
+            // array_push($resultado[$i], [
+            //     'produtos' => Comanda::listaProdutosComanda($resultado[$i]['idcomanda'])
+            // ]);
+            $resultado[$i]['produtos'] = Comanda::listaProdutosComanda($resultado[$i]['idcomanda']);
         }
 
         return $resultado;

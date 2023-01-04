@@ -57,21 +57,19 @@ class Produto extends Model{
         $sql = new Sql;
 
         
-        $result = $sql->select('SELECT * 
+        $resultado = $sql->select('SELECT * 
         FROM produtos a
         INNER JOIN `produto-tipo` b USING (idproduto)
         INNER JOIN `tipos` c USING (idtipo)
         WHERE a.ativo = 1
         ');
 
-        for($i=0; $i<(count($result)); $i++ )
+        for($i=0; $i<(count($resultado)); $i++ )
         {
-            array_push($result[$i], [
-                'ingredientes'=>Produto::listaIngredientesProduto($result[$i]['idproduto'])
-            ]);
+            $resultado[$i]['ingredientes'] = Produto::listaIngredientesProduto($resultado[$i]['idproduto']);
         }
 
-        return $result;
+        return $resultado;
 
     }
 
@@ -87,20 +85,7 @@ class Produto extends Model{
             ':idproduto'=>$idproduto
         ]);
 
-        $ingredientes['ingredientes'] = [];
-        
-
-        for ($i=0; $i < count($resultado) ; $i++) { 
-            array_push($ingredientes['ingredientes'], 
-            [
-                'idingrediente' => $resultado[$i]['idingrediente'] ,
-                'nome' => $resultado[$i]['nomeingrediente'], 
-                'valoradicional' => $resultado[$i]['valoradicional'],
-                'quantidade' => 1 
-            ]);
-        }
-
-        return $ingredientes;
+        return $resultado;
     }
 
     public function get($idproduto)
@@ -122,7 +107,11 @@ class Produto extends Model{
             'idproduto'=>$idproduto
         ]);
 
-        array_push($resultado[0], Produto::listaIngredientesProduto($idproduto));
+        $resultado[0]['ingredientes'] = Produto::listaIngredientesProduto($idproduto);
+
+        for ($i=0; $i < count($resultado[0]['ingredientes']) ; $i++) { 
+            $resultado[0]['ingredientes'][$i]['quantidade'] = 1;
+        }
 
         return json_encode($resultado[0]);
     }
@@ -165,7 +154,7 @@ class Produto extends Model{
     {
         $sql = new Sql;
 
-        $result = $sql->select('SELECT * 
+        $resultado = $sql->select('SELECT * 
         FROM produtos a
         INNER JOIN `produto-tipo` b USING (idproduto)
         INNER JOIN `tipos` c USING (idtipo)
@@ -174,21 +163,19 @@ class Produto extends Model{
             ":PESQUISA"=>"%".$pesquisa."%"
         ]);
 
-        for($i=0; $i<(count($result)); $i++ )
+        for($i=0; $i<(count($resultado)); $i++ )
         {
-            array_push($result[$i], [
-                'ingredientes'=>Produto::listaIngredientesProduto($result[$i]['idproduto'])
-            ]);
+            $resultado[$i]['ingredientes'] = Produto::listaIngredientesProduto($resultado[$i]['idproduto']);
         }
 
-        return $result;
+        return $resultado;
     }
 
     public static function filtraPorTipo($idtipo)
     {
         $sql = new Sql;
 
-        $result = $sql->select('SELECT * 
+        $resultado = $sql->select('SELECT * 
         FROM produtos a
         INNER JOIN `produto-tipo` b USING (idproduto)
         INNER JOIN `tipos` c USING (idtipo)
@@ -197,14 +184,12 @@ class Produto extends Model{
             ":idtipo"=>$idtipo
         ]);
 
-        for($i=0; $i<(count($result)); $i++ )
+        for($i=0; $i<(count($resultado)); $i++ )
         {
-            array_push($result[$i], [
-                'ingredientes'=>Produto::listaIngredientesProduto($result[$i]['idproduto'])
-            ]);
+            $resultado[$i]['ingredientes'] = Produto::listaIngredientesProduto($resultado[$i]['idproduto']);
         }
 
-        return $result;        
+        return $resultado;        
     }
 
 }

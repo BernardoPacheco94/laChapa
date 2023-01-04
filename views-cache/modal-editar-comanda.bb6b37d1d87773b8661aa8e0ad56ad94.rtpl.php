@@ -50,7 +50,7 @@
                                 </tr>
                             </thead>
                             <tbody id="body_tabela_produtos_lancados_na_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                                <?php $counter2=-1;  if( isset($value1["0"]["produtos"]) && ( is_array($value1["0"]["produtos"]) || $value1["0"]["produtos"] instanceof Traversable ) && sizeof($value1["0"]["produtos"]) ) foreach( $value1["0"]["produtos"] as $key2 => $value2 ){ $counter2++; ?>
+                                <?php $counter2=-1;  if( isset($value1["produtos"]) && ( is_array($value1["produtos"]) || $value1["produtos"] instanceof Traversable ) && sizeof($value1["produtos"]) ) foreach( $value1["produtos"] as $key2 => $value2 ){ $counter2++; ?>
                                     <tr id="linha_produto_<?php echo htmlspecialchars( $value2["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                         <td class="text-center" id="td_nome_produto_comanda_<?php echo htmlspecialchars( $value2["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>}">
                                             <?php echo htmlspecialchars( $value2["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
