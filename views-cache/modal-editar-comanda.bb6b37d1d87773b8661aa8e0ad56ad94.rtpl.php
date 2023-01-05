@@ -52,8 +52,13 @@
                             <tbody id="body_tabela_produtos_lancados_na_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                 <?php $counter2=-1;  if( isset($value1["produtos"]) && ( is_array($value1["produtos"]) || $value1["produtos"] instanceof Traversable ) && sizeof($value1["produtos"]) ) foreach( $value1["produtos"] as $key2 => $value2 ){ $counter2++; ?>
                                     <tr id="linha_produto_<?php echo htmlspecialchars( $value2["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                                        <td class="text-center" id="td_nome_produto_comanda_<?php echo htmlspecialchars( $value2["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>}">
+                                        <td class="text-center" id="td_nome_produto_comanda_<?php echo htmlspecialchars( $value2["idproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                             <?php echo htmlspecialchars( $value2["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                                            <ul class="text-start">
+                                                <?php $counter3=-1;  if( isset($value2["porcaoextra"]) && ( is_array($value2["porcaoextra"]) || $value2["porcaoextra"] instanceof Traversable ) && sizeof($value2["porcaoextra"]) ) foreach( $value2["porcaoextra"] as $key3 => $value3 ){ $counter3++; ?>
+                                                    <li><?php echo htmlspecialchars( $value3["nomeingrediente"], ENT_COMPAT, 'UTF-8', FALSE ); ?></li>
+                                                <?php } ?>
+                                            </ul>
                                         </td>
                                         <td class="text-center align-middle">
                                             R$ <?php echo formatPrice($value2["vlfinalproduto"]); ?>

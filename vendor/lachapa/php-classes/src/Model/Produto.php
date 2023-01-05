@@ -99,7 +99,7 @@ class Produto extends Model{
         return $this->setData($resultado[0]);
     }
 
-    public static function getAjax($idproduto)
+    public static function getIngredientesProdutoAjax($idproduto)
     {
         $sql = new Sql;
 

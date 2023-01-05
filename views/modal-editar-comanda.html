@@ -52,8 +52,13 @@
                             <tbody id="body_tabela_produtos_lancados_na_comanda_{$value.idcomanda}">
                                 {loop="$value.produtos"}
                                     <tr id="linha_produto_{$value.idproduto}">
-                                        <td class="text-center" id="td_nome_produto_comanda_{$value.idproduto}}">
+                                        <td class="text-center" id="td_nome_produto_comanda_{$value.idproduto}">
                                             {$value.nomeproduto}
+                                            <ul class="text-start">
+                                                {loop="$value.porcaoextra"}
+                                                    <li>{$value.nomeingrediente}</li>
+                                                {/loop}
+                                            </ul>
                                         </td>
                                         <td class="text-center align-middle">
                                             R$ {function="formatPrice($value.vlfinalproduto)"}

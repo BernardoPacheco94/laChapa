@@ -10,11 +10,11 @@ use LaChapa\Page;
 $app->config('debug', true);
 
 
-$app->get('/comanda/ajax', function () {
+$app->get('/ingredientesproduto/ajax', function () {
     $idproduto = $_GET['idproduto'];
 
     $produto = new Produto;
-    echo ($produto->getAjax($idproduto));
+    echo ($produto->getIngredientesProdutoAjax($idproduto));
 });
 
 $app->get('/ingredientes/ajax', function () {
@@ -65,6 +65,6 @@ $app->post('/salvaprodutoeingredientescomanda/ajax', function () {
 });
 
 $app->get('/listagemteste', function(){
-    var_dump(Produto::listaProdutos());
+    var_dump(Mesa::mesasExibidas());
     exit;
 });
