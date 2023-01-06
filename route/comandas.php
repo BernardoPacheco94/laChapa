@@ -68,3 +68,8 @@ $app->get('/listagemteste', function(){
     var_dump(Mesa::mesasExibidas());
     exit;
 });
+
+$app->get('/listagemtesteajax', function(){
+    echo json_encode(Comanda::listaComandas());
+    exit;
+});

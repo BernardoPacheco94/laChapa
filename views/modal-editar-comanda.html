@@ -51,14 +51,58 @@
                             </thead>
                             <tbody id="body_tabela_produtos_lancados_na_comanda_{$value.idcomanda}">
                                 {loop="$value.produtos"}
-                                    <tr id="linha_produto_{$value.idproduto}">
-                                        <td class="text-center" id="td_nome_produto_comanda_{$value.idproduto}">
+                                    <tr id="linha_produto_{$counter}">
+                                        <td class="text-center" id="td_nome_produto_comanda_{$counter}">
                                             {$value.nomeproduto}
-                                            <ul class="text-start">
-                                                {loop="$value.porcaoextra"}
-                                                    <li>{$value.nomeingrediente}</li>
-                                                {/loop}
-                                            </ul>
+                                            
+                                            {$i=0}
+                                            <!-- Ingredientes a serem removidos -->
+                                            {loop="$value.removeringrediente"}
+                                                {$i=$counter+1}
+                                            {/loop}
+                                            {if="$i>0"}
+                                                <ul class="text-start fw-normal">
+                                                    Sem:
+                                                    {loop="$value.removeringrediente"}
+                                                        <li>
+                                                            {$value.nomeingrediente}
+                                                        </li>
+                                                    {/loop}
+                                                </ul>
+                                                {$i=0}
+                                            {/if}
+                                            
+                                            <!-- Porçoes extra -->
+                                            {loop="$value.porcaoextra"}
+                                                {$i=$counter+1}
+                                            {/loop}
+                                            {if="$i>0"}
+                                                <ul class="text-start fw-normal">
+                                                    Porção extra:
+                                                    {loop="$value.porcaoextra"}
+                                                        <li>
+                                                            {$value.nomeingrediente}
+                                                        </li>
+                                                    {/loop}
+                                                </ul>
+                                                {$i=0}
+                                            {/if}
+
+                                            <!-- Ingredientes adicionais -->
+                                            {loop="$value.ingredienteadicional"}
+                                                {$i=$counter+1}
+                                            {/loop}
+                                            {if="$i>0"}
+                                                <ul class="text-start fw-normal">
+                                                    Adicional:
+                                                    {loop="$value.ingredienteadicional"}
+                                                        <li>
+                                                            {$value.nomeingrediente}
+                                                        </li>
+                                                    {/loop}
+                                                </ul>
+                                                {$i=0}
+                                            {/if}
                                         </td>
                                         <td class="text-center align-middle">
                                             R$ {function="formatPrice($value.vlfinalproduto)"}
@@ -116,7 +160,7 @@
                                         <th>Valor adc</th>
                                     </tr>
                                 </thead>
-                                <tbody id="body_tabela_ingredientes_comanda">
+                                <tbody id="body_tabela_ingredientes_produto">
 
                                 </tbody>
                                 <tfoot>

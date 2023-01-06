@@ -19,9 +19,6 @@ $app->get('/cardapio', function(){
     } else {
         $listaProdutos = $produto->listaProdutos();
     }
-
-
-
     
     $page->setTpl('cardapio',[
         'tipos'=>Tipo::listaTipos(),
@@ -29,8 +26,6 @@ $app->get('/cardapio', function(){
         'produtos'=> $listaProdutos
     ]);
 });
-    
-
 
 $app->get('/cardapio/ajax/tipo', function(){
 

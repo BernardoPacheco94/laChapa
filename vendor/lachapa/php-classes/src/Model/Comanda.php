@@ -168,9 +168,6 @@ class Comanda extends Model
         ');
 
         for ($i = 0; $i < count($resultado); $i++) {
-            // array_push($resultado[$i], [
-            //     'produtos' => Comanda::listaProdutosComanda($resultado[$i]['idcomanda'])
-            // ]);
             $resultado[$i]['produtos'] = Comanda::listaProdutosComanda($resultado[$i]['idcomanda']);
         }
 

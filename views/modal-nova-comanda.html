@@ -88,7 +88,7 @@
                                         <th>Valor adc</th>
                                     </tr>
                                 </thead>
-                                <tbody id="body_tabela_ingredientes_comanda">
+                                <tbody id="body_tabela_ingredientes_produto">
                                     
                                 </tbody>
                                 <tfoot>

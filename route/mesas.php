@@ -10,6 +10,8 @@ use LaChapa\Model\Tipo;
 
 //Rota para a pagina principal - deck mesas
 $app->get('/', function(){
+    // var_dump(Comanda::listaComandas());
+    // exit;
     $page = new Page();
 
     $page->setTpl('index',[
