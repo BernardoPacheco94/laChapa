@@ -137,7 +137,7 @@ $('.select_produto_comanda').change(function (e) {
                     success: function (responseIngredientes) {//retorna todos os ingredientes
 
                         //Cria um select com os ingredientes cadastrados
-                        $('#body_tabela_ingredientes_produto').append('<tr id="linha_select_ingredientes"><th colspan="4" class="text-center"><select class="form-control" name="" id="select_adc_novo_ingrediente"></select> </th><th><button type="button" name="" id="btn_adc_novo_ingrediente_comanda" class="btn btn-dark"><i class="fa-solid fa-save"></i></button></th></tr>')
+                        $('#body_tabela_ingredientes_produto').append('<tr id="linha_select_ingredientes"><th colspan="4" class="text-center"><select class="form-control" name="" id="select_adc_novo_ingrediente"></select> </th><th><button type="button" name="" id="btn_salva_novo_ingrediente_comanda" class="btn btn-dark"><i class="fa-solid fa-save"></i></button></th></tr>')
 
 
                         $('#select_adc_novo_ingrediente').empty();
@@ -156,7 +156,7 @@ $('.select_produto_comanda').change(function (e) {
 
 
                         //Ao selecionar o ingrediente adicional, incluir na lista de ingredientes e adicionar o valor
-                        $('#btn_adc_novo_ingrediente_comanda').click(function (e) {
+                        $('#btn_salva_novo_ingrediente_comanda').click(function (e) {
                             e.preventDefault()
                             id_novo_ingrediente_comanda = $('#select_adc_novo_ingrediente').val()
 
@@ -418,4 +418,4 @@ function salvaComanda(Array = produtos) {
 
 salvaProdutoComanda()
 
-salvaComanda(produtos)
+salvaComanda(produtos) 

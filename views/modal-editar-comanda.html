@@ -1,9 +1,10 @@
 {loop="$comandas"}
 <!-- Modal - Lancamento da comanda -->
-<div class="modal fade" id="modal_editar_comanda_{$value.idcomanda}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_editar_comanda_{$value.idcomanda}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="form_principal" action="/novaComanda" method="post">
+            <form id="form_principal" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Comanda {$value.idcomanda}</h5>
                     <button type="button" class="btn btn-dark mx-auto w-50">
@@ -21,27 +22,26 @@
                         <option value="0">Nenhuma</option>
                         {$mesa=$value.idmesa}
                         {loop="$todasMesas"}
-                        <option name="{$value.idmesa}" value="{$value.idmesa}"
-                        {if="$value.idmesa == $mesa"} selected {/if}
-                        >{$value.idmesa}
+                        <option name="{$value.idmesa}" value="{$value.idmesa}" {if="$value.idmesa == $mesa"} selected
+                            {/if}>{$value.idmesa}
                         </option>
                         {/loop}
                     </select>
 
-                    <select class="form-control mb-4" name="idatendente" id="select_atendente_comanda_{$value.idcomanda}">
+                    <select class="form-control mb-4" name="idatendente"
+                        id="select_atendente_comanda_{$value.idcomanda}">
                         <option value="atendente" disabled>Atendente</option>
                         <option value="0">Nenhum</option>
                         {$atendente=$value.idatendente}
                         {loop="$atendentes"}
                         <option name="{$value.idatendente}" value="{$value.idatendente}"
-                        {if="$atendente == $value.idatendente"} selected {/if}
-                        >{$value.nomeatendente}
+                            {if="$atendente == $value.idatendente"} selected {/if}>{$value.nomeatendente}
                         </option>
                         {/loop}
                     </select>
                     <!-- Exibe produtos já lancados -->
                     <div class="table">
-                        <table class="table table-striped" id="tabela_produtos_lancados_na_comanda_{$value.idcomanda}" >
+                        <table class="table table-striped" id="tabela_produtos_lancados_na_comanda_{$value.idcomanda}">
                             <thead>
                                 <tr>
                                     <th class="text-center">Produto</th>
@@ -51,68 +51,68 @@
                             </thead>
                             <tbody id="body_tabela_produtos_lancados_na_comanda_{$value.idcomanda}">
                                 {loop="$value.produtos"}
-                                    <tr id="linha_produto_{$counter}">
-                                        <td class="text-center" id="td_nome_produto_comanda_{$counter}">
-                                            {$value.nomeproduto}
-                                            
-                                            {$i=0}
-                                            <!-- Ingredientes a serem removidos -->
-                                            {loop="$value.removeringrediente"}
-                                                {$i=$counter+1}
-                                            {/loop}
-                                            {if="$i>0"}
-                                                <ul class="text-start fw-normal">
-                                                    Sem:
-                                                    {loop="$value.removeringrediente"}
-                                                        <li>
-                                                            {$value.nomeingrediente}
-                                                        </li>
-                                                    {/loop}
-                                                </ul>
-                                                {$i=0}
-                                            {/if}
-                                            
-                                            <!-- Porçoes extra -->
-                                            {loop="$value.porcaoextra"}
-                                                {$i=$counter+1}
-                                            {/loop}
-                                            {if="$i>0"}
-                                                <ul class="text-start fw-normal">
-                                                    Porção extra:
-                                                    {loop="$value.porcaoextra"}
-                                                        <li>
-                                                            {$value.nomeingrediente}
-                                                        </li>
-                                                    {/loop}
-                                                </ul>
-                                                {$i=0}
-                                            {/if}
+                                <tr id="linha_produto_{$counter}">
+                                    <td class="text-center" id="td_nome_produto_comanda_{$counter}">
+                                        {$value.nomeproduto}
 
-                                            <!-- Ingredientes adicionais -->
-                                            {loop="$value.ingredienteadicional"}
-                                                {$i=$counter+1}
+                                        {$i=0}
+                                        <!-- Ingredientes a serem removidos -->
+                                        {loop="$value.removeringrediente"}
+                                        {$i=$counter+1}
+                                        {/loop}
+                                        {if="$i>0"}
+                                        <ul class="text-start fw-normal">
+                                            Sem:
+                                            {loop="$value.removeringrediente"}
+                                            <li>
+                                                {$value.nomeingrediente}
+                                            </li>
                                             {/loop}
-                                            {if="$i>0"}
-                                                <ul class="text-start fw-normal">
-                                                    Adicional:
-                                                    {loop="$value.ingredienteadicional"}
-                                                        <li>
-                                                            {$value.nomeingrediente}
-                                                        </li>
-                                                    {/loop}
-                                                </ul>
-                                                {$i=0}
-                                            {/if}
-                                        </td>
-                                        <td class="text-center align-middle">
-                                            R$ {function="formatPrice($value.vlfinalproduto)"}
-                                        </td>
-                                        <td class="text-center align-middle">
-                                            <button id="btn_remove_produto_comanda_{$value.idcomanda}"
+                                        </ul>
+                                        {$i=0}
+                                        {/if}
+
+                                        <!-- Porçoes extra -->
+                                        {loop="$value.porcaoextra"}
+                                        {$i=$counter+1}
+                                        {/loop}
+                                        {if="$i>0"}
+                                        <ul class="text-start fw-normal">
+                                            Porção extra:
+                                            {loop="$value.porcaoextra"}
+                                            <li>
+                                                {$value.nomeingrediente} - {$value.qtdporcaoextra}x
+                                            </li>
+                                            {/loop}
+                                        </ul>
+                                        {$i=0}
+                                        {/if}
+
+                                        <!-- Ingredientes adicionais -->
+                                        {loop="$value.ingredienteadicional"}
+                                        {$i=$counter+1}
+                                        {/loop}
+                                        {if="$i>0"}
+                                        <ul class="text-start fw-normal">
+                                            Adicional:
+                                            {loop="$value.ingredienteadicional"}
+                                            <li>
+                                                {$value.nomeingrediente} - {$value.qtdingredienteadicional}x
+                                            </li>
+                                            {/loop}
+                                        </ul>
+                                        {$i=0}
+                                        {/if}
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        R$ {function="formatPrice($value.vlfinalproduto)"}
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <button id="btn_remove_produto_comanda_{$value.idcomanda}"
                                             class="btn fa-solid fa-trash-can text-danger ">
-                                            </button>
-                                        </td>
-                                    </tr>                                    
+                                        </button>
+                                    </td>
+                                </tr>
                                 {/loop}
                             </tbody>
                             <tfoot>
@@ -129,7 +129,7 @@
                     <!-- Seleciona o produto desejado -->
                     <div class="row">
                         <div class="col-8">
-                            <select class="form-control select_tipo_produto_comanda">
+                            <select class="form-control" id="select_tipo_produto_comanda_{$value.idcomanda}">
                                 <option value="tipo" id="option_tipo" disabled selected>Tipo de Produto</option>
                                 <option value="todos">Todos</option>
                                 {loop="$tipos"}
@@ -141,7 +141,7 @@
                     <div class="row mt-3">
                         </button>
                         <div class="col-12">
-                            <select class="form-control select_produto_comanda">
+                            <select class="form-control" id="select_produto_comanda_{$value.idcomanda}">
                                 <option value="produto" disabled selected>Selecione o tipo de produto</option>
                             </select>
                         </div>
@@ -150,7 +150,7 @@
                     <!-- Tabela de ingredientes -->
                     <div class="row mt-2">
                         <div class="table-responsive">
-                            <table class="table table-light table-hover" id="tabela_ingredientes_comanda" hidden>
+                            <table class="table table-light table-hover" id="tabela_ingredientes_comanda_{$value.idcomanda}" hidden>
                                 <thead>
                                     <tr>
                                         <th>Ingrediente</th>
@@ -160,7 +160,7 @@
                                         <th>Valor adc</th>
                                     </tr>
                                 </thead>
-                                <tbody id="body_tabela_ingredientes_produto">
+                                <tbody id="body_tabela_ingredientes_produto_comanda_{$value.idcomanda}">
 
                                 </tbody>
                                 <tfoot>
@@ -169,7 +169,7 @@
                                         <th colspan="2" class="text-center">
                                             <input type="number" step="0.01" name="valortotal" id="valortotal"
                                                 class="form-control" hidden>
-                                            <input id="valortotal_exibido" class="form-control" disabled>
+                                            <input id="valortotal_exibido_tabela_ingredientes_comanda_{$value.idcomanda}" class="form-control" disabled>
                                         </th>
                                     </tr>
 
@@ -186,8 +186,8 @@
                     </button>
                 </div>
                 <div class="modal-footer">
-                    <button class="w-100 btn btn-dark" data-bs-dismiss="modal" id="salva_comanda">
-                        <i class="fa-solid fa-save"></i> Salvar
+                    <button class="w-100 btn btn-dark" data-bs-dismiss="modal" id="editar_comanda_{$value.idcomanda}">
+                        <i class="fa-solid fa-save"></i> Alterar Comanda {$value.idcomanda}
                     </button>
 
                     <button type="button" class="w-100 btn btn-warning" data-bs-dismiss="modal">

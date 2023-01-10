@@ -69,7 +69,7 @@ $app->get('/listagemteste', function(){
     exit;
 });
 
-$app->get('/listagemtesteajax', function(){
+$app->get('/listacomandasajax', function(){
     echo json_encode(Comanda::listaComandas());
     exit;
 });
