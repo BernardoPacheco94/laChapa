@@ -13,7 +13,7 @@
         <script src="/res/script/jQuery/jquery-develop.js"></script>
         
         <!-- Script interno -->
-        <!-- <script src="/res/script/script.js"></script> -->
+        <script src="/res/script/script.js"></script>
         <script src="/res/script/edit.js"></script>
 
 </body>

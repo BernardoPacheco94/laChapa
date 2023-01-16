@@ -1,5 +1,5 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?><main>
-    
+
     <section>
         <?php require $this->checkTemplate("side-menu");?>   
                   
