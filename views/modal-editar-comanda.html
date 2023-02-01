@@ -14,9 +14,11 @@
                 </div>
                 <div class="modal-body">
 
+                    <label for="nomecliente">Nome Cliente:</label>
                     <input class="form-control mb-4" type="text" name="nomecliente" id="nomecliente"
                         value="{$value.nomecliente}">
 
+                    <label for="idmesacomanda">Mesa:</label>
                     <select class="form-control mb-4" name="idmesacomanda" id="select_mesa_comanda_{$value.idcomanda}">
                         <option value="mesa" disabled>Mesa</option>
                         <option value="0">Nenhuma</option>
@@ -28,6 +30,7 @@
                         {/loop}
                     </select>
 
+                    <label for="idatendente">Atendente:</label>
                     <select class="form-control mb-4" name="idatendente"
                         id="select_atendente_comanda_{$value.idcomanda}">
                         <option value="atendente" disabled>Atendente</option>

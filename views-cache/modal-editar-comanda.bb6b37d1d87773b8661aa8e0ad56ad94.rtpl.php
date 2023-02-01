@@ -14,9 +14,11 @@
                 </div>
                 <div class="modal-body">
 
+                    <label for="nomecliente">Nome Cliente:</label>
                     <input class="form-control mb-4" type="text" name="nomecliente" id="nomecliente"
                         value="<?php echo htmlspecialchars( $value1["nomecliente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
 
+                    <label for="idmesacomanda">Mesa:</label>
                     <select class="form-control mb-4" name="idmesacomanda" id="select_mesa_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                         <option value="mesa" disabled>Mesa</option>
                         <option value="0">Nenhuma</option>
@@ -28,6 +30,7 @@
                         <?php } ?>
                     </select>
 
+                    <label for="idatendente">Atendente:</label>
                     <select class="form-control mb-4" name="idatendente"
                         id="select_atendente_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                         <option value="atendente" disabled>Atendente</option>

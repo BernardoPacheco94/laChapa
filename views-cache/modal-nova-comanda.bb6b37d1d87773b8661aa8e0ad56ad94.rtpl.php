@@ -15,7 +15,7 @@
                     <input class="form-control mb-4 nome_cliente_nova_comanda" type="text" name="nomecliente"
                         placeholder="Nome do cliente">
 
-                    <select class="form-control mb-4 select_mesa_nova_comanda" name="idmesacomanda">
+                    <select class="form-control mb-4 select_mesa_nova_comanda" name="idmesacomanda" required>
                         <option value="mesa" disabled selected>Mesa</option>
                         <option value="0">Nenhuma</option>
                         <?php $counter1=-1;  if( isset($todasMesas) && ( is_array($todasMesas) || $todasMesas instanceof Traversable ) && sizeof($todasMesas) ) foreach( $todasMesas as $key1 => $value1 ){ $counter1++; ?>
