@@ -15,7 +15,7 @@
                     <input class="form-control mb-4 nome_cliente_nova_comanda" type="text" name="nomecliente"
                         placeholder="Nome do cliente">
 
-                    <select class="form-control mb-4 select_mesa_nova_comanda" name="idmesacomanda">
+                    <select class="form-control mb-4 select_mesa_nova_comanda" name="idmesacomanda" required>
                         <option value="mesa" disabled selected>Mesa</option>
                         <option value="0">Nenhuma</option>
                         {loop="$todasMesas"}

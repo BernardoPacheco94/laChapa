@@ -6,4 +6,4 @@ comandas/cartão
 
 forma de pagamento na comanda, apos finalizar
 
-Finalizar Comanda
+Finalizar Comanda na dashboard
