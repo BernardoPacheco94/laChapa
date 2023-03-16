@@ -29,7 +29,7 @@ CREATE TABLE `atendentes` (
   PRIMARY KEY (`idatendente`),
   UNIQUE KEY `idatendente_UNIQUE` (`idatendente`),
   UNIQUE KEY `nomeatendente_UNIQUE` (`nomeatendente`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -55,6 +55,22 @@ CREATE TABLE `caixa` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `cartoes`
+--
+
+DROP TABLE IF EXISTS `cartoes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cartoes` (
+  `idcartao` int(11) NOT NULL AUTO_INCREMENT,
+  `ativo` int(11) NOT NULL DEFAULT 1,
+  `numero` varchar(4) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`idcartao`),
+  UNIQUE KEY `idcartao_UNIQUE` (`idcartao`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `comanda-mesa`
 --
 
@@ -70,7 +86,7 @@ CREATE TABLE `comanda-mesa` (
   KEY `FK_mesa_comanda` (`idcomanda`),
   CONSTRAINT `idcomandamesa` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idmesacomanda` FOREIGN KEY (`idmesa`) REFERENCES `mesas` (`idmesa`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +106,7 @@ CREATE TABLE `comanda-produtos` (
   KEY `FK_comanda_produto` (`idproduto`),
   CONSTRAINT `idcomandaproduto` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idprodutocomanda` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,11 +123,15 @@ CREATE TABLE `comandas` (
   `datacomanda` timestamp NOT NULL DEFAULT current_timestamp(),
   `nomecliente` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `idatendente` int(11) DEFAULT NULL,
+  `idcartao` int(11) DEFAULT NULL,
+  `observacao` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`idcomanda`),
   UNIQUE KEY `idcomanda_UNIQUE` (`idcomanda`),
-  KEY `atendentecomanda_idx` (`idatendente`),
-  CONSTRAINT `atendentecomanda` FOREIGN KEY (`idatendente`) REFERENCES `atendentes` (`idatendente`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `idcomandaatendente_idx` (`idatendente`),
+  KEY `idcomandacartao_idx` (`idcartao`),
+  CONSTRAINT `idcomandaatendente` FOREIGN KEY (`idatendente`) REFERENCES `atendentes` (`idatendente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `idcomandacartao` FOREIGN KEY (`idcartao`) REFERENCES `cartoes` (`idcartao`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=206 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +174,7 @@ CREATE TABLE `ingredienteadicional` (
   CONSTRAINT `idcomandaingredienteadicional` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idingredienteadc` FOREIGN KEY (`idingrediente`) REFERENCES `ingredientes` (`idingrediente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idprodutoingredienteadicional` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,7 +230,7 @@ CREATE TABLE `porcao-extra` (
   CONSTRAINT `idcomandaporcaoextra` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idingredienteporcaoextra` FOREIGN KEY (`idingrediente`) REFERENCES `ingredientes` (`idingrediente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idprodutoporcaoextra` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,7 +249,7 @@ CREATE TABLE `produto-ingredientes` (
   KEY `FK_ingrediente_produto` (`idingrediente`),
   CONSTRAINT `idingredienteproduto` FOREIGN KEY (`idingrediente`) REFERENCES `ingredientes` (`idingrediente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idprodutoingrediente` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -286,7 +306,7 @@ CREATE TABLE `removeringrediente` (
   KEY `idingredienteremovido_idx` (`idingrediente`),
   CONSTRAINT `idcomandaremoveringrediente` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idprodutoremoveringrediente` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -666,4 +686,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-19 18:31:25
+-- Dump completed on 2023-03-16  0:02:24
