@@ -2,9 +2,6 @@
 
 require_once "vendor/autoload.php";
 
-use LaChapa\DB\Sql;
-use LaChapa\Page;
-use LaChapa\Model\Mesa;
 
 $app = new \Slim\Slim();
 
@@ -18,6 +15,7 @@ require_once "route".DIRECTORY_SEPARATOR."caixa.php";
 require_once "route".DIRECTORY_SEPARATOR."ingredientes.php";
 require_once "route".DIRECTORY_SEPARATOR."atendentes.php";
 require_once "route".DIRECTORY_SEPARATOR."comandas.php";
+require_once "route".DIRECTORY_SEPARATOR."cartoes.php";
 
 
 $app->run();

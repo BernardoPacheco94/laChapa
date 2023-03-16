@@ -56,6 +56,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/atendentes">Atendentes</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/cartoes">Cadastro Comandas</a>
+                        </li>
                     </ul>
                     <!-- <div class="">
                         <ul class="navbar-nav mr-3">
