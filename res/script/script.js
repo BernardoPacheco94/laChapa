@@ -360,16 +360,18 @@ function criaTabelaProdutosComanda(Array = produtos) {
         //Evento para remover produto da tabela
         $('#btn_remove_produto_comanda_' + index).click(function (e) {
             e.preventDefault();
-            // Remover item do array produto[] e atualizar o valor e afins
-            produtos.splice(index, 1)
-            $('#linha_produto_' + index).remove();
+            if (confirm('Deseja realmente excluir o produto ' + (produtos[index].nomeproduto))) {
+                // Remover item do array produto[] e atualizar o valor e afins
+                produtos.splice(index, 1)
+                $('#linha_produto_' + index).remove();
 
-            criaTabelaProdutosComanda(produtos)
+                criaTabelaProdutosComanda(produtos)
 
-            exibeValorTotalComanda(valortotalcomanda)
-            
-            if (produtos.length == 0) {
-                $('#tabela_produtos_lancados_na_comanda').attr('hidden', true)
+                exibeValorTotalComanda(valortotalcomanda)
+
+                if (produtos.length == 0) {
+                    $('#tabela_produtos_lancados_na_comanda').attr('hidden', true)
+                }
             }
         });
 
