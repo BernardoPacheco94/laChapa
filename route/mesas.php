@@ -1,6 +1,7 @@
 <?php
 
 use LaChapa\Model\Atendente;
+use LaChapa\Model\Cartao;
 use LaChapa\Model\Comanda;
 use LaChapa\Model\Ingrediente;
 use LaChapa\Page;
@@ -10,8 +11,6 @@ use LaChapa\Model\Tipo;
 
 //Rota para a pagina principal - deck mesas
 $app->get('/', function(){
-    // var_dump(Comanda::listaComandas());
-    // exit;
     $page = new Page();
 
     $page->setTpl('index',[
@@ -21,7 +20,8 @@ $app->get('/', function(){
         'atendentes' => Atendente::listaAtendentes(),
         'tipos'=>Tipo::listaTipos(),
         'produtos'=> Produto::listaProdutos(),
-        'comandas' => Comanda::listaComandas()
+        'comandas' => Comanda::listaComandas(),
+        'cartoes' => Cartao::listaCartoes()
     ]);
 });
 

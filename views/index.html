@@ -11,7 +11,7 @@
         <div id="div-btn-adc-mesa" class="col-3">
             <button type="button" class="btn btn-dark" id="btn-adc-comanda" data-bs-toggle="modal"
                 data-bs-target="#modal_nova_comanda">
-                Nova Comanda
+                Novo Pedido
             </button>
         </div>
     </div>

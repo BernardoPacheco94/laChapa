@@ -34,7 +34,7 @@ $app->post('/salvaprodutoeingredientescomanda/ajax', function () {
         $comanda->salvaComandaMesa();
         for ($i = 0; $i < count($_POST['produtos']); $i++) {
 
-            $comanda->salvaComandaProdutos($_POST['produtos'][$i]['idproduto'], $_POST['produtos'][$i]['vlfinalproduto']);
+            $comanda->salvaComandaProdutos($_POST['produtos'][$i]['idproduto'], $_POST['produtos'][$i]['vlfinalproduto'], $_POST['produtos'][$i]['observacao']);
 
 
             if (array_key_exists('porcaoextra', $_POST['produtos'][$i])) {

@@ -32,7 +32,7 @@ $('.select_tipo_produto_comanda').change(function (e) {
 
 //Carregamento dos ingredientes do produto na comanda
 $('.select_produto_comanda').change(function (e) {
-    e.preventDefault()
+    e.preventDefault() 
 
     id_produto = $('.select_produto_comanda').val()
 
@@ -67,6 +67,7 @@ $('.select_produto_comanda').change(function (e) {
             $.each(listaIngredientesProduto, function (key, value) {
 
                 $('#body_tabela_ingredientes_produto').prepend('<tr><td>' + value['nomeingrediente'] + '</td><td id="qtd_ing_' + value["idingrediente"] + '" value="' + value["quantidade"] + '"> ' + value['quantidade'] + 'x </td><td class="text-center"><a id="adc_ing_' + value['idingrediente'] + '" href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a id="rmv_ing_' + value['idingrediente'] + '" href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td id="vlr_adc_' + value['idingrediente'] + '">' + (value['valoradicional']).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td></tr>')
+
 
 
 
@@ -242,6 +243,7 @@ $('.select_produto_comanda').change(function (e) {
     });
 
     $('#tabela_ingredientes_comanda').attr('hidden', false)
+    $('#txt_observacao').attr('hidden', false);
 });
 
 //insercão do produto na tabela de produtos da comanda
@@ -288,6 +290,7 @@ function salvaProdutoComanda() {
                 porcaoextra: porcaoextra,
                 ingredienteadicional: ingredienteadicional,
                 removeringrediente: removeringrediente,
+                observacao: $('#txt_observacao').val(),
                 vlfinalproduto: parseFloat($('#valortotal').val())
             })
 
@@ -305,6 +308,9 @@ function criaTabelaProdutosComanda(Array = produtos) {
     $('#body_tabela_produtos_lancados_na_comanda').empty();
 
     $('#tabela_ingredientes_comanda').attr('hidden', true)
+
+    console.log('Produtos:')
+    console.log(produtos)
 
     valortotalcomanda = 0
 
@@ -345,6 +351,12 @@ function criaTabelaProdutosComanda(Array = produtos) {
             }
         }
 
+        //Observações do produto
+        if (produtos[index].observacao != "") {
+            $('#td_nome_comanda_produto_' + index).append('<ul class="text-start fw-normal" id="observacao_produto_' + index + '">OBS: </ul>')
+            $('#observacao_produto_' + index).append('<li>' + produtos[index].observacao + '</li>')
+        }
+
         //Evento para remover produto da tabela
         $('#btn_remove_produto_comanda_' + index).click(function (e) {
             e.preventDefault();
@@ -362,6 +374,9 @@ function criaTabelaProdutosComanda(Array = produtos) {
 
 
     $('#tabela_produtos_lancados_na_comanda').attr('hidden', false);
+    
+    $('#txt_observacao').attr('hidden', true);
+    $('#txt_observacao').val('')
 
     $('.select_produto_comanda').prop('selectedIndex', 0)
 
@@ -395,6 +410,7 @@ function salvaComanda(Array = produtos) {
                     nomecliente: $('.nome_cliente_nova_comanda').val(),
                     idatendente: $('.select_atendente_nova_comanda').val(),
                     idmesa: $('.select_mesa_nova_comanda').val(),
+                    observacao: $('.text_observacao').val(),
                     produtos: produtos
                 },
                 dataType: "json",

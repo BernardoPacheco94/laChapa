@@ -7,7 +7,7 @@ $app->get('/cartoes', function(){
     $page = new Page();
 
     $page->setTpl('cartoes',[
-        'listacartoes' => Cartao::exibeCartoes()
+        'listacartoes' => Cartao::listaCartoes()
     ]);
 });
 

@@ -22,7 +22,7 @@ class Cartao extends Model
         }
     }
 
-    public static function exibeCartoes()
+    public static function listaCartoes()
     {
         $sql = new Sql;
 

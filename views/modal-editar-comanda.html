@@ -13,6 +13,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <label for="idcartaocomanda">Comanda</label>
+                    <select class="form-control mb-4 select_cartao_editar_comanda" name="idcartaocomanda" required>
+                        <option value="cartao" disabled selected>Comanda</option>
+                        <option value="0">Nenhuma</option>
+                        {loop="$cartoes"}
+                        <option name="{$value.numero}" value="{$value.numero}">{$value.numero}
+                        </option>
+                        {/loop}
+                    </select>
 
                     <label for="nomecliente">Nome Cliente:</label>
                     <input class="form-control mb-4" type="text" name="nomecliente" id="nomecliente"

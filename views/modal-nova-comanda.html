@@ -4,13 +4,22 @@
         <div class="modal-content">
             <form id="form_principal" action="/novaComanda" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Nova Comanda</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Novo Pedido</h5>
                     <button type="button" class="btn btn-dark mx-auto w-50">
                         <i class="fa-solid fa-2x fa-print"></i>
                     </button>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+
+                    <select class="form-control mb-4 select_cartao_nova_comanda" name="idcartaocomanda" required>
+                        <option value="cartao" disabled selected>Comanda</option>
+                        <option value="0">Nenhuma</option>
+                        {loop="$cartoes"}
+                        <option name="{$value.numero}" value="{$value.numero}">{$value.numero}
+                        </option>
+                        {/loop}
+                    </select>
 
                     <input class="form-control mb-4 nome_cliente_nova_comanda" type="text" name="nomecliente"
                         placeholder="Nome do cliente">
@@ -104,6 +113,10 @@
                                 </tfoot>
                             </table>
                         </div>
+                    </div>
+
+                    <div>
+                        <input type="text" name="observacao" id="txt_observacao" class="text_observacao form-control" value="" placeholder="Observação" hidden>
                     </div>
 
                 </div>
