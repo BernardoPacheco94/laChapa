@@ -32,7 +32,7 @@ $('.select_tipo_produto_comanda').change(function (e) {
 
 //Carregamento dos ingredientes do produto na comanda
 $('.select_produto_comanda').change(function (e) {
-    e.preventDefault() 
+    e.preventDefault()
 
     id_produto = $('.select_produto_comanda').val()
 
@@ -367,6 +367,10 @@ function criaTabelaProdutosComanda(Array = produtos) {
             criaTabelaProdutosComanda(produtos)
 
             exibeValorTotalComanda(valortotalcomanda)
+            
+            if (produtos.length == 0) {
+                $('#tabela_produtos_lancados_na_comanda').attr('hidden', true)
+            }
         });
 
         exibeValorTotalComanda(valortotalcomanda)
@@ -374,7 +378,7 @@ function criaTabelaProdutosComanda(Array = produtos) {
 
 
     $('#tabela_produtos_lancados_na_comanda').attr('hidden', false);
-    
+
     $('#txt_observacao').attr('hidden', true);
     $('#txt_observacao').val('')
 
