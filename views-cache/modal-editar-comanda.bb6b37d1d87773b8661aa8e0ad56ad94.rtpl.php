@@ -115,6 +115,15 @@
                                         </ul>
                                         <?php $i=0; ?>
                                         <?php } ?>
+
+                                        <?php if( $value2["observacao"] ){ ?>
+                                        <ul class="text-start fw-normal">
+                                            OBS:
+                                            <li>
+                                                <?php echo htmlspecialchars( $value2["observacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                                            </li>
+                                        </ul>
+                                        <?php } ?>
                                     </td>
                                     <td class="text-center align-middle">
                                         R$ <?php echo formatPrice($value2["vlfinalproduto"]); ?>

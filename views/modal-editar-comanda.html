@@ -115,6 +115,15 @@
                                         </ul>
                                         {$i=0}
                                         {/if}
+
+                                        {if="$value.observacao"}
+                                        <ul class="text-start fw-normal">
+                                            OBS:
+                                            <li>
+                                                {$value.observacao}
+                                            </li>
+                                        </ul>
+                                        {/if}
                                     </td>
                                     <td class="text-center align-middle">
                                         R$ {function="formatPrice($value.vlfinalproduto)"}

@@ -282,6 +282,7 @@ function removerIngredienteProdutoComanda(ingredientes, idcomanda) {
 
 }
 
+
     //         nomeproduto = response['nomeproduto']
 
     //         response['ingredientes'] = response['ingredientes']
