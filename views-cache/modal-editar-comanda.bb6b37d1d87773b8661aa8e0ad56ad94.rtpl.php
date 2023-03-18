@@ -17,8 +17,9 @@
                     <select class="form-control mb-4 select_cartao_editar_comanda" name="idcartaocomanda" required>
                         <option value="cartao" disabled selected>Comanda</option>
                         <option value="0">Nenhuma</option>
+                        <?php $idcartao=$value1["idcartao"]; ?>
                         <?php $counter2=-1;  if( isset($cartoes) && ( is_array($cartoes) || $cartoes instanceof Traversable ) && sizeof($cartoes) ) foreach( $cartoes as $key2 => $value2 ){ $counter2++; ?>
-                        <option name="<?php echo htmlspecialchars( $value2["numero"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value2["numero"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value2["numero"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        <option name="<?php echo htmlspecialchars( $value2["numero"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value2["numero"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"<?php if( $idcartao == $value2["idcartao"] ){ ?> selected <?php } ?>><?php echo htmlspecialchars( $value2["numero"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                         </option>
                         <?php } ?>
                     </select>

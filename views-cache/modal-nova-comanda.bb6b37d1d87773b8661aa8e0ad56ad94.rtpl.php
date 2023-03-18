@@ -16,7 +16,7 @@
                         <option value="cartao" disabled selected>Comanda</option>
                         <option value="0">Nenhuma</option>
                         <?php $counter1=-1;  if( isset($cartoes) && ( is_array($cartoes) || $cartoes instanceof Traversable ) && sizeof($cartoes) ) foreach( $cartoes as $key1 => $value1 ){ $counter1++; ?>
-                        <option name="<?php echo htmlspecialchars( $value1["numero"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value1["numero"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["numero"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        <option name="<?php echo htmlspecialchars( $value1["idcartao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value1["idcartao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["numero"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                         </option>
                         <?php } ?>
                     </select>

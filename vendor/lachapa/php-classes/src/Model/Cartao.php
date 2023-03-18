@@ -41,4 +41,6 @@ class Cartao extends Model
             ':idcartao' =>$idcartao
         ]);
     }
+
+    
 }

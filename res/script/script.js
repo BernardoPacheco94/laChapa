@@ -413,6 +413,7 @@ function salvaComanda(Array = produtos) {
                     valortotal: valortotalcomanda,
                     statuscomanda: null,
                     datacomanda: null,
+                    idcartao: $('.select_cartao_nova_comanda').val(),
                     nomecliente: $('.nome_cliente_nova_comanda').val(),
                     idatendente: $('.select_atendente_nova_comanda').val(),
                     idmesa: $('.select_mesa_nova_comanda').val(),
@@ -421,9 +422,10 @@ function salvaComanda(Array = produtos) {
                 },
                 dataType: "json",
                 success: function (response) {
+                    console.log('response')
                     console.log(response)
 
-                    document.location.reload()
+                    // document.location.reload()
                 },
                 error: function (err) {
                     console.log(err)

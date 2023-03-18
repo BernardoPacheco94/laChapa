@@ -17,8 +17,9 @@
                     <select class="form-control mb-4 select_cartao_editar_comanda" name="idcartaocomanda" required>
                         <option value="cartao" disabled selected>Comanda</option>
                         <option value="0">Nenhuma</option>
+                        {$idcartao=$value.idcartao}
                         {loop="$cartoes"}
-                        <option name="{$value.numero}" value="{$value.numero}">{$value.numero}
+                        <option name="{$value.numero}" value="{$value.numero}"{if="$idcartao == $value.idcartao"} selected {/if}>{$value.numero}
                         </option>
                         {/loop}
                     </select>

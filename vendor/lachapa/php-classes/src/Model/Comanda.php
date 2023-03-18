@@ -11,13 +11,14 @@ class Comanda extends Model
     {
         $sql = new Sql;
 
-        $resultado = $sql->select('CALL `db_lachapa`.`sp_salva_comanda`(:idcomanda, :valortotal, :statuscomanda, :datacomanda, :nomecliente, :idatendente)', [
+        $resultado = $sql->select('CALL `db_lachapa`.`sp_salva_comanda`(:idcomanda, :valortotal, :statuscomanda, :datacomanda, :nomecliente, :idatendente, :idcartao)', [
             ':idcomanda' => $this->getidcomanda(),
             ':valortotal' => $this->getvalortotal(),
             ':statuscomanda' => 'A',
             ':datacomanda' => $this->getdatacomanda(),
             ':nomecliente' => $this->getnomecliente(),
-            ':idatendente' => $this->getidatendente()
+            ':idatendente' => $this->getidatendente(),
+            ':idcartao' => $this->getidcartao()
         ]);
 
         return $this->setData($resultado[0]);
