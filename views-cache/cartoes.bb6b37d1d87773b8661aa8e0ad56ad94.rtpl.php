@@ -6,23 +6,6 @@
             <h3 class="mx-auto mt-3">Comandas</h3>
         </div>
 
-        <!-- Cadastrar comandas -->
-        <!-- <form action="/salvacartoes" method="get">
-            <div class="container">
-                <div class="mx-auto mb-4 col-xs-6 col-sm-6 col-md-3 col-lg-2 col-xl-2 col-xxl-2">
-                    <input type="number" name="inicial" id="idnuminicial" class="form-control mb-4"
-                        placeholder="Número inicial">
-                    <input type="number" name="final" id="idnumfinal" class="form-control" placeholder="Número final">
-                </div>
-            </div>
-
-            <div class="container mx-auto col-xs-6 col-sm-6 col-md-3 col-lg-2 col-xl-2 col-xxl-2">
-                <button type="submit" class="w-100 btn btn-dark">
-                    Gerar Comandas
-                </button>
-            </div>
-        </form> -->
-
         <div class="container text-center">
             <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalGerarCartoes">
                 Novas comandas

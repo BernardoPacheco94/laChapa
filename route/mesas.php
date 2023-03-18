@@ -23,6 +23,9 @@ $app->get('/', function(){
         'comandas' => Comanda::listaComandas(),
         'cartoes' => Cartao::listaCartoes()
     ]);
+
+    // print_r(Mesa::mesasExibidas());
+    // exit;
 });
 
 

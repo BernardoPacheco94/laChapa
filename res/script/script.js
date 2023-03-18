@@ -425,7 +425,7 @@ function salvaComanda(Array = produtos) {
                     console.log('response')
                     console.log(response)
 
-                    // document.location.reload()
+                    document.location.reload()
                 },
                 error: function (err) {
                     console.log(err)

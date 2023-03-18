@@ -107,7 +107,8 @@ class Mesa extends Model
 
         $result = $sql->select('SELECT * FROM comandas
         INNER JOIN `comanda-mesa` USING (idcomanda)
-        INNER JOIN mesas USING (idmesa)
+        INNER JOIN mesas USING (idmesa)        
+        LEFT JOIN `cartoes` USING (idcartao)
         WHERE idmesa = :idmesa AND statuscomanda = "A"',[
             ':idmesa' =>$idmesa
         ]);
