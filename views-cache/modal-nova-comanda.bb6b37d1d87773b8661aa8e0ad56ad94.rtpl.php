@@ -137,7 +137,7 @@
 
 
                     <button type="button" class="w-100 btn btn-success">
-                        Encerrar Comanda
+                        Encerrar Pedido
                     </button>
 
                 </div>

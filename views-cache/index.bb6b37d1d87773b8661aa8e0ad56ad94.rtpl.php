@@ -70,7 +70,7 @@
                                             <button type="button" class="btn btn-dark"
                                                 id="btn-gerenciar-comanda-<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" data-bs-toggle="modal"
                                                 data-bs-target="#modal_editar_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                                                Gerenciar Comanda <?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                                                Gerenciar Pedido <?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                                             </button>
                                         </div>
                                         <div class="col-6 text-center">

@@ -6,7 +6,7 @@
         <div class="modal-content">
             <form id="form_principal" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Comanda <?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Pedido <?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h5>
                     <button type="button" class="btn btn-dark mx-auto w-50">
                         <i class="fa-solid fa-2x fa-print"></i>
                     </button>
@@ -208,7 +208,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="w-100 btn btn-dark" data-bs-dismiss="modal" id="editar_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                        <i class="fa-solid fa-save"></i> Alterar Comanda <?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        <i class="fa-solid fa-save"></i> Alterar Pedido <?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                     </button>
 
                     <button type="button" class="w-100 btn btn-warning" data-bs-dismiss="modal">
@@ -217,7 +217,7 @@
 
 
                     <button type="button" class="w-100 btn btn-success">
-                        Encerrar Comanda
+                        Encerrar Pedido
                     </button>
 
                 </div>
