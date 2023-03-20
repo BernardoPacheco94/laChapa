@@ -146,7 +146,7 @@ $('.select_produto_comanda').change(function (e) {
                         //inclui as opcões no select
                         for (let c = 0; c < responseIngredientes.length; c++) {
 
-                            $('#select_adc_novo_ingrediente').prepend('<option id="option' + responseIngredientes[c].idingrediente + '" value="' + responseIngredientes[c].idingrediente + '">' + responseIngredientes[c].nomeingrediente + '</option>')
+                            $('#select_adc_novo_ingrediente').prepend('<option id="option' + responseIngredientes[c].idingrediente + '" value="' + responseIngredientes[c].idingrediente + '">' + responseIngredientes[c].nomeingrediente  + ' - ' + (responseIngredientes[c].valoradicional).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</option>')
                             for (let index = 0; index < listaIngredientesProduto.length; index++) {//se o ingrediente já estiver no produto é removido
                                 if (responseIngredientes[c].idingrediente == listaIngredientesProduto[index].idingrediente) {
                                     $('#option' + responseIngredientes[c].idingrediente).remove()

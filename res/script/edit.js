@@ -23,8 +23,9 @@ window.onload = () => {
                     idproduto = $('#select_produto_comanda_' + comandas[index]['idcomanda']).val()
 
                     carregaTabelaDeIngredientes(idproduto, comandas[index]['idcomanda'])
-
                 });
+
+                salvaProdutoComandaEdit(comandas[index]['idcomanda'])
 
             }
         }
@@ -201,6 +202,7 @@ function carregaTabelaDeIngredientes(idproduto, idcomanda) {
 
             $('#tabela_ingredientes_comanda_' + idcomanda).attr('hidden', false)
 
+
         }
     })
 
@@ -281,6 +283,9 @@ function removerIngredienteProdutoComanda(ingredientes, idcomanda) {
     });
 
 }
+
+
+
 
 
     //         nomeproduto = response['nomeproduto']

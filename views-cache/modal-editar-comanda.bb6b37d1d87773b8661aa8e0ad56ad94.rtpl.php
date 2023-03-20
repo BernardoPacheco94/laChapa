@@ -202,7 +202,7 @@
 
                 </div>
                 <div class="row m-3">
-                    <button id="salva_produto_comanda"
+                    <button type="button" id="salva_produto_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
                         class="btn btn-dark col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 mx-auto">
                         <i class="fa-solid fa-plus"></i>
                     </button>
