@@ -24,9 +24,6 @@ window.onload = () => {
 
                     carregaTabelaDeIngredientes(idproduto, comandas[index]['idcomanda'])
                 });
-
-                salvaProdutoComandaEdit(comandas[index]['idcomanda'])
-
             }
         }
     })
@@ -199,9 +196,11 @@ function carregaTabelaDeIngredientes(idproduto, idcomanda) {
 
             });
 
+            
+            salvaProdutoComandaEdit(idproduto,response['ingredientes'], idcomanda, response['nomeproduto'])
 
             $('#tabela_ingredientes_comanda_' + idcomanda).attr('hidden', false)
-
+            $('#txt_observacao_'+idcomanda).attr('hidden', false);
 
         }
     })
@@ -284,6 +283,142 @@ function removerIngredienteProdutoComanda(ingredientes, idcomanda) {
 
 }
 
+function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda, nomeproduto) {
+    $('#salva_produto_comanda_'+idcomanda).click(function (e) {
+        e.preventDefault();
+        console.log($('#select_produto_comanda_'+idcomanda).val())
+
+        if (($('#select_produto_comanda_'+idcomanda).val()) != null) {
+            $.each(listaIngredientesProduto, function (key, value) {
+                if (value['quantidade'] > 1) {
+                    porcaoextra.push({
+                        'ingredienteporcaoextra': value['nomeingrediente'],
+                        'idproduto': idproduto,
+                        'idingrediente': value['idingrediente'],
+                        'qtdporcaoextra': value['quantidade']
+                    })
+                }
+
+                if (value['quantidade'] == 0) {
+                    removeringrediente.push({
+                        'removeringrediente': value['nomeingrediente'],
+                        'idproduto': idproduto,
+                        'idingrediente': value['idingrediente']
+                    })
+                }
+            });
+
+            $.each(adicionais, function (key, value) {
+                ingredienteadicional.push({
+                    'ingredienteadicional': value['nomeingrediente'],
+                    'idproduto': idproduto,
+                    'idingrediente': value['idingrediente'],
+                    'qtdingredienteadicional': value['qtdingredienteadicional']
+                })
+            });
+
+            produtos.push({
+                idproduto: idproduto,
+                nomeproduto: nomeproduto,
+                vladicional: valor_adicional_total,
+                porcaoextra: porcaoextra,
+                ingredienteadicional: ingredienteadicional,
+                removeringrediente: removeringrediente,
+                observacao: $('#txt_observacao_'+idcomanda).val(),
+                vlfinalproduto: parseFloat($('#valortotal').val())
+            })
+
+        }
+        else {
+            alert('Selecione um produto para incluir na comanda')
+        }
+    });
+
+    // txtvlinicialcomanda = $('#valor_total_comanda_'+idcomanda).text()
+    // vlinicialcomanda = parseFloat(txtvlinicialcomanda.replace('R$ ', '').replace('.','').replace(',','.'))
+}
+
+// function criaTabelaProdutosComandaEdit(idcomanda, Array = produtos, vlinicialcomanda) {
+
+//     // $('#body_tabela_produtos_lancados_na_comanda_'+idcomanda).empty();
+
+//     $('#tabela_ingredientes_comanda_'+idcomanda).attr('hidden', true)
+
+//     valortotalcomanda = vlinicialcomanda
+
+//     $.map(produtos, function (key) {
+//         valortotalcomanda += key.vlfinalproduto
+//     });
+
+//     for (let index = 1; index <= produtos.length; index++) {
+
+//         $('#tabela_produtos_lancados_na_comanda_'+idcomanda).append('<tr id="linha_produto_' + (($('#tabela_produtos_lancados_na_comanda_'+idcomanda+'tbody tr').length) + (index)) + '"><td class="text-center"  id="td_nome_comanda_produto_' + (($('#tabela_produtos_lancados_na_comanda_'+idcomanda+'tbody tr').length) + (index)) + '">' + produtos[index].nomeproduto + '</td><td class="text-center align-middle">' + produtos[index].vlfinalproduto.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td><td class="text-center align-middle"><button id="btn_remove_produto_comanda_' + index + '" class="btn fa-solid fa-trash-can text-danger "></button></td></tr>')
+
+
+//         //lista de ingredientes a serem removidos
+//         if ((produtos[index].removeringrediente).length) {
+//             $('#td_nome_comanda_produto_' + index).append('<ul class="text-start fw-normal" id="lista_remover_ingredientes_produto_' + index + '">Sem: </ul>')
+//             for (let i = 0; i < produtos[index].removeringrediente.length; i++) {
+//                 $('#lista_remover_ingredientes_produto_' + index).append('<li>' + produtos[index].removeringrediente[i].removeringrediente + '</li>')
+//             }
+//         }
+
+//         //lista de porcões extras
+//         if (produtos[index].porcaoextra.length) {
+//             $('#td_nome_comanda_produto_' + index).append('<ul class="text-start fw-normal" id="lista_porcaoextra_ingredientes_produto_' + index + '">Porcão extra: </ul>')
+//             for (let i = 0; i < produtos[index].porcaoextra.length; i++) {
+//                 $('#lista_porcaoextra_ingredientes_produto_' + index).append('<li>' + produtos[index].porcaoextra[i].ingredienteporcaoextra + ' - ' + produtos[index].porcaoextra[i].qtdporcaoextra + 'x</li>')
+//             }
+//         }
+
+//         //lista de ingredientes a serem adicionados
+//         if (produtos[index].ingredienteadicional.length) {
+
+//             $('#td_nome_comanda_produto_' + index).append('<ul class="text-start fw-normal" id="lista_ingredienteadicional_ingredientes_produto_' + index + '">Adicional: </ul>')
+
+//             for (let i = 0; i < produtos[index].ingredienteadicional.length; i++) {
+//                 if (produtos[index].ingredienteadicional[i].qtdingredienteadicional >= 1) {
+//                     $('#lista_ingredienteadicional_ingredientes_produto_' + index).append('<li>' + produtos[index].ingredienteadicional[i].ingredienteadicional + ' - ' + produtos[index].ingredienteadicional[i].qtdingredienteadicional + 'x </li>')
+//                 }
+//             }
+//         }
+
+//         //Observações do produto
+//         if (produtos[index].observacao != "") {
+//             $('#td_nome_comanda_produto_' + index).append('<ul class="text-start fw-normal" id="observacao_produto_' + index + '">OBS: </ul>')
+//             $('#observacao_produto_' + index).append('<li>' + produtos[index].observacao + '</li>')
+//         }
+
+//         //Evento para remover produto da tabela
+//         $('#btn_remove_produto_comanda_' + index).click(function (e) {
+//             e.preventDefault();
+//             if (confirm('Deseja realmente excluir o produto ' + (produtos[index].nomeproduto))) {
+//                 // Remover item do array produto[] e atualizar o valor e afins
+//                 produtos.splice(index, 1)
+//                 $('#linha_produto_' + index).remove();
+
+//                 criaTabelaProdutosComanda(produtos)
+
+//                 exibeValorTotalComanda(valortotalcomanda)
+
+//                 if (produtos.length == 0) {
+//                     $('#tabela_produtos_lancados_na_comanda').attr('hidden', true)
+//                 }
+//             }
+//         });
+
+//         // exibeValorTotalComanda(valortotalcomanda)
+//     }
+
+
+//     $('#tabela_produtos_lancados_na_comanda').attr('hidden', false);
+
+//     $('#txt_observacao').attr('hidden', true);
+//     $('#txt_observacao').val('')
+
+//     $('.select_produto_comanda').prop('selectedIndex', 0)
+
+// }
 
 
 

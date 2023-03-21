@@ -200,6 +200,10 @@
                         </div>
                     </div>
 
+                    <div>
+                        <input type="text" name="observacao" id="txt_observacao_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="text_observacao form-control" value="" placeholder="Observação" hidden>
+                    </div>
+
                 </div>
                 <div class="row m-3">
                     <button type="button" id="salva_produto_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
