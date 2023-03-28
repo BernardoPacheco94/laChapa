@@ -43,7 +43,7 @@ class Comanda extends Model
         $sql = new Sql;
 
         $sql->select('CALL `db_lachapa`.`sp_salva_comanda_mesa`(:idcomandamesa, :idcomanda, :idmesa)', [
-            ':idcomandamesa' => 0,
+            ':idcomandamesa' => $this->getidcomandamesa(),
             ':idcomanda' => $this->getidcomanda(),
             ':idmesa' => $this->getidmesa()
         ]);
