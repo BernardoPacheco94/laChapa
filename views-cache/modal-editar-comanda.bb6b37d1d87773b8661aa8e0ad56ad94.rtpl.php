@@ -14,7 +14,7 @@
                 </div>
                 <div class="modal-body">
                     <label for="idcartaocomanda">Comanda</label>
-                    <select class="form-control mb-4 select_cartao_editar_comanda" name="idcartaocomanda" required>
+                    <select class="form-control mb-4" id="select_cartao_editar_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" name="idcartaocomanda" required>
                         <option value="cartao" disabled selected>Comanda</option>
                         <option value="0">Nenhuma</option>
                         <?php $idcartao=$value1["idcartao"]; ?>
@@ -25,7 +25,7 @@
                     </select>
 
                     <label for="nomecliente">Nome Cliente:</label>
-                    <input class="form-control mb-4" type="text" name="nomecliente" id="nomecliente"
+                    <input class="form-control mb-4" type="text" name="nomecliente" id="nomecliente_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
                         value="<?php echo htmlspecialchars( $value1["nomecliente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
 
                     <label for="idmesacomanda">Mesa:</label>
@@ -189,7 +189,7 @@
                                     <tr>
                                         <th colspan="3" class="text-center">Valor</th>
                                         <th colspan="2" class="text-center">
-                                            <input type="number" step="0.01" name="valortotal" id="valortotal"
+                                            <input type="number" step="0.01" name="valortotal" id="valortotal_produto_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
                                                 class="form-control" hidden>
                                             <input id="valortotal_exibido_tabela_ingredientes_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="form-control" disabled>
                                         </th>
@@ -212,9 +212,9 @@
                     </button>
                 </div>
                 <div class="modal-footer">
-                    <button class="w-100 btn btn-dark" data-bs-dismiss="modal" id="editar_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                    <!-- <button class="w-100 btn btn-dark" data-bs-dismiss="modal" id="editar_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                         <i class="fa-solid fa-save"></i> Alterar Pedido <?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
-                    </button>
+                    </button> -->
 
                     <button type="button" class="w-100 btn btn-warning" data-bs-dismiss="modal">
                         Cancelar
