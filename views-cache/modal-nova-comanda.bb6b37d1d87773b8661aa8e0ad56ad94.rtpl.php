@@ -12,8 +12,8 @@
                 </div>
                 <div class="modal-body">
 
+                    <label for="idcartaocomanda">Comanda</label>
                     <select class="form-control mb-4 select_cartao_nova_comanda" name="idcartaocomanda" required>
-                        <option value="cartao" disabled selected>Comanda</option>
                         <option value="0">Nenhuma</option>
                         <?php $counter1=-1;  if( isset($cartoes) && ( is_array($cartoes) || $cartoes instanceof Traversable ) && sizeof($cartoes) ) foreach( $cartoes as $key1 => $value1 ){ $counter1++; ?>
                         <option name="<?php echo htmlspecialchars( $value1["idcartao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value1["idcartao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["numero"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
@@ -21,11 +21,12 @@
                         <?php } ?>
                     </select>
 
+                    <label for="nomecliente">Nome Cliente:</label>
                     <input class="form-control mb-4 nome_cliente_nova_comanda" type="text" name="nomecliente"
                         placeholder="Nome do cliente">
 
+                    <label for="idmesacomanda">Mesa:</label>
                     <select class="form-control mb-4 select_mesa_nova_comanda" name="idmesacomanda" required>
-                        <option value="mesa" disabled selected>Mesa</option>
                         <option value="0">Nenhuma</option>
                         <?php $counter1=-1;  if( isset($todasMesas) && ( is_array($todasMesas) || $todasMesas instanceof Traversable ) && sizeof($todasMesas) ) foreach( $todasMesas as $key1 => $value1 ){ $counter1++; ?>
                         <option name="<?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
@@ -33,8 +34,8 @@
                         <?php } ?>
                     </select>
 
+                    <label for="idatendente">Atendente:</label>
                     <select class="form-control mb-4 select_atendente_nova_comanda" name="idatendente">
-                        <option value="atendente" disabled selected>Atendente</option>
                         <option value="0">Nenhum</option>
                         <?php $counter1=-1;  if( isset($atendentes) && ( is_array($atendentes) || $atendentes instanceof Traversable ) && sizeof($atendentes) ) foreach( $atendentes as $key1 => $value1 ){ $counter1++; ?>
                         <option name="<?php echo htmlspecialchars( $value1["idatendente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value1["idatendente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nomeatendente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
@@ -86,7 +87,7 @@
 
                     <!-- Tabela de ingredientes -->
                     <div class="row mt-2">
-                        <div class="table-responsive" >
+                        <div class="table-responsive">
                             <table class="table table-light table-hover" id="tabela_ingredientes_comanda" hidden>
                                 <thead>
                                     <tr>
@@ -98,15 +99,15 @@
                                     </tr>
                                 </thead>
                                 <tbody id="body_tabela_ingredientes_produto">
-                                    
+
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th colspan="3" class="text-center">Valor</th>
                                         <th colspan="2" class="text-center">
                                             <input type="number" step="0.01" name="valortotal" id="valortotal"
-                                                class="form-control" hidden >
-                                            <input id="valortotal_exibido" class="form-control" disabled >
+                                                class="form-control" hidden>
+                                            <input id="valortotal_exibido" class="form-control" disabled>
                                         </th>
                                     </tr>
 
@@ -116,7 +117,8 @@
                     </div>
 
                     <div>
-                        <input type="text" name="observacao" id="txt_observacao" class="text_observacao form-control" value="" placeholder="Observação" hidden>
+                        <input type="text" name="observacao" id="txt_observacao" class="text_observacao form-control"
+                            value="" placeholder="Observação" hidden>
                     </div>
 
                 </div>

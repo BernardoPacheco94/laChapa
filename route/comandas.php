@@ -54,6 +54,7 @@ $app->post('/salvaprodutoeingredientescomanda/ajax', function () {
             }
         }
 
+        
         echo json_encode($_POST);
     } catch (\Throwable $th) {
         echo json_encode(array(

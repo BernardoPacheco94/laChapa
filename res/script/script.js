@@ -21,7 +21,7 @@ $('.select_tipo_produto_comanda').change(function (e) {
 
             //Carrega os produtos de acordo com o tipo selecionado
             for (let index = 0; index < response.length; index++) {
-                $('.select_produto_comanda').prepend('<option value=' + response[index].idproduto + '>' + response[index].nomeproduto + '</option>')
+                $('.select_produto_comanda').prepend('<option value=' + response[index].idproduto + '>' + response[index].nomeproduto +' - '+ (response[index].valorproduto).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</option>')
             }
             $('.select_produto_comanda').prepend('<option selected disabled>Selecione o produto</option>')
         }

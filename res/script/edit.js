@@ -419,6 +419,7 @@ function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda,
                     nomecliente: $('#nomecliente_comanda_' + idcomanda).val(),
                     idatendente: $('#select_atendente_comanda_' + idcomanda).val(),
                     idmesa: $('#select_mesa_comanda_' + idcomanda).val(),
+                    idcomandamesa: $('#idcomandamesa_'+idcomanda).val(),
                     observacao: $('#txt_observacao_196' + idcomanda).val(),
                     produtos: produtos
                 },

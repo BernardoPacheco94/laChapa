@@ -15,7 +15,6 @@
                 <div class="modal-body">
                     <label for="idcartaocomanda">Comanda</label>
                     <select class="form-control mb-4" id="select_cartao_editar_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" name="idcartaocomanda" required>
-                        <option value="cartao" disabled selected>Comanda</option>
                         <option value="0">Nenhuma</option>
                         <?php $idcartao=$value1["idcartao"]; ?>
                         <?php $counter2=-1;  if( isset($cartoes) && ( is_array($cartoes) || $cartoes instanceof Traversable ) && sizeof($cartoes) ) foreach( $cartoes as $key2 => $value2 ){ $counter2++; ?>
@@ -26,12 +25,11 @@
 
                     <label for="nomecliente">Nome Cliente:</label>
                     <input class="form-control mb-4" type="text" name="nomecliente" id="nomecliente_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
-                        value="<?php echo htmlspecialchars( $value1["nomecliente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                        value="<?php echo htmlspecialchars( $value1["nomecliente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" autocomplete="off">
 
                     <label for="idmesacomanda">Mesa:</label>
                     <select class="form-control mb-4" name="idmesacomanda" id="select_mesa_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                        <option value="mesa" disabled>Mesa</option>
-                        <option value="0">Nenhuma</option>
+                       <option value="0">Nenhuma</option>
                         <?php $mesa=$value1["idmesa"]; ?>
                         <?php $counter2=-1;  if( isset($todasMesas) && ( is_array($todasMesas) || $todasMesas instanceof Traversable ) && sizeof($todasMesas) ) foreach( $todasMesas as $key2 => $value2 ){ $counter2++; ?>
                         <option name="<?php echo htmlspecialchars( $value2["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value2["idmesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" <?php if( $value2["idmesa"] == $mesa ){ ?> selected
@@ -40,10 +38,11 @@
                         <?php } ?>
                     </select>
 
+                    <input type="number" name="idcomandamesa" value="<?php echo htmlspecialchars( $value1["idcomandamesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" id="idcomandamesa_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" hidden>
+
                     <label for="idatendente">Atendente:</label>
                     <select class="form-control mb-4" name="idatendente"
                         id="select_atendente_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                        <option value="atendente" disabled>Atendente</option>
                         <option value="0">Nenhum</option>
                         <?php $atendente=$value1["idatendente"]; ?>
                         <?php $counter2=-1;  if( isset($atendentes) && ( is_array($atendentes) || $atendentes instanceof Traversable ) && sizeof($atendentes) ) foreach( $atendentes as $key2 => $value2 ){ $counter2++; ?>
@@ -212,9 +211,9 @@
                     </button>
                 </div>
                 <div class="modal-footer">
-                    <!-- <button class="w-100 btn btn-dark" data-bs-dismiss="modal" id="editar_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                    <button class="w-100 btn btn-dark" data-bs-dismiss="modal" id="editar_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                         <i class="fa-solid fa-save"></i> Alterar Pedido <?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
-                    </button> -->
+                    </button>
 
                     <button type="button" class="w-100 btn btn-warning" data-bs-dismiss="modal">
                         Cancelar

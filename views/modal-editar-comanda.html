@@ -15,7 +15,6 @@
                 <div class="modal-body">
                     <label for="idcartaocomanda">Comanda</label>
                     <select class="form-control mb-4" id="select_cartao_editar_comanda_{$value.idcomanda}" name="idcartaocomanda" required>
-                        <option value="cartao" disabled selected>Comanda</option>
                         <option value="0">Nenhuma</option>
                         {$idcartao=$value.idcartao}
                         {loop="$cartoes"}
@@ -26,12 +25,11 @@
 
                     <label for="nomecliente">Nome Cliente:</label>
                     <input class="form-control mb-4" type="text" name="nomecliente" id="nomecliente_comanda_{$value.idcomanda}"
-                        value="{$value.nomecliente}">
+                        value="{$value.nomecliente}" autocomplete="off">
 
                     <label for="idmesacomanda">Mesa:</label>
                     <select class="form-control mb-4" name="idmesacomanda" id="select_mesa_comanda_{$value.idcomanda}">
-                        <option value="mesa" disabled>Mesa</option>
-                        <option value="0">Nenhuma</option>
+                       <option value="0">Nenhuma</option>
                         {$mesa=$value.idmesa}
                         {loop="$todasMesas"}
                         <option name="{$value.idmesa}" value="{$value.idmesa}" {if="$value.idmesa == $mesa"} selected
@@ -40,10 +38,11 @@
                         {/loop}
                     </select>
 
+                    <input type="number" name="idcomandamesa" value="{$value.idcomandamesa}" id="idcomandamesa_{$value.idcomanda}" hidden>
+
                     <label for="idatendente">Atendente:</label>
                     <select class="form-control mb-4" name="idatendente"
                         id="select_atendente_comanda_{$value.idcomanda}">
-                        <option value="atendente" disabled>Atendente</option>
                         <option value="0">Nenhum</option>
                         {$atendente=$value.idatendente}
                         {loop="$atendentes"}
@@ -212,9 +211,9 @@
                     </button>
                 </div>
                 <div class="modal-footer">
-                    <!-- <button class="w-100 btn btn-dark" data-bs-dismiss="modal" id="editar_comanda_{$value.idcomanda}">
+                    <button class="w-100 btn btn-dark" data-bs-dismiss="modal" id="editar_comanda_{$value.idcomanda}">
                         <i class="fa-solid fa-save"></i> Alterar Pedido {$value.idcomanda}
-                    </button> -->
+                    </button>
 
                     <button type="button" class="w-100 btn btn-warning" data-bs-dismiss="modal">
                         Cancelar
