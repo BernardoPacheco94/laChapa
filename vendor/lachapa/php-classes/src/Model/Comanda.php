@@ -25,14 +25,15 @@ class Comanda extends Model
     }
 
 
-    public function salvaComandaProdutos($idproduto, $vlfinalproduto, $observacao)
+    public function salvaComandaProdutos($idproduto, $vlfinalproduto, $observacao, $nroitem)
     {
         $sql = new Sql;
 
-        $sql->select('CALL `db_lachapa`.`sp_salva_comanda_produtos`(:idcomandaproduto, :idcomanda, :idproduto, :vlfinalproduto, :observacao)', [
+        $sql->select('CALL `db_lachapa`.`sp_salva_comanda_produtos`(:idcomandaproduto, :idcomanda, :idproduto, :nroitem, :vlfinalproduto, :observacao)', [
             ':idcomandaproduto' => $this->getidcomandaproduto(),
             ':idcomanda' => $this->getidcomanda(),
             ':idproduto' => $idproduto,
+            ':nroitem' => $nroitem,
             ':vlfinalproduto' => $vlfinalproduto,
             ':observacao' => $observacao
         ]);
@@ -49,28 +50,32 @@ class Comanda extends Model
         ]);
     }
 
-    public function salvaComandaProdutoPorcaoExtra($idproduto, $qtd, $idingrediente)
+    public function salvaComandaProdutoPorcaoExtra($idproduto, $qtd, $idingrediente, $nroitem)
     {
         $sql = new Sql;
 
-        $sql->select('CALL `db_lachapa`.`sp_salva_porcao_extra`(:idporcaoextra, :idproduto, :idcomanda, :idingrediente, :qtdporcaoextra)', [
+        $sql->select('CALL `db_lachapa`.`sp_salva_porcao_extra`(:idporcaoextra, :idproduto, :idcomanda, :idingrediente, :qtdporcaoextra, :nroitem)', [
             ':idporcaoextra' => 0,
             ':idcomanda' => $this->getidcomanda(),
             ':idproduto' => $idproduto,
             ':idingrediente' => $idingrediente,
-            ':qtdporcaoextra' => $qtd
+            ':qtdporcaoextra' => $qtd,
+            ':nroitem' => $nroitem
         ]);
     }
 
-    public static function listaPorcaoExtraProdutoComanda($idproduto, $idcomanda)
+    public static function listaPorcaoExtraProdutoComanda($idproduto, $idcomanda, $nroitem)
     {
         $sql = new Sql;
 
         return $sql->select('SELECT * FROM `porcao-extra` 
         INNER JOIN ingredientes USING (idingrediente) 
-        WHERE idproduto = :idproduto AND idcomanda = :idcomanda', [
+        WHERE idproduto = :idproduto 
+        AND idcomanda = :idcomanda
+        AND nroitem = :nroitem', [
             ':idproduto' => $idproduto,
-            ':idcomanda' => $idcomanda
+            ':idcomanda' => $idcomanda,
+            ':nroitem' => $nroitem
         ]);
     }
 
@@ -138,7 +143,7 @@ class Comanda extends Model
         
 
         for ($i = 0; $i < count($resultado); $i++) {
-            $consultaporcaoextra = Comanda::listaPorcaoExtraProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda']);
+            $consultaporcaoextra = Comanda::listaPorcaoExtraProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda'], $resultado[$i]['nroitem']);
 
             if (count($consultaporcaoextra) > 0) {
                 $resultado[$i]['porcaoextra'] = $consultaporcaoextra;

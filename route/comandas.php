@@ -34,12 +34,12 @@ $app->post('/salvaprodutoeingredientescomanda/ajax', function () {
         $comanda->salvaComandaMesa();
         for ($i = 0; $i < count($_POST['produtos']); $i++) {
 
-            $comanda->salvaComandaProdutos($_POST['produtos'][$i]['idproduto'], $_POST['produtos'][$i]['vlfinalproduto'], $_POST['produtos'][$i]['observacao']);
+            $comanda->salvaComandaProdutos($_POST['produtos'][$i]['idproduto'], $_POST['produtos'][$i]['vlfinalproduto'], $_POST['produtos'][$i]['observacao'], $_POST['produtos'][$i]['nroitem']);
 
 
             if (array_key_exists('porcaoextra', $_POST['produtos'][$i])) {
                 for ($c = 0; $c < count($_POST['produtos'][$i]['porcaoextra']); $c++) {
-                    $comanda->salvaComandaProdutoPorcaoExtra($_POST['produtos'][$i]['porcaoextra'][$c]['idproduto'], $_POST['produtos'][$i]['porcaoextra'][$c]['qtdporcaoextra'], $_POST['produtos'][$i]['porcaoextra'][$c]['idingrediente']);
+                    $comanda->salvaComandaProdutoPorcaoExtra($_POST['produtos'][$i]['porcaoextra'][$c]['idproduto'], $_POST['produtos'][$i]['porcaoextra'][$c]['qtdporcaoextra'], $_POST['produtos'][$i]['porcaoextra'][$c]['idingrediente'], $_POST['produtos'][$i]['porcaoextra'][$c]['nroitem']);
                 }
             }
             if (array_key_exists('ingredienteadicional', $_POST['produtos'][$i])) {

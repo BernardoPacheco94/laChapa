@@ -51,7 +51,7 @@ function carregaOptionsComProduto(idtipo, comandas) {
 
             //Carrega os produtos de acordo com o tipo selecionado
             for (let index = 0; index < response.length; index++) {
-                $('#select_produto_comanda_' + comandas['idcomanda']).prepend('<option value=' + response[index].idproduto + '>' + response[index].nomeproduto + '</option>')
+                $('#select_produto_comanda_' + comandas['idcomanda']).prepend('<option value=' + response[index].idproduto + '>' + response[index].nomeproduto  + ' - '+ (response[index].valorproduto).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })+ '</option>')
             }
             $('#select_produto_comanda_' + comandas['idcomanda']).prepend('<option selected disabled>Selecione o produto</option>')
         }
@@ -207,70 +207,64 @@ function carregaTabelaDeIngredientes(idproduto, idcomanda, comandas) {
 
             salvaProdutoComandaEdit(idproduto, response['ingredientes'], idcomanda, response['nomeproduto'])
 
-            $('#salva_produto_comanda_' + idcomanda).click(function (e) {
-                e.preventDefault();
-                // console.log($('#select_produto_comanda_'+idcomanda).val())
+            // $('#salva_produto_comanda_' + idcomanda).click(function (e) {
+            //     e.preventDefault();
 
-                if (($('#select_produto_comanda_' + idcomanda).val()) != null) {
-                    $.each(response['ingredientes'], function (key, value) {
-                        if (value['quantidade'] > 1) {
-                            porcaoextra.push({
-                                'ingredienteporcaoextra': value['nomeingrediente'],
-                                'idproduto': idproduto,
-                                'idingrediente': value['idingrediente'],
-                                'qtdporcaoextra': value['quantidade']
-                            })
-                        }
+            //     if (($('#select_produto_comanda_' + idcomanda).val()) != null) {
+            //         $.each(response['ingredientes'], function (key, value) {
+            //             if (value['quantidade'] > 1) {
+            //                 porcaoextra.push({
+            //                     'ingredienteporcaoextra': value['nomeingrediente'],
+            //                     'idproduto': idproduto,
+            //                     'idingrediente': value['idingrediente'],
+            //                     'qtdporcaoextra': value['quantidade']
+            //                 })
+            //             }
 
-                        if (value['quantidade'] == 0) {
-                            removeringrediente.push({
-                                'removeringrediente': value['nomeingrediente'],
-                                'idproduto': idproduto,
-                                'idingrediente': value['idingrediente']
-                            })
-                        }
-                    });
+            //             if (value['quantidade'] == 0) {
+            //                 removeringrediente.push({
+            //                     'removeringrediente': value['nomeingrediente'],
+            //                     'idproduto': idproduto,
+            //                     'idingrediente': value['idingrediente']
+            //                 })
+            //             }
+            //         });
 
-                    $.each(adicionais, function (key, value) {
-                        ingredienteadicional.push({
-                            'ingredienteadicional': value['nomeingrediente'],
-                            'idproduto': idproduto,
-                            'idingrediente': value['idingrediente'],
-                            'qtdingredienteadicional': value['qtdingredienteadicional']
-                        })
-                    });
+            //         $.each(adicionais, function (key, value) {
+            //             ingredienteadicional.push({
+            //                 'ingredienteadicional': value['nomeingrediente'],
+            //                 'idproduto': idproduto,
+            //                 'idingrediente': value['idingrediente'],
+            //                 'qtdingredienteadicional': value['qtdingredienteadicional']
+            //             })
+            //         });
 
-                    produtos = []
-                    produtos.push({
-                        idproduto: parseInt(idproduto),
-                        nomeproduto: response['nomeproduto'],
-                        vladicional: valor_adicional_total,
-                        porcaoextra: porcaoextra,
-                        ingredienteadicional: ingredienteadicional,
-                        removeringrediente: removeringrediente,
-                        observacao: $('#txt_observacao_' + idcomanda).val(),
-                        vlfinalproduto: parseFloat($('#valortotal').val())
-                    })
+            //         produtos = []
+            //         produtos.push({
+            //             idproduto: parseInt(idproduto),
+            //             nomeproduto: response['nomeproduto'],
+            //             vladicional: valor_adicional_total,
+            //             porcaoextra: porcaoextra,
+            //             ingredienteadicional: ingredienteadicional,
+            //             removeringrediente: removeringrediente,
+            //             observacao: $('#txt_observacao_' + idcomanda).val(),
+            //             vlfinalproduto: parseFloat($('#valortotal').val())
+            //         })
 
-                    console.log(produtos)
-                    $('#txt_observacao_' + idcomanda).val('')
+            //         $('#txt_observacao_' + idcomanda).val('')
 
-                    $.each(comandas, function (index, value) {
-                        if (value['idcomanda'] == idcomanda) {
-                            value['produtos'].push(produtos[0])
-                            console.log(comandas)
-                        }
-                    });
+            //         $.each(comandas, function (index, value) {
+            //             if (value['idcomanda'] == idcomanda) {
+            //                 value['produtos'].push(produtos[0])
+            //                 console.log(comandas)
+            //             }
+            //         });
 
-
-                    //mandar array produtos pra tabela
-
-                }
-                else {
-                    alert('Selecione um produto para incluir na comanda')
-                }
-            });
-
+            //     }
+            //     else {
+            //         alert('Selecione um produto para incluir na comanda')
+            //     }
+            // });
 
         }
     })
@@ -354,7 +348,7 @@ function removerIngredienteProdutoComanda(ingredientes, idcomanda) {
 }
 
 function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda, nomeproduto) {
-    $('#salva_produto_comanda_' + idcomanda).click(function (e) {
+    $('.atualiza_comanda_' + idcomanda).click(function (e) {
         e.preventDefault();
         
         txtvlinicialcomanda = $('#valor_total_comanda_' + idcomanda).text()
@@ -403,9 +397,11 @@ function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda,
                 vlfinalproduto: vlprodutoadicionado
             })
 
-            vlfinalcomanda = vlprodutoadicionado + vlinicialcomanda
+            porcaoextra = []
+            ingredienteadicional = []
+            removeringrediente = []
 
-            
+            vlfinalcomanda = vlprodutoadicionado + vlinicialcomanda            
 
             $.ajax({
                 type: "POST",
@@ -420,15 +416,14 @@ function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda,
                     idatendente: $('#select_atendente_comanda_' + idcomanda).val(),
                     idmesa: $('#select_mesa_comanda_' + idcomanda).val(),
                     idcomandamesa: $('#idcomandamesa_'+idcomanda).val(),
-                    observacao: $('#txt_observacao_196' + idcomanda).val(),
+                    observacao: $('#txt_observacao_' + idcomanda).val(),
                     produtos: produtos
                 },
                 dataType: "json",
                 success: function (response) {
-                    console.log('response-deu certo')
+                    console.log('response:')
                     console.log(response)
-                    // document.location.reload()
-                    // $('#btn-gerenciar-comanda-'+idcomanda).click()
+                    document.location.reload()
                 },
                 error: function (err) {
                     console.log('erro')

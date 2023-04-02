@@ -4,8 +4,7 @@
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="form_principal" method="post">
-                <div class="modal-header">
+               <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Pedido <?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h5>
                     <button type="button" class="btn btn-dark mx-auto w-50">
                         <i class="fa-solid fa-2x fa-print"></i>
@@ -183,6 +182,8 @@
                                 </thead>
                                 <tbody id="body_tabela_ingredientes_produto_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
 
+                                    
+
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -206,12 +207,12 @@
                 </div>
                 <div class="row m-3">
                     <button type="button" id="salva_produto_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
-                        class="btn btn-dark col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 mx-auto">
+                        class="btn btn-dark col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 mx-auto atualiza_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                         <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>
                 <div class="modal-footer">
-                    <button class="w-100 btn btn-dark" data-bs-dismiss="modal" id="editar_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                    <button class="w-100 btn btn-dark atualiza_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" data-bs-dismiss="modal" id="editar_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                         <i class="fa-solid fa-save"></i> Alterar Pedido <?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                     </button>
 
@@ -219,13 +220,11 @@
                         Cancelar
                     </button>
 
-
                     <button type="button" class="w-100 btn btn-success">
                         Encerrar Pedido
                     </button>
 
                 </div>
-            </form>
         </div>
     </div>
 

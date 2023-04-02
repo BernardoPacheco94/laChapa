@@ -21,7 +21,7 @@ $('.select_tipo_produto_comanda').change(function (e) {
 
             //Carrega os produtos de acordo com o tipo selecionado
             for (let index = 0; index < response.length; index++) {
-                $('.select_produto_comanda').prepend('<option value=' + response[index].idproduto + '>' + response[index].nomeproduto +' - '+ (response[index].valorproduto).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</option>')
+                $('.select_produto_comanda').prepend('<option value=' + response[index].idproduto + '>' + response[index].nomeproduto + ' - ' + (response[index].valorproduto).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</option>')
             }
             $('.select_produto_comanda').prepend('<option selected disabled>Selecione o produto</option>')
         }
@@ -146,7 +146,7 @@ $('.select_produto_comanda').change(function (e) {
                         //inclui as opcões no select
                         for (let c = 0; c < responseIngredientes.length; c++) {
 
-                            $('#select_adc_novo_ingrediente').prepend('<option id="option' + responseIngredientes[c].idingrediente + '" value="' + responseIngredientes[c].idingrediente + '">' + responseIngredientes[c].nomeingrediente  + ' - ' + (responseIngredientes[c].valoradicional).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</option>')
+                            $('#select_adc_novo_ingrediente').prepend('<option id="option' + responseIngredientes[c].idingrediente + '" value="' + responseIngredientes[c].idingrediente + '">' + responseIngredientes[c].nomeingrediente + ' - ' + (responseIngredientes[c].valoradicional).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</option>')
                             for (let index = 0; index < listaIngredientesProduto.length; index++) {//se o ingrediente já estiver no produto é removido
                                 if (responseIngredientes[c].idingrediente == listaIngredientesProduto[index].idingrediente) {
                                     $('#option' + responseIngredientes[c].idingrediente).remove()
@@ -320,7 +320,16 @@ function criaTabelaProdutosComanda(Array = produtos) {
 
     for (let index = 0; index < produtos.length; index++) {
 
-        $('#tabela_produtos_lancados_na_comanda').append('<tr id="linha_produto_' + index + '"><td class="text-center"  id="td_nome_comanda_produto_' + index + '">' + produtos[index].nomeproduto + '</td><td class="text-center align-middle">' + produtos[index].vlfinalproduto.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td><td class="text-center align-middle"><button id="btn_remove_produto_comanda_' + index + '" class="btn fa-solid fa-trash-can text-danger "></button></td></tr>')
+        $('#tabela_produtos_lancados_na_comanda').append('<tr id="linha_produto_' + index + '"><td class="text-center"  id="td_nome_comanda_produto_' + index + '">' + produtos[index].nomeproduto + ' <input type="number" value="' + index + '" id="nroitem_' + index + '" hidden> </td><td class="text-center align-middle">' + produtos[index].vlfinalproduto.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td><td class="text-center align-middle"><button id="btn_remove_produto_comanda_' + index + '" class="btn fa-solid fa-trash-can text-danger "></button></td></tr>')
+        produtos[index]['nroitem'] = $('#nroitem_' + index).val()
+        if (produtos[index]['porcaoextra']) {
+
+            for (c = 0; c < produtos[index]['porcaoextra'].length; c++) {
+                produtos[index]['porcaoextra'][c]['nroitem'] = $('#nroitem_' + index).val()
+            }
+
+        }
+
 
 
         //lista de ingredientes a serem removidos
@@ -425,7 +434,7 @@ function salvaComanda(Array = produtos) {
                     console.log('response')
                     console.log(response)
 
-                    document.location.reload()
+                    // document.location.reload()
                 },
                 error: function (err) {
                     console.log(err)
