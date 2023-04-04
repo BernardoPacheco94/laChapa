@@ -353,6 +353,7 @@ function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda,
         
         txtvlinicialcomanda = $('#valor_total_comanda_' + idcomanda).text()
         vlinicialcomanda = parseFloat(txtvlinicialcomanda.replace('R$ ', '').replace('.', '').replace(',', '.'))
+        nroitem = $('#body_tabela_produtos_lancados_na_comanda_'+idcomanda).length
 
         if (($('#select_produto_comanda_' + idcomanda).val()) != null) {
             $.each(listaIngredientesProduto, function (key, value) {
@@ -361,7 +362,8 @@ function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda,
                         'ingredienteporcaoextra': value['nomeingrediente'],
                         'idproduto': idproduto,
                         'idingrediente': value['idingrediente'],
-                        'qtdporcaoextra': value['quantidade']
+                        'qtdporcaoextra': value['quantidade'],
+                        'nroitem': nroitem
                     })
                 }
 
@@ -369,7 +371,8 @@ function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda,
                     removeringrediente.push({
                         'removeringrediente': value['nomeingrediente'],
                         'idproduto': idproduto,
-                        'idingrediente': value['idingrediente']
+                        'idingrediente': value['idingrediente'],
+                        'nroitem': nroitem
                     })
                 }
             });
@@ -379,7 +382,8 @@ function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda,
                     'ingredienteadicional': value['nomeingrediente'],
                     'idproduto': idproduto,
                     'idingrediente': value['idingrediente'],
-                    'qtdingredienteadicional': value['qtdingredienteadicional']
+                    'qtdingredienteadicional': value['qtdingredienteadicional'],
+                    'nroitem': nroitem
                 })
             });
 
@@ -394,7 +398,8 @@ function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda,
                 ingredienteadicional: ingredienteadicional,
                 removeringrediente: removeringrediente,
                 observacao: $('#txt_observacao_' + idcomanda).val(),
-                vlfinalproduto: vlprodutoadicionado
+                vlfinalproduto: vlprodutoadicionado, 
+                nroitem: nroitem
             })
 
             porcaoextra = []
@@ -423,7 +428,7 @@ function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda,
                 success: function (response) {
                     console.log('response:')
                     console.log(response)
-                    document.location.reload()
+                    // document.location.reload()
                 },
                 error: function (err) {
                     console.log('erro')
