@@ -329,6 +329,20 @@ function criaTabelaProdutosComanda(Array = produtos) {
             }
 
         }
+        if (produtos[index]['ingredienteadicional']) {
+
+            for (c = 0; c < produtos[index]['ingredienteadicional'].length; c++) {
+                produtos[index]['ingredienteadicional'][c]['nroitem'] = $('#nroitem_' + index).val()
+            }
+
+        }
+        if (produtos[index]['removeringrediente']) {
+
+            for (c = 0; c < produtos[index]['removeringrediente'].length; c++) {
+                produtos[index]['removeringrediente'][c]['nroitem'] = $('#nroitem_' + index).val()
+            }
+
+        }
 
 
 

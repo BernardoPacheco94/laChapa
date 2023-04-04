@@ -80,52 +80,60 @@ class Comanda extends Model
     }
 
 
-    public function salvaComandaIngredienteAdicional($idproduto, $qtd, $idingrediente)
+    public function salvaComandaIngredienteAdicional($idproduto, $qtd, $idingrediente, $nroitem)
     {
         $sql = new Sql;
 
-        $sql->select('CALL `db_lachapa`.`sp_salva_ingrediente_adicional`(:idingredienteadicional, :idproduto, :idcomanda, :idingrediente, :qtdingredienteadicional)', [
+        $sql->select('CALL `db_lachapa`.`sp_salva_ingrediente_adicional`(:idingredienteadicional, :idproduto, :idcomanda, :idingrediente, :qtdingredienteadicional, :nroitem)', [
             ':idingredienteadicional' => 0,
             ':idproduto' => $idproduto,
             ':idcomanda' => $this->getidcomanda(),
             ':idingrediente' => $idingrediente,
-            ':qtdingredienteadicional' => $qtd
+            ':qtdingredienteadicional' => $qtd,
+            ':nroitem' => $nroitem
         ]);
     }
 
-    public static function listaIngredienteAdicionalProdutoComanda($idproduto, $idcomanda)
+    public static function listaIngredienteAdicionalProdutoComanda($idproduto, $idcomanda, $nroitem)
     {
         $sql = new Sql;
 
         return $sql->select('SELECT * FROM `ingredienteadicional`
         INNER JOIN ingredientes USING (idingrediente)
-         WHERE idproduto = :idproduto AND idcomanda = :idcomanda', [
+         WHERE idproduto = :idproduto 
+         AND idcomanda = :idcomanda
+         AND nroitem = :nroitem', [
             ':idproduto' => $idproduto,
-            ':idcomanda' => $idcomanda
+            ':idcomanda' => $idcomanda,
+            ':nroitem' => $nroitem
         ]);
     }
 
-    public function salvaComandaProdutoRemoverIngrediente($idproduto, $idingrediente)
+    public function salvaComandaProdutoRemoverIngrediente($idproduto, $idingrediente, $nroitem)
     {
         $sql = new Sql;
 
-        $sql->select('CALL `db_lachapa`.`sp_salva_removeringrediente`(:idremoveringrediente, :idproduto, :idcomanda, :idingrediente)', [
+        $sql->select('CALL `db_lachapa`.`sp_salva_removeringrediente`(:idremoveringrediente, :idproduto, :idcomanda, :idingrediente, :nroitem)', [
             ':idremoveringrediente' => 0,
             ':idproduto' => $idproduto,
             ':idcomanda' => $this->getidcomanda(),
-            ':idingrediente' => $idingrediente
+            ':idingrediente' => $idingrediente,
+            ':nroitem' => $nroitem
         ]);
     }
 
-    public static function listaRemoverIngredienteProdutoComanda($idproduto, $idcomanda)
+    public static function listaRemoverIngredienteProdutoComanda($idproduto, $idcomanda, $nroitem)
     {
         $sql = new Sql;
 
         return $sql->select('SELECT * FROM `removeringrediente`
         INNER JOIN ingredientes USING (idingrediente)
-        WHERE idproduto = :idproduto AND idcomanda = :idcomanda', [
+        WHERE idproduto = :idproduto 
+        AND idcomanda = :idcomanda
+        AND nroitem = :nroitem', [
             ':idproduto' => $idproduto,
-            ':idcomanda' => $idcomanda
+            ':idcomanda' => $idcomanda,
+            ':nroitem' => $nroitem
         ]);
     }
 
@@ -149,13 +157,13 @@ class Comanda extends Model
                 $resultado[$i]['porcaoextra'] = $consultaporcaoextra;
             }
             
-            $consultaingredienteadicional = Comanda::listaIngredienteAdicionalProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda']);
+            $consultaingredienteadicional = Comanda::listaIngredienteAdicionalProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda'], $resultado[$i]['nroitem']);
             
             if (count($consultaingredienteadicional) > 0) {
                 $resultado[$i]['ingredienteadicional'] = $consultaingredienteadicional;
             }
 
-            $consultaremoveringrediente = Comanda::listaRemoverIngredienteProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda']);
+            $consultaremoveringrediente = Comanda::listaRemoverIngredienteProdutoComanda($resultado[$i]['idproduto'], $resultado[$i]['idcomanda'], $resultado[$i]['nroitem']);
 
             if (count($consultaremoveringrediente) > 0) {
                 $resultado[$i]['removeringrediente'] = $consultaremoveringrediente;

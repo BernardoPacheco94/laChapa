@@ -44,12 +44,12 @@ $app->post('/salvaprodutoeingredientescomanda/ajax', function () {
             }
             if (array_key_exists('ingredienteadicional', $_POST['produtos'][$i])) {
                 for ($c = 0; $c < count($_POST['produtos'][$i]['ingredienteadicional']); $c++) {
-                    $comanda->salvaComandaIngredienteAdicional($_POST['produtos'][$i]['ingredienteadicional'][$c]['idproduto'], $_POST['produtos'][$i]['ingredienteadicional'][$c]['qtdingredienteadicional'], $_POST['produtos'][$i]['ingredienteadicional'][$c]['idingrediente']);
+                    $comanda->salvaComandaIngredienteAdicional($_POST['produtos'][$i]['ingredienteadicional'][$c]['idproduto'], $_POST['produtos'][$i]['ingredienteadicional'][$c]['qtdingredienteadicional'], $_POST['produtos'][$i]['ingredienteadicional'][$c]['idingrediente'], $_POST['produtos'][$i]['ingredienteadicional'][$c]['nroitem']);
                 }
             }
             if (array_key_exists('removeringrediente', $_POST['produtos'][$i])) {
                 for ($c = 0; $c < count($_POST['produtos'][$i]['removeringrediente']); $c++) {
-                    $comanda->salvaComandaProdutoRemoverIngrediente($_POST['produtos'][$i]['removeringrediente'][$c]['idproduto'], $_POST['produtos'][$i]['removeringrediente'][$c]['idingrediente']);
+                    $comanda->salvaComandaProdutoRemoverIngrediente($_POST['produtos'][$i]['removeringrediente'][$c]['idproduto'], $_POST['produtos'][$i]['removeringrediente'][$c]['idingrediente'], $_POST['produtos'][$i]['removeringrediente'][$c]['nroitem']);
                 }
             }
         }
