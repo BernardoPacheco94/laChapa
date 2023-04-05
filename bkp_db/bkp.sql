@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `db_lachapa` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `db_lachapa`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: db_lachapa
@@ -65,9 +67,11 @@ CREATE TABLE `cartoes` (
   `idcartao` int(11) NOT NULL AUTO_INCREMENT,
   `ativo` int(11) NOT NULL DEFAULT 1,
   `numero` varchar(4) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `livre` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`idcartao`),
-  UNIQUE KEY `idcartao_UNIQUE` (`idcartao`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  UNIQUE KEY `idcartao_UNIQUE` (`idcartao`),
+  UNIQUE KEY `numero_UNIQUE` (`numero`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,9 +88,9 @@ CREATE TABLE `comanda-mesa` (
   PRIMARY KEY (`idcomandamesa`),
   KEY `FX_comanda_mesa` (`idmesa`),
   KEY `FK_mesa_comanda` (`idcomanda`),
-  CONSTRAINT `idcomandamesa` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `idmesacomanda` FOREIGN KEY (`idmesa`) REFERENCES `mesas` (`idmesa`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `idcomandamesa` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `idmesacomanda` FOREIGN KEY (`idmesa`) REFERENCES `mesas` (`idmesa`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,13 +104,17 @@ CREATE TABLE `comanda-produtos` (
   `idcomandaproduto` int(11) NOT NULL AUTO_INCREMENT,
   `idcomanda` int(11) NOT NULL,
   `idproduto` int(11) NOT NULL,
+  `nroitem` int(11) DEFAULT NULL,
   `vlfinalproduto` float DEFAULT NULL,
+  `observacao` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`idcomandaproduto`),
   KEY `FK_produto_comanda` (`idcomanda`),
   KEY `FK_comanda_produto` (`idproduto`),
+  KEY `FK_item_porcao_extra` (`nroitem`),
+  KEY `nroitem_idx` (`nroitem`),
   CONSTRAINT `idcomandaproduto` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idprodutocomanda` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,14 +132,13 @@ CREATE TABLE `comandas` (
   `nomecliente` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `idatendente` int(11) DEFAULT NULL,
   `idcartao` int(11) DEFAULT NULL,
-  `observacao` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`idcomanda`),
   UNIQUE KEY `idcomanda_UNIQUE` (`idcomanda`),
   KEY `idcomandaatendente_idx` (`idatendente`),
   KEY `idcomandacartao_idx` (`idcartao`),
-  CONSTRAINT `idcomandaatendente` FOREIGN KEY (`idatendente`) REFERENCES `atendentes` (`idatendente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `idcomandacartao` FOREIGN KEY (`idcartao`) REFERENCES `cartoes` (`idcartao`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=206 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `idcomandaatendente` FOREIGN KEY (`idatendente`) REFERENCES `atendentes` (`idatendente`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `idcomandacartao` FOREIGN KEY (`idcartao`) REFERENCES `cartoes` (`idcartao`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,15 +173,18 @@ CREATE TABLE `ingredienteadicional` (
   `idproduto` int(11) NOT NULL,
   `qtdingredienteadicional` int(11) DEFAULT NULL,
   `idingrediente` int(11) DEFAULT NULL,
+  `nroitem` int(11) DEFAULT NULL,
   PRIMARY KEY (`idingredienteadicional`),
   UNIQUE KEY `idingredienteadicional_UNIQUE` (`idingredienteadicional`),
   KEY `idprodutoingredienteadicional_idx` (`idproduto`),
   KEY `idcomandaingredienteadicional_idx` (`idcomanda`),
   KEY `idingredienteadc_idx` (`idingrediente`),
+  KEY `idnroitemingredienteadc_idx` (`nroitem`),
   CONSTRAINT `idcomandaingredienteadicional` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idingredienteadc` FOREIGN KEY (`idingrediente`) REFERENCES `ingredientes` (`idingrediente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `idprodutoingredienteadicional` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `idprodutoingredienteadicional` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `nroitemingredienteadicional` FOREIGN KEY (`nroitem`) REFERENCES `comanda-produtos` (`nroitem`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -223,14 +233,17 @@ CREATE TABLE `porcao-extra` (
   `idproduto` int(11) NOT NULL,
   `qtdporcaoextra` int(11) DEFAULT NULL,
   `idingrediente` int(11) DEFAULT NULL,
+  `nroitem` int(11) DEFAULT NULL,
   PRIMARY KEY (`idporcaoextra`),
   KEY `idcomandaporcaoextra_idx` (`idcomanda`),
   KEY `idprodutoporcaoextra_idx` (`idproduto`),
   KEY `idingredienteporcaoextra_idx` (`idingrediente`),
+  KEY `nroitemporcaoextra` (`nroitem`),
   CONSTRAINT `idcomandaporcaoextra` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idingredienteporcaoextra` FOREIGN KEY (`idingrediente`) REFERENCES `ingredientes` (`idingrediente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `idprodutoporcaoextra` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `idprodutoporcaoextra` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `nroitemporcaoextra` FOREIGN KEY (`nroitem`) REFERENCES `comanda-produtos` (`nroitem`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -300,13 +313,16 @@ CREATE TABLE `removeringrediente` (
   `idcomanda` int(11) NOT NULL,
   `idproduto` int(11) NOT NULL,
   `idingrediente` int(11) NOT NULL,
+  `nroitem` int(11) DEFAULT NULL,
   PRIMARY KEY (`idremoveringrediente`),
   KEY `idcomandaremoveringrediente_idx` (`idcomanda`),
   KEY `idprodutoremoveringrediente_idx` (`idproduto`),
   KEY `idingredienteremovido_idx` (`idingrediente`),
+  KEY `idnroitemremoveringrediente_idx` (`nroitem`),
   CONSTRAINT `idcomandaremoveringrediente` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `idprodutoremoveringrediente` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `idprodutoremoveringrediente` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `nroitemremoveringrediente` FOREIGN KEY (`nroitem`) REFERENCES `comanda-produtos` (`nroitem`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -365,7 +381,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_salva_comanda`(
 `pstatuscomanda` varchar(1),
 `pdatacomanda` timestamp,
 `pnomecliente` varchar(45),
-`pidatendente` int(11)
+`pidatendente` int(11),
+`pidcartao` int(11)
 
 )
 BEGIN
@@ -378,11 +395,12 @@ BEGIN
 				statuscomanda = pstatuscomanda,
                 datacomanda = pdatacomanda,
                 nomecliente = pnomecliente,
-                idatendente = pidatendente
+                idatendente = pidatendente,
+                idcartao = pidcartao
 			WHERE  idcomanda = pidcomanda;
 	ELSE
-		INSERT INTO `db_lachapa`.`comandas` (`valortotal`, `nomecliente`, `idatendente`)
-		VALUES (pvalortotal, pnomecliente, pidatendente);
+		INSERT INTO `db_lachapa`.`comandas` (`valortotal`, `nomecliente`, `idatendente`, `idcartao`)
+		VALUES (pvalortotal, pnomecliente, pidatendente, pidcartao);
         
         SET pidcomanda = LAST_INSERT_ID();
 	END IF;
@@ -416,7 +434,7 @@ BEGIN
 	IF pidcomandamesa > 0 THEN
 		UPDATE `comanda-mesa`
 			SET
-				idcomandamesa = pdicomandamesa,
+				idcomandamesa = pidcomandamesa,
                 idcomanda = pidcomanda,
                 idmesa = pidmesa
 			WHERE idcomandamesa = pidcomandamesa;
@@ -448,7 +466,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_salva_comanda_produtos`(
 `pidcomandaproduto` int(11),
 `pidcomanda` int(11),
 `pidproduto` int(11),
-`pvlfinalproduto` float
+`pnroitem` int(11),
+`pvlfinalproduto` float,
+`pobservacao` varchar(255)
 )
 BEGIN
 
@@ -458,11 +478,13 @@ BEGIN
 				idcomandaproduto = pidcomandaproduto,
 				idcomanda = pidcomanda,
 				idproduto = pidproduto,
-                vlfinalproduto = pvlfinalproduto
+                nroitem = pnroitem,
+                vlfinalproduto = pvlfinalproduto,
+                observacao = pobservacao
 			WHERE  idcomandaproduto = pidcomandaproduto;
 	ELSE
-		INSERT INTO `db_lachapa`.`comanda-produtos` (`idcomanda`, `idproduto`, `vlfinalproduto`)
-		VALUES (pidcomanda, pidproduto, pvlfinalproduto);
+		INSERT INTO `db_lachapa`.`comanda-produtos` (`idcomanda`, `idproduto`, `nroitem`, `vlfinalproduto`,`observacao`)
+		VALUES (pidcomanda, pidproduto, pnroitem, pvlfinalproduto, pobservacao);
         
         SET pidcomandaproduto = LAST_INSERT_ID();
 	END IF;
@@ -493,7 +515,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_salva_ingrediente_adicional`(
 `pidproduto` int(11),
 `pidcomanda` int(11),
 `pidingrediente` int(11),
-`pqtdingredienteadicional` int(11)
+`pqtdingredienteadicional` int(11),
+`pnroitem` int (11)
 
 )
 BEGIN
@@ -505,18 +528,21 @@ IF `pidingredienteadicional` > 0 THEN
 				`idproduto` = `pidproduto`,
 				`idcomanda` = `pidcomanda`,
                 `idingrediente` = `pidingrediente`,
-				`qtdingredienteadicional` = `pqtdingredienteadicional`;
+				`qtdingredienteadicional` = `pqtdingredienteadicional`,
+                `nroitem` = `pnroitem`;
 	ELSE 
 		INSERT INTO `db_lachapa`.`ingredienteadicional`
 						(`idproduto`,
 						`idcomanda`,
                         `idingrediente`,
-						`qtdingredienteadicional`)
+						`qtdingredienteadicional`,
+                        `nroitem`)
 		VALUES
 						(pidproduto,
 						pidcomanda,
                         pidingrediente,
-						pqtdingredienteadicional);
+						pqtdingredienteadicional,
+                        pnroitem);
 		
         SET `pidingredienteadicional` = LAST_INSERT_ID();
         
@@ -547,7 +573,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_salva_porcao_extra`(
 `pidproduto` int(11),
 `pidcomanda` int(11),
 `pidingrediente` int(11),
-`pqtdporcaoextra` int(11)
+`pqtdporcaoextra` int(11),
+`pnroitem` int(11)
 
 )
 BEGIN
@@ -559,18 +586,21 @@ IF `pidporcaoextra` > 0 THEN
 				`idproduto` = `pidproduto`,
 				`idcomanda` = `pidcomanda`,
                 `idingrediente` = `pidingrediente`,
-				`qtdporcaoextra` = `pqtdporcaoextra`;
+				`qtdporcaoextra` = `pqtdporcaoextra`,
+                `nroitem` = `pnroitem`;
 	ELSE 
 		INSERT INTO `db_lachapa`.`porcao-extra`
 						(`idproduto`,
 						`idcomanda`,
                         `idingrediente`,
-						`qtdporcaoextra`)
+						`qtdporcaoextra`,
+                        `nroitem`)
 		VALUES
 						(pidproduto,
 						pidcomanda,
                         pidingrediente,
-						pqtdporcaoextra);
+						pqtdporcaoextra,
+                        pnroitem);
 		
         SET `pidporcaoextra` = LAST_INSERT_ID();
         
@@ -642,7 +672,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_salva_removeringrediente`(
 `pidremoveringrediente` int(11),
 `pidproduto` int(11),
 `pidcomanda` int(11),
-`pidingrediente` int(11)
+`pidingrediente` int(11),
+`pnroitem` int(11)
 
 )
 BEGIN
@@ -653,16 +684,19 @@ IF `pidremoveringrediente` > 0 THEN
 				`idremoveringrediente` = `pidremoveringrediente`,
 				`idproduto` = `pidproduto`,
 				`idcomanda` = `pidcomanda`,
-                `idingrediente` = `pidingrediente`;
+                `idingrediente` = `pidingrediente`,
+                `nroitem` = `pnroitem`;
 	ELSE 
 		INSERT INTO `db_lachapa`.`removeringrediente`
 						(`idproduto`,
 						`idcomanda`,
-                        `idingrediente`)
+                        `idingrediente`,
+                        `nroitem`)
 		VALUES
 						(pidproduto,
 						pidcomanda,
-                        pidingrediente);
+                        pidingrediente,
+                        pnroitem);
 		
         SET `pidremoveringrediente` = LAST_INSERT_ID();
         
@@ -686,4 +720,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-16  0:02:24
+-- Dump completed on 2023-04-04 22:26:22
