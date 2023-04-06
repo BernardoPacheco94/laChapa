@@ -62,8 +62,8 @@
                             </thead>
                             <tbody id="body_tabela_produtos_lancados_na_comanda_{$value.idcomanda}">
                                 {loop="$value.produtos"}
-                                <tr id="linha_produto_{$counter}">
-                                    <td class="text-center" id="td_nome_produto_comanda_{$counter}">
+                                <tr id="linha_produto_{$counter}_comanda_{$value.idcomanda}">
+                                    <td class="text-center" id="td_nome_produto_{$counter}_comanda_{$value.idcomanda}">
                                         {$value.nomeproduto}
 
                                         {$i=0}
@@ -128,7 +128,7 @@
                                         R$ {function="formatPrice($value.vlfinalproduto)"}
                                     </td>
                                     <td class="text-center align-middle">
-                                        <button id="btn_remove_produto_comanda_{$value.idcomanda}"
+                                        <button id="btn_remove_produto_comanda_{$value.idcomanda}_item_{$counter}"
                                             class="btn fa-solid fa-trash-can text-danger ">
                                         </button>
                                     </td>
@@ -212,7 +212,7 @@
                     </button>
                 </div>
                 <div class="modal-footer">
-                    <button class="w-100 btn btn-dark atualiza_comanda_{$value.idcomanda}" data-bs-dismiss="modal" id="editar_comanda_{$value.idcomanda}">
+                    <button class="w-100 btn btn-dark atualiza_comanda_{$value.idcomanda}" id="editar_comanda_{$value.idcomanda}">
                         <i class="fa-solid fa-save"></i> Alterar Pedido {$value.idcomanda}
                     </button>
 

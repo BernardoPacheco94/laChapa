@@ -3,7 +3,6 @@
 use LaChapa\Model\Atendente;
 use LaChapa\Model\Cartao;
 use LaChapa\Model\Comanda;
-use LaChapa\Model\Ingrediente;
 use LaChapa\Page;
 use LaChapa\Model\Mesa;
 use LaChapa\Model\Produto;

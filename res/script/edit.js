@@ -368,11 +368,52 @@ function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda,
             success: function (response) {
                 console.log('response:')
                 console.log(response)
-                document.location.reload()
+
+                $('#body_tabela_produtos_lancados_na_comanda_'+response['idcomanda']).append('<tr id="linha_produto_'+response['produtos'][0]['nroitem']+'_comanda_'+ response['idcomanda'] +'"><td class="text-center" id="td_nome_produto_'+response['produtos'][0]['nroitem']+'_comanda_'+response['idcomanda']+'">'+response['produtos'][0]['nomeproduto']+' <ul id="lista_removeringrediente_item_'+response['produtos'][0]['nroitem']+'_comanda_'+response['idcomanda']+'" hidden class="text-start fw-normal">Sem:</ul> <ul id="lista_porcaoextra_item_'+response['produtos'][0]['nroitem']+'_comanda_'+response['idcomanda']+'"hidden class="text-start fw-normal">Porção extra:</ul> <ul id="lista_ingredienteadicional_item_'+response['produtos'][0]['nroitem']+'_comanda_'+response['idcomanda']+'" hidden class="text-start fw-normal">Adicional:</ul> <ul id="lista_observacao_item_'+response['produtos'][0]['nroitem']+'_comanda_'+response['idcomanda']+'" hidden class="text-start fw-normal">OBS:</ul> </td><td class="text-center align-middle">'+parseFloat(response['produtos'][0]['vlfinalproduto']).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) +'</td><td class="text-center align-middle"><button id="btn_remove_produto_comanda'+response['idcomanda']+'_item_'+response['produtos'][0]['nroitem']+'"class="btn fa-solid fa-trash-can text-danger "></button></td></tr>')
+
+                if(response['produtos'][0]['porcaoextra']){
+                    for (let index = 0; index < response['produtos'][0]['porcaoextra'].length; index++) {
+                        $('#lista_porcaoextra_item_'+response['produtos'][0]['nroitem']+'_comanda_'+response['idcomanda']).append('<li>'+ response['produtos'][0]['porcaoextra'][index]['ingredienteporcaoextra'] +' - '+ response['produtos'][0]['porcaoextra'][index]['qtdporcaoextra'] + 'x </li>')                        
+                    }          
+                    
+                    $('#lista_porcaoextra_item_'+response['produtos'][0]['nroitem']+'_comanda_'+response['idcomanda']).attr('hidden', false)
+                    
+                }
+                
+                if(response['produtos'][0]['ingredienteadicional']){
+
+                    for (let index = 0; index < response['produtos'][0]['ingredienteadicional'].length; index++) {
+                        $('#lista_ingredienteadicional_item_'+response['produtos'][0]['nroitem']+'_comanda_'+response['idcomanda']).append('<li>'+ response['produtos'][0]['ingredienteadicional'][index]['ingredienteadicional'] +' - '+ response['produtos'][0]['ingredienteadicional'][index]['qtdingredienteadicional'] + 'x </li>')                        
+                    }                    
+                    
+                    $('#lista_ingredienteadicional_item_'+response['produtos'][0]['nroitem']+'_comanda_'+response['idcomanda']).attr('hidden', false)
+                }
+                
+                if(response['produtos'][0]['removeringrediente']){
+                    
+                    for (let index = 0; index < response['produtos'][0]['removeringrediente'].length; index++) {
+                        $('#lista_removeringrediente_item_'+response['produtos'][0]['nroitem']+'_comanda_'+response['idcomanda']).append('<li>'+ response['produtos'][0]['removeringrediente'][index]['removeringrediente']+'</li>')                        
+                    }                    
+                    
+                    $('#lista_removeringrediente_item_'+response['produtos'][0]['nroitem']+'_comanda_'+response['idcomanda']).attr('hidden', false)
+                }
+
+                if(response['observacao']){
+                    
+                    $('#lista_observacao_item_'+response['produtos'][0]['nroitem']+'_comanda_'+response['idcomanda']).append('<li>'+ response['observacao'] +'</li>')                        
+                                      
+                    
+                    $('#lista_observacao_item_'+response['produtos'][0]['nroitem']+'_comanda_'+response['idcomanda']).attr('hidden', false)
+                }         
+
+                        
+
+
+                // document.location.reload()
             },
-            error: function (err) {
+            error: function (xhr, status, error) {
                 console.log('erro')
-                console.log(err)
+                console.error(error)
             }
         });
 

@@ -62,8 +62,8 @@
                             </thead>
                             <tbody id="body_tabela_produtos_lancados_na_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                 <?php $counter2=-1;  if( isset($value1["produtos"]) && ( is_array($value1["produtos"]) || $value1["produtos"] instanceof Traversable ) && sizeof($value1["produtos"]) ) foreach( $value1["produtos"] as $key2 => $value2 ){ $counter2++; ?>
-                                <tr id="linha_produto_<?php echo htmlspecialchars( $counter2, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                                    <td class="text-center" id="td_nome_produto_comanda_<?php echo htmlspecialchars( $counter2, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                                <tr id="linha_produto_<?php echo htmlspecialchars( $counter2, ENT_COMPAT, 'UTF-8', FALSE ); ?>_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                                    <td class="text-center" id="td_nome_produto_<?php echo htmlspecialchars( $counter2, ENT_COMPAT, 'UTF-8', FALSE ); ?>_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                         <?php echo htmlspecialchars( $value2["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
 
                                         <?php $i=0; ?>
@@ -128,7 +128,7 @@
                                         R$ <?php echo formatPrice($value2["vlfinalproduto"]); ?>
                                     </td>
                                     <td class="text-center align-middle">
-                                        <button id="btn_remove_produto_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
+                                        <button id="btn_remove_produto_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>_item_<?php echo htmlspecialchars( $counter2, ENT_COMPAT, 'UTF-8', FALSE ); ?>"
                                             class="btn fa-solid fa-trash-can text-danger ">
                                         </button>
                                     </td>
@@ -212,7 +212,7 @@
                     </button>
                 </div>
                 <div class="modal-footer">
-                    <button class="w-100 btn btn-dark atualiza_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" data-bs-dismiss="modal" id="editar_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                    <button class="w-100 btn btn-dark atualiza_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" id="editar_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                         <i class="fa-solid fa-save"></i> Alterar Pedido <?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                     </button>
 
