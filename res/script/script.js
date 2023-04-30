@@ -253,7 +253,6 @@ function salvaProdutoComanda() {
     $('#salva_produto_comanda').click(function (e) {
         e.preventDefault();
 
-
         if (($('.select_produto_comanda').val()) != null) {
             $.each(listaIngredientesProduto, function (key, value) {
                 if (value['quantidade'] > 1) {
@@ -449,7 +448,7 @@ function salvaComanda(Array = produtos) {
                     console.log('response')
                     console.log(response)
 
-                    // document.location.reload()
+                    document.location.reload()
                 },
                 error: function (err) {
                     console.log(err)

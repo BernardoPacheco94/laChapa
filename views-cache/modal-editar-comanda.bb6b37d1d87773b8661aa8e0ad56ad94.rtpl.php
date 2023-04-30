@@ -213,7 +213,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="w-100 btn btn-dark atualiza_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" id="editar_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                        <i class="fa-solid fa-save"></i> Alterar Pedido <?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        <i class="fa-solid fa-save"></i> Salvar Alterações Pedido <?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                     </button>
 
                     <button type="button" class="w-100 btn btn-warning" data-bs-dismiss="modal">
