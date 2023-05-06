@@ -27,7 +27,10 @@ window.onload = () => {
                     carregaTabelaDeIngredientes(idproduto, comandas[index]['idcomanda'], comandas)
                 });
 
-                salvaProdutoComandaEdit($('#select_produto_comanda_' + comandas[index]['idcomanda']).val(), response['ingredientes'], comandas[index]['idcomanda'], response['nomeproduto'])
+                // console.log('comandas[index]')
+                // console.log(comandas[index])
+
+                salvaProdutoComandaEdit(comandas[index]['idcomanda'])
             }
         }
     })
@@ -137,7 +140,7 @@ function carregaTabelaDeIngredientes(idproduto, idcomanda) {
 
                                     todosIngredientes[i].qtdingredienteadicional = qtd
 
-                                    $('#body_tabela_ingredientes_produto_comanda_' + idcomanda).append('<tr><td>' + todosIngredientes[i]['nomeingrediente'] + '</td><td id="qtd_ing_' + todosIngredientes[i]["idingrediente"] + '"> ' + qtd + 'x </td><td class="text-center"><a id="adc_ing_' + todosIngredientes[i]["idingrediente"] + '" href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a id="rmv_ing_' + todosIngredientes[i]['idingrediente'] + '" href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td id="vlr_adc_' + todosIngredientes[i]['idingrediente'] + '">' + todosIngredientes[i]['valoradicional'].toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td></tr>');
+                                    $('#body_tabela_ingredientes_produto_comanda_' + idcomanda).append('<tr><td>' + todosIngredientes[i]['nomeingrediente'] + '</td><td id="qtd_ing_' + todosIngredientes[i]["idingrediente"] + '" value="'+qtd+'"> ' + qtd + 'x </td><td class="text-center"><a id="adc_ing_' + todosIngredientes[i]["idingrediente"] + '" href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a id="rmv_ing_' + todosIngredientes[i]['idingrediente'] + '" href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td id="vlr_adc_' + todosIngredientes[i]['idingrediente'] + '">' + todosIngredientes[i]['valoradicional'].toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td></tr>');
 
                                     valor_adicional_total = valor_adicional_total + todosIngredientes[i]['valoradicional']
 
@@ -148,10 +151,10 @@ function carregaTabelaDeIngredientes(idproduto, idcomanda) {
                                         e.preventDefault();
                                         qtd++
 
-                                        $('#qtd_ing_' + todosIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + todosIngredientes[i]['idingrediente'] + '"> ' + qtd + 'x </td>');
+                                        $('#qtd_ing_' + todosIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + todosIngredientes[i]['idingrediente'] + '" value="'+qtd+'"> ' + qtd + 'x </td>');
 
                                         if (qtd <= 0) {
-                                            $('#qtd_ing_' + todosIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + todosIngredientes[i]['idingrediente'] + '"> 0x </td>');
+                                            $('#qtd_ing_' + todosIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + todosIngredientes[i]['idingrediente'] + '" value="'+qtd+'"> 0x </td>');
                                             qtd = 0
                                         } else {
                                             vlr_total = (qtd * todosIngredientes[i]['valoradicional']) + response['valorproduto']
@@ -174,7 +177,7 @@ function carregaTabelaDeIngredientes(idproduto, idcomanda) {
                                             alert('Não é possível ingrediente menor que ZERO!')
                                         } else {
 
-                                            $('#qtd_ing_' + todosIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + todosIngredientes[i]['idingrediente'] + '"> ' + qtd + 'x </td>');
+                                            $('#qtd_ing_' + todosIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + todosIngredientes[i]['idingrediente'] + '" value="'+qtd+'"> ' + qtd + 'x </td>');
 
                                             vlr_total = (qtd * todosIngredientes[i]['valoradicional']) + response['valorproduto']
 
@@ -204,9 +207,6 @@ function carregaTabelaDeIngredientes(idproduto, idcomanda) {
 
             $('#tabela_ingredientes_comanda_' + idcomanda).attr('hidden', false)
             $('#txt_observacao_' + idcomanda).attr('hidden', false);
-
-            
-            console.log('action')
         }
     })
     
@@ -236,16 +236,13 @@ function adicionarIngredienteProdutoComanda(ingredientes, idcomanda) {
         $('#adc_ing_' + value['idingrediente']).click(function (e) {
             e.preventDefault();
 
-            console.log('quantidade' + value['nomeingrediente'])
-            console.log(value['quantidade'])
-
             value['quantidade']++
 
-            $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '"> ' + value['quantidade'] + 'x </td>');
+            $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '" value="'+value['quantidade']+'"> ' + value['quantidade'] + 'x </td>');
 
             if (value['quantidade'] <= 0) {
                 value['quantidade'] = 0
-                $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '"> ' + value['quantidade'] + 'x </td>');
+                $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '" value="'+value['quantidade']+'"> ' + value['quantidade'] + 'x </td>');
             } else if (value['quantidade'] == 1) {
                 // não adiciona nada ao valor total
             } else {
@@ -273,11 +270,11 @@ function removerIngredienteProdutoComanda(ingredientes, idcomanda) {
             value['quantidade']--
 
             if (value['quantidade'] <= 0) {
-                $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '"> 0x </td>');
+                $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '" value="0"> 0x </td>');
                 value['quantidade'] = 0
             } else {
 
-                $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '"> ' + value['quantidade'] + 'x </td>');
+                $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '" value="'+value['quantidade']+'"> ' + value['quantidade'] + 'x </td>');
 
                 valor_adicional_total = valor_adicional_total - value['valoradicional']
 
@@ -289,45 +286,59 @@ function removerIngredienteProdutoComanda(ingredientes, idcomanda) {
 
 }
 
-function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda, nomeproduto) {
+function salvaProdutoComandaEdit(idcomanda) {
     $('#salva_produto_comanda_' + idcomanda).click(function (e) {
         e.preventDefault();
+
+        idproduto = $('#select_produto_comanda_' + idcomanda).val()
+        nomeprodutotemp = $('#select_produto_comanda_' + idcomanda).find(":selected").text()
+        nomeproduto = nomeprodutotemp.split(" - ")[0]
 
         txtvlinicialcomanda = $('#valor_total_comanda_' + idcomanda).text()
         vlinicialcomanda = parseFloat(txtvlinicialcomanda.replace('R$ ', '').replace('.', '').replace(',', '.'))
 
         nroitem = $('#body_tabela_produtos_lancados_na_comanda_' + idcomanda + ' tr').length
 
-        $.each(listaIngredientesProduto, function (key, value) {
-            if (value['quantidade'] > 1) {
-                porcaoextra.push({
-                    'ingredienteporcaoextra': value['nomeingrediente'],
-                    'idproduto': idproduto,
-                    'idingrediente': value['idingrediente'],
-                    'qtdporcaoextra': value['quantidade'],
-                    'nroitem': nroitem
-                })
-            }
+        listaIngredientesProduto = $('#body_tabela_produtos_lancados_na_comanda_'+idcomanda
+        ).map(function () { 
+            nomeingrediente = $(this).find("td:eq(0)").text()
+            // quantidade = 
 
-            if (value['quantidade'] == 0) {
-                removeringrediente.push({
-                    'removeringrediente': value['nomeingrediente'],
-                    'idproduto': idproduto,
-                    'idingrediente': value['idingrediente'],
-                    'nroitem': nroitem
-                })
-            }
-        });
+        }).get();
 
-        $.each(adicionais, function (key, value) {
-            ingredienteadicional.push({
-                'ingredienteadicional': value['nomeingrediente'],
-                'idproduto': idproduto,
-                'idingrediente': value['idingrediente'],
-                'qtdingredienteadicional': value['qtdingredienteadicional'],
-                'nroitem': nroitem
-            })
-        });
+        console.log('listaIngredientesProduto')
+        console.log(listaIngredientesProduto)
+
+        // $.each(listaIngredientesProduto, function (key, value) {
+        //     if (value['quantidade'] > 1) {
+        //         porcaoextra.push({
+        //             'ingredienteporcaoextra': value['nomeingrediente'],
+        //             'idproduto': idproduto,
+        //             'idingrediente': value['idingrediente'],
+        //             'qtdporcaoextra': value['quantidade'],
+        //             'nroitem': nroitem
+        //         })
+        //     }
+
+        //     if (value['quantidade'] == 0) {
+        //         removeringrediente.push({
+        //             'removeringrediente': value['nomeingrediente'],
+        //             'idproduto': idproduto,
+        //             'idingrediente': value['idingrediente'],
+        //             'nroitem': nroitem
+        //         })
+        //     }
+        // });
+
+        // $.each(adicionais, function (key, value) {
+        //     ingredienteadicional.push({
+        //         'ingredienteadicional': value['nomeingrediente'],
+        //         'idproduto': idproduto,
+        //         'idingrediente': value['idingrediente'],
+        //         'qtdingredienteadicional': value['qtdingredienteadicional'],
+        //         'nroitem': nroitem
+        //     })
+        // });
 
         txtvlprodutoadicionado = $('#valortotal_exibido_tabela_ingredientes_comanda_' + idcomanda).val()
         vlprodutoadicionado = parseFloat(txtvlprodutoadicionado.replace('R$', '').replace('.', '').replace(',', '.'))
@@ -336,9 +347,9 @@ function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda,
             idproduto: idproduto,
             nomeproduto: nomeproduto,
             vladicional: valor_adicional_total,
-            porcaoextra: porcaoextra,
-            ingredienteadicional: ingredienteadicional,
-            removeringrediente: removeringrediente,
+            // porcaoextra: porcaoextra,
+            // ingredienteadicional: ingredienteadicional,
+            // removeringrediente: removeringrediente,
             observacao: $('#txt_observacao_' + idcomanda).val(),
             vlfinalproduto: vlprodutoadicionado,
             nroitem: nroitem
@@ -346,6 +357,7 @@ function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda,
 
         vlfinalcomanda = vlprodutoadicionado + vlinicialcomanda
 
+        
         dados = {
             idcomanda: idcomanda,
             valortotal: vlfinalcomanda,
@@ -359,6 +371,11 @@ function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda,
             observacao: $('#txt_observacao_' + idcomanda).val(),
             produtos: produtos
         }
+
+        console.log('produtos')
+        console.log(produtos)
+        console.log('dados')
+        console.log(dados)
 
 
 
@@ -398,9 +415,6 @@ function salvaProdutoComandaEdit(idproduto, listaIngredientesProduto, idcomanda,
 
             $('#lista_observacao_item_' + produtos['nroitem'] + '_comanda_' + idcomanda).attr('hidden', false)
         }
-
-        console.log('produtos')
-        console.log(produtos)
     });
 
 
