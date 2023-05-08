@@ -286,7 +286,13 @@ function removerIngredienteProdutoComanda(ingredientes, idcomanda) {
 
 }
 
+
 function salvaProdutoComandaEdit(idcomanda) {
+    adicionais = []
+    $('#btn_adc_novo_ingrediente_comanda_' + idcomanda).click(function (e) {
+        e.preventDefault();
+    }); //monta o array adicionais []
+
     $('#salva_produto_comanda_' + idcomanda).click(function (e) {
         e.preventDefault();
 
@@ -298,25 +304,27 @@ function salvaProdutoComandaEdit(idcomanda) {
         vlinicialcomanda = parseFloat(txtvlinicialcomanda.replace('R$ ', '').replace('.', '').replace(',', '.'))
 
         nroitem = $('#body_tabela_produtos_lancados_na_comanda_' + idcomanda + ' tr').length
-        qtdinicialings = $('#body_tabela_produtos_lancados_na_comanda_' + idcomanda + ' td').length
 
-        console.log('qtdinicialings')
-        console.log(qtdinicialings)
 
         listaIngredientesProduto = $('#tabela_ingredientes_comanda_' + idcomanda + ' tr').map(function () {
 
             if ($(this).find("td:eq(0)").text() != "") {
+
                 return {
                     nomeingrediente: $(this).find("td:eq(0)").text(),
                     quantidade: parseFloat($(this).find("td:eq(1)").text().replace(' ', '').replace('x', '')),
-                    idingrediente : parseInt($(this).find("td:eq(1)").attr("id").replace("qtd_ing_", ""))
+                    idingrediente: parseInt($(this).find("td:eq(1)").attr("id").replace("qtd_ing_", ""))
                 }
             }
 
         }).get();
 
+
         console.log('listaIngredientesProduto')
         console.log(listaIngredientesProduto)
+
+        console.log('adicionais')
+        console.log(adicionais)
 
         // $.each(listaIngredientesProduto, function (key, value) {
         //     if (value['quantidade'] > 1) {
