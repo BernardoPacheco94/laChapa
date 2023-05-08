@@ -140,7 +140,7 @@ function carregaTabelaDeIngredientes(idproduto, idcomanda) {
 
                                     todosIngredientes[i].qtdingredienteadicional = qtd
 
-                                    $('#body_tabela_ingredientes_produto_comanda_' + idcomanda).append('<tr><td>' + todosIngredientes[i]['nomeingrediente'] + '</td><td id="qtd_ing_' + todosIngredientes[i]["idingrediente"] + '" value="'+qtd+'"> ' + qtd + 'x </td><td class="text-center"><a id="adc_ing_' + todosIngredientes[i]["idingrediente"] + '" href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a id="rmv_ing_' + todosIngredientes[i]['idingrediente'] + '" href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td id="vlr_adc_' + todosIngredientes[i]['idingrediente'] + '">' + todosIngredientes[i]['valoradicional'].toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td></tr>');
+                                    $('#body_tabela_ingredientes_produto_comanda_' + idcomanda).append('<tr><td>' + todosIngredientes[i]['nomeingrediente'] + '</td><td id="qtd_ing_' + todosIngredientes[i]["idingrediente"] + '" value="' + qtd + '"> ' + qtd + 'x </td><td class="text-center"><a id="adc_ing_' + todosIngredientes[i]["idingrediente"] + '" href=""><i class="fa-solid fa-circle-plus text-success fa-2x"></i></a></td><td class="text-center"><a id="rmv_ing_' + todosIngredientes[i]['idingrediente'] + '" href=""><i class="fa-solid fa-circle-minus text-warning fa-2x"></i></a></td><td id="vlr_adc_' + todosIngredientes[i]['idingrediente'] + '">' + todosIngredientes[i]['valoradicional'].toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td></tr>');
 
                                     valor_adicional_total = valor_adicional_total + todosIngredientes[i]['valoradicional']
 
@@ -151,10 +151,10 @@ function carregaTabelaDeIngredientes(idproduto, idcomanda) {
                                         e.preventDefault();
                                         qtd++
 
-                                        $('#qtd_ing_' + todosIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + todosIngredientes[i]['idingrediente'] + '" value="'+qtd+'"> ' + qtd + 'x </td>');
+                                        $('#qtd_ing_' + todosIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + todosIngredientes[i]['idingrediente'] + '" value="' + qtd + '"> ' + qtd + 'x </td>');
 
                                         if (qtd <= 0) {
-                                            $('#qtd_ing_' + todosIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + todosIngredientes[i]['idingrediente'] + '" value="'+qtd+'"> 0x </td>');
+                                            $('#qtd_ing_' + todosIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + todosIngredientes[i]['idingrediente'] + '" value="' + qtd + '"> 0x </td>');
                                             qtd = 0
                                         } else {
                                             vlr_total = (qtd * todosIngredientes[i]['valoradicional']) + response['valorproduto']
@@ -177,7 +177,7 @@ function carregaTabelaDeIngredientes(idproduto, idcomanda) {
                                             alert('Não é possível ingrediente menor que ZERO!')
                                         } else {
 
-                                            $('#qtd_ing_' + todosIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + todosIngredientes[i]['idingrediente'] + '" value="'+qtd+'"> ' + qtd + 'x </td>');
+                                            $('#qtd_ing_' + todosIngredientes[i]['idingrediente']).replaceWith('<td id="qtd_ing_' + todosIngredientes[i]['idingrediente'] + '" value="' + qtd + '"> ' + qtd + 'x </td>');
 
                                             vlr_total = (qtd * todosIngredientes[i]['valoradicional']) + response['valorproduto']
 
@@ -209,7 +209,7 @@ function carregaTabelaDeIngredientes(idproduto, idcomanda) {
             $('#txt_observacao_' + idcomanda).attr('hidden', false);
         }
     })
-    
+
 
 }
 
@@ -238,11 +238,11 @@ function adicionarIngredienteProdutoComanda(ingredientes, idcomanda) {
 
             value['quantidade']++
 
-            $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '" value="'+value['quantidade']+'"> ' + value['quantidade'] + 'x </td>');
+            $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '" value="' + value['quantidade'] + '"> ' + value['quantidade'] + 'x </td>');
 
             if (value['quantidade'] <= 0) {
                 value['quantidade'] = 0
-                $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '" value="'+value['quantidade']+'"> ' + value['quantidade'] + 'x </td>');
+                $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '" value="' + value['quantidade'] + '"> ' + value['quantidade'] + 'x </td>');
             } else if (value['quantidade'] == 1) {
                 // não adiciona nada ao valor total
             } else {
@@ -274,7 +274,7 @@ function removerIngredienteProdutoComanda(ingredientes, idcomanda) {
                 value['quantidade'] = 0
             } else {
 
-                $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '" value="'+value['quantidade']+'"> ' + value['quantidade'] + 'x </td>');
+                $('#qtd_ing_' + value['idingrediente']).replaceWith('<td id="qtd_ing_' + value['idingrediente'] + '" value="' + value['quantidade'] + '"> ' + value['quantidade'] + 'x </td>');
 
                 valor_adicional_total = valor_adicional_total - value['valoradicional']
 
@@ -298,11 +298,20 @@ function salvaProdutoComandaEdit(idcomanda) {
         vlinicialcomanda = parseFloat(txtvlinicialcomanda.replace('R$ ', '').replace('.', '').replace(',', '.'))
 
         nroitem = $('#body_tabela_produtos_lancados_na_comanda_' + idcomanda + ' tr').length
+        qtdinicialings = $('#body_tabela_produtos_lancados_na_comanda_' + idcomanda + ' td').length
 
-        listaIngredientesProduto = $('#body_tabela_produtos_lancados_na_comanda_'+idcomanda
-        ).map(function () { 
-            nomeingrediente = $(this).find("td:eq(0)").text()
-            // quantidade = 
+        console.log('qtdinicialings')
+        console.log(qtdinicialings)
+
+        listaIngredientesProduto = $('#tabela_ingredientes_comanda_' + idcomanda + ' tr').map(function () {
+
+            if ($(this).find("td:eq(0)").text() != "") {
+                return {
+                    nomeingrediente: $(this).find("td:eq(0)").text(),
+                    quantidade: parseFloat($(this).find("td:eq(1)").text().replace(' ', '').replace('x', '')),
+                    idingrediente : parseInt($(this).find("td:eq(1)").attr("id").replace("qtd_ing_", ""))
+                }
+            }
 
         }).get();
 
@@ -357,7 +366,7 @@ function salvaProdutoComandaEdit(idcomanda) {
 
         vlfinalcomanda = vlprodutoadicionado + vlinicialcomanda
 
-        
+
         dados = {
             idcomanda: idcomanda,
             valortotal: vlfinalcomanda,
@@ -372,10 +381,10 @@ function salvaProdutoComandaEdit(idcomanda) {
             produtos: produtos
         }
 
-        console.log('produtos')
-        console.log(produtos)
-        console.log('dados')
-        console.log(dados)
+        // console.log('produtos')
+        // console.log(produtos)
+        // console.log('dados')
+        // console.log(dados)
 
 
 
