@@ -116,6 +116,7 @@ function carregaTabelaDeIngredientes(idproduto, idcomanda) {
                         for (let c = 0; c < todosIngredientes.length; c++) {
 
                             $('#select_adc_novo_ingrediente').prepend('<option id="option' + todosIngredientes[c].idingrediente + '" value="' + todosIngredientes[c].idingrediente + '">' + todosIngredientes[c].nomeingrediente + ' - ' + (todosIngredientes[c].valoradicional).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</option>')
+
                             for (let index = 0; index < response['ingredientes'].length; index++) {//se o ingrediente já estiver no produto é removido
                                 if (todosIngredientes[c].idingrediente == response['ingredientes'][index].idingrediente) {
                                     $('#option' + todosIngredientes[c].idingrediente).remove()
@@ -288,7 +289,7 @@ function removerIngredienteProdutoComanda(ingredientes, idcomanda) {
 
 
 function salvaProdutoComandaEdit(idcomanda) {
-    adicionais = []
+    // adicionais = []
     $('#btn_adc_novo_ingrediente_comanda_' + idcomanda).click(function (e) {
         e.preventDefault();
     }); //monta o array adicionais []
@@ -307,7 +308,6 @@ function salvaProdutoComandaEdit(idcomanda) {
 
 
         listaIngredientesProduto = $('#tabela_ingredientes_comanda_' + idcomanda + ' tr').map(function () {
-
             if ($(this).find("td:eq(0)").text() != "") {
 
                 return {
@@ -319,43 +319,47 @@ function salvaProdutoComandaEdit(idcomanda) {
 
         }).get();
 
+        for (let index = 0; index < listaIngredientesProduto.length; index++) {
+            for (let cont = 0; cont < adicionais.length; cont++) {
+                if (adicionais[cont]['nomeingrediente'] == listaIngredientesProduto[index]['nomeingrediente']) {
+                    listaIngredientesProduto.splice(index, 1)
+                }
+            }
+        }
 
-        console.log('listaIngredientesProduto')
-        console.log(listaIngredientesProduto)
 
-        console.log('adicionais')
-        console.log(adicionais)
 
-        // $.each(listaIngredientesProduto, function (key, value) {
-        //     if (value['quantidade'] > 1) {
-        //         porcaoextra.push({
-        //             'ingredienteporcaoextra': value['nomeingrediente'],
-        //             'idproduto': idproduto,
-        //             'idingrediente': value['idingrediente'],
-        //             'qtdporcaoextra': value['quantidade'],
-        //             'nroitem': nroitem
-        //         })
-        //     }
+        $.each(listaIngredientesProduto, function (key, value) {
+            if (value['quantidade'] > 1) {
+                porcaoextra.push({
+                    'ingredienteporcaoextra': value['nomeingrediente'],
+                    'idproduto': idproduto,
+                    'idingrediente': value['idingrediente'],
+                    'qtdporcaoextra': value['quantidade'],
+                    'nroitem': nroitem
+                })
+            }
 
-        //     if (value['quantidade'] == 0) {
-        //         removeringrediente.push({
-        //             'removeringrediente': value['nomeingrediente'],
-        //             'idproduto': idproduto,
-        //             'idingrediente': value['idingrediente'],
-        //             'nroitem': nroitem
-        //         })
-        //     }
-        // });
+            if (value['quantidade'] == 0) {
+                removeringrediente.push({
+                    'removeringrediente': value['nomeingrediente'],
+                    'idproduto': idproduto,
+                    'idingrediente': value['idingrediente'],
+                    'nroitem': nroitem
+                })
+            }
+        });
 
-        // $.each(adicionais, function (key, value) {
-        //     ingredienteadicional.push({
-        //         'ingredienteadicional': value['nomeingrediente'],
-        //         'idproduto': idproduto,
-        //         'idingrediente': value['idingrediente'],
-        //         'qtdingredienteadicional': value['qtdingredienteadicional'],
-        //         'nroitem': nroitem
-        //     })
-        // });
+        $.each(adicionais, function (key, value) {
+            ingredienteadicional.push({
+                'ingredienteadicional': value['nomeingrediente'],
+                'idproduto': idproduto,
+                'idingrediente': value['idingrediente'],
+                'qtdingredienteadicional': value['qtdingredienteadicional'],
+                'nroitem': nroitem
+            })
+        });
+
 
         txtvlprodutoadicionado = $('#valortotal_exibido_tabela_ingredientes_comanda_' + idcomanda).val()
         vlprodutoadicionado = parseFloat(txtvlprodutoadicionado.replace('R$', '').replace('.', '').replace(',', '.'))
@@ -364,9 +368,9 @@ function salvaProdutoComandaEdit(idcomanda) {
             idproduto: idproduto,
             nomeproduto: nomeproduto,
             vladicional: valor_adicional_total,
-            // porcaoextra: porcaoextra,
-            // ingredienteadicional: ingredienteadicional,
-            // removeringrediente: removeringrediente,
+            porcaoextra: porcaoextra,
+            ingredienteadicional: ingredienteadicional,
+            removeringrediente: removeringrediente,
             observacao: $('#txt_observacao_' + idcomanda).val(),
             vlfinalproduto: vlprodutoadicionado,
             nroitem: nroitem
@@ -389,48 +393,58 @@ function salvaProdutoComandaEdit(idcomanda) {
             produtos: produtos
         }
 
-        // console.log('produtos')
-        // console.log(produtos)
-        // console.log('dados')
-        // console.log(dados)
+        console.log('dados')
+        console.log(dados)
 
+        ultimoItem = produtos.slice(-1)[0]
+        console.log('ultimoItem')
+        console.log(ultimoItem)
 
+        $('#body_tabela_produtos_lancados_na_comanda_' + idcomanda).append('<tr id="linha_produto_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda + '"><td class="text-center" id="td_nome_produto_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda + '">' + ultimoItem['nomeproduto'] + ' <ul id="lista_removeringrediente_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda + '" hidden class="text-start fw-normal">Sem:</ul> <ul id="lista_porcaoextra_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda + '"hidden class="text-start fw-normal">Porção extra:</ul> <ul id="lista_ingredienteadicional_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda + '" hidden class="text-start fw-normal">Adicional:</ul> <ul id="lista_observacao_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda + '" hidden class="text-start fw-normal">OBS:</ul> </td><td class="text-center align-middle">' + parseFloat(ultimoItem['vlfinalproduto']).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td><td class="text-center align-middle"><button id="btn_remove_produto_comanda' + idcomanda + '_item_' + ultimoItem['nroitem'] + '"class="btn fa-solid fa-trash-can text-danger "></button></td></tr>')
 
-        $('#body_tabela_produtos_lancados_na_comanda_' + idcomanda).append('<tr id="linha_produto_' + produtos['nroitem'] + '_comanda_' + idcomanda + '"><td class="text-center" id="td_nome_produto_' + produtos['nroitem'] + '_comanda_' + idcomanda + '">' + produtos['nomeproduto'] + ' <ul id="lista_removeringrediente_item_' + produtos['nroitem'] + '_comanda_' + idcomanda + '" hidden class="text-start fw-normal">Sem:</ul> <ul id="lista_porcaoextra_item_' + produtos['nroitem'] + '_comanda_' + idcomanda + '"hidden class="text-start fw-normal">Porção extra:</ul> <ul id="lista_ingredienteadicional_item_' + produtos['nroitem'] + '_comanda_' + idcomanda + '" hidden class="text-start fw-normal">Adicional:</ul> <ul id="lista_observacao_item_' + produtos['nroitem'] + '_comanda_' + idcomanda + '" hidden class="text-start fw-normal">OBS:</ul> </td><td class="text-center align-middle">' + parseFloat(produtos['vlfinalproduto']).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td><td class="text-center align-middle"><button id="btn_remove_produto_comanda' + idcomanda + '_item_' + produtos['nroitem'] + '"class="btn fa-solid fa-trash-can text-danger "></button></td></tr>')
-
-        if (produtos['porcaoextra']) {
-            for (let index = 0; index < produtos['porcaoextra'].length; index++) {
-                $('#lista_porcaoextra_item_' + produtos['nroitem'] + '_comanda_' + idcomanda).append('<li>' + produtos['porcaoextra'][index]['ingredienteporcaoextra'] + ' - ' + produtos['porcaoextra'][index]['qtdporcaoextra'] + 'x </li>')
+        if ((ultimoItem['porcaoextra']).length > 0) {
+            for (let index = 0; index < ultimoItem['porcaoextra'].length; index++) {
+                $('#lista_porcaoextra_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda).append('<li>' + ultimoItem['porcaoextra'][index]['ingredienteporcaoextra'] + ' - ' + ultimoItem['porcaoextra'][index]['qtdporcaoextra'] + 'x </li>')
             }
 
-            $('#lista_porcaoextra_item_' + produtos['nroitem'] + '_comanda_' + idcomanda).attr('hidden', false)
+            $('#lista_porcaoextra_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda).attr('hidden', false)
 
         }
 
-        if (produtos['ingredienteadicional']) {
+        if (ultimoItem['ingredienteadicional'].length > 0) {
+            verificaQtd = false
 
-            for (let index = 0; index < produtos['ingredienteadicional'].length; index++) {
-                $('#lista_ingredienteadicional_item_' + produtos['nroitem'] + '_comanda_' + idcomanda).append('<li>' + produtos['ingredienteadicional'][index]['ingredienteadicional'] + ' - ' + produtos['ingredienteadicional'][index]['qtdingredienteadicional'] + 'x </li>')
+            for (let index = 0; index < ultimoItem['ingredienteadicional'].length; index++) {
+                if (ultimoItem['ingredienteadicional'][index]['qtdingredienteadicional'] != 0) {
+
+                    $('#lista_ingredienteadicional_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda).append('<li>' + ultimoItem['ingredienteadicional'][index]['ingredienteadicional'] + ' - ' + ultimoItem['ingredienteadicional'][index]['qtdingredienteadicional'] + 'x </li>')
+
+                    verificaQtd = true
+                } else{
+                    ultimoItem['ingredienteadicional'].splice(index, 1)
+                }
             }
 
-            $('#lista_ingredienteadicional_item_' + produtos['nroitem'] + '_comanda_' + idcomanda).attr('hidden', false)
+            if (verificaQtd) {
+                $('#lista_ingredienteadicional_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda).attr('hidden', false)
+            }
         }
 
-        if (produtos['removeringrediente']) {
+        if (ultimoItem['removeringrediente'].length > 0) {
 
-            for (let index = 0; index < produtos['removeringrediente'].length; index++) {
-                $('#lista_removeringrediente_item_' + produtos['nroitem'] + '_comanda_' + idcomanda).append('<li>' + produtos['removeringrediente'][index]['removeringrediente'] + '</li>')
+            for (let index = 0; index < ultimoItem['removeringrediente'].length; index++) {
+                $('#lista_removeringrediente_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda).append('<li>' + ultimoItem['removeringrediente'][index]['removeringrediente'] + '</li>')
             }
 
-            $('#lista_removeringrediente_item_' + produtos['nroitem'] + '_comanda_' + idcomanda).attr('hidden', false)
+            $('#lista_removeringrediente_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda).attr('hidden', false)
         }
 
-        if (produtos['observacao']) {
+        if (ultimoItem['observacao']) {
 
-            $('#lista_observacao_item_' + produtos['nroitem'] + '_comanda_' + idcomanda).append('<li>' + response['observacao'] + '</li>')
+            $('#lista_observacao_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda).append('<li>' + response['observacao'] + '</li>')
 
 
-            $('#lista_observacao_item_' + produtos['nroitem'] + '_comanda_' + idcomanda).attr('hidden', false)
+            $('#lista_observacao_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda).attr('hidden', false)
         }
     });
 
