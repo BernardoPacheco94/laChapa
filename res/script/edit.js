@@ -303,6 +303,10 @@ function salvaProdutoComandaEdit(idcomanda) {
 
         txtvlinicialcomanda = $('#valor_total_comanda_' + idcomanda).text()
         vlinicialcomanda = parseFloat(txtvlinicialcomanda.replace('R$ ', '').replace('.', '').replace(',', '.'))
+        console.log('vlinicialcomanda')
+        console.log(vlinicialcomanda)
+        console.log('txtvlinicialcomanda')
+        console.log(txtvlinicialcomanda)
 
         nroitem = $('#body_tabela_produtos_lancados_na_comanda_' + idcomanda + ' tr').length
 
@@ -397,8 +401,6 @@ function salvaProdutoComandaEdit(idcomanda) {
         console.log(dados)
 
         ultimoItem = produtos.slice(-1)[0]
-        console.log('ultimoItem')
-        console.log(ultimoItem)
 
         $('#body_tabela_produtos_lancados_na_comanda_' + idcomanda).append('<tr id="linha_produto_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda + '"><td class="text-center" id="td_nome_produto_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda + '">' + ultimoItem['nomeproduto'] + ' <ul id="lista_removeringrediente_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda + '" hidden class="text-start fw-normal">Sem:</ul> <ul id="lista_porcaoextra_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda + '"hidden class="text-start fw-normal">Porção extra:</ul> <ul id="lista_ingredienteadicional_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda + '" hidden class="text-start fw-normal">Adicional:</ul> <ul id="lista_observacao_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda + '" hidden class="text-start fw-normal">OBS:</ul> </td><td class="text-center align-middle">' + parseFloat(ultimoItem['vlfinalproduto']).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td><td class="text-center align-middle"><button id="btn_remove_produto_comanda' + idcomanda + '_item_' + ultimoItem['nroitem'] + '"class="btn fa-solid fa-trash-can text-danger "></button></td></tr>')
 
@@ -441,11 +443,21 @@ function salvaProdutoComandaEdit(idcomanda) {
 
         if (ultimoItem['observacao']) {
 
-            $('#lista_observacao_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda).append('<li>' + response['observacao'] + '</li>')
+            $('#lista_observacao_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda).append('<li>' + ultimoItem['observacao'] + '</li>')
 
 
             $('#lista_observacao_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda).attr('hidden', false)
         }
+
+        $('#valor_total_comanda_'+idcomanda).text(vlfinalcomanda.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }))
+        
+        $('#select_tipo_produto_comanda_'+idcomanda).val('tipo').change()
+        $('#tabela_ingredientes_comanda_'+idcomanda).attr('hidden', true)
+        $('#txt_observacao_'+idcomanda).attr('hidden', true)
+        $('#txt_observacao_'+idcomanda).val(null)
+
+
+
     });
 
 
