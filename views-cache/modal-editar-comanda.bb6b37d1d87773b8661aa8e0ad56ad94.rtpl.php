@@ -138,10 +138,10 @@
                             <tfoot>
                                 <tr>
                                     <th class="text-center" colspan="2">Total:</th>
-                                    <th id="valor_total_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="text-start">
-                                        R$ <?php echo formatPrice($value1["valortotal"]); ?>
-                                    </th>
+                                    <th id="valor_total_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="text-start">R$ <?php echo formatPrice($value1["valortotal"]); ?></th>
+                                    <td hidden><input id="valortotal_oculto_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="form-control" value="<?php echo htmlspecialchars( $value1["valortotal"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></input></td>
                                 </tr>
+                                
                             </tfoot>
                         </table>
                     </div>

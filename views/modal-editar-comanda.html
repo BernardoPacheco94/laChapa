@@ -138,10 +138,10 @@
                             <tfoot>
                                 <tr>
                                     <th class="text-center" colspan="2">Total:</th>
-                                    <th id="valor_total_comanda_{$value.idcomanda}" class="text-start">
-                                        R$ {function="formatPrice($value.valortotal)"}
-                                    </th>
+                                    <th id="valor_total_comanda_{$value.idcomanda}" class="text-start">R$ {function="formatPrice($value.valortotal)"}</th>
+                                    <td hidden><input id="valortotal_oculto_comanda_{$value.idcomanda}" class="form-control" value="{$value.valortotal}"></input></td>
                                 </tr>
+                                
                             </tfoot>
                         </table>
                     </div>
