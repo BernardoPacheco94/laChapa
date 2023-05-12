@@ -1,11 +1,9 @@
 <?php
 
-use LaChapa\Model\Atendente;
 use LaChapa\Model\Comanda;
 use LaChapa\Model\Produto;
 use LaChapa\Model\Ingrediente;
 use LaChapa\Model\Mesa;
-use LaChapa\Page;
 
 $app->config('debug', true);
 
@@ -32,29 +30,30 @@ $app->post('/salvaprodutoeingredientescomanda/ajax', function () {
     try {
         $comanda->salvaComanda();
         $comanda->salvaComandaMesa();
-        for ($i = 0; $i < count($_POST['produtos']); $i++) {
+        if (isset($_POST['produtos'])) {
+            for ($i = 0; $i < count($_POST['produtos']); $i++) {
 
-            $comanda->salvaComandaProdutos($_POST['produtos'][$i]['idproduto'], $_POST['produtos'][$i]['vlfinalproduto'], $_POST['produtos'][$i]['observacao'], $_POST['produtos'][$i]['nroitem']);
+                $comanda->salvaComandaProdutos($_POST['produtos'][$i]['idproduto'], $_POST['produtos'][$i]['vlfinalproduto'], $_POST['produtos'][$i]['observacao'], $_POST['produtos'][$i]['nroitem']);
 
 
-            if (array_key_exists('porcaoextra', $_POST['produtos'][$i])) {
-                for ($c = 0; $c < count($_POST['produtos'][$i]['porcaoextra']); $c++) {
-                    $comanda->salvaComandaProdutoPorcaoExtra($_POST['produtos'][$i]['porcaoextra'][$c]['idproduto'], $_POST['produtos'][$i]['porcaoextra'][$c]['qtdporcaoextra'], $_POST['produtos'][$i]['porcaoextra'][$c]['idingrediente'], $_POST['produtos'][$i]['porcaoextra'][$c]['nroitem']);
+                if (array_key_exists('porcaoextra', $_POST['produtos'][$i])) {
+                    for ($c = 0; $c < count($_POST['produtos'][$i]['porcaoextra']); $c++) {
+                        $comanda->salvaComandaProdutoPorcaoExtra($_POST['produtos'][$i]['porcaoextra'][$c]['idproduto'], $_POST['produtos'][$i]['porcaoextra'][$c]['qtdporcaoextra'], $_POST['produtos'][$i]['porcaoextra'][$c]['idingrediente'], $_POST['produtos'][$i]['porcaoextra'][$c]['nroitem']);
+                    }
                 }
-            }
-            if (array_key_exists('ingredienteadicional', $_POST['produtos'][$i])) {
-                for ($c = 0; $c < count($_POST['produtos'][$i]['ingredienteadicional']); $c++) {
-                    $comanda->salvaComandaIngredienteAdicional($_POST['produtos'][$i]['ingredienteadicional'][$c]['idproduto'], $_POST['produtos'][$i]['ingredienteadicional'][$c]['qtdingredienteadicional'], $_POST['produtos'][$i]['ingredienteadicional'][$c]['idingrediente'], $_POST['produtos'][$i]['ingredienteadicional'][$c]['nroitem']);
+                if (array_key_exists('ingredienteadicional', $_POST['produtos'][$i])) {
+                    for ($c = 0; $c < count($_POST['produtos'][$i]['ingredienteadicional']); $c++) {
+                        $comanda->salvaComandaIngredienteAdicional($_POST['produtos'][$i]['ingredienteadicional'][$c]['idproduto'], $_POST['produtos'][$i]['ingredienteadicional'][$c]['qtdingredienteadicional'], $_POST['produtos'][$i]['ingredienteadicional'][$c]['idingrediente'], $_POST['produtos'][$i]['ingredienteadicional'][$c]['nroitem']);
+                    }
                 }
-            }
-            if (array_key_exists('removeringrediente', $_POST['produtos'][$i])) {
-                for ($c = 0; $c < count($_POST['produtos'][$i]['removeringrediente']); $c++) {
-                    $comanda->salvaComandaProdutoRemoverIngrediente($_POST['produtos'][$i]['removeringrediente'][$c]['idproduto'], $_POST['produtos'][$i]['removeringrediente'][$c]['idingrediente'], $_POST['produtos'][$i]['removeringrediente'][$c]['nroitem']);
+                if (array_key_exists('removeringrediente', $_POST['produtos'][$i])) {
+                    for ($c = 0; $c < count($_POST['produtos'][$i]['removeringrediente']); $c++) {
+                        $comanda->salvaComandaProdutoRemoverIngrediente($_POST['produtos'][$i]['removeringrediente'][$c]['idproduto'], $_POST['produtos'][$i]['removeringrediente'][$c]['idingrediente'], $_POST['produtos'][$i]['removeringrediente'][$c]['nroitem']);
+                    }
                 }
             }
         }
 
-        
         echo json_encode($_POST);
     } catch (\Throwable $th) {
         echo json_encode(array(
@@ -65,12 +64,12 @@ $app->post('/salvaprodutoeingredientescomanda/ajax', function () {
     }
 });
 
-$app->get('/listagemteste', function(){
+$app->get('/listagemteste', function () {
     var_dump(Mesa::mesasExibidas());
     exit;
 });
 
-$app->get('/listacomandasajax', function(){
+$app->get('/listacomandasajax', function () {
     echo json_encode(Comanda::listaComandas());
     exit;
 });

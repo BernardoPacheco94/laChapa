@@ -26,10 +26,6 @@ window.onload = () => {
 
                     carregaTabelaDeIngredientes(idproduto, comandas[index]['idcomanda'], comandas)
                 });
-
-                // console.log('comandas[index]')
-                // console.log(comandas[index])
-
                 
                 salvaProdutoComandaEdit(comandas[index]['idcomanda'])
             }
@@ -289,7 +285,7 @@ function removerIngredienteProdutoComanda(ingredientes, idcomanda) {
 }
 
 
-function salvaProdutoComandaEdit(idcomanda) {
+function salvaProdutoComandaEdit(idcomanda, produtos = []) {
     // adicionais = []
     $('#btn_adc_novo_ingrediente_comanda_' + idcomanda).click(function (e) {
         e.preventDefault();
@@ -381,15 +377,7 @@ function salvaProdutoComandaEdit(idcomanda) {
 
 
         dados = {
-            idcomanda: idcomanda,
             valortotal: vlfinalcomanda,
-            statuscomanda: null,
-            datacomanda: null,
-            idcartao: $('#select_cartao_editar_comanda_' + idcomanda).val(),
-            nomecliente: $('#nomecliente_comanda_' + idcomanda).val(),
-            idatendente: $('#select_atendente_comanda_' + idcomanda).val(),
-            idmesa: $('#select_mesa_comanda_' + idcomanda).val(),
-            idcomandamesa: $('#idcomandamesa_' + idcomanda).val(),
             produtos: produtos
         }
 
@@ -462,6 +450,19 @@ function salvaProdutoComandaEdit(idcomanda) {
     $('#editar_comanda_' + idcomanda).click(function (e) {
         e.preventDefault();
 
+        dados = {
+            idcomanda: idcomanda,
+            valortotal: $('#valortotal_oculto_comanda_'+idcomanda).val(),
+            statuscomanda: null,
+            datacomanda: null,
+            idcartao: $('#select_cartao_editar_comanda_' + idcomanda).val(),
+            nomecliente: $('#nomecliente_comanda_' + idcomanda).val(),
+            idatendente: $('#select_atendente_comanda_' + idcomanda).val(),
+            idmesa: $('#select_mesa_comanda_' + idcomanda).val(),
+            idcomandamesa: $('#idcomandamesa_' + idcomanda).val(),
+            produtos: produtos
+        }
+
         $.ajax({
             type: "POST",
             url: "/salvaprodutoeingredientescomanda/ajax",
@@ -471,7 +472,7 @@ function salvaProdutoComandaEdit(idcomanda) {
                 console.log('response:')
                 console.log(response)
 
-                // document.location.reload()
+                document.location.reload()
             },
             error: function (xhr, status, error) {
                 console.log('erro')
