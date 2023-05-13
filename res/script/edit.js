@@ -299,7 +299,7 @@ function removerProdutosComanda(idcomanda) {
             txtCorrigido = txtNormal.substring(0, posicao)
 
 
-            if (confirm('Deseja realmente excluir o produto ' + txtCorrigido + '? *')) {  
+            if (confirm('Deseja realmente excluir o produto ' + txtCorrigido + ' do pedido '+idcomanda+'? ')) {  
                 
                 vlfinalproduto = Number($('#valortotal_oculto_comanda_'+idcomanda).val()) - Number($('#vlproduto_'+idcomandaproduto).val())
 
@@ -314,6 +314,8 @@ function removerProdutosComanda(idcomanda) {
                     dataType: "json",
                     success: function (response) {
                         console.log(response)
+                        alert(txtCorrigido + ' excluído!')
+                        document.location.reload()
                         
                     },
                     error: function (xhr, status, error) {
