@@ -39,6 +39,23 @@ class Comanda extends Model
         ]);
     }
 
+    public function removeComandaProduto($idcomanda, $idcomandaproduto, $valortotal){
+        $sql = new Sql;
+
+        $sql->query('DELETE FROM `db_lachapa`.`comanda-produtos`
+        WHERE idcomandaproduto = :idcomandaproduto',[
+            ':idcomandaproduto' => $idcomandaproduto
+        ]);
+
+        $sql->query('UPDATE `db_lachapa`.`comandas`
+        SET
+        valortotal = :valortotal
+        WHERE idcomanda = :idcomanda',[
+            ':valortotal' => $valortotal,
+            ':idcomanda' => $idcomanda
+        ]);
+    }
+
     public function salvaComandaMesa()
     {
         $sql = new Sql;

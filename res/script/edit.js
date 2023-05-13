@@ -26,8 +26,9 @@ window.onload = () => {
 
                     carregaTabelaDeIngredientes(idproduto, comandas[index]['idcomanda'], comandas)
                 });
-                
+
                 salvaProdutoComandaEdit(comandas[index]['idcomanda'])
+                removerProdutosComanda(comandas[index]['idcomanda'])
             }
         }
     })
@@ -284,6 +285,51 @@ function removerIngredienteProdutoComanda(ingredientes, idcomanda) {
 
 }
 
+function removerProdutosComanda(idcomanda) {
+    
+    for (let index = 0; index < $('#body_tabela_produtos_lancados_na_comanda_'+idcomanda+' tr').length; index++) {
+
+        $('#btn_remove_produto_comanda_' + idcomanda + '_item_' + index).click(function (e) {
+            e.preventDefault();
+            idcomandaproduto = $('#idcomanda_'+idcomanda+'_produto_'+index+'').val()
+
+            txtNormal = $('#td_nome_produto_'+index+'_comanda_'+idcomanda).text()
+            posicao = txtNormal.indexOf('\n')
+
+            txtCorrigido = txtNormal.substring(0, posicao)
+
+
+            if (confirm('Deseja realmente excluir o produto ' + txtCorrigido + '? *')) {  
+                
+                vlfinalproduto = Number($('#valortotal_oculto_comanda_'+idcomanda).val()) - Number($('#vlproduto_'+idcomandaproduto).val())
+
+                $.ajax({
+                    type: "post",
+                    url: "/removeprodutocomanda",
+                    data: {
+                        valortotal : vlfinalproduto,
+                        idcomandaproduto : idcomandaproduto,
+                        idcomanda : idcomanda
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response)
+                        
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('xhr: '+xhr)                        
+                        console.log('status: '+status)                        
+                        console.log('error: '+error)                        
+                    }
+                });
+            }
+        });
+        
+    }
+
+}
+
+
 
 function salvaProdutoComandaEdit(idcomanda, produtos = []) {
     // adicionais = []
@@ -298,7 +344,7 @@ function salvaProdutoComandaEdit(idcomanda, produtos = []) {
         nomeprodutotemp = $('#select_produto_comanda_' + idcomanda).find(":selected").text()
         nomeproduto = nomeprodutotemp.split(" - ")[0]
 
-        vlinicialcomanda = parseFloat($('#valortotal_oculto_comanda_'+idcomanda).val()  )      
+        vlinicialcomanda = parseFloat($('#valortotal_oculto_comanda_' + idcomanda).val())
 
 
         nroitem = $('#body_tabela_produtos_lancados_na_comanda_' + idcomanda + ' tr').length
@@ -406,7 +452,7 @@ function salvaProdutoComandaEdit(idcomanda, produtos = []) {
                     $('#lista_ingredienteadicional_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda).append('<li>' + ultimoItem['ingredienteadicional'][index]['ingredienteadicional'] + ' - ' + ultimoItem['ingredienteadicional'][index]['qtdingredienteadicional'] + 'x </li>')
 
                     verificaQtd = true
-                } else{
+                } else {
                     ultimoItem['ingredienteadicional'].splice(index, 1)
                 }
             }
@@ -433,16 +479,16 @@ function salvaProdutoComandaEdit(idcomanda, produtos = []) {
             $('#lista_observacao_item_' + ultimoItem['nroitem'] + '_comanda_' + idcomanda).attr('hidden', false)
         }
 
-       
 
-        $('#valor_total_comanda_'+idcomanda).text(vlfinalcomanda.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}))
-        $('#valortotal_oculto_comanda_'+idcomanda).val(vlfinalcomanda)        
 
-        
-        $('#select_tipo_produto_comanda_'+idcomanda).val('tipo').change()
-        $('#tabela_ingredientes_comanda_'+idcomanda).attr('hidden', true)
-        $('#txt_observacao_'+idcomanda).attr('hidden', true)
-        $('#txt_observacao_'+idcomanda).val(null)
+        $('#valor_total_comanda_' + idcomanda).text(vlfinalcomanda.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }))
+        $('#valortotal_oculto_comanda_' + idcomanda).val(vlfinalcomanda)
+
+
+        $('#select_tipo_produto_comanda_' + idcomanda).val('tipo').change()
+        $('#tabela_ingredientes_comanda_' + idcomanda).attr('hidden', true)
+        $('#txt_observacao_' + idcomanda).attr('hidden', true)
+        $('#txt_observacao_' + idcomanda).val(null)
 
     });
 
@@ -452,7 +498,7 @@ function salvaProdutoComandaEdit(idcomanda, produtos = []) {
 
         dados = {
             idcomanda: idcomanda,
-            valortotal: $('#valortotal_oculto_comanda_'+idcomanda).val(),
+            valortotal: $('#valortotal_oculto_comanda_' + idcomanda).val(),
             statuscomanda: null,
             datacomanda: null,
             idcartao: $('#select_cartao_editar_comanda_' + idcomanda).val(),

@@ -63,8 +63,7 @@
                             <tbody id="body_tabela_produtos_lancados_na_comanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                 <?php $counter2=-1;  if( isset($value1["produtos"]) && ( is_array($value1["produtos"]) || $value1["produtos"] instanceof Traversable ) && sizeof($value1["produtos"]) ) foreach( $value1["produtos"] as $key2 => $value2 ){ $counter2++; ?>
                                 <tr id="linha_produto_<?php echo htmlspecialchars( $counter2, ENT_COMPAT, 'UTF-8', FALSE ); ?>_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                                    <td class="text-center" id="td_nome_produto_<?php echo htmlspecialchars( $counter2, ENT_COMPAT, 'UTF-8', FALSE ); ?>_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                                        <?php echo htmlspecialchars( $value2["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                                    <td class="text-center" id="td_nome_produto_<?php echo htmlspecialchars( $counter2, ENT_COMPAT, 'UTF-8', FALSE ); ?>_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value2["nomeproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?><input type="number" id="idcomanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>_produto_<?php echo htmlspecialchars( $counter2, ENT_COMPAT, 'UTF-8', FALSE ); ?>" hidden value="<?php echo htmlspecialchars( $value2["idcomandaproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
 
                                         <?php $i=0; ?>
                                         <!-- Ingredientes a serem removidos -->
@@ -126,6 +125,8 @@
                                     </td>
                                     <td class="text-center align-middle">
                                         R$ <?php echo formatPrice($value2["vlfinalproduto"]); ?>
+
+                                        <input type="number" id="vlproduto_<?php echo htmlspecialchars( $value2["idcomandaproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" hidden value="<?php echo htmlspecialchars( $value2["vlfinalproduto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                                     </td>
                                     <td class="text-center align-middle">
                                         <button id="btn_remove_produto_comanda_<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>_item_<?php echo htmlspecialchars( $counter2, ENT_COMPAT, 'UTF-8', FALSE ); ?>"

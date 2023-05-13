@@ -63,8 +63,7 @@
                             <tbody id="body_tabela_produtos_lancados_na_comanda_{$value.idcomanda}">
                                 {loop="$value.produtos"}
                                 <tr id="linha_produto_{$counter}_comanda_{$value.idcomanda}">
-                                    <td class="text-center" id="td_nome_produto_{$counter}_comanda_{$value.idcomanda}">
-                                        {$value.nomeproduto}
+                                    <td class="text-center" id="td_nome_produto_{$counter}_comanda_{$value.idcomanda}">{$value.nomeproduto}<input type="number" id="idcomanda_{$value.idcomanda}_produto_{$counter}" hidden value="{$value.idcomandaproduto}">
 
                                         {$i=0}
                                         <!-- Ingredientes a serem removidos -->
@@ -126,6 +125,8 @@
                                     </td>
                                     <td class="text-center align-middle">
                                         R$ {function="formatPrice($value.vlfinalproduto)"}
+
+                                        <input type="number" id="vlproduto_{$value.idcomandaproduto}" hidden value="{$value.vlfinalproduto}">
                                     </td>
                                     <td class="text-center align-middle">
                                         <button id="btn_remove_produto_comanda_{$value.idcomanda}_item_{$counter}"

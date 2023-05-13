@@ -73,3 +73,20 @@ $app->get('/listacomandasajax', function () {
     echo json_encode(Comanda::listaComandas());
     exit;
 });
+
+$app->post('/removeprodutocomanda', function(){
+    $comanda = new Comanda;
+
+    try {
+        $comanda->removeComandaProduto($_POST['idcomanda'],$_POST['idcomandaproduto'], $_POST['valortotal']);
+
+        echo json_encode($_POST);
+        
+    } catch (\Throwable $th) {
+        echo json_encode(array(
+            "Arquivo" => $th->getFile(),
+            "Mensagem" => $th->getMessage(),
+            "linha" => $th->getLine()
+        ));
+    }
+});
