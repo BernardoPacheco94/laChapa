@@ -202,9 +202,11 @@ function carregaTabelaDeIngredientes(idproduto, idcomanda) {
 
             });
 
+            console.log('response')
+            console.log(response)
 
 
-            $('#tabela_ingredientes_comanda_' + idcomanda).attr('hidden', false)
+            if(response['ingredientes'].length > 0 ) {$('#tabela_ingredientes_comanda_' + idcomanda).attr('hidden', false)}
             $('#txt_observacao_' + idcomanda).attr('hidden', false);
         }
     })

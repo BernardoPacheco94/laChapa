@@ -239,11 +239,12 @@ $('.select_produto_comanda').change(function (e) {
                 });
 
             });
+
+            if (listaIngredientesProduto.length > 0) { $('#tabela_ingredientes_comanda').attr('hidden', false) }
+            $('#txt_observacao').attr('hidden', false);
         }
     });
 
-    $('#tabela_ingredientes_comanda').attr('hidden', false)
-    $('#txt_observacao').attr('hidden', false);
 });
 
 //insercão do produto na tabela de produtos da comanda
@@ -308,9 +309,6 @@ function criaTabelaProdutosComanda(Array = produtos) {
 
     $('#tabela_ingredientes_comanda').attr('hidden', true)
 
-    console.log('Produtos:')
-    console.log(produtos)
-
     valortotalcomanda = 0
 
     $.map(produtos, function (key) {
@@ -320,7 +318,7 @@ function criaTabelaProdutosComanda(Array = produtos) {
     for (let index = 0; index < produtos.length; index++) {
 
         $('#tabela_produtos_lancados_na_comanda').append('<tr id="linha_produto_' + index + '"><td class="text-center"  id="td_nome_comanda_produto_' + index + '">' + produtos[index].nomeproduto + ' <input type="number" value="' + index + '" id="nroitem_' + index + '" hidden> </td><td class="text-center align-middle">' + produtos[index].vlfinalproduto.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</td><td class="text-center align-middle"><button id="btn_remove_produto_comanda_' + index + '" class="btn fa-solid fa-trash-can text-danger "></button></td></tr>')
-        
+
         produtos[index]['nroitem'] = $('#nroitem_' + index).val()
         if (produtos[index]['porcaoextra']) {
 
@@ -383,7 +381,7 @@ function criaTabelaProdutosComanda(Array = produtos) {
         //Evento para remover produto da tabela
         $('#btn_remove_produto_comanda_' + index).click(function (e) {
             e.preventDefault();
-            if (confirm('Deseja realmente excluir o produto ' + (produtos[index].nomeproduto) +'?')) {
+            if (confirm('Deseja realmente excluir o produto ' + (produtos[index].nomeproduto) + '?')) {
                 // Remover item do array produto[] e atualizar o valor e afins
                 produtos.splice(index, 1)
                 $('#linha_produto_' + index).remove();

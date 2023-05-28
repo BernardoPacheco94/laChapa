@@ -205,4 +205,24 @@ class Comanda extends Model
 
         return $resultado;
     }
+
+    public static function buscaComanda($idcomanda){
+        $sql = new Sql;
+
+        $resultado = $sql->select('
+            select * from `comandas`
+            inner join `comanda-mesa` using (idcomanda) 
+            left join `cartoes` using (idcartao)
+            left join `atendentes` using (idatendente)
+            where idcomanda = :idcomanda
+            limit 1
+        ',[
+            ':idcomanda' => $idcomanda
+        ]);
+
+        $resultado[0]['produtos'] = Comanda::listaProdutosComanda($idcomanda);
+
+        return $resultado;
+    }
+
 }

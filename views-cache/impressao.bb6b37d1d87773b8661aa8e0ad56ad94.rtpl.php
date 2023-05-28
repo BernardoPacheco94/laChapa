@@ -1,9 +1,4 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><!-- <script>
-    window.onload = function () {
-        window.print();
-    };             
-</script> -->
-
+<?php if(!class_exists('Rain\Tpl')){exit;}?>
 <body onload="window.print()">
     <div>
         <span><?php echo htmlspecialchars( $dadosComanda["nomeatendente"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>

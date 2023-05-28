@@ -6,9 +6,11 @@
         <div class="modal-content">
                <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Pedido <?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h5>
-                    <button type="button" class="btn btn-dark mx-auto w-50">
-                        <i class="fa-solid fa-2x fa-print"></i>
-                    </button>
+                    <a href="/comanda/print/<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" target="_blank" class="w-100 text-center">
+                        <button type="button" class="btn btn-dark w-75">
+                            <i class="fa-solid fa-2x fa-print"></i>
+                        </button>
+                    </a>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

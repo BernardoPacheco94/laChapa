@@ -1,0 +1,93 @@
+
+<body onload="window.print()">
+    <div>
+        <span>{$dadosComanda.nomeatendente}</span>
+        <span>{$dadosComanda.datacomanda}</span>
+    </div>
+    <hr>
+    <div>
+        <span>Mesa: {$dadosComanda.idmesa}</span>
+        <span>Comanda {$dadosComanda.idcartao}</span>
+    </div>
+    <hr>
+    <hr>
+    <table>
+        <thead>
+            <th>Descricao</th>
+            <th>Valor</th>
+        </thead>
+        <tbody>
+            {loop="$dadosComanda.produtos"}
+            <tr>
+                <td>{$value.nomeproduto} <br>
+                    {$i=0}
+                    <!-- Ingredientes a serem removidos -->
+                    {loop="$value.removeringrediente"}
+                    {$i=$counter+1}
+                    {/loop}
+                    {if="$i>0"}
+                    <ul class="text-start fw-normal">
+                        Sem:
+                        {loop="$value.removeringrediente"}
+                        <li>
+                            {$value.nomeingrediente}
+                        </li>
+                        {/loop}
+                    </ul>
+                    {$i=0}
+                    {/if}
+
+
+                    <!-- Porçoes extra -->
+                    {loop="$value.porcaoextra"}
+                    {$i=$counter+1}
+                    {/loop}
+                    {if="$i>0"}
+                    <ul class="text-start fw-normal">
+                        Porção extra:
+                        {loop="$value.porcaoextra"}
+                        <li>
+                            {$value.nomeingrediente} - {$value.qtdporcaoextra}x
+                        </li>
+                        {/loop}
+                    </ul>
+                    {$i=0}
+                    {/if}
+
+                    <!-- Ingredientes adicionais -->
+                    {loop="$value.ingredienteadicional"}
+                    {$i=$counter+1}
+                    {/loop}
+                    {if="$i>0"}
+                    <ul class="text-start fw-normal">
+                        Adicional:
+                        {loop="$value.ingredienteadicional"}
+                        <li>
+                            {$value.nomeingrediente} - {$value.qtdingredienteadicional}x
+                        </li>
+                        {/loop}
+                    </ul>
+                    {$i=0}
+                    {/if}
+
+                    {if="$value.observacao"}
+                    <ul class="text-start fw-normal">
+                        OBS:
+                        <li>
+                            {$value.observacao}
+                        </li>
+                    </ul>
+                    {/if}
+                </td>
+                <td>R$ {function="formatPrice($value.vlfinalproduto)"}</td>
+            </tr>
+            {/loop}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>TOTAL: </th>
+                <td>R$ {function="formatPrice($dadosComanda.valortotal)"}</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>

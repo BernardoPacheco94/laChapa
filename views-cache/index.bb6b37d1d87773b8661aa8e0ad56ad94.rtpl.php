@@ -75,7 +75,7 @@
                                         </div>
                                         <div class="col-6 text-center">
                                             <span class="">
-                                                <a href="/comanda/print/idcomanda"><i
+                                                <a href="/comanda/print/<?php echo htmlspecialchars( $value2["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" target="_blank"><i
                                                         class="text-dark fa-solid fa-2x fa-print"></i> </a>
                                             </span>
                                         </div>

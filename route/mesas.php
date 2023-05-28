@@ -23,8 +23,6 @@ $app->get('/', function(){
         'cartoes' => Cartao::listaCartoes()
     ]);
 
-    // print_r(Mesa::mesasExibidas());
-    // exit;
 });
 
 

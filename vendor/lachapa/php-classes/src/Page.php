@@ -18,10 +18,7 @@ class Page
 
     public function __construct($opts = array(), $tpl_dir = "/views/")
     {
-        $this->options = array_merge($this->defaults, $opts);//o merge 'monta' os arrays em um só, porém o array que vale é o segundo do paramentro em caso de conflito   
-        
-       
-
+        $this->options = array_merge($this->defaults, $opts);//o merge 'monta' os arrays em um só, porém o array que vale é o segundo do paramentro em caso de conflito  
 
         $config = array(
             "tpl_dir"       => $_SERVER['DOCUMENT_ROOT'].$tpl_dir,//o $_server['document_root] serve para que seja apontado através do root do servidor
