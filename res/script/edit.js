@@ -504,7 +504,7 @@ function salvaProdutoComandaEdit(idcomanda, produtos = []) {
             idcomanda: idcomanda,
             valortotal: $('#valortotal_oculto_comanda_' + idcomanda).val(),
             statuscomanda: null,
-            datacomanda: null,
+            datacomanda: moment($('#datacomanda_'+idcomanda).val()).format('YYYY-MM-DD HH:MM:SS'),
             idcartao: $('#select_cartao_editar_comanda_' + idcomanda).val(),
             nomecliente: $('#nomecliente_comanda_' + idcomanda).val(),
             idatendente: $('#select_atendente_comanda_' + idcomanda).val(),
@@ -522,7 +522,7 @@ function salvaProdutoComandaEdit(idcomanda, produtos = []) {
                 console.log('response:')
                 console.log(response)
 
-                document.location.reload()
+                // document.location.reload()
             },
             error: function (xhr, status, error) {
                 console.log('erro')

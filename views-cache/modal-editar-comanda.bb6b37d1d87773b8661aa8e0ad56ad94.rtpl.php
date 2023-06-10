@@ -6,11 +6,16 @@
         <div class="modal-content">
                <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Pedido <?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h5>
-                    <a href="/comanda/print/<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" target="_blank" class="w-100 text-center">
-                        <button type="button" class="btn btn-dark w-75">
-                            <i class="fa-solid fa-2x fa-print"></i>
-                        </button>
-                    </a>
+                    <div class="w-25">
+                        <?php echo formatDate($value1["datacomanda"]); ?>
+                    </div>
+                        <div class="w-75">
+                            <a href="/comanda/print/<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" target="_blank" class="w-100 text-center">
+                                <button type="button" class="btn btn-dark w-100">
+                                    <i class="fa-solid fa-2x fa-print"></i>
+                                </button>
+                            </a>
+                        </div>                        
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -40,6 +45,8 @@
                     </select>
 
                     <input type="number" name="idcomandamesa" value="<?php echo htmlspecialchars( $value1["idcomandamesa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" id="idcomandamesa_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" hidden>
+
+                    <input type="datetime" hidden id="datacomanda_<?php echo htmlspecialchars( $value1["idcomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" value="<?php echo htmlspecialchars( $value1["datacomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
 
                     <label for="idatendente">Atendente:</label>
                     <select class="form-control mb-4" name="idatendente"

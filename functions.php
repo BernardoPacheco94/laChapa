@@ -14,4 +14,7 @@ function verificaArray(Array $array)
     }
 }
 
-
+function formatDate($date)
+{
+    return date('d/m/y H:i', strtotime($date));
+}

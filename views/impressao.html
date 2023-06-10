@@ -2,7 +2,7 @@
 <body onload="window.print()">
     <div>
         <span>{$dadosComanda.nomeatendente}</span>
-        <span>{$dadosComanda.datacomanda}</span>
+        <span>{function="formatDate($dadosComanda.datacomanda)"}</span>
     </div>
     <hr>
     <div>

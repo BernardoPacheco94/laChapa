@@ -22,7 +22,6 @@ $app->get('/ingredientes/ajax', function () {
 });
 
 
-
 $app->post('/salvaprodutoeingredientescomanda/ajax', function () {
     $comanda = new Comanda;
 
