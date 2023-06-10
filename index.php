@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require_once "vendor/autoload.php";
 
 
@@ -16,6 +17,7 @@ require_once "route".DIRECTORY_SEPARATOR."ingredientes.php";
 require_once "route".DIRECTORY_SEPARATOR."atendentes.php";
 require_once "route".DIRECTORY_SEPARATOR."comandas.php";
 require_once "route".DIRECTORY_SEPARATOR."cartoes.php";
+require_once "route".DIRECTORY_SEPARATOR."login.php";
 
 
 $app->run();

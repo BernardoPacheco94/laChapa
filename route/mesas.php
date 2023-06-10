@@ -7,10 +7,13 @@ use LaChapa\Page;
 use LaChapa\Model\Mesa;
 use LaChapa\Model\Produto;
 use LaChapa\Model\Tipo;
+use LaChapa\Model\User;
 
 //Rota para a pagina principal - deck mesas
 $app->get('/', function(){
+    User::checkLogin();
     $page = new Page();
+
 
     $page->setTpl('index',[
         'todasMesas' => Mesa::exibeTodas(),

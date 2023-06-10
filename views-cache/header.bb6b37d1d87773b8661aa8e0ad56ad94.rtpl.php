@@ -60,6 +60,11 @@
                             <a class="nav-link" href="/cartoes">Cadastro de Comandas</a>
                         </li>
                     </ul>
+                    <ul class="navbar-nav me-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Sair</a>
+                        </li>
+                    </ul>
                     <!-- <div class="">
                         <ul class="navbar-nav mr-3">
                             <li class="nav-item">
