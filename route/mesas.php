@@ -12,6 +12,7 @@ use LaChapa\Model\User;
 //Rota para a pagina principal - deck mesas
 $app->get('/', function(){
     User::checkLogin();
+
     $page = new Page();
 
 
@@ -33,6 +34,8 @@ $app->get('/', function(){
 
 //Rota adicionar nova mesa
 $app->get('/addMesa', function(){
+    User::checkLogin();
+
     $mesa = new Mesa;
 
     $mesa->novaMesa();
@@ -43,6 +46,8 @@ $app->get('/addMesa', function(){
 
 //Rota reexibir mesa
 $app->get('/exibeMesa/:idmesa', function($idmesa){
+    User::checkLogin();
+
     $mesa = new Mesa;
 
     $mesa->exibirMesa($idmesa);
@@ -53,6 +58,7 @@ $app->get('/exibeMesa/:idmesa', function($idmesa){
 
 //Rota remover mesa
 $app->get('/removerMesa/:idmesa', function($idmesa){
+    User::checkLogin();
     $mesa = new Mesa;
 
     $mesa->removerMesa($idmesa);

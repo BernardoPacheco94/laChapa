@@ -2,11 +2,14 @@
 
 use LaChapa\Model\Ingrediente;
 use LaChapa\Model\Tipo;
+use LaChapa\Model\User;
 use LaChapa\Page;
 
 $app->config('debug',true);
 
 $app->get('/ingredientes', function(){
+    User::checkLogin();
+
     $listaIngredientes = (isset($_GET['pesquisar'])) ? Ingrediente::pesquisar($_GET['pesquisar']) : Ingrediente::listaIngredientes();    
     
     $page = new Page();
@@ -20,6 +23,8 @@ $app->get('/ingredientes', function(){
 
 //adiciona novo ingrediente
 $app->get('/addIngrediente', function(){
+    User::checkLogin();
+
     $ingrediente = new Ingrediente;
 
     $ingrediente->setData($_GET);
@@ -32,6 +37,8 @@ $app->get('/addIngrediente', function(){
 
 //deleta um ingrediente
 $app->get('/ingrediente/deletar/:idingrediente', function($idingrediente){
+    User::checkLogin();
+
     $ingrediente = new Ingrediente;
 
     $ingrediente->deletarIngrediente($idingrediente);
@@ -42,6 +49,8 @@ $app->get('/ingrediente/deletar/:idingrediente', function($idingrediente){
 
 //editar ingrediente
 $app->get('/editarIngrediente/:idingrediente', function($idingrediente){
+    User::checkLogin();
+    
     $ingrediente = new Ingrediente;
 
     $ingrediente->setData($_GET);

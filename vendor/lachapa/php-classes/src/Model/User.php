@@ -17,8 +17,8 @@ class User extends Model
     {
         $sql = new Sql;
 
-        $result = $sql->select("SELECT * FROM usuarios WHERE nome = :LOGIN", array(
-            ":LOGIN" => $login
+        $result = $sql->select("SELECT * FROM usuarios WHERE nome = :login AND ativo = 1", array(
+            ":login" => $login
         ));
 
 
@@ -64,11 +64,11 @@ class User extends Model
             ||
             !(int)$_SESSION[User::SESSION]["idusuario"] > 0
         ) {
-            //nao está logado
-            return false;
+            header('Location: /login');
         } else {
             return true;
         }
+        exit;
     }
 
     // public static function verifyLogin($inadmin = true) //verifica se o usuário está logado e é admin
@@ -220,7 +220,7 @@ class User extends Model
     {
         $sql = new Sql;
 
-        $result = $sql->select('SELECT * FROM usuarios WHERE nome = :nome', [
+        $result = $sql->select('SELECT * FROM usuarios WHERE nome = :nome AND ativo = 1', [
             'nome' => $login
         ]);
 

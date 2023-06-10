@@ -4,6 +4,7 @@ use LaChapa\Model\Comanda;
 use LaChapa\Model\Produto;
 use LaChapa\Model\Ingrediente;
 use LaChapa\Model\Mesa;
+use LaChapa\Model\User;
 use LaChapa\Page;
 
 $app->config('debug', true);
@@ -93,7 +94,7 @@ $app->post('/removeprodutocomanda', function(){
 });
 
 $app->get('/comanda/print/:idcomanda', function($idcomanda){
-
+    User::checkLogin();
     $comanda = new Comanda;
     $page = new Page(
         [
@@ -108,7 +109,7 @@ $app->get('/comanda/print/:idcomanda', function($idcomanda){
     exit;    
 });
 $app->get('/comanda/printdev/:idcomanda', function($idcomanda){
-
+    User::checkLogin();
     $comanda = new Comanda;
     $result = $comanda->buscaComanda($idcomanda);    
     echo json_encode($result);

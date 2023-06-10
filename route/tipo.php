@@ -1,11 +1,13 @@
 <?php
 
 use LaChapa\Model\Tipo;
+use LaChapa\Model\User;
 use LaChapa\Page;
 
 //Criar um tipo de produto
 $app->get('/addTipo', function(){
-        
+    User::checkLogin();
+
     $tipo = new Tipo;
 
     $tipo->setData($_GET);
@@ -18,6 +20,8 @@ $app->get('/addTipo', function(){
 
 //Visualizar tipos
 $app->get('/tipos', function(){
+    User::checkLogin();
+
     $listaTipos = (isset($_GET['pesquisar'])) ? Tipo::pesquisar($_GET['pesquisar']) : Tipo::listaTipos();    
     
     $page = new Page();
@@ -29,6 +33,8 @@ $app->get('/tipos', function(){
 
 // deletar tipo
 $app->get('/tipos/deletar/:idtipo', function($idtipo){
+    User::checkLogin();
+
     $tipo = new Tipo;
 
     $tipo->deletarTipo($idtipo);
@@ -39,6 +45,8 @@ $app->get('/tipos/deletar/:idtipo', function($idtipo){
 
 //editar tipo
 $app->get('/editarTipo/:idtipo', function($idtipo){
+    User::checkLogin();
+    
     $tipo = new Tipo();
 
     $tipo->setData($_GET);
