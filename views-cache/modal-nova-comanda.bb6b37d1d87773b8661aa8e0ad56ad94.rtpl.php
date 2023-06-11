@@ -137,11 +137,6 @@
                         Cancelar
                     </button>
 
-
-                    <button type="button" class="w-100 btn btn-success">
-                        Encerrar Pedido
-                    </button>
-
                 </div>
             </form>
         </div>

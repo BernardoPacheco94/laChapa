@@ -4,237 +4,250 @@
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-               <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Pedido {$value.idcomanda}</h5>
-                    <div class="w-25">
-                        {function="formatDate($value.datacomanda)"}
-                    </div>
-                        <div class="w-75">
-                            <a href="/comanda/print/{$value.idcomanda}" target="_blank" class="w-100 text-center">
-                                <button type="button" class="btn btn-dark w-100">
-                                    <i class="fa-solid fa-2x fa-print"></i>
-                                </button>
-                            </a>
-                        </div>                        
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pedido {$value.idcomanda}</h5>
+                <div class="w-25">
+                    {function="formatDate($value.datacomanda)"}
                 </div>
-                <div class="modal-body">
-                    <label for="idcartaocomanda">Comanda</label>
-                    <select class="form-control mb-4" id="select_cartao_editar_comanda_{$value.idcomanda}" name="idcartaocomanda" required>
-                        <option value="0">Nenhuma</option>
-                        {$idcartao=$value.idcartao}
-                        {loop="$cartoes"}
-                        <option name="{$value.numero}" value="{$value.numero}"{if="$idcartao == $value.idcartao"} selected {/if}>{$value.numero}
-                        </option>
-                        {/loop}
-                    </select>
+                <div class="w-75">
+                    <a href="/comanda/print/{$value.idcomanda}" target="_blank" class="w-100 text-center">
+                        <button type="button" class="btn btn-dark w-100">
+                            <i class="fa-solid fa-2x fa-print"></i>
+                        </button>
+                    </a>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="idcartaocomanda">Comanda</label>
+                <select class="form-control mb-4" id="select_cartao_editar_comanda_{$value.idcomanda}"
+                    name="idcartaocomanda" required>
+                    <option value="0">Nenhuma</option>
+                    {$idcartao=$value.idcartao}
+                    {loop="$cartoes"}
+                    <option name="{$value.numero}" value="{$value.numero}" {if="$idcartao == $value.idcartao"} selected
+                        {/if}>{$value.numero}
+                    </option>
+                    {/loop}
+                </select>
 
-                    <label for="nomecliente">Nome Cliente:</label>
-                    <input class="form-control mb-4" type="text" name="nomecliente" id="nomecliente_comanda_{$value.idcomanda}"
-                        value="{$value.nomecliente}" autocomplete="off">
+                <label for="nomecliente">Nome Cliente:</label>
+                <input class="form-control mb-4" type="text" name="nomecliente"
+                    id="nomecliente_comanda_{$value.idcomanda}" value="{$value.nomecliente}" autocomplete="off">
 
-                    <label for="idmesacomanda">Mesa:</label>
-                    <select class="form-control mb-4" name="idmesacomanda" id="select_mesa_comanda_{$value.idcomanda}">
-                       <option value="0">Nenhuma</option>
-                        {$mesa=$value.idmesa}
-                        {loop="$todasMesas"}
-                        <option name="{$value.idmesa}" value="{$value.idmesa}" {if="$value.idmesa == $mesa"} selected
-                            {/if}>{$value.idmesa}
-                        </option>
-                        {/loop}
-                    </select>
+                <label for="idmesacomanda">Mesa:</label>
+                <select class="form-control mb-4" name="idmesacomanda" id="select_mesa_comanda_{$value.idcomanda}">
+                    <option value="0">Nenhuma</option>
+                    {$mesa=$value.idmesa}
+                    {loop="$todasMesas"}
+                    <option name="{$value.idmesa}" value="{$value.idmesa}" {if="$value.idmesa == $mesa"} selected
+                        {/if}>{$value.idmesa}
+                    </option>
+                    {/loop}
+                </select>
 
-                    <input type="number" name="idcomandamesa" value="{$value.idcomandamesa}" id="idcomandamesa_{$value.idcomanda}" hidden>
+                <input type="number" name="idcomandamesa" value="{$value.idcomandamesa}"
+                    id="idcomandamesa_{$value.idcomanda}" hidden>
 
-                    <input type="datetime" hidden id="datacomanda_{$value.idcomanda}" value="{$value.datacomanda}">
+                <input type="datetime" hidden id="datacomanda_{$value.idcomanda}" value="{$value.datacomanda}">
 
-                    <label for="idatendente">Atendente:</label>
-                    <select class="form-control mb-4" name="idatendente"
-                        id="select_atendente_comanda_{$value.idcomanda}">
-                        <option value="0">Nenhum</option>
-                        {$atendente=$value.idatendente}
-                        {loop="$atendentes"}
-                        <option name="{$value.idatendente}" value="{$value.idatendente}"
-                            {if="$atendente == $value.idatendente"} selected {/if}>{$value.nomeatendente}
-                        </option>
-                        {/loop}
-                    </select>
-                    <!-- Exibe produtos já lancados -->
-                    <div class="table">
-                        <table class="table table-striped" id="tabela_produtos_lancados_na_comanda_{$value.idcomanda}">
+                <label for="idatendente">Atendente:</label>
+                <select class="form-control mb-4" name="idatendente" id="select_atendente_comanda_{$value.idcomanda}">
+                    <option value="0">Nenhum</option>
+                    {$atendente=$value.idatendente}
+                    {loop="$atendentes"}
+                    <option name="{$value.idatendente}" value="{$value.idatendente}"
+                        {if="$atendente == $value.idatendente"} selected {/if}>
+                        {$value.nomeatendente}
+                    </option>
+                    {/loop}
+                </select>
+                <!-- Exibe produtos já lancados -->
+                <div class="table">
+                    <table class="table table-striped" id="tabela_produtos_lancados_na_comanda_{$value.idcomanda}">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Produto</th>
+                                <th class="text-center">Valor</th>
+                                <th class="text-center">Excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody id="body_tabela_produtos_lancados_na_comanda_{$value.idcomanda}">
+                            {loop="$value.produtos"}
+                            <tr id="linha_produto_{$counter}_comanda_{$value.idcomanda}">
+                                <td class="text-center" id="td_nome_produto_{$counter}_comanda_{$value.idcomanda}">
+                                    {$value.nomeproduto}<input type="number"
+                                        id="idcomanda_{$value.idcomanda}_produto_{$counter}" hidden
+                                        value="{$value.idcomandaproduto}">
+
+                                    {$i=0}
+                                    <!-- Ingredientes a serem removidos -->
+                                    {loop="$value.removeringrediente"}
+                                    {$i=$counter+1}
+                                    {/loop}
+                                    {if="$i>0"}
+                                    <ul class="text-start fw-normal">
+                                        Sem:
+                                        {loop="$value.removeringrediente"}
+                                        <li>
+                                            {$value.nomeingrediente}
+                                        </li>
+                                        {/loop}
+                                    </ul>
+                                    {$i=0}
+                                    {/if}
+
+                                    <!-- Porçoes extra -->
+                                    {loop="$value.porcaoextra"}
+                                    {$i=$counter+1}
+                                    {/loop}
+                                    {if="$i>0"}
+                                    <ul class="text-start fw-normal">
+                                        Porção extra:
+                                        {loop="$value.porcaoextra"}
+                                        <li>
+                                            {$value.nomeingrediente} - {$value.qtdporcaoextra}x
+                                        </li>
+                                        {/loop}
+                                    </ul>
+                                    {$i=0}
+                                    {/if}
+
+                                    <!-- Ingredientes adicionais -->
+                                    {loop="$value.ingredienteadicional"}
+                                    {$i=$counter+1}
+                                    {/loop}
+                                    {if="$i>0"}
+                                    <ul class="text-start fw-normal">
+                                        Adicional:
+                                        {loop="$value.ingredienteadicional"}
+                                        <li>
+                                            {$value.nomeingrediente} - {$value.qtdingredienteadicional}x
+                                        </li>
+                                        {/loop}
+                                    </ul>
+                                    {$i=0}
+                                    {/if}
+
+                                    {if="$value.observacao"}
+                                    <ul class="text-start fw-normal">
+                                        OBS:
+                                        <li>
+                                            {$value.observacao}
+                                        </li>
+                                    </ul>
+                                    {/if}
+                                </td>
+                                <td class="text-center align-middle">
+                                    R$ {function="formatPrice($value.vlfinalproduto)"}
+
+                                    <input type="number" id="vlproduto_{$value.idcomandaproduto}" hidden
+                                        value="{$value.vlfinalproduto}">
+                                </td>
+                                <td class="text-center align-middle">
+                                    <button id="btn_remove_produto_comanda_{$value.idcomanda}_item_{$counter}"
+                                        class="btn fa-solid fa-trash-can text-danger ">
+                                    </button>
+                                </td>
+                            </tr>
+                            {/loop}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th class="text-center" colspan="2">Total:</th>
+                                <th id="valor_total_comanda_{$value.idcomanda}" class="text-start">R$
+                                    {function="formatPrice($value.valortotal)"}</th>
+                                <td hidden><input id="valortotal_oculto_comanda_{$value.idcomanda}" class="form-control"
+                                        value="{$value.valortotal}"></input></td>
+                            </tr>
+
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Seleciona o produto desejado -->
+                <div class="row">
+                    <div class="col-8">
+                        <select class="form-control" id="select_tipo_produto_comanda_{$value.idcomanda}">
+                            <option value="tipo" id="option_tipo" disabled selected>Tipo de Produto</option>
+                            <option value="todos">Todos</option>
+                            {loop="$tipos"}
+                            <option value="{$value.idtipo}">{$value.nometipo}</option>
+                            {/loop}
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    </button>
+                    <div class="col-12">
+                        <select class="form-control" id="select_produto_comanda_{$value.idcomanda}">
+                            <option value="produto" disabled selected>Selecione o tipo de produto</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Tabela de ingredientes -->
+                <div class="row mt-2">
+                    <div class="table-responsive">
+                        <table class="table table-light table-hover" id="tabela_ingredientes_comanda_{$value.idcomanda}"
+                            hidden>
                             <thead>
                                 <tr>
-                                    <th class="text-center">Produto</th>
-                                    <th class="text-center">Valor</th>
-                                    <th class="text-center">Excluir</th>
+                                    <th>Ingrediente</th>
+                                    <th>Qtd</th>
+                                    <th class="text-center">Adicionar</th>
+                                    <th class="text-center">Remover</th>
+                                    <th>Valor adc</th>
                                 </tr>
                             </thead>
-                            <tbody id="body_tabela_produtos_lancados_na_comanda_{$value.idcomanda}">
-                                {loop="$value.produtos"}
-                                <tr id="linha_produto_{$counter}_comanda_{$value.idcomanda}">
-                                    <td class="text-center" id="td_nome_produto_{$counter}_comanda_{$value.idcomanda}">{$value.nomeproduto}<input type="number" id="idcomanda_{$value.idcomanda}_produto_{$counter}" hidden value="{$value.idcomandaproduto}">
+                            <tbody id="body_tabela_ingredientes_produto_comanda_{$value.idcomanda}">
 
-                                        {$i=0}
-                                        <!-- Ingredientes a serem removidos -->
-                                        {loop="$value.removeringrediente"}
-                                        {$i=$counter+1}
-                                        {/loop}
-                                        {if="$i>0"}
-                                        <ul class="text-start fw-normal">
-                                            Sem:
-                                            {loop="$value.removeringrediente"}
-                                            <li>
-                                                {$value.nomeingrediente}
-                                            </li>
-                                            {/loop}
-                                        </ul>
-                                        {$i=0}
-                                        {/if}
 
-                                        <!-- Porçoes extra -->
-                                        {loop="$value.porcaoextra"}
-                                        {$i=$counter+1}
-                                        {/loop}
-                                        {if="$i>0"}
-                                        <ul class="text-start fw-normal">
-                                            Porção extra:
-                                            {loop="$value.porcaoextra"}
-                                            <li>
-                                                {$value.nomeingrediente} - {$value.qtdporcaoextra}x
-                                            </li>
-                                            {/loop}
-                                        </ul>
-                                        {$i=0}
-                                        {/if}
 
-                                        <!-- Ingredientes adicionais -->
-                                        {loop="$value.ingredienteadicional"}
-                                        {$i=$counter+1}
-                                        {/loop}
-                                        {if="$i>0"}
-                                        <ul class="text-start fw-normal">
-                                            Adicional:
-                                            {loop="$value.ingredienteadicional"}
-                                            <li>
-                                                {$value.nomeingrediente} - {$value.qtdingredienteadicional}x
-                                            </li>
-                                            {/loop}
-                                        </ul>
-                                        {$i=0}
-                                        {/if}
-
-                                        {if="$value.observacao"}
-                                        <ul class="text-start fw-normal">
-                                            OBS:
-                                            <li>
-                                                {$value.observacao}
-                                            </li>
-                                        </ul>
-                                        {/if}
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        R$ {function="formatPrice($value.vlfinalproduto)"}
-
-                                        <input type="number" id="vlproduto_{$value.idcomandaproduto}" hidden value="{$value.vlfinalproduto}">
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        <button id="btn_remove_produto_comanda_{$value.idcomanda}_item_{$counter}"
-                                            class="btn fa-solid fa-trash-can text-danger ">
-                                        </button>
-                                    </td>
-                                </tr>
-                                {/loop}
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th class="text-center" colspan="2">Total:</th>
-                                    <th id="valor_total_comanda_{$value.idcomanda}" class="text-start">R$ {function="formatPrice($value.valortotal)"}</th>
-                                    <td hidden><input id="valortotal_oculto_comanda_{$value.idcomanda}" class="form-control" value="{$value.valortotal}"></input></td>
+                                    <th colspan="3" class="text-center">Valor</th>
+                                    <th colspan="2" class="text-center">
+                                        <input type="number" step="0.01" name="valortotal"
+                                            id="valortotal_produto_{$value.idcomanda}" class="form-control" hidden>
+                                        <input id="valortotal_exibido_tabela_ingredientes_comanda_{$value.idcomanda}"
+                                            class="form-control" disabled>
+                                    </th>
                                 </tr>
-                                
+
                             </tfoot>
                         </table>
                     </div>
-
-                    <!-- Seleciona o produto desejado -->
-                    <div class="row">
-                        <div class="col-8">
-                            <select class="form-control" id="select_tipo_produto_comanda_{$value.idcomanda}">
-                                <option value="tipo" id="option_tipo" disabled selected>Tipo de Produto</option>
-                                <option value="todos">Todos</option>
-                                {loop="$tipos"}
-                                <option value="{$value.idtipo}">{$value.nometipo}</option>
-                                {/loop}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        </button>
-                        <div class="col-12">
-                            <select class="form-control" id="select_produto_comanda_{$value.idcomanda}">
-                                <option value="produto" disabled selected>Selecione o tipo de produto</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Tabela de ingredientes -->
-                    <div class="row mt-2">
-                        <div class="table-responsive">
-                            <table class="table table-light table-hover" id="tabela_ingredientes_comanda_{$value.idcomanda}" hidden>
-                                <thead>
-                                    <tr>
-                                        <th>Ingrediente</th>
-                                        <th>Qtd</th>
-                                        <th class="text-center">Adicionar</th>
-                                        <th class="text-center">Remover</th>
-                                        <th>Valor adc</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="body_tabela_ingredientes_produto_comanda_{$value.idcomanda}">
-
-                                    
-
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th colspan="3" class="text-center">Valor</th>
-                                        <th colspan="2" class="text-center">
-                                            <input type="number" step="0.01" name="valortotal" id="valortotal_produto_{$value.idcomanda}"
-                                                class="form-control" hidden>
-                                            <input id="valortotal_exibido_tabela_ingredientes_comanda_{$value.idcomanda}" class="form-control" disabled>
-                                        </th>
-                                    </tr>
-
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div>
-                        <input type="text" name="observacao" id="txt_observacao_{$value.idcomanda}" class="text_observacao form-control" value="" placeholder="Observação" hidden>
-                    </div>
-
                 </div>
-                <div class="row m-3">
-                    <button type="button" id="salva_produto_comanda_{$value.idcomanda}"
-                        class="btn btn-dark col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 mx-auto atualiza_comanda_{$value.idcomanda}">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
+
+                <div>
+                    <input type="text" name="observacao" id="txt_observacao_{$value.idcomanda}"
+                        class="text_observacao form-control" value="" placeholder="Observação" hidden>
                 </div>
-                <div class="modal-footer">
-                    <button class="w-100 btn btn-dark atualiza_comanda_{$value.idcomanda}" id="editar_comanda_{$value.idcomanda}">
-                        <i class="fa-solid fa-save"></i> Salvar Alterações Pedido {$value.idcomanda}
-                    </button>
 
-                    <button type="button" class="w-100 btn btn-warning" data-bs-dismiss="modal">
-                        Cancelar
-                    </button>
+            </div>
+            <div class="row m-3">
+                <button type="button" id="salva_produto_comanda_{$value.idcomanda}"
+                    class="btn btn-dark col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 mx-auto atualiza_comanda_{$value.idcomanda}">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button class="w-100 btn btn-dark atualiza_comanda_{$value.idcomanda}"
+                    id="editar_comanda_{$value.idcomanda}">
+                    <i class="fa-solid fa-save"></i> Salvar Alterações Pedido {$value.idcomanda}
+                </button>
 
-                    <button type="button" class="w-100 btn btn-success">
-                        Encerrar Pedido
-                    </button>
+                <button type="button" class="w-100 btn btn-warning" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
 
-                </div>
+                <a class="w-100 btn btn-success" href="/encerrarcomanda/{$value.idcomanda}" onclick="return confirm('Deseja realmente encerrar o pedido {$value.idcomanda}?')">
+                    Encerrar Pedido
+                </a>
+
+            </div>
         </div>
     </div>
 

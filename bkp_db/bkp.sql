@@ -31,7 +31,7 @@ CREATE TABLE `atendentes` (
   PRIMARY KEY (`idatendente`),
   UNIQUE KEY `idatendente_UNIQUE` (`idatendente`),
   UNIQUE KEY `nomeatendente_UNIQUE` (`nomeatendente`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `comanda-mesa` (
   KEY `FK_mesa_comanda` (`idcomanda`),
   CONSTRAINT `idcomandamesa` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `idmesacomanda` FOREIGN KEY (`idmesa`) REFERENCES `mesas` (`idmesa`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +114,7 @@ CREATE TABLE `comanda-produtos` (
   KEY `nroitem_idx` (`nroitem`),
   CONSTRAINT `idcomandaproduto` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idprodutocomanda` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=503 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,7 +138,7 @@ CREATE TABLE `comandas` (
   KEY `idcomandacartao_idx` (`idcartao`),
   CONSTRAINT `idcomandaatendente` FOREIGN KEY (`idatendente`) REFERENCES `atendentes` (`idatendente`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `idcomandacartao` FOREIGN KEY (`idcartao`) REFERENCES `cartoes` (`idcartao`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=266 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,10 +181,10 @@ CREATE TABLE `ingredienteadicional` (
   KEY `idingredienteadc_idx` (`idingrediente`),
   KEY `idnroitemingredienteadc_idx` (`nroitem`),
   CONSTRAINT `idcomandaingredienteadicional` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `idingredienteadc` FOREIGN KEY (`idingrediente`) REFERENCES `ingredientes` (`idingrediente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `idprodutoingredienteadicional` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `nroitemingredienteadicional` FOREIGN KEY (`nroitem`) REFERENCES `comanda-produtos` (`nroitem`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `idingredienteadc` FOREIGN KEY (`idingrediente`) REFERENCES `ingredientes` (`idingrediente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `idprodutoingredienteadicional` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `nroitemingredienteadicional` FOREIGN KEY (`nroitem`) REFERENCES `comanda-produtos` (`nroitem`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,7 +201,7 @@ CREATE TABLE `ingredientes` (
   `ativo` int(11) DEFAULT 1,
   PRIMARY KEY (`idingrediente`),
   UNIQUE KEY `idingrediente_UNIQUE` (`idingrediente`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,8 +242,8 @@ CREATE TABLE `porcao-extra` (
   CONSTRAINT `idcomandaporcaoextra` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idingredienteporcaoextra` FOREIGN KEY (`idingrediente`) REFERENCES `ingredientes` (`idingrediente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idprodutoporcaoextra` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `nroitemporcaoextra` FOREIGN KEY (`nroitem`) REFERENCES `comanda-produtos` (`nroitem`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `nroitemporcaoextra` FOREIGN KEY (`nroitem`) REFERENCES `comanda-produtos` (`nroitem`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -262,7 +262,7 @@ CREATE TABLE `produto-ingredientes` (
   KEY `FK_ingrediente_produto` (`idingrediente`),
   CONSTRAINT `idingredienteproduto` FOREIGN KEY (`idingrediente`) REFERENCES `ingredientes` (`idingrediente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idprodutoingrediente` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -281,7 +281,7 @@ CREATE TABLE `produto-tipo` (
   KEY `FK_tipo_produto` (`idtipo`),
   CONSTRAINT `idprodutotipo` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idtipoproduto` FOREIGN KEY (`idtipo`) REFERENCES `tipos` (`idtipo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -298,7 +298,7 @@ CREATE TABLE `produtos` (
   `ativo` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`idproduto`),
   UNIQUE KEY `idproduto_UNIQUE` (`idproduto`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -319,10 +319,10 @@ CREATE TABLE `removeringrediente` (
   KEY `idprodutoremoveringrediente_idx` (`idproduto`),
   KEY `idingredienteremovido_idx` (`idingrediente`),
   KEY `idnroitemremoveringrediente_idx` (`nroitem`),
-  CONSTRAINT `idcomandaremoveringrediente` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `idprodutoremoveringrediente` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `nroitemremoveringrediente` FOREIGN KEY (`nroitem`) REFERENCES `comanda-produtos` (`nroitem`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `idcomandaremoveringrediente` FOREIGN KEY (`idcomanda`) REFERENCES `comandas` (`idcomanda`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `idprodutoremoveringrediente` FOREIGN KEY (`idproduto`) REFERENCES `produtos` (`idproduto`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `nroitemremoveringrediente` FOREIGN KEY (`nroitem`) REFERENCES `comanda-produtos` (`nroitem`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -358,7 +358,7 @@ CREATE TABLE `usuarios` (
   UNIQUE KEY `idusuarios_UNIQUE` (`idusuario`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `nome_UNIQUE` (`nome`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -710,6 +710,49 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_salva_usuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_salva_usuario`(
+`pidusuario` int(11),
+`pemail` varchar(70),
+`ppasshash` varchar(255),
+`pnome` varchar(45),
+`pativo` varchar(1)
+)
+BEGIN
+	IF pidusuario > 0 THEN
+		UPDATE usuarios
+			SET 
+				idusuario = pidusuario,
+				email = pemail,
+				statuscomanda = pstatuscomanda,
+                passhash = ppasshash,
+                nome = pnome,
+                ativo = pativo
+			WHERE  idusuario = pidusuario;
+	ELSE
+		INSERT INTO `db_lachapa`.`usuarios` (`email`, `passhash`, `nome`, `ativo`)
+		VALUES (pemail, ppasshash, pnome, pativo);
+        
+        SET pidusuario = LAST_INSERT_ID();
+	END IF;
+    
+    SELECT * FROM usuarios WHERE idusuario = pidusuario; 
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -720,4 +763,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-04 22:26:22
+-- Dump completed on 2023-06-11 14:30:55
