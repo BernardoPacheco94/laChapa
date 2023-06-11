@@ -2,7 +2,7 @@
 <body onload="window.print()">
     <div>
         <span><?php echo htmlspecialchars( $dadosComanda["nomeatendente"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
-        <span><?php echo htmlspecialchars( $dadosComanda["datacomanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
+        <span><?php echo formatDate($dadosComanda["datacomanda"]); ?></span>
     </div>
     <hr>
     <div>

@@ -522,7 +522,7 @@ function salvaProdutoComandaEdit(idcomanda, produtos = []) {
                 console.log('response:')
                 console.log(response)
 
-                // document.location.reload()
+                document.location.reload()
             },
             error: function (xhr, status, error) {
                 console.log('erro')
